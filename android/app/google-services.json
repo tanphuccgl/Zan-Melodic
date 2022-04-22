@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "544951313027",
+    "project_id": "zan-melodic",
+    "storage_bucket": "zan-melodic.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544951313027:android:363626f3aacc310fb971b6",
+        "android_client_info": {
+          "package_name": "com.goldenowl.zanmelodic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "544951313027-pdbi88qp2k88edicsf8arp8f0mcf8fhe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7GVE635TzkzaITU8PAufN7VTgZuF6BLE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "544951313027-pdbi88qp2k88edicsf8arp8f0mcf8fhe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
