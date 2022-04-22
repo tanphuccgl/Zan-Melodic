@@ -31,6 +31,8 @@ class DashboardPage extends StatelessWidget {
           length: TabIndex.values.length,
           child: Scaffold(
             appBar: AppBar(
+                elevation: 0,
+                toolbarHeight: 20,
                 backgroundColor: MyColors.colorBlack,
                 bottom: TabBar(
                     indicatorColor: Colors.transparent,
@@ -49,13 +51,18 @@ class DashboardPage extends StatelessWidget {
                       for (final item in TabIndex.values)
                         Tab(text: item.lableOf()),
                     ])),
-            body: const TabBarView(children: [
-              FavoritesPage(),
-              TracksPage(),
-              PlaylistPage(),
-              AlbumPage(),
-              FolderPage(),
-            ]),
+            body: const Padding(
+              padding: EdgeInsets.fromLTRB(30, 25, 30, 0),
+              child: TabBarView(
+                  physics: NeverScrollableScrollPhysics(),
+                  children: [
+                    FavoritesPage(),
+                    TracksPage(),
+                    PlaylistPage(),
+                    AlbumPage(),
+                    FolderPage(),
+                  ]),
+            ),
           ),
         );
       },
