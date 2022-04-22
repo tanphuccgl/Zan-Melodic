@@ -21,6 +21,9 @@ jobs:
         with:
           channel: stable
       - run: flutter doctor -v
+      - run: flutter pub run build_runner build
+
+
       - name: Install dependencies
         run: dart pub get
 
