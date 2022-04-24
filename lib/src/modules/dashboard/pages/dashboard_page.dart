@@ -52,7 +52,7 @@ class DashboardPage extends StatelessWidget {
                         Tab(text: item.lableOf()),
                     ])),
             body: const Padding(
-              padding: EdgeInsets.fromLTRB(30, 10, 30, 0),
+              padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
               child: TabBarView(children: [
                 FavoritesPage(),
                 TracksPage(),
