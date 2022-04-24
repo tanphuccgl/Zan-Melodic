@@ -12,7 +12,6 @@ import 'package:zanmelodic/src/modules/loading/pages/loading_page.dart';
       page: LoadingPage,
       // initial: true,
     ),
-    
     // redirect all other paths
     RedirectRoute(path: '*', redirectTo: ''),
   ],
