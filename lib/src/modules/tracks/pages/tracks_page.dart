@@ -8,10 +8,13 @@ class TracksPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: CustomScrollView(physics: BouncingScrollPhysics(), slivers: [
-        ControllBar(),
-        ListTracksWidget(),
-      ]),
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
+        child: CustomScrollView(physics: BouncingScrollPhysics(), slivers: [
+          ControllBar(),
+          ListTracksWidget(),
+        ]),
+      ),
     );
   }
 }
