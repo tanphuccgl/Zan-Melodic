@@ -18,5 +18,15 @@ class Style {
             fontWeight: FontWeight.bold,
             height: 1,
             color: MyColors.colorWhite),
+        displaySmall: TextStyle(
+            fontSize: 35,
+            fontWeight: FontWeight.normal,
+            height: 1.2,
+            color: MyColors.colorWhite),
+        displayLarge: TextStyle(
+            fontSize: 50,
+            fontWeight: FontWeight.bold,
+            height: 1.22,
+            color: MyColors.colorWhite),
       );
 }
