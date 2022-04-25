@@ -8,5 +8,15 @@ class Style {
             fontWeight: FontWeight.normal,
             height: 1,
             color: MyColors.colorGray6),
+        titleMedium: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.normal,
+            height: 1,
+            color: MyColors.colorWhite),
+        titleLarge: TextStyle(
+            fontSize: 41,
+            fontWeight: FontWeight.bold,
+            height: 1,
+            color: MyColors.colorWhite),
       );
 }
