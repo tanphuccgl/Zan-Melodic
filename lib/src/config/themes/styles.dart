@@ -11,7 +11,7 @@ class Style {
         titleMedium: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.normal,
-            height: 1,
+            height: 1.2,
             color: MyColors.colorWhite),
         titleLarge: TextStyle(
             fontSize: 41,
