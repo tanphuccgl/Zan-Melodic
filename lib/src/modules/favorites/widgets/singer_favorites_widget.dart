@@ -36,25 +36,24 @@ class SingerFavotiresWidget extends StatelessWidget {
           width: 15,
         ),
         Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Next To Me',
+          child: RichText(
+            text: TextSpan(
+                text: 'Next To Me\n',
                 style: Style.textTheme().titleMedium,
-              ),
-              _textGray('Otto Knows'),
-              _textGray('2012'),
-              _textGray('1 track'),
-            ],
+                children: [
+                  _textGray('Otto Knows\n'),
+                  _textGray('2012\n'),
+                  _textGray('1 track'),
+                ]),
           ),
-        ),
+        )
       ],
     );
   }
 
-  Text _textGray(String title) {
-    return Text(title,
+  TextSpan _textGray(String title) {
+    return TextSpan(
+        text: title,
         style: Style.textTheme()
             .titleMedium!
             .copyWith(color: MyColors.colorGray, fontSize: 17));

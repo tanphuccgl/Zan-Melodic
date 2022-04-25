@@ -10,16 +10,19 @@ class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
-        slivers: [
-          _headerTitle('Singer'),
-          const SingerFavotiresWidget(),
-          _headerTitle('Playlist'),
-          const PlaylistFavotiresWidget(),
-          _headerTitle('Tracks'),
-          const TracksFavotiresWidget()
-        ],
+      body: Padding(
+        padding: const EdgeInsets.only(left: 20, top: 20),
+        child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+          slivers: [
+            _headerTitle('Singer'),
+            const SingerFavotiresWidget(),
+            _headerTitle('Playlist'),
+            const PlaylistFavotiresWidget(),
+            _headerTitle('Tracks'),
+            const TracksFavotiresWidget()
+          ],
+        ),
       ),
     );
   }

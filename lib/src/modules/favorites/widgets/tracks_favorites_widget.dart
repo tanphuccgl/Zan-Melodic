@@ -36,20 +36,19 @@ class TracksFavotiresWidget extends StatelessWidget {
           width: 15,
         ),
         Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Next To Me',
+          child: RichText(
+            text: TextSpan(
+                text: 'Next To Me\n',
                 style: Style.textTheme().titleMedium,
-              ),
-              Text('Otto Knows',
-                  style: Style.textTheme()
-                      .titleMedium!
-                      .copyWith(color: MyColors.colorGray, fontSize: 17)),
-            ],
+                children: [
+                  TextSpan(
+                      text: 'Otto Knows',
+                      style: Style.textTheme()
+                          .titleMedium!
+                          .copyWith(color: MyColors.colorGray, fontSize: 17)),
+                ]),
           ),
-        ),
+        )
       ],
     );
   }
