@@ -8,4 +8,5 @@ class MyColors {
   static const Color colorGray = Color(0xFFAAAAAA);
   static const Color colorGray6 = Color(0xFFF2F2F2);
   static const Color colorWhite = Color(0xFFEFFFFF);
+  static const Color colorWhite1 = Color(0xFFE5E5E5);
 }
