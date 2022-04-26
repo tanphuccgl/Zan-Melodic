@@ -1,26 +1,23 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zanmelodic/src/config/routes/coordinator.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
-import 'package:zanmelodic/src/models/tracks_model.dart';
 import 'package:zanmelodic/src/modules/now_playing/widgets/custom_process_bar.dart';
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
+import 'package:zanmelodic/src/utils/enums/loop_mode.dart';
 
 class NowPlayingPage extends StatelessWidget {
-  const NowPlayingPage({@PathParam('id') required this.id, this.data, Key? key})
-      : super(key: key);
-  final XTracks? data;
-  final String id;
+  const NowPlayingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final _pTop = MediaQuery.of(context).padding.top;
     const _pHori = 40.0;
-    final _tracks = data ?? XTracks.empty();
     return BlocBuilder<PlayMusicBloc, PlayMusicState>(
         builder: (context, state) {
+      final _tracks = state.tracks;
+
       return Scaffold(
         backgroundColor: MyColors.colorBackground,
         body: GestureDetector(
@@ -77,9 +74,12 @@ class NowPlayingPage extends StatelessWidget {
                         height: 40,
                         width: 40,
                         child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.shuffle,
+                            onPressed: () => context
+                                .read<PlayMusicBloc>()
+                                .setShuffleModeEnabled(
+                                    state.isEnableShuffle ? false : true),
+                            icon: Icon(
+                              state.shuffleIcon,
                               size: 20,
                               color: MyColors.colorWhite,
                             )),
@@ -88,9 +88,10 @@ class NowPlayingPage extends StatelessWidget {
                         height: 40,
                         width: 40,
                         child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.loop,
+                            onPressed: () =>
+                                context.read<PlayMusicBloc>().setLoopMode(),
+                            icon: Icon(
+                              state.loopMode.iconOf(),
                               size: 20,
                               color: MyColors.colorWhite,
                             )),
@@ -105,7 +106,9 @@ class NowPlayingPage extends StatelessWidget {
                         width: 60,
                         height: 60,
                         child: IconButton(
-                            onPressed: () {},
+                            onPressed: () => context
+                                .read<PlayMusicBloc>()
+                                .onSkipToPrevious(),
                             icon: const Icon(
                               Icons.skip_previous,
                               color: MyColors.colorWhite,
@@ -136,7 +139,8 @@ class NowPlayingPage extends StatelessWidget {
                         width: 60,
                         height: 60,
                         child: IconButton(
-                            onPressed: () {},
+                            onPressed: () =>
+                                context.read<PlayMusicBloc>().onSkipToNext(),
                             icon: const Icon(
                               Icons.skip_next,
                               color: MyColors.colorWhite,

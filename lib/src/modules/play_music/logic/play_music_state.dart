@@ -6,6 +6,8 @@ class PlayMusicState extends Equatable {
   final Duration currentPosition;
   final Duration endPosition;
   final bool isPlaying;
+  final bool isEnableShuffle;
+  final LoopMode loopMode;
   bool get isEndSong =>
       audioPlayer.processingState == ProcessingState.completed;
   IconData get playIcon {
@@ -17,6 +19,9 @@ class PlayMusicState extends Equatable {
     return _icon;
   }
 
+  IconData get shuffleIcon =>
+      isEnableShuffle ? Icons.shuffle_on : Icons.shuffle;
+
   bool get isShowPlayBottomBar => tracks.id.isEmpty ? false : true;
   String get currentTime => XUtil.formatDuration(currentPosition);
   String get totalTime => XUtil.formatDuration(endPosition);
@@ -27,6 +32,8 @@ class PlayMusicState extends Equatable {
     required this.tracks,
     this.isPlaying = false,
     required this.audioPlayer,
+    this.isEnableShuffle = false,
+    this.loopMode = LoopMode.off,
   });
 
   @override
@@ -36,6 +43,8 @@ class PlayMusicState extends Equatable {
         audioPlayer,
         currentPosition,
         endPosition,
+        isEnableShuffle,
+        loopMode,
       ];
 
   PlayMusicState copyWith({
@@ -44,6 +53,8 @@ class PlayMusicState extends Equatable {
     AudioPlayer? audioPlayer,
     Duration? currentPosition,
     Duration? endPosition,
+    bool? isEnableShuffle,
+    LoopMode? loopMode,
   }) {
     return PlayMusicState(
       tracks: tracks ?? this.tracks,
@@ -51,6 +62,8 @@ class PlayMusicState extends Equatable {
       audioPlayer: audioPlayer ?? this.audioPlayer,
       currentPosition: currentPosition ?? this.currentPosition,
       endPosition: endPosition ?? this.endPosition,
+      isEnableShuffle: isEnableShuffle ?? this.isEnableShuffle,
+      loopMode: loopMode ?? this.loopMode,
     );
   }
 }

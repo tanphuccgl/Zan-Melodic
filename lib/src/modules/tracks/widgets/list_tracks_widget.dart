@@ -23,11 +23,11 @@ class ListTracksWidget extends StatelessWidget {
         if (_handle.isCompleted) {
           _handle = XHandle.result(XResult.success(state.items.data ?? []));
           final List<XTracks> _items = _handle.data ?? [];
-
           return _items.isNotEmpty
               ? SliverList(
                   delegate: SliverChildBuilderDelegate(
-                      (context, index) => _buildCard(context, _items[index]),
+                      (context, index) => _buildCard(context,
+                          listTracks: _items, tracks: _items[index]),
                       childCount: _items.length),
                 )
               : const XStateEmptyWidget();
@@ -40,9 +40,12 @@ class ListTracksWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(BuildContext context, XTracks tracks) {
+  Widget _buildCard(BuildContext context,
+      {required List<XTracks> listTracks, required XTracks tracks}) {
     return GestureDetector(
-      onTap: () => context.read<PlayMusicBloc>().onPlay(tracks),
+      onTap: () => context
+          .read<PlayMusicBloc>()
+          .onPlayFromTracks(listTracks: listTracks, tracks: tracks),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 13),
         child: SizedBox(

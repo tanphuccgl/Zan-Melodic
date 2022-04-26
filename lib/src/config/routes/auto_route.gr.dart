@@ -13,7 +13,6 @@
 import 'package:auto_route/auto_route.dart' as _i5;
 import 'package:flutter/material.dart' as _i11;
 
-import '../../models/tracks_model.dart' as _i12;
 import '../../modules/album/pages/album_page.dart' as _i9;
 import '../../modules/dashboard/pages/dashboard_page.dart' as _i3;
 import '../../modules/dashboard/router/dashboard_wrapper_router.dart' as _i1;
@@ -43,13 +42,8 @@ class XRouter extends _i5.RootStackRouter {
           routeData: routeData, child: const _i3.DashboardPage());
     },
     NowPlayingRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<NowPlayingRouteArgs>(
-          orElse: () => NowPlayingRouteArgs(id: pathParams.getString('id')));
       return _i5.MaterialPageX<dynamic>(
-          routeData: routeData,
-          child:
-              _i4.NowPlayingPage(id: args.id, data: args.data, key: args.key));
+          routeData: routeData, child: const _i4.NowPlayingPage());
     },
     FavoritesTab.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
@@ -213,29 +207,10 @@ class DashboardRoute extends _i5.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.NowPlayingPage]
-class NowPlayingRoute extends _i5.PageRouteInfo<NowPlayingRouteArgs> {
-  NowPlayingRoute({required String id, _i12.XTracks? data, _i11.Key? key})
-      : super(NowPlayingRoute.name,
-            path: 'now-playing',
-            args: NowPlayingRouteArgs(id: id, data: data, key: key),
-            rawPathParams: {'id': id});
+class NowPlayingRoute extends _i5.PageRouteInfo<void> {
+  const NowPlayingRoute() : super(NowPlayingRoute.name, path: 'now-playing');
 
   static const String name = 'NowPlayingRoute';
-}
-
-class NowPlayingRouteArgs {
-  const NowPlayingRouteArgs({required this.id, this.data, this.key});
-
-  final String id;
-
-  final _i12.XTracks? data;
-
-  final _i11.Key? key;
-
-  @override
-  String toString() {
-    return 'NowPlayingRouteArgs{id: $id, data: $data, key: $key}';
-  }
 }
 
 /// generated route for

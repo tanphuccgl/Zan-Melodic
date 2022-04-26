@@ -13,8 +13,7 @@ class PlayerBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => DashboardCoordinator.showNowPlayingScreen(context,
-          id: tracks.id, data: tracks),
+      onTap: () => DashboardCoordinator.showNowPlayingScreen(context),
       child: Container(
         margin: const EdgeInsets.fromLTRB(20, 0, 10, 16),
         padding: const EdgeInsets.fromLTRB(7, 15, 12, 15),
@@ -73,7 +72,8 @@ class PlayerBottomBar extends StatelessWidget {
             SizedBox(
               width: 30,
               child: IconButton(
-                  onPressed: () {},
+                  onPressed: () =>
+                      context.read<PlayMusicBloc>().onSkipToPrevious(),
                   icon: const Icon(
                     Icons.skip_previous,
                     color: MyColors.colorWhite,
@@ -93,7 +93,7 @@ class PlayerBottomBar extends StatelessWidget {
             SizedBox(
               width: 30,
               child: IconButton(
-                  onPressed: () {},
+                  onPressed: () => context.read<PlayMusicBloc>().onSkipToNext(),
                   icon: const Icon(
                     Icons.skip_next,
                     color: MyColors.colorWhite,
