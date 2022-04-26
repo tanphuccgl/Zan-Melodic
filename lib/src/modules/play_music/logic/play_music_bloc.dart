@@ -23,7 +23,6 @@ class PlayMusicBloc extends Cubit<PlayMusicState> {
         tracks: tracks,
         isPlaying: true,
       ));
-
       state.audioPlayer.play();
       getPositon();
     } catch (e) {

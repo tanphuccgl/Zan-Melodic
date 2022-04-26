@@ -6,6 +6,7 @@ import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/constants/my_images.dart';
 import 'package:zanmelodic/src/models/tracks_model.dart';
+import 'package:zanmelodic/src/modules/now_playing/widgets/custom_process_bar.dart';
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
 
 class NowPlayingPage extends StatelessWidget {
@@ -97,29 +98,7 @@ class NowPlayingPage extends StatelessWidget {
                       )
                     ],
                   ),
-                  Column(
-                    children: [
-                      Image.asset(
-                        MyImage.audio,
-                        color: MyColors.colorGray,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            state.currentTime,
-                            style: Style.textTheme()
-                                .titleMedium!
-                                .copyWith(fontSize: 17),
-                          ),
-                          Text(state.totalTime,
-                              style: Style.textTheme()
-                                  .titleMedium!
-                                  .copyWith(fontSize: 17))
-                        ],
-                      ),
-                    ],
-                  ),
+                  const CutomProcessBar(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
