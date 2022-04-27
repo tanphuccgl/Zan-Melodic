@@ -15,7 +15,6 @@ class Prefs {
    
 
     String jsonListFolder = jsonEncode(listFolder);
-    print(jsonEncode(listFolder));
     _prefs.setString('listFolder', jsonListFolder);
   }
 

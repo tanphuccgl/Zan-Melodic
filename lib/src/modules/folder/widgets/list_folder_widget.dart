@@ -63,7 +63,7 @@ class ListFolderWidget extends StatelessWidget {
             Expanded(
               child: RichText(
                   text: TextSpan(
-                      text: '${folder.name}\n',
+                      text: Utils.getNameFolderOfLink(folder.link)+'\n',
                       style: Style.textTheme().titleMedium,
                       children: [
                     TextSpan(

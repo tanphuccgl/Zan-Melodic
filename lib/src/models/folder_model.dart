@@ -1,7 +1,7 @@
 import 'package:zanmelodic/src/models/tracks_model.dart';
 
 class XFolder {
-  String name;
+  String link;
   String id;
   String date;
   int color;
@@ -9,7 +9,7 @@ class XFolder {
   List<XTracks>? listTracks;
 
   XFolder({
-    this.name = '',
+    this.link = '',
     this.listTracks,
     this.date = '',
      this.color=0,
@@ -23,7 +23,7 @@ class XFolder {
       listTracks: (json['listTracks'] as List)
             .map((e) => XTracks.fromJson(e))
             .toList(),
-      name: json['name'],
+      link: json['link'],
       id: json['id'],
       color: json['color'],
     );
@@ -32,7 +32,7 @@ class XFolder {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['size'] = size;
-    data['name'] = name;
+    data['link'] = link;
     data['date'] = date;
     data['color'] = color;
      if (listTracks != null) {

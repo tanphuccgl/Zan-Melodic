@@ -31,16 +31,15 @@ class FolderBloc extends Cubit<FolderState> {
   Future<void> addItem() async {
     String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
     final _itemsState = state.items.data ?? [];
-    print('levi+ ' +selectedDirectory.toString());
     bool isDuplication = _itemsState
         .where(
-            (e) => Utils.getNameFolderOfLink(selectedDirectory ?? '') == e.name)
+            (e) => selectedDirectory  == e.link)
         .isNotEmpty;
 
     if (selectedDirectory != null && isDuplication == false) {
       final folder = XFolder(
           color: Utils.colorRandom(),
-          name: Utils.getNameFolderOfLink(selectedDirectory),
+          link: selectedDirectory,
           size: 0,
           id: Utils.idRandom(),
           date: Utils.dateTimeFolder(),
