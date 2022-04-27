@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 
-class ControllBar extends StatelessWidget {
-  const ControllBar({Key? key}) : super(key: key);
+class ControlBar extends StatelessWidget {
+  const ControlBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
