@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zanmelodic/src/widgets/controll_bar.dart';
+import 'package:zanmelodic/src/widgets/custom_bar/control_bar.dart';
 import 'package:zanmelodic/src/modules/tracks/widgets/list_tracks_widget.dart';
 
 class TracksPage extends StatelessWidget {
@@ -11,7 +11,7 @@ class TracksPage extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
         child: CustomScrollView(physics: BouncingScrollPhysics(), slivers: [
-          ControllBar(),
+          ControlBar(),
           ListTracksWidget(),
         ]),
       ),
