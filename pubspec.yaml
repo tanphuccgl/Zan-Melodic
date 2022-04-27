@@ -40,6 +40,8 @@ dependencies:
   firebase_storage: ^10.2.13
   intl: ^0.17.0
   just_audio: ^0.9.19
+  path_provider: ^2.0.9
+  file_picker: ^4.5.1
 
 
 

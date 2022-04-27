@@ -11,11 +11,12 @@
 // ignore_for_file: type=lint
 
 import 'package:auto_route/auto_route.dart' as _i4;
-import 'package:flutter/material.dart' as _i10;
+import 'package:flutter/material.dart' as _i11;
 
 import '../../modules/album/pages/album_page.dart' as _i8;
 import '../../modules/dashboard/pages/dashboard_page.dart' as _i3;
 import '../../modules/dashboard/router/dashboard_wrapper_router.dart' as _i1;
+import '../../modules/detail_folder/pages/detail_folder_page.dart' as _i10;
 import '../../modules/favorites/pages/favorites_page.dart' as _i5;
 import '../../modules/folder/pages/folder_page.dart' as _i9;
 import '../../modules/loading/pages/loading_page.dart' as _i2;
@@ -23,7 +24,7 @@ import '../../modules/playlist/pages/playlist_page.dart' as _i7;
 import '../../modules/tracks/pages/tracks_page.dart' as _i6;
 
 class XRouter extends _i4.RootStackRouter {
-  XRouter([_i10.GlobalKey<_i10.NavigatorState>? navigatorKey])
+  XRouter([_i11.GlobalKey<_i11.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
@@ -79,6 +80,12 @@ class XRouter extends _i4.RootStackRouter {
     FolderRoute.name: (routeData) {
       return _i4.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i9.FolderPage());
+    },
+    DetailFolderRoute.name: (routeData) {
+      final args = routeData.argsAs<DetailFolderRouteArgs>();
+      return _i4.MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: _i10.DetailFolderPage(key: args.key, name: args.name));
     }
   };
 
@@ -146,7 +153,12 @@ class XRouter extends _i4.RootStackRouter {
                         parent: DashboardRoute.name,
                         children: [
                           _i4.RouteConfig(FolderRoute.name,
-                              path: '', parent: FolderTab.name),
+                              path: '',
+                              parent: FolderTab.name,
+                              children: [
+                                _i4.RouteConfig(DetailFolderRoute.name,
+                                    path: 'detail', parent: FolderRoute.name)
+                              ]),
                           _i4.RouteConfig('*#redirect',
                               path: '*',
                               parent: FolderTab.name,
@@ -278,7 +290,31 @@ class AlbumRoute extends _i4.PageRouteInfo<void> {
 /// generated route for
 /// [_i9.FolderPage]
 class FolderRoute extends _i4.PageRouteInfo<void> {
-  const FolderRoute() : super(FolderRoute.name, path: '');
+  const FolderRoute({List<_i4.PageRouteInfo>? children})
+      : super(FolderRoute.name, path: '', initialChildren: children);
 
   static const String name = 'FolderRoute';
+}
+
+/// generated route for
+/// [_i10.DetailFolderPage]
+class DetailFolderRoute extends _i4.PageRouteInfo<DetailFolderRouteArgs> {
+  DetailFolderRoute({_i11.Key? key, required String name})
+      : super(DetailFolderRoute.name,
+            path: 'detail', args: DetailFolderRouteArgs(key: key, name: name));
+
+  static const String name = 'DetailFolderRoute';
+}
+
+class DetailFolderRouteArgs {
+  const DetailFolderRouteArgs({this.key, required this.name});
+
+  final _i11.Key? key;
+
+  final String name;
+
+  @override
+  String toString() {
+    return 'DetailFolderRouteArgs{key: $key, name: $name}';
+  }
 }
