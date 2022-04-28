@@ -12,7 +12,7 @@ class XFolder {
     this.link = '',
     this.listTracks,
     this.date = '',
-     this.color=0,
+    this.color = 0,
     this.size = 0.0,
     this.id = '',
   });
@@ -20,9 +20,8 @@ class XFolder {
     return XFolder(
       size: json['size'].toDouble(),
       date: json['date'],
-      listTracks: (json['listTracks'] as List)
-            .map((e) => XTracks.fromJson(e))
-            .toList(),
+      listTracks:
+          (json['listTracks'] as List).map((e) => XTracks.fromJson(e)).toList(),
       link: json['link'],
       id: json['id'],
       color: json['color'],
@@ -35,7 +34,7 @@ class XFolder {
     data['link'] = link;
     data['date'] = date;
     data['color'] = color;
-     if (listTracks != null) {
+    if (listTracks != null) {
       data['listTracks'] = listTracks!.map((v) => v.toJson()).toList();
     } else {
       data['listTracks'] = [];

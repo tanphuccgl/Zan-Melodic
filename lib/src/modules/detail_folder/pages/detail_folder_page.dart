@@ -64,7 +64,7 @@ class _DetailFolderPageState extends State<DetailFolderPage> {
     final OnAudioQuery _audioQuery = OnAudioQuery();
 
     List<SongModel> something = await _audioQuery.querySongs();
-    var a =something.where((e) => e.fileExtension=='mp3').toList();
+    var a = something.where((e) => e.fileExtension == 'mp3').toList();
     log("levi" + a.toString());
   }
 
@@ -84,7 +84,7 @@ class _DetailFolderPageState extends State<DetailFolderPage> {
         appBar: AppBar(
           title: Text(widget.name),
         ),
-        body: files == null
+        body: files.isEmpty
             ? const Text("Searching Files")
             : ListView.builder(
                 //if file/folder list is grabbed, then show here

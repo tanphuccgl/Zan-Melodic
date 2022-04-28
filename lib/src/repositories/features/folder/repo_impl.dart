@@ -8,7 +8,7 @@ class FolderRepositoryImpl implements FolderRepository {
   Future<XResult<List<XFolder>>> fetchListFolder() async {
     try {
       final data = Prefs.getListFolderToLocal();
-      return  XResult.success(data);
+      return XResult.success(data);
     } catch (e) {
       return XResult.error(e.toString());
     }

@@ -1,5 +1,3 @@
-import 'dart:io' as io;
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zanmelodic/src/models/handle.dart';
@@ -29,10 +27,6 @@ class TracksBloc extends Cubit<TracksState> {
   }
 
   Future<void> getTracksFromLocal(String directory) async {
-    List<io.FileSystemEntity> files = io.Directory(directory).listSync();
-
-    files.map((e) {
-      print(e.uri);
-    }).toList();
+    // List<io.FileSystemEntity> files = io.Directory(directory).listSync();
   }
 }

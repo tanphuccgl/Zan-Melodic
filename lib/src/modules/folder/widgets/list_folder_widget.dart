@@ -49,7 +49,7 @@ class ListFolderWidget extends StatelessWidget {
 
   Widget _buildCard(BuildContext context, XFolder folder) {
     return GestureDetector(
-      onTap: () =>FolderCoordinator.showDetailFolderScreen(context, 'aa'),
+      onTap: () => FolderCoordinator.showDetailFolderScreen(context, 'aa'),
       child: Padding(
         padding: const EdgeInsets.all(4),
         child: Row(
@@ -63,7 +63,7 @@ class ListFolderWidget extends StatelessWidget {
             Expanded(
               child: RichText(
                   text: TextSpan(
-                      text: Utils.getNameFolderOfLink(folder.link)+'\n',
+                      text: Utils.getNameFolderOfLink(folder.link) + '\n',
                       style: Style.textTheme().titleMedium,
                       children: [
                     TextSpan(

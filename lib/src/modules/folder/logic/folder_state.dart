@@ -7,7 +7,6 @@ class FolderState extends Equatable {
 
   @override
   List<Object?> get props => [items];
-  
 
   FolderState copyWith({
     XHandle<List<XFolder>>? items,

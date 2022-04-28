@@ -11,7 +11,6 @@ class FolderPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => FolderBloc(),
-    
       child: const Scaffold(
         body: Padding(
           padding: EdgeInsets.fromLTRB(20, 10, 20, 0),

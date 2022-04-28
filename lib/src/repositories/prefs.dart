@@ -11,9 +11,6 @@ class Prefs {
   }
 
   static void saveListFolderToLocal(List<XFolder> listFolder) {
-    
-   
-
     String jsonListFolder = jsonEncode(listFolder);
     _prefs.setString('listFolder', jsonListFolder);
   }
@@ -29,4 +26,3 @@ class Prefs {
     return [];
   }
 }
-
