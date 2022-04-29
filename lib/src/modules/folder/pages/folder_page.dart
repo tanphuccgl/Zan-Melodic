@@ -11,7 +11,7 @@ class FolderPage extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
         child: CustomScrollView(
-          slivers: [ControlBar(listTracks: []), ListFolderWidget()],
+          slivers: [ControlBar(songList: []), ListFolderWidget()],
         ),
       ),
     );

@@ -1,13 +1,13 @@
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/models/result.dart';
 import 'package:zanmelodic/src/repositories/audio_query.dart';
-import 'package:zanmelodic/src/repositories/features/tracks/repo.dart';
+import 'package:zanmelodic/src/repositories/features/song/repo.dart';
 
-class TracksRepositoryImpl implements TracksRepository {
+class SongRepositoryImpl implements SongRepository {
   @override
-  Future<XResult<List<SongModel>>> getAllTracks() async {
+  Future<XResult<List<SongModel>>> getListOfSongs() async {
     try {
-      var data = await XAudioQuery.fetchTracksFromLocal();
+      var data = await XAudioQuery.getSongFromLocal();
       return XResult.success(data);
     } catch (e) {
       return XResult.error(e.toString());

@@ -1,6 +1,6 @@
 enum TabIndex {
   favorites,
-  tracks,
+  song,
   playlist,
   album,
   folder,
@@ -11,7 +11,7 @@ extension TabIndexExt on TabIndex {
     switch (this) {
       case TabIndex.favorites:
         return "Favorites";
-      case TabIndex.tracks:
+      case TabIndex.song:
         return "Tracks";
       case TabIndex.playlist:
         return "Playlist";

@@ -35,14 +35,9 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  firebase_core: ^1.14.1
-  cloud_firestore: ^3.1.12
-  firebase_storage: ^10.2.13
   intl: ^0.17.0
   just_audio: ^0.9.19
   on_audio_query: ^2.6.0
-  permission_handler: ^9.2.0
-  uri_to_file: ^0.2.0
 
 
 

@@ -8,8 +8,8 @@ import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
 import 'package:zanmelodic/src/widgets/image_widget/image_song.dart';
 
 class PlayerBottomBar extends StatelessWidget {
-  const PlayerBottomBar({Key? key, required this.tracks}) : super(key: key);
-  final SongModel tracks;
+  const PlayerBottomBar({Key? key, required this.song}) : super(key: key);
+  final SongModel song;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class PlayerBottomBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             ImageSongWidget(
-              song: tracks,
+              id: song.id,
               height: 51.0,
               width: 51.0,
             ),
@@ -42,14 +42,14 @@ class PlayerBottomBar extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    '${tracks.title}\n',
+                    '${song.title}\n',
                     style: Style.textTheme()
                         .titleMedium!
                         .copyWith(fontSize: 15, height: 1.25),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  Text(tracks.artist ?? '',
+                  Text(song.artist ?? '',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Style.textTheme().titleMedium!.copyWith(
@@ -84,7 +84,7 @@ class PlayerBottomBar extends StatelessWidget {
               child: IconButton(
                   onPressed: () => state.isPlaying
                       ? context.read<PlayMusicBloc>().onPause()
-                      : context.read<PlayMusicBloc>().onPlay(tracks),
+                      : context.read<PlayMusicBloc>().onButtonPlayer(song),
                   icon: Icon(
                     state.playIcon,
                     color: MyColors.colorWhite,

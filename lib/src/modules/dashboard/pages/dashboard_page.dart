@@ -10,7 +10,7 @@ import 'package:zanmelodic/src/modules/folder/pages/folder_page.dart';
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
 import 'package:zanmelodic/src/modules/play_music/pages/player_bottom_bar.dart';
 import 'package:zanmelodic/src/modules/playlist/pages/playlist_page.dart';
-import 'package:zanmelodic/src/modules/tracks/pages/tracks_page.dart';
+import 'package:zanmelodic/src/modules/songs/pages/songs_page.dart';
 import 'package:zanmelodic/src/utils/enums/tab_index.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -21,7 +21,7 @@ class DashboardPage extends StatelessWidget {
     return AutoTabsScaffold(
       routes: const [
         FavoritesTab(),
-        TracksTab(),
+        SongTab(),
         PlaylistTab(),
         AlbumTab(),
         FolderTab(),
@@ -34,7 +34,7 @@ class DashboardPage extends StatelessWidget {
               length: TabIndex.values.length,
               child: Scaffold(
                 bottomNavigationBar: state.isShowPlayBottomBar
-                    ? PlayerBottomBar(tracks: state.tracks)
+                    ? PlayerBottomBar(song: state.song)
                     : null,
                 appBar: AppBar(
                     elevation: 0,
@@ -62,7 +62,7 @@ class DashboardPage extends StatelessWidget {
                         ])),
                 body: const TabBarView(children: [
                   FavoritesPage(),
-                  TracksPage(),
+                  SongPage(),
                   PlaylistPage(),
                   AlbumPage(),
                   FolderPage(),

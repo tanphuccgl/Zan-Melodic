@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 
-class TracksFavotiresWidget extends StatelessWidget {
-  const TracksFavotiresWidget({Key? key}) : super(key: key);
+class SongFavotiresWidget extends StatelessWidget {
+  const SongFavotiresWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

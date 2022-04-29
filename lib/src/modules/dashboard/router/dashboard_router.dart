@@ -8,13 +8,13 @@ import 'package:zanmelodic/src/modules/dashboard/router/dashboard_wrapper_router
 import 'package:zanmelodic/src/modules/favorites/router/favorites_router.dart';
 import 'package:zanmelodic/src/modules/folder/router/folder_router.dart';
 import 'package:zanmelodic/src/modules/playlist/router/playlist_router.dart';
-import 'package:zanmelodic/src/modules/tracks/router/tracks_router.dart';
+import 'package:zanmelodic/src/modules/songs/router/songs_router.dart';
 
 import '../../now_playing/pages/now_playing_page.dart';
 
 class DashboardTaps {
   static const String favoritesTab = 'favorites';
-  static const String tracksTab = 'tracks';
+  static const String songTab = 'song';
   static const String playlistTab = 'playlist';
   static const String albumTab = 'album';
   static const String folderTab = 'folder';
@@ -33,7 +33,7 @@ class DashboardCoordinator {
           initial: true,
           children: [
             FavoritesCoordinator.autoRoute,
-            TracksCoordinator.autoRoute,
+            SongCoordinator.autoRoute,
             PlaylistCoordinator.autoRoute,
             AlbumCoordinator.autoRoute,
             FolderCoordinator.autoRoute,

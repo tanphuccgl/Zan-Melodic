@@ -21,7 +21,7 @@ import '../../modules/folder/pages/folder_page.dart' as _i10;
 import '../../modules/loading/pages/loading_page.dart' as _i2;
 import '../../modules/now_playing/pages/now_playing_page.dart' as _i4;
 import '../../modules/playlist/pages/playlist_page.dart' as _i8;
-import '../../modules/tracks/pages/tracks_page.dart' as _i7;
+import '../../modules/songs/pages/songs_page.dart' as _i7;
 
 class XRouter extends _i5.RootStackRouter {
   XRouter([_i11.GlobalKey<_i11.NavigatorState>? navigatorKey])
@@ -49,7 +49,7 @@ class XRouter extends _i5.RootStackRouter {
       return _i5.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i5.EmptyRouterPage());
     },
-    TracksTab.name: (routeData) {
+    SongTab.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i5.EmptyRouterPage());
     },
@@ -69,9 +69,9 @@ class XRouter extends _i5.RootStackRouter {
       return _i5.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i6.FavoritesPage());
     },
-    TracksRoute.name: (routeData) {
+    SongRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i7.TracksPage());
+          routeData: routeData, child: const _i7.SongPage());
     },
     PlaylistRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
@@ -110,15 +110,15 @@ class XRouter extends _i5.RootStackRouter {
                               redirectTo: '',
                               fullMatch: true)
                         ]),
-                    _i5.RouteConfig(TracksTab.name,
-                        path: 'tracks',
+                    _i5.RouteConfig(SongTab.name,
+                        path: 'song',
                         parent: DashboardRoute.name,
                         children: [
-                          _i5.RouteConfig(TracksRoute.name,
-                              path: '', parent: TracksTab.name),
+                          _i5.RouteConfig(SongRoute.name,
+                              path: '', parent: SongTab.name),
                           _i5.RouteConfig('*#redirect',
                               path: '*',
-                              parent: TracksTab.name,
+                              parent: SongTab.name,
                               redirectTo: '',
                               fullMatch: true)
                         ]),
@@ -224,11 +224,11 @@ class FavoritesTab extends _i5.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.EmptyRouterPage]
-class TracksTab extends _i5.PageRouteInfo<void> {
-  const TracksTab({List<_i5.PageRouteInfo>? children})
-      : super(TracksTab.name, path: 'tracks', initialChildren: children);
+class SongTab extends _i5.PageRouteInfo<void> {
+  const SongTab({List<_i5.PageRouteInfo>? children})
+      : super(SongTab.name, path: 'song', initialChildren: children);
 
-  static const String name = 'TracksTab';
+  static const String name = 'SongTab';
 }
 
 /// generated route for
@@ -267,11 +267,11 @@ class FavoritesRoute extends _i5.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i7.TracksPage]
-class TracksRoute extends _i5.PageRouteInfo<void> {
-  const TracksRoute() : super(TracksRoute.name, path: '');
+/// [_i7.SongPage]
+class SongRoute extends _i5.PageRouteInfo<void> {
+  const SongRoute() : super(SongRoute.name, path: '');
 
-  static const String name = 'TracksRoute';
+  static const String name = 'SongRoute';
 }
 
 /// generated route for
