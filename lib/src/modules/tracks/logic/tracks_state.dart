@@ -1,7 +1,7 @@
 part of 'tracks_bloc.dart';
 
 class TracksState extends Equatable {
-  final XHandle<List<XTracks>> items;
+  final XHandle<List<SongModel>> items;
 
   const TracksState({required this.items});
 
@@ -9,7 +9,7 @@ class TracksState extends Equatable {
   List<Object?> get props => [items];
 
   TracksState copyWith({
-    XHandle<List<XTracks>>? items,
+    XHandle<List<SongModel>>? items,
   }) {
     return TracksState(
       items: items ?? this.items,

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
-import 'package:zanmelodic/src/models/tracks_model.dart';
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
 
 class ControllBar extends StatelessWidget {
   const ControllBar({Key? key, required this.listTracks}) : super(key: key);
-  final List<XTracks> listTracks;
+  final List<SongModel> listTracks;
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/routes/coordinator.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
@@ -38,9 +39,6 @@ class NowPlayingPage extends StatelessWidget {
                       height: 220,
                       width: 220,
                       decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(_tracks.image),
-                              fit: BoxFit.fill),
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
@@ -49,23 +47,37 @@ class NowPlayingPage extends StatelessWidget {
                                   .withOpacity(0.25),
                             )
                           ]),
+                      child: QueryArtworkWidget(
+                        artworkBorder: BorderRadius.circular(20.0),
+                        id: _tracks.id,
+                        type: ArtworkType.AUDIO,
+                        keepOldArtwork: true,
+                        nullArtworkWidget: const Icon(
+                          Icons.image_not_supported,
+                          size: 240,
+                          color: MyColors.colorWhite,
+                        ),
+                      ),
                     ),
                   ),
-                  RichText(
-                    textAlign: TextAlign.center,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                    text: TextSpan(
-                        text: '${_tracks.name}\n',
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '${_tracks.title}\n',
                         style: Style.textTheme().displayLarge,
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: _tracks.author,
-                              style: Style.textTheme().titleMedium!.copyWith(
-                                  fontSize: 19,
-                                  fontWeight: FontWeight.w500,
-                                  color: MyColors.colorGray))
-                        ]),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(_tracks.artist ?? '',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: Style.textTheme().titleMedium!.copyWith(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: MyColors.colorGray))
+                    ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

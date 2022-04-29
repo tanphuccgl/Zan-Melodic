@@ -10,7 +10,6 @@ import 'package:zanmelodic/src/modules/loading/pages/loading_page.dart';
     AutoRoute(
       path: XRoutes.loading,
       page: LoadingPage,
-      // initial: true,
     ),
     // redirect all other paths
     RedirectRoute(path: '*', redirectTo: ''),

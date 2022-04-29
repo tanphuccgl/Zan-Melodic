@@ -1,7 +1,7 @@
 part of 'play_music_bloc.dart';
 
 class PlayMusicState extends Equatable {
-  final XTracks tracks;
+  final SongModel tracks;
   final AudioPlayer audioPlayer;
   final Duration currentPosition;
   final Duration endPosition;
@@ -22,7 +22,8 @@ class PlayMusicState extends Equatable {
   IconData get shuffleIcon =>
       isEnableShuffle ? Icons.shuffle_on : Icons.shuffle;
 
-  bool get isShowPlayBottomBar => tracks.id.isEmpty ? false : true;
+  // ignore: unnecessary_null_comparison
+  bool get isShowPlayBottomBar => tracks.id == null ? false : true;
   String get currentTime => XUtil.formatDuration(currentPosition);
   String get totalTime => XUtil.formatDuration(endPosition);
 
@@ -48,7 +49,7 @@ class PlayMusicState extends Equatable {
       ];
 
   PlayMusicState copyWith({
-    XTracks? tracks,
+    SongModel? tracks,
     bool? isPlaying,
     AudioPlayer? audioPlayer,
     Duration? currentPosition,

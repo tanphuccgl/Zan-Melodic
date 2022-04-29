@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zanmelodic/src/modules/tracks/logic/tracks_bloc.dart';
-import 'package:zanmelodic/src/widgets/controll_bar.dart';
 import 'package:zanmelodic/src/modules/tracks/widgets/list_tracks_widget.dart';
+import 'package:zanmelodic/src/widgets/controll_bar.dart';
 
 class TracksPage extends StatelessWidget {
   const TracksPage({Key? key}) : super(key: key);
