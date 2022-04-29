@@ -6,7 +6,6 @@ class PlayMusicState extends Equatable {
   final Duration currentPosition;
   final Duration endPosition;
   final bool isPlaying;
-  final bool isEnableShuffle;
   final LoopMode loopMode;
   bool get isEndSong =>
       audioPlayer.processingState == ProcessingState.completed;
@@ -19,9 +18,6 @@ class PlayMusicState extends Equatable {
     return _icon;
   }
 
-  IconData get shuffleIcon =>
-      isEnableShuffle ? Icons.shuffle_on : Icons.shuffle;
-
   // ignore: unnecessary_null_comparison
   bool get isShowPlayBottomBar => tracks.id == null ? false : true;
   String get currentTime => XUtil.formatDuration(currentPosition);
@@ -33,7 +29,6 @@ class PlayMusicState extends Equatable {
     required this.tracks,
     this.isPlaying = false,
     required this.audioPlayer,
-    this.isEnableShuffle = false,
     this.loopMode = LoopMode.off,
   });
 
@@ -44,7 +39,6 @@ class PlayMusicState extends Equatable {
         audioPlayer,
         currentPosition,
         endPosition,
-        isEnableShuffle,
         loopMode,
       ];
 
@@ -63,7 +57,6 @@ class PlayMusicState extends Equatable {
       audioPlayer: audioPlayer ?? this.audioPlayer,
       currentPosition: currentPosition ?? this.currentPosition,
       endPosition: endPosition ?? this.endPosition,
-      isEnableShuffle: isEnableShuffle ?? this.isEnableShuffle,
       loopMode: loopMode ?? this.loopMode,
     );
   }

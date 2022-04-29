@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/models/handle.dart';
@@ -23,5 +24,13 @@ class TracksBloc extends Cubit<TracksState> {
     } else {
       XSnackbar.show(msg: 'Load All Tracks Error');
     }
+  }
+
+  void onSortNameToList() {
+    emit(state.copyWith(isSortName: !state.isSortName));
+  }
+
+  void onShuffleToList() {
+    emit(state.copyWith(isShuffle: !state.isShuffle));
   }
 }

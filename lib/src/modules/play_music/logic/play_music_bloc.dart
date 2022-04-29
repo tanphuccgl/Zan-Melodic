@@ -94,10 +94,6 @@ class PlayMusicBloc<T extends PlayMusicState> extends Cubit<T> {
             currentPosition: event,
             endPosition: state.audioPlayer.duration) as T);
       });
-  Future<void> setShuffleModeEnabled(bool value) async {
-    await state.audioPlayer.setShuffleModeEnabled(value);
-    emit(state.copyWith(isEnableShuffle: value) as T);
-  }
 
   Future<void> setLoopMode() async {
     final value = state.loopMode.nextOption();

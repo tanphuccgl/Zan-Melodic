@@ -24,6 +24,8 @@ class ListTracksWidget extends StatelessWidget {
         if (_handle.isCompleted) {
           _handle = XHandle.result(XResult.success(state.items.data ?? []));
           final List<SongModel> _items = _handle.data ?? [];
+          state.isSortName ? state.sortListByNameReverse : state.sortListByName;
+          state.isShuffle ? _items.shuffle() : null;
           return _items.isNotEmpty
               ? SliverList(
                   delegate: SliverChildBuilderDelegate(
