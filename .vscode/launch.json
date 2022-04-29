@@ -2,6 +2,11 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Zan-Melodic",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
