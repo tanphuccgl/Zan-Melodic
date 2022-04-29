@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/models/result.dart';
-import 'package:zanmelodic/src/models/tracks_model.dart';
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
 import 'package:zanmelodic/src/modules/tracks/logic/tracks_bloc.dart';
+import 'package:zanmelodic/src/widgets/image_widget/image_song.dart';
 import 'package:zanmelodic/src/widgets/state/state_empty_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_error_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_loading_widget.dart';
@@ -18,16 +19,18 @@ class ListTracksWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<TracksBloc, TracksState>(
       builder: (context, state) {
-        XHandle<List<XTracks>> _handle = state.items;
+        XHandle<List<SongModel>> _handle = state.items;
 
         if (_handle.isCompleted) {
           _handle = XHandle.result(XResult.success(state.items.data ?? []));
-          final List<XTracks> _items = _handle.data ?? [];
-
+          final List<SongModel> _items = _handle.data ?? [];
+          state.isSortName ? state.sortListByNameReverse : state.sortListByName;
+          state.isShuffle ? _items.shuffle() : null;
           return _items.isNotEmpty
               ? SliverList(
                   delegate: SliverChildBuilderDelegate(
-                      (context, index) => _buildCard(context, _items[index]),
+                      (context, index) => _buildCard(context,
+                          listTracks: _items, tracks: _items[index]),
                       childCount: _items.length),
                 )
               : const XStateEmptyWidget();
@@ -40,47 +43,60 @@ class ListTracksWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(BuildContext context, XTracks tracks) {
+  Widget _buildCard(BuildContext context,
+      {required List<SongModel> listTracks, required SongModel tracks}) {
     return GestureDetector(
-      onTap: () => context.read<PlayMusicBloc>().onPlay(tracks),
+      onTap: () => context
+          .read<PlayMusicBloc>()
+          .onPlayFromTracks(listTracks: listTracks, tracks: tracks),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 13),
         child: SizedBox(
           height: 70,
-          width: double.infinity,
+          width: 70,
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  flex: 3,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: Image.network(
-                      tracks.image,
-                      height: 70.0,
-                      width: 70.0,
-                    ),
+                  flex: 8,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 70,
+                        child: ImageSongWidget(
+                          song: tracks,
+                          height: 70.0,
+                          width: 70.0,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '${tracks.title}\n',
+                              style: Style.textTheme().titleMedium,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(tracks.artist ?? '',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: Style.textTheme().titleMedium!.copyWith(
+                                    fontSize: 17, color: MyColors.colorGray))
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Expanded(
-                  flex: 6,
-                  child: RichText(
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                    text: TextSpan(
-                        text: '${tracks.name}\n',
-                        style: Style.textTheme().titleMedium,
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: tracks.author,
-                              style: Style.textTheme().titleMedium!.copyWith(
-                                  fontSize: 17, color: MyColors.colorGray))
-                        ]),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
+                  flex: 2,
                   child: IconButton(
                     onPressed: () {},
                     icon: const Icon(

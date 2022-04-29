@@ -12,7 +12,7 @@ class AlbumPage extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
         child: CustomScrollView(
             physics: BouncingScrollPhysics(),
-            slivers: [ControlBar(), ListAlbumWidget()]),
+            slivers: [ControlBar(listTracks: []), ListAlbumWidget()]),
       ),
     );
   }

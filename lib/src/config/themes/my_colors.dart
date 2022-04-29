@@ -9,4 +9,6 @@ class MyColors {
   static const Color colorGray6 = Color(0xFFF2F2F2);
   static const Color colorWhite = Color(0xFFFFFFFF);
   static const Color colorWhite1 = Color(0xFFE5E5E5);
+  static const Color colorBackground = Color(0xFF450433);
+  static const Color colorShadowImageNowPlaying = Color(0xFF000000);
 }
