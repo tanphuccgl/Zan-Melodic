@@ -5,8 +5,8 @@ import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
 import 'package:zanmelodic/src/modules/tracks/logic/tracks_bloc.dart';
 
-class ControllBar extends StatelessWidget {
-  const ControllBar({Key? key, required this.listTracks}) : super(key: key);
+class ControlBar extends StatelessWidget {
+  const ControlBar({Key? key, required this.listTracks}) : super(key: key);
   final List<SongModel> listTracks;
 
   @override
