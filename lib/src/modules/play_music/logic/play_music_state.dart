@@ -1,11 +1,12 @@
 part of 'play_music_bloc.dart';
 
 class PlayMusicState extends Equatable {
-  final XTracks tracks;
+  final SongModel tracks;
   final AudioPlayer audioPlayer;
   final Duration currentPosition;
   final Duration endPosition;
   final bool isPlaying;
+  final LoopMode loopMode;
   bool get isEndSong =>
       audioPlayer.processingState == ProcessingState.completed;
   IconData get playIcon {
@@ -17,7 +18,8 @@ class PlayMusicState extends Equatable {
     return _icon;
   }
 
-  bool get isShowPlayBottomBar => tracks.id.isEmpty ? false : true;
+  // ignore: unnecessary_null_comparison
+  bool get isShowPlayBottomBar => tracks.id == null ? false : true;
   String get currentTime => XUtil.formatDuration(currentPosition);
   String get totalTime => XUtil.formatDuration(endPosition);
 
@@ -27,6 +29,7 @@ class PlayMusicState extends Equatable {
     required this.tracks,
     this.isPlaying = false,
     required this.audioPlayer,
+    this.loopMode = LoopMode.off,
   });
 
   @override
@@ -36,14 +39,17 @@ class PlayMusicState extends Equatable {
         audioPlayer,
         currentPosition,
         endPosition,
+        loopMode,
       ];
 
   PlayMusicState copyWith({
-    XTracks? tracks,
+    SongModel? tracks,
     bool? isPlaying,
     AudioPlayer? audioPlayer,
     Duration? currentPosition,
     Duration? endPosition,
+    bool? isEnableShuffle,
+    LoopMode? loopMode,
   }) {
     return PlayMusicState(
       tracks: tracks ?? this.tracks,
@@ -51,6 +57,7 @@ class PlayMusicState extends Equatable {
       audioPlayer: audioPlayer ?? this.audioPlayer,
       currentPosition: currentPosition ?? this.currentPosition,
       endPosition: endPosition ?? this.endPosition,
+      loopMode: loopMode ?? this.loopMode,
     );
   }
 }

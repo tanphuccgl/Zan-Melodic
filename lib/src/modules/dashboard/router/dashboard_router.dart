@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:zanmelodic/src/config/routes/auto_route.gr.dart';
 import 'package:zanmelodic/src/config/routes/page_routers.dart';
-import 'package:zanmelodic/src/models/tracks_model.dart';
 import 'package:zanmelodic/src/modules/album/router/album_router.dart';
 import 'package:zanmelodic/src/modules/dashboard/pages/dashboard_page.dart';
 import 'package:zanmelodic/src/modules/dashboard/router/dashboard_wrapper_router.dart';
@@ -45,9 +44,8 @@ class DashboardCoordinator {
       RedirectRoute(path: '*', redirectTo: ''),
     ],
   );
-  static showNowPlayingScreen(BuildContext context,
-      {XTracks? data, required String id}) {
-    var value = data ?? XTracks();
-    return context.router.push(NowPlayingRoute(data: value, id: value.id));
-  }
+  static showNowPlayingScreen(
+    BuildContext context,
+  ) =>
+      context.router.push(const NowPlayingRoute());
 }
