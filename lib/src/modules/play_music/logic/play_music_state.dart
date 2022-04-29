@@ -1,7 +1,7 @@
 part of 'play_music_bloc.dart';
 
 class PlayMusicState extends Equatable {
-  final SongModel tracks;
+  final SongModel song;
   final AudioPlayer audioPlayer;
   final Duration currentPosition;
   final Duration endPosition;
@@ -19,14 +19,14 @@ class PlayMusicState extends Equatable {
   }
 
   // ignore: unnecessary_null_comparison
-  bool get isShowPlayBottomBar => tracks.id == null ? false : true;
+  bool get isShowPlayBottomBar => song.id == null ? false : true;
   String get currentTime => XUtil.formatDuration(currentPosition);
   String get totalTime => XUtil.formatDuration(endPosition);
 
   const PlayMusicState({
     this.currentPosition = Duration.zero,
     this.endPosition = Duration.zero,
-    required this.tracks,
+    required this.song,
     this.isPlaying = false,
     required this.audioPlayer,
     this.loopMode = LoopMode.off,
@@ -34,7 +34,7 @@ class PlayMusicState extends Equatable {
 
   @override
   List<Object?> get props => [
-        tracks,
+        song,
         isPlaying,
         audioPlayer,
         currentPosition,
@@ -43,7 +43,7 @@ class PlayMusicState extends Equatable {
       ];
 
   PlayMusicState copyWith({
-    SongModel? tracks,
+    SongModel? song,
     bool? isPlaying,
     AudioPlayer? audioPlayer,
     Duration? currentPosition,
@@ -52,7 +52,7 @@ class PlayMusicState extends Equatable {
     LoopMode? loopMode,
   }) {
     return PlayMusicState(
-      tracks: tracks ?? this.tracks,
+      song: song ?? this.song,
       isPlaying: isPlaying ?? this.isPlaying,
       audioPlayer: audioPlayer ?? this.audioPlayer,
       currentPosition: currentPosition ?? this.currentPosition,

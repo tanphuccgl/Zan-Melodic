@@ -1,10 +1,11 @@
-part of 'tracks_bloc.dart';
+part of 'song_list_bloc.dart';
 
-class TracksState extends Equatable {
+class SongListState extends Equatable {
   final XHandle<List<SongModel>> items;
   final bool isSortName;
   final bool isShuffle;
   IconData get shuffleIcon => isShuffle ? Icons.shuffle_on : Icons.shuffle;
+
   void get sortListByName => (items.data ?? []).sort((a, b) {
         String item1 = a.title;
         String item2 = b.title;
@@ -16,18 +17,18 @@ class TracksState extends Equatable {
         return item2.compareTo(item1);
       });
 
-  const TracksState(
+  const SongListState(
       {required this.items, this.isSortName = false, this.isShuffle = false});
 
   @override
   List<Object?> get props => [items, isSortName, isShuffle];
 
-  TracksState copyWith({
+  SongListState copyWith({
     XHandle<List<SongModel>>? items,
     bool? isSortName,
     bool? isShuffle,
   }) {
-    return TracksState(
+    return SongListState(
       items: items ?? this.items,
       isSortName: isSortName ?? this.isSortName,
       isShuffle: isShuffle ?? this.isShuffle,

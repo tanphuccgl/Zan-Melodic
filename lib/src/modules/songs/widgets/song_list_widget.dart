@@ -6,18 +6,18 @@ import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/models/result.dart';
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
-import 'package:zanmelodic/src/modules/tracks/logic/tracks_bloc.dart';
+import 'package:zanmelodic/src/modules/songs/logic/song_list_bloc.dart';
 import 'package:zanmelodic/src/widgets/image_widget/image_song.dart';
 import 'package:zanmelodic/src/widgets/state/state_empty_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_error_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_loading_widget.dart';
 
-class ListTracksWidget extends StatelessWidget {
-  const ListTracksWidget({Key? key}) : super(key: key);
+class SongListWidget extends StatelessWidget {
+  const SongListWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TracksBloc, TracksState>(
+    return BlocBuilder<SongListBloc, SongListState>(
       builder: (context, state) {
         XHandle<List<SongModel>> _handle = state.items;
 
@@ -30,7 +30,7 @@ class ListTracksWidget extends StatelessWidget {
               ? SliverList(
                   delegate: SliverChildBuilderDelegate(
                       (context, index) => _buildCard(context,
-                          listTracks: _items, tracks: _items[index]),
+                          songList: _items, song: _items[index]),
                       childCount: _items.length),
                 )
               : const XStateEmptyWidget();
@@ -44,11 +44,11 @@ class ListTracksWidget extends StatelessWidget {
   }
 
   Widget _buildCard(BuildContext context,
-      {required List<SongModel> listTracks, required SongModel tracks}) {
+      {required List<SongModel> songList, required SongModel song}) {
     return GestureDetector(
       onTap: () => context
           .read<PlayMusicBloc>()
-          .onPlayFromTracks(listTracks: listTracks, tracks: tracks),
+          .onPlayerItem(songList: songList, song: song),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 13),
         child: SizedBox(
@@ -65,7 +65,7 @@ class ListTracksWidget extends StatelessWidget {
                       SizedBox(
                         width: 70,
                         child: ImageSongWidget(
-                          song: tracks,
+                          id: song.id,
                           height: 70.0,
                           width: 70.0,
                         ),
@@ -79,12 +79,12 @@ class ListTracksWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              '${tracks.title}\n',
+                              '${song.title}\n',
                               style: Style.textTheme().titleMedium,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
-                            Text(tracks.artist ?? '',
+                            Text(song.artist ?? '',
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: Style.textTheme().titleMedium!.copyWith(

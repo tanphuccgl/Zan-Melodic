@@ -6,23 +6,23 @@ import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/repositories/domain.dart';
 import 'package:zanmelodic/src/widgets/loading/bot_toast.dart';
 
-part 'tracks_state.dart';
+part 'song_list_state.dart';
 
-class TracksBloc extends Cubit<TracksState> {
-  TracksBloc() : super(TracksState(items: XHandle.loading())) {
-    getAllTracks();
+class SongListBloc extends Cubit<SongListState> {
+  SongListBloc() : super(SongListState(items: XHandle.loading())) {
+    fetchListOfSongs();
   }
 
   final Domain _domain = Domain();
 
-  Future<void> getAllTracks() async {
+  Future<void> fetchListOfSongs() async {
     await Future.delayed(const Duration(seconds: 2));
-    final value = await _domain.tracks.getAllTracks();
+    final value = await _domain.song.getListOfSongs();
     if (value.isSuccess) {
       emit(state.copyWith(items: XHandle.completed(value.data ?? [])));
-      XSnackbar.show(msg: 'Load All Tracks Success');
+      XSnackbar.show(msg: 'Load All List Success');
     } else {
-      XSnackbar.show(msg: 'Load All Tracks Error');
+      XSnackbar.show(msg: 'Load All LIst Error');
     }
   }
 

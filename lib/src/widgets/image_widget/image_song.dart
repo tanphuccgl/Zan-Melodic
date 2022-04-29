@@ -5,11 +5,11 @@ import 'package:zanmelodic/src/config/themes/my_colors.dart';
 class ImageSongWidget extends StatelessWidget {
   const ImageSongWidget(
       {Key? key,
-      required this.song,
+      required this.id,
       this.height = double.infinity,
       this.width = double.infinity})
       : super(key: key);
-  final SongModel song;
+  final int id;
   final double? height;
   final double? width;
 
@@ -19,7 +19,7 @@ class ImageSongWidget extends StatelessWidget {
       artworkBorder: BorderRadius.circular(20.0),
       artworkHeight: height,
       artworkWidth: width,
-      id: song.id,
+      id: id,
       type: ArtworkType.AUDIO,
       keepOldArtwork: true,
       nullArtworkWidget: const Icon(
