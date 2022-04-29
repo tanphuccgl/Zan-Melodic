@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
-import 'package:zanmelodic/src/models/tracks_model.dart';
 import 'package:zanmelodic/src/modules/dashboard/router/dashboard_router.dart';
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
+import 'package:zanmelodic/src/widgets/image_widget/image_song.dart';
 
 class PlayerBottomBar extends StatelessWidget {
   const PlayerBottomBar({Key? key, required this.tracks}) : super(key: key);
-  final XTracks tracks;
+  final SongModel tracks;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => DashboardCoordinator.showNowPlayingScreen(context,
-          id: tracks.id, data: tracks),
+      onTap: () => DashboardCoordinator.showNowPlayingScreen(context),
       child: Container(
         margin: const EdgeInsets.fromLTRB(20, 0, 10, 16),
         padding: const EdgeInsets.fromLTRB(7, 15, 12, 15),
@@ -28,34 +28,33 @@ class PlayerBottomBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image.network(
-                tracks.image,
-                height: 51.0,
-                width: 51.0,
-                fit: BoxFit.fill,
-              ),
+            ImageSongWidget(
+              song: tracks,
+              height: 51.0,
+              width: 51.0,
             ),
             const SizedBox(
               width: 11,
             ),
             Expanded(
-              child: RichText(
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-                text: TextSpan(
-                    text: '${tracks.name}\n',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '${tracks.title}\n',
                     style: Style.textTheme()
                         .titleMedium!
                         .copyWith(fontSize: 15, height: 1.25),
-                    children: <TextSpan>[
-                      TextSpan(
-                          text: tracks.author,
-                          style: Style.textTheme()
-                              .titleMedium!
-                              .copyWith(fontSize: 12, height: 1.2))
-                    ]),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(tracks.artist ?? '',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Style.textTheme().titleMedium!.copyWith(
+                          fontSize: 12, height: 1.2, color: MyColors.colorGray))
+                ],
               ),
             ),
             _controlPlayer()
@@ -73,7 +72,8 @@ class PlayerBottomBar extends StatelessWidget {
             SizedBox(
               width: 30,
               child: IconButton(
-                  onPressed: () {},
+                  onPressed: () =>
+                      context.read<PlayMusicBloc>().onSkipToPrevious(),
                   icon: const Icon(
                     Icons.skip_previous,
                     color: MyColors.colorWhite,
@@ -93,7 +93,7 @@ class PlayerBottomBar extends StatelessWidget {
             SizedBox(
               width: 30,
               child: IconButton(
-                  onPressed: () {},
+                  onPressed: () => context.read<PlayMusicBloc>().onSkipToNext(),
                   icon: const Icon(
                     Icons.skip_next,
                     color: MyColors.colorWhite,

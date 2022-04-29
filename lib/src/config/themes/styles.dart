@@ -24,7 +24,7 @@ class Style {
             height: 1.2,
             color: MyColors.colorWhite),
         displayLarge: TextStyle(
-            fontSize: 50,
+            fontSize: 30,
             fontWeight: FontWeight.bold,
             height: 1.22,
             color: MyColors.colorWhite),
