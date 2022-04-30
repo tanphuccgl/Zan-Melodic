@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zanmelodic/src/config/routes/auto_route.gr.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
-import 'package:zanmelodic/src/modules/album/pages/album_page.dart';
+import 'package:zanmelodic/src/modules/album/album/pages/album_page.dart';
 import 'package:zanmelodic/src/modules/favorites/pages/favorites_page.dart';
 import 'package:zanmelodic/src/modules/folder/pages/folder_page.dart';
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
@@ -28,14 +28,12 @@ class DashboardPage extends StatelessWidget {
       ],
       builder: (context, child, animation) {
         final tabsRouter = AutoTabsRouter.of(context);
-        return BlocBuilder<PlayMusicBloc, PlayMusicState>(
-          builder: (context, state) {
+      
             return DefaultTabController(
               length: TabIndex.values.length,
               child: Scaffold(
-                bottomNavigationBar: state.isShowPlayBottomBar
-                    ? PlayerBottomBar(song: state.song)
-                    : null,
+                bottomNavigationBar:const  PlayerBottomBar()
+                  ,
                 appBar: AppBar(
                     elevation: 0,
                     toolbarHeight: 20,
@@ -71,7 +69,6 @@ class DashboardPage extends StatelessWidget {
             );
           },
         );
-      },
-    );
+     
   }
 }

@@ -26,7 +26,6 @@ class XAudioQuery {
 
   static Future<List<AlbumModel>> getAlbumfromLocal() async {
     List<AlbumModel> _listAlbum = await audioQuery.queryAlbums();
-    log(_listAlbum.toString());
     return _listAlbum;
   }
 }

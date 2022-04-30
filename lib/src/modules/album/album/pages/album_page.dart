@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zanmelodic/src/modules/album/logic/album_list_bloc.dart';
-import 'package:zanmelodic/src/modules/album/widgets/list_album_widget.dart';
+import 'package:zanmelodic/src/modules/album/album/logic/album_list_bloc.dart';
+import 'package:zanmelodic/src/modules/album/album/widgets/list_album_widget.dart';
 import 'package:zanmelodic/src/widgets/custom_bar/upper_control_bar.dart';
 
 class AlbumPage extends StatelessWidget {

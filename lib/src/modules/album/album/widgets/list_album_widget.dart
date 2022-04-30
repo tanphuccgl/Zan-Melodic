@@ -5,7 +5,8 @@ import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/models/result.dart';
-import 'package:zanmelodic/src/modules/album/logic/album_list_bloc.dart';
+import 'package:zanmelodic/src/modules/album/album/logic/album_list_bloc.dart';
+import 'package:zanmelodic/src/modules/album/router/album_router.dart';
 import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_empty_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_error_widget.dart';
@@ -45,36 +46,39 @@ class ListAlbumWidget extends StatelessWidget {
 Widget _buildCard(BuildContext context, {required AlbumModel album}) {
   final String numberSong =
       '${album.numOfSongs} ${album.numOfSongs > 1 ? 'tracks' : 'track'}';
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 9),
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        CustomImageWidget(
-            id: album.id,
-            height: 120,
-            width: 120,
-            artworkType: ArtworkType.ALBUM),
-        const SizedBox(
-          width: 15,
-        ),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _customText(
-                title: album.album,
-                style: Style.textTheme().titleMedium,
-              ),
-              _customText(
-                title: album.artist ?? '',
-              ),
-              _customText(title: numberSong),
-            ],
+  return GestureDetector(
+    onTap: () => AlbumCoordinator.showAlbumDetailScreen(context),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 9),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CustomImageWidget(
+              id: album.id,
+              height: 120,
+              width: 120,
+              artworkType: ArtworkType.ALBUM),
+          const SizedBox(
+            width: 15,
           ),
-        )
-      ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _customText(
+                  title: album.album,
+                  style: Style.textTheme().titleMedium,
+                ),
+                _customText(
+                  title: album.artist ?? '',
+                ),
+                _customText(title: numberSong),
+              ],
+            ),
+          )
+        ],
+      ),
     ),
   );
 }
