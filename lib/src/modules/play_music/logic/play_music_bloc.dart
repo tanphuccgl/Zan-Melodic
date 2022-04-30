@@ -33,15 +33,13 @@ class PlayMusicBloc extends Cubit<PlayMusicState> {
   Future<void> onPlayerItem(
       {required List<SongModel> songList, SongModel? song}) async {
     try {
-      if (state.isEndSong) {
-        await state.audioPlayer.setAudioSource(
-          ConcatenatingAudioSource(
-            children: songList.map((e) {
-              return AudioSource.uri(Uri.file(e.data));
-            }).toList(),
-          ),
-        );
-      }
+      await state.audioPlayer.setAudioSource(
+        ConcatenatingAudioSource(
+          children: songList.map((e) {
+            return AudioSource.uri(Uri.file(e.data));
+          }).toList(),
+        ),
+      );
 
       if (song != null) {
         var index = songList.indexWhere((e) => e.id == song.id);
