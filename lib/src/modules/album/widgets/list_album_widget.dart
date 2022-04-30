@@ -19,12 +19,11 @@ class ListAlbumWidget extends StatelessWidget {
     return BlocBuilder<AlbumListBloc, AlbumListState>(
       builder: (context, state) {
         XHandle<List<AlbumModel>> _handle = state.items;
-//TODO: control bar
         if (_handle.isCompleted) {
           _handle = XHandle.result(XResult.success(state.items.data ?? []));
           final List<AlbumModel> _items = _handle.data ?? [];
-          // state.isSortName ? state.sortListByNameReverse : state.sortListByName;
-          // state.isShuffle ? _items.shuffle() : null;
+          state.isSortName ? state.sortListByNameReverse : state.sortListByName;
+          state.isShuffle ? _items.shuffle() : null;
           return _items.isNotEmpty
               ? SliverList(
                   delegate: SliverChildBuilderDelegate(
