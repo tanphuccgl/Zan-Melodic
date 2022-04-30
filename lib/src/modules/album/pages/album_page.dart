@@ -10,9 +10,10 @@ class AlbumPage extends StatelessWidget {
     return const Scaffold(
       body: Padding(
         padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
-        child: CustomScrollView(
-            physics: BouncingScrollPhysics(),
-            slivers: [ControlBar(songList: []), ListAlbumWidget()]),
+        child: CustomScrollView(physics: BouncingScrollPhysics(), slivers: [
+          ControlBar(songList: []),
+          ListAlbumWidget(),
+        ]),
       ),
     );
   }

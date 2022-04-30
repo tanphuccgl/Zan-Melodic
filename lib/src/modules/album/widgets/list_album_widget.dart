@@ -1,55 +1,91 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
+import 'package:zanmelodic/src/models/handle.dart';
+import 'package:zanmelodic/src/models/result.dart';
+import 'package:zanmelodic/src/modules/album/logic/album_list_bloc.dart';
+import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
+import 'package:zanmelodic/src/widgets/state/state_empty_widget.dart';
+import 'package:zanmelodic/src/widgets/state/state_error_widget.dart';
+import 'package:zanmelodic/src/widgets/state/state_loading_widget.dart';
 
 class ListAlbumWidget extends StatelessWidget {
   const ListAlbumWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-          (context, index) => Padding(
-              padding: const EdgeInsets.symmetric(vertical: 9),
-              child: _buildCard()),
-          childCount: 10),
+    return BlocBuilder<AlbumListBloc, AlbumListState>(
+      builder: (context, state) {
+        XHandle<List<AlbumModel>> _handle = state.items;
+//TODO: control bar
+        if (_handle.isCompleted) {
+          _handle = XHandle.result(XResult.success(state.items.data ?? []));
+          final List<AlbumModel> _items = _handle.data ?? [];
+          // state.isSortName ? state.sortListByNameReverse : state.sortListByName;
+          // state.isShuffle ? _items.shuffle() : null;
+          return _items.isNotEmpty
+              ? SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                      (context, index) =>
+                          _buildCard(context, album: _items[index]),
+                      childCount: _items.length),
+                )
+              : const XStateEmptyWidget();
+        } else if (_handle.isLoading) {
+          return const XStateLoadingWidget();
+        } else {
+          return const XStateErrorWidget();
+        }
+      },
     );
   }
+}
 
-  Widget _buildCard() {
-    return Row(
+Widget _buildCard(BuildContext context, {required AlbumModel album}) {
+  final String numberSong =
+      '${album.numOfSongs} ${album.numOfSongs > 1 ? 'tracks' : 'track'}';
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 9),
+    child: Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(20.0),
-          child: Image.network(
-            'https://s3-alpha-sig.figma.com/img/68b5/7f27/62678a2e0355e92c6653d1065a9fbcf9?Expires=1651449600&Signature=QLyf6Vx71xwW9MkgJqgNWGPIkAoXybPuZ-51EH4M1ga2~rMufPkWI-NymWUuUB4Jo2V1Z-4yy8uQ~HTZ09-QeXfENUTikxtmq0CLbdX5F23EoSfGrMWh-04UpBIjh32UTKbJPx-Q4xUZq~xG1mx1DplXldk-4Axmr5AoxSDdXL4i03qDvjXNmAi09PmoXp8WzoCK5MTWT9o0PVdcQSeic5L8VDs8e4uoDr41~EdiGgx~TMRH2~u9GswtA~hsQ~VAGaTm9EfT2JPoZx6mvWb5d-9VfSN6gVNQTqOprvx4qL3aXKJ1GY2HhJuS5XM9Qo6iaXSUK9O25W6O-CKBIX~qbg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA',
-            height: 120.0,
-            width: 120.0,
-            fit: BoxFit.fill,
-          ),
-        ),
+        CustomImageWidget(
+            id: album.id,
+            height: 120,
+            width: 120,
+            artworkType: ArtworkType.ALBUM),
         const SizedBox(
           width: 15,
         ),
-        RichText(
-            text: TextSpan(
-                text: 'Hybrid Theory\n',
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _customText(
+                title: album.album,
                 style: Style.textTheme().titleMedium,
-                children: [
-              _textGray('Linkin Park\n'),
-              _textGray('2000\n'),
-              _textGray('1 track'),
-            ]))
+              ),
+              _customText(
+                title: album.artist ?? '',
+              ),
+              _customText(title: numberSong),
+            ],
+          ),
+        )
       ],
-    );
-  }
+    ),
+  );
+}
 
-  TextSpan _textGray(String title) {
-    return TextSpan(
-        text: title,
-        style: Style.textTheme()
-            .titleMedium!
-            .copyWith(color: MyColors.colorGray, fontSize: 17, height: 1.23));
-  }
+Text _customText({required String title, TextStyle? style}) {
+  return Text(title,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: style ??
+          Style.textTheme()
+              .titleMedium!
+              .copyWith(color: MyColors.colorGray, fontSize: 17, height: 1.23));
 }

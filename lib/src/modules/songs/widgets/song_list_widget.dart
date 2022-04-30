@@ -7,7 +7,7 @@ import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/models/result.dart';
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
 import 'package:zanmelodic/src/modules/songs/logic/song_list_bloc.dart';
-import 'package:zanmelodic/src/widgets/image_widget/image_song.dart';
+import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_empty_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_error_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_loading_widget.dart';
@@ -64,7 +64,7 @@ class SongListWidget extends StatelessWidget {
                     children: [
                       SizedBox(
                         width: 70,
-                        child: ImageSongWidget(
+                        child: CustomImageWidget(
                           id: song.id,
                           height: 70.0,
                           width: 70.0,
