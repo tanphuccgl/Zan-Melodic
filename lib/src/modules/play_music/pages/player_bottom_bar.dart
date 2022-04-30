@@ -5,7 +5,7 @@ import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/modules/dashboard/router/dashboard_router.dart';
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
-import 'package:zanmelodic/src/widgets/image_widget/image_song.dart';
+import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
 
 class PlayerBottomBar extends StatelessWidget {
   const PlayerBottomBar({Key? key, required this.song}) : super(key: key);
@@ -28,7 +28,7 @@ class PlayerBottomBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ImageSongWidget(
+            CustomImageWidget(
               id: song.id,
               height: 51.0,
               width: 51.0,
