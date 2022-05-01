@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zanmelodic/src/modules/album/album/logic/album_bloc.dart';
 import 'package:zanmelodic/src/modules/album/album_detail/logic/album_detail_bloc.dart';
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
-import 'package:zanmelodic/src/modules/playlist/playlist/logic/playlist_bloc.dart';
 import 'package:zanmelodic/src/modules/songs/logic/song_list_bloc.dart';
 
 class DashboardWrapperPage extends StatelessWidget {
@@ -18,7 +17,6 @@ class DashboardWrapperPage extends StatelessWidget {
         BlocProvider(create: (_) => PlayMusicBloc()),
         BlocProvider(create: (_) => AlbumBloc()),
         BlocProvider(create: (_) => AlbumDetailBloc()),
-        BlocProvider(create: (_) => PlaylistBloc()),
       ],
       child: WillPopScope(
           onWillPop: () async => false,

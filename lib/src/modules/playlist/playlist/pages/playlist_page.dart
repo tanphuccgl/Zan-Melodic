@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/logic/playlist_bloc.dart';
-import 'package:zanmelodic/src/modules/playlist/playlist/widgets/dialog_create_playlist.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/widgets/playlist_widget.dart';
+import 'package:zanmelodic/src/modules/playlist/router/playlist_router.dart';
 import 'package:zanmelodic/src/widgets/custom_bar/upper_control_bar.dart';
 
 class PlaylistPage extends StatelessWidget {
@@ -16,10 +16,8 @@ class PlaylistPage extends StatelessWidget {
         return Scaffold(
           floatingActionButton: FloatingActionButton(
             backgroundColor: MyColors.colorPrimary,
-            onPressed: () async => showDialog<String>(
-                barrierDismissible: false,
-                context: context,
-                builder: (context) => const DialogCreatePlaylist()),
+            onPressed: () =>
+                PlaylistCoordinator.showDialogCreatePlaylist(context),
             child: const Icon(Icons.add),
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,

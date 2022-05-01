@@ -48,7 +48,11 @@ class XAudioQuery {
 
   static Future<bool> createPlaylist(String name) async {
     var _value = await audioQuery.createPlaylist(name);
-    log(_value.toString());
+    return _value;
+  }
+
+  static Future<bool> removePlaylist(int idPlaylist) async {
+    var _value = await audioQuery.removePlaylist(idPlaylist);
     return _value;
   }
 

@@ -6,7 +6,7 @@ class PlaylistState extends Equatable {
   final bool isShuffle;
   final String namePlaylist;
   final bool pureName;
-
+  final int temp;
   String get isValidName {
     return pureName ? XUtil.isValidNameCreatePlaylist(namePlaylist) : "";
   }
@@ -32,6 +32,7 @@ class PlaylistState extends Equatable {
     this.isShuffle = false,
     this.namePlaylist = '',
     this.pureName = false,
+    this.temp = 1,
   });
 
   @override
@@ -40,6 +41,8 @@ class PlaylistState extends Equatable {
         isSortName,
         isShuffle,
         namePlaylist,
+        pureName,
+        temp,
       ];
 
   PlaylistState copyWith({
@@ -48,13 +51,14 @@ class PlaylistState extends Equatable {
     bool? isShuffle,
     String? namePlaylist,
     bool? pureName,
+    int? temp,
   }) {
     return PlaylistState(
-      items: items ?? this.items,
-      isSortName: isSortName ?? this.isSortName,
-      isShuffle: isShuffle ?? this.isShuffle,
-      namePlaylist: namePlaylist ?? this.namePlaylist,
-      pureName: pureName ?? this.pureName,
-    );
+        items: items ?? this.items,
+        isSortName: isSortName ?? this.isSortName,
+        isShuffle: isShuffle ?? this.isShuffle,
+        namePlaylist: namePlaylist ?? this.namePlaylist,
+        pureName: pureName ?? this.pureName,
+        temp: (temp ?? this.temp) + 1);
   }
 }

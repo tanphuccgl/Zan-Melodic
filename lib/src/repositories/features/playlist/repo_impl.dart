@@ -27,9 +27,23 @@ class PlaylistRepositoryImpl extends PlaylistRepository {
   }
 
   @override
-  Future<XResult> addNewPlaylist(String name) async {
+  Future<XResult<List<PlaylistModel>>> addNewPlaylist(String name) async {
     try {
-      var data = await XAudioQuery.createPlaylist(name);
+      await XAudioQuery.createPlaylist(name);
+      var data = await XAudioQuery.getPlaylistFromLocal();
+
+      return XResult.success(data);
+    } catch (e) {
+      return XResult.error(e.toString());
+    }
+  }
+
+  @override
+  Future<XResult<List<PlaylistModel>>> removePlaylist(int idPlaylist) async {
+    try {
+      await XAudioQuery.removePlaylist(idPlaylist);
+      var data = await XAudioQuery.getPlaylistFromLocal();
+
       return XResult.success(data);
     } catch (e) {
       return XResult.error(e.toString());

@@ -32,15 +32,26 @@ class PlaylistBloc extends Cubit<PlaylistState> {
     if (state.isValidName == '' && state.pureName == true) {
       final _value = await _domain.playlist.addNewPlaylist(name);
       if (_value.isSuccess) {
-        //TODO
-        fetchListOfSongs();
+        emit(state.copyWith(items: XHandle.completed(_value.data ?? [])));
+
         XCoordinator.pop(context);
         XSnackbar.show(msg: 'Add Success');
-
-        fetchListOfSongs();
       } else {
         XSnackbar.show(msg: 'Add Error');
       }
+    }
+  }
+
+  Future<void> removePlaylist(BuildContext context,
+      {required int idPlaylist}) async {
+    final _value = await _domain.playlist.removePlaylist(idPlaylist);
+    if (_value.isSuccess) {
+      emit(state.copyWith(items: XHandle.completed(_value.data ?? [])));
+
+      XCoordinator.pop(context);
+      XSnackbar.show(msg: 'Remove Success');
+    } else {
+      XSnackbar.show(msg: 'Remove Error');
     }
   }
 

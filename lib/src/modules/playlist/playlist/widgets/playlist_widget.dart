@@ -5,6 +5,7 @@ import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/models/result.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/logic/playlist_bloc.dart';
+import 'package:zanmelodic/src/modules/playlist/router/playlist_router.dart';
 import 'package:zanmelodic/src/utils/utils.dart';
 import 'package:zanmelodic/src/widgets/state/state_empty_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_error_widget.dart';
@@ -52,8 +53,11 @@ class PlaylistWidget extends StatelessWidget {
             shrinkWrap: true,
             scrollDirection: Axis.vertical,
             physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) =>
-                _itemCard(playlist: _listLeft[index], width: 178, height: 162),
+            itemBuilder: (context, index) => _itemCard(
+                context: context,
+                playlist: _listLeft[index],
+                width: 178,
+                height: 162),
             itemCount: _listLeft.length,
           ),
         ),
@@ -63,8 +67,11 @@ class PlaylistWidget extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
-            itemBuilder: (context, index) =>
-                _itemCard(playlist: _listRight[index], width: 182, height: 150),
+            itemBuilder: (context, index) => _itemCard(
+                context: context,
+                playlist: _listRight[index],
+                width: 182,
+                height: 150),
             itemCount: _listRight.length,
           ),
         ),
@@ -72,23 +79,32 @@ class PlaylistWidget extends StatelessWidget {
     ));
   }
 
-//TODO
   Widget _itemCard({
     required PlaylistModel playlist,
     required double width,
     required double height,
+    required BuildContext context,
   }) {
-    return Padding(
-        padding: const EdgeInsets.all(3.5),
-        child: Container(
-          width: width,
-          height: height,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.0),
-              color: XUtil.colorRandom()),
-          child: Center(
-              child: Text(playlist.playlist,
-                  style: Style.textTheme().titleMedium)),
-        ));
+    return GestureDetector(
+      onLongPress: () => PlaylistCoordinator.showDialogRemovePlaylist(context,
+          playlist: playlist),
+      child: Padding(
+          padding: const EdgeInsets.all(3.5),
+          child: Container(
+            width: width,
+            height: height,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                color: XUtil.colorRandom()),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(playlist.playlist, style: Style.textTheme().titleMedium),
+                Text(XUtil.formatNumberSong(playlist.numOfSongs),
+                    style: Style.textTheme().titleMedium),
+              ],
+            ),
+          )),
+    );
   }
 }
