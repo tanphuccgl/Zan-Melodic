@@ -9,6 +9,7 @@ import 'package:zanmelodic/src/modules/now_playing/widgets/custom_process_bar.da
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
 import 'package:zanmelodic/src/modules/songs/logic/song_list_bloc.dart';
 import 'package:zanmelodic/src/utils/enums/loop_mode.dart';
+import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
 
 class NowPlayingPage extends StatelessWidget {
   const NowPlayingPage({Key? key}) : super(key: key);
@@ -67,30 +68,13 @@ class NowPlayingPage extends StatelessWidget {
 
   Widget _image(int id) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Container(
-        height: 220,
-        width: 220,
-        decoration:
-            BoxDecoration(borderRadius: BorderRadius.circular(20), boxShadow: [
-          BoxShadow(
-            offset: const Offset(10, 20),
-            color: MyColors.colorShadowImageNowPlaying.withOpacity(0.25),
-          )
-        ]),
-        child: QueryArtworkWidget(
-          artworkBorder: BorderRadius.circular(20.0),
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: CustomImageWidget(
           id: id,
-          type: ArtworkType.AUDIO,
-          keepOldArtwork: true,
-          nullArtworkWidget: const Icon(
-            Icons.image_not_supported,
-            size: 240,
-            color: MyColors.colorWhite,
-          ),
-        ),
-      ),
-    );
+          height: 220,
+          width: 220,
+          isShadow: true,
+        ));
   }
 
   Widget _infoSongWidget(SongModel songModel) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zanmelodic/src/modules/album/logic/album_list_bloc.dart';
-import 'package:zanmelodic/src/modules/album/widgets/list_album_widget.dart';
+import 'package:zanmelodic/src/modules/album/album/logic/album_list_bloc.dart';
+import 'package:zanmelodic/src/modules/album/album/widgets/list_album_widget.dart';
 import 'package:zanmelodic/src/widgets/custom_bar/upper_control_bar.dart';
 
 class AlbumPage extends StatelessWidget {
@@ -17,14 +17,15 @@ class AlbumPage extends StatelessWidget {
             child: CustomScrollView(
                 physics: const BouncingScrollPhysics(),
                 slivers: [
-                  UpperControlBar(
-                    iconShuffle: state.shuffleIcon,
-                    iconSort: state.sortIcon,
-                    onPressedPlayer: () {},
-                    onPressedShuffle: () =>
-                        context.read<AlbumListBloc>().onShuffleToList(),
-                    onPressedSort: () =>
-                        context.read<AlbumListBloc>().onSortNameToList(),
+                  SliverToBoxAdapter(
+                    child: UpperControlBar(
+                      iconShuffle: state.shuffleIcon,
+                      iconSort: state.sortIcon,
+                      onPressedShuffle: () =>
+                          context.read<AlbumListBloc>().onShuffleToList(),
+                      onPressedSort: () =>
+                          context.read<AlbumListBloc>().onSortNameToList(),
+                    ),
                   ),
                   const ListAlbumWidget(),
                 ]),

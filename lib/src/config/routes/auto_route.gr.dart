@@ -11,20 +11,21 @@
 // ignore_for_file: type=lint
 
 import 'package:auto_route/auto_route.dart' as _i5;
-import 'package:flutter/material.dart' as _i11;
+import 'package:flutter/material.dart' as _i12;
 
-import '../../modules/album/pages/album_page.dart' as _i9;
+import '../../modules/album/album/pages/album_page.dart' as _i9;
+import '../../modules/album/album_detail/pages/album_detail_page.dart' as _i10;
 import '../../modules/dashboard/pages/dashboard_page.dart' as _i3;
 import '../../modules/dashboard/router/dashboard_wrapper_router.dart' as _i1;
 import '../../modules/favorites/pages/favorites_page.dart' as _i6;
-import '../../modules/folder/pages/folder_page.dart' as _i10;
+import '../../modules/folder/pages/folder_page.dart' as _i11;
 import '../../modules/loading/pages/loading_page.dart' as _i2;
 import '../../modules/now_playing/pages/now_playing_page.dart' as _i4;
 import '../../modules/playlist/pages/playlist_page.dart' as _i8;
 import '../../modules/songs/pages/songs_page.dart' as _i7;
 
 class XRouter extends _i5.RootStackRouter {
-  XRouter([_i11.GlobalKey<_i11.NavigatorState>? navigatorKey])
+  XRouter([_i12.GlobalKey<_i12.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
@@ -81,9 +82,13 @@ class XRouter extends _i5.RootStackRouter {
       return _i5.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i9.AlbumPage());
     },
+    AlbumDetailRoute.name: (routeData) {
+      return _i5.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i10.AlbumDetailPage());
+    },
     FolderRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i10.FolderPage());
+          routeData: routeData, child: const _i11.FolderPage());
     }
   };
 
@@ -140,6 +145,8 @@ class XRouter extends _i5.RootStackRouter {
                         children: [
                           _i5.RouteConfig(AlbumRoute.name,
                               path: '', parent: AlbumTab.name),
+                          _i5.RouteConfig(AlbumDetailRoute.name,
+                              path: 'detail', parent: AlbumTab.name),
                           _i5.RouteConfig('*#redirect',
                               path: '*',
                               parent: AlbumTab.name,
@@ -291,7 +298,15 @@ class AlbumRoute extends _i5.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i10.FolderPage]
+/// [_i10.AlbumDetailPage]
+class AlbumDetailRoute extends _i5.PageRouteInfo<void> {
+  const AlbumDetailRoute() : super(AlbumDetailRoute.name, path: 'detail');
+
+  static const String name = 'AlbumDetailRoute';
+}
+
+/// generated route for
+/// [_i11.FolderPage]
 class FolderRoute extends _i5.PageRouteInfo<void> {
   const FolderRoute() : super(FolderRoute.name, path: '');
 
