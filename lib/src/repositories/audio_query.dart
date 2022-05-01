@@ -26,4 +26,15 @@ class XAudioQuery {
     List<AlbumModel> _listAlbum = await audioQuery.queryAlbums();
     return _listAlbum;
   }
+
+  static Future<List<SongModel>> getSongFromAlbum(int idAlbum) async {
+    final _list = await getAudiofromLocal();
+    var value = _list
+        .where((e) =>
+            e.isMusic == true &&
+            e.data.contains('/storage/emulated/0/Call/') == false &&
+            e.albumId == idAlbum)
+        .toList();
+    return value;
+  }
 }

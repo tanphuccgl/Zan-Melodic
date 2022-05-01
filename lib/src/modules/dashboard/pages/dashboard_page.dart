@@ -26,47 +26,42 @@ class DashboardPage extends StatelessWidget {
       ],
       builder: (context, child, animation) {
         final tabsRouter = AutoTabsRouter.of(context);
-      
-            return DefaultTabController(
-              length: TabIndex.values.length,
-              child: Scaffold(
-                bottomNavigationBar:const  PlayerBottomBar()
-                  ,
-                appBar: AppBar(
-                    elevation: 0,
-                    toolbarHeight: 20,
-                    backgroundColor: MyColors.colorBlack,
-                    bottom: TabBar(
-                        indicatorColor: Colors.transparent,
-                        isScrollable: true,
-                        labelStyle: Style.textTheme().labelMedium,
-                        unselectedLabelStyle: Style.textTheme()
-                            .labelMedium!
-                            .copyWith(fontSize: 21),
-                        onTap: (index) {
-                          if (index == tabsRouter.activeIndex) {
-                            tabsRouter
-                                .stackRouterOfIndex(index)
-                                ?.popUntilRoot();
-                          } else {
-                            tabsRouter.setActiveIndex(index);
-                          }
-                        },
-                        tabs: <Tab>[
-                          for (final item in TabIndex.values)
-                            Tab(text: item.lableOf()),
-                        ])),
-                body: const TabBarView(children: [
-                  FavoritesPage(),
-                  SongPage(),
-                  PlaylistPage(),
-                  AlbumPage(),
-                  FolderPage(),
-                ]),
-              ),
-            );
-          },
+
+        return DefaultTabController(
+          length: TabIndex.values.length,
+          child: Scaffold(
+            bottomNavigationBar: const PlayerBottomBar(),
+            appBar: AppBar(
+                elevation: 0,
+                toolbarHeight: 20,
+                backgroundColor: MyColors.colorBlack,
+                bottom: TabBar(
+                    indicatorColor: Colors.transparent,
+                    isScrollable: true,
+                    labelStyle: Style.textTheme().labelMedium,
+                    unselectedLabelStyle:
+                        Style.textTheme().labelMedium!.copyWith(fontSize: 21),
+                    onTap: (index) {
+                      if (index == tabsRouter.activeIndex) {
+                        tabsRouter.stackRouterOfIndex(index)?.popUntilRoot();
+                      } else {
+                        tabsRouter.setActiveIndex(index);
+                      }
+                    },
+                    tabs: <Tab>[
+                      for (final item in TabIndex.values)
+                        Tab(text: item.lableOf()),
+                    ])),
+            body: const TabBarView(children: [
+              FavoritesPage(),
+              SongPage(),
+              PlaylistPage(),
+              AlbumPage(),
+              FolderPage(),
+            ]),
+          ),
         );
-     
+      },
+    );
   }
 }

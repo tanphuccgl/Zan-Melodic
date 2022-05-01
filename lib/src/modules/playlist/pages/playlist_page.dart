@@ -10,9 +10,10 @@ class PlaylistPage extends StatelessWidget {
     return const Scaffold(
       body: Padding(
         padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
-        child: CustomScrollView(
-            physics: BouncingScrollPhysics(),
-            slivers: [UpperControlBar(), PlaylistWidget()]),
+        child: CustomScrollView(physics: BouncingScrollPhysics(), slivers: [
+          SliverToBoxAdapter(child: UpperControlBar()),
+          PlaylistWidget()
+        ]),
       ),
     );
   }

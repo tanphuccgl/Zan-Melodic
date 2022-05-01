@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
+import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
+import 'package:zanmelodic/src/modules/songs/logic/song_list_bloc.dart';
 
 class UpperControlBar extends StatelessWidget {
   const UpperControlBar({
@@ -18,26 +21,33 @@ class UpperControlBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: SizedBox(
-        width: double.infinity,
-        child:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          _customIconButton(
-              icon: iconSort ?? Icons.sort, onPressed: onPressedSort ?? () {}),
-          Row(
-            children: [
-              _customIconButton(
-                  icon: iconShuffle ?? Icons.shuffle,
-                  onPressed: onPressedShuffle ?? () {}),
-              _customIconButton(
+    return SizedBox(
+      width: double.infinity,
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        _customIconButton(
+            icon: iconSort ?? Icons.sort, onPressed: onPressedSort ?? () {}),
+        Row(
+          children: [
+            BlocBuilder<PlayMusicBloc, PlayMusicState>(
+              builder: (context, state) {
+                return _customIconButton(
+                    icon: iconShuffle ?? Icons.shuffle,
+                    onPressed: onPressedShuffle ?? () {});
+              },
+            ),
+            BlocBuilder<SongListBloc, SongListState>(builder: (context, state) {
+              final _items = state.items.data ?? [];
+              return _customIconButton(
                 icon: Icons.play_arrow,
-                onPressed: onPressedPlayer ?? () {},
-              ),
-            ],
-          )
-        ]),
-      ),
+                onPressed: onPressedPlayer ??
+                    () => context
+                        .read<PlayMusicBloc>()
+                        .onPlayerItem(songList: _items),
+              );
+            }),
+          ],
+        )
+      ]),
     );
   }
 

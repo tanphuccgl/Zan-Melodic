@@ -14,7 +14,7 @@ class PlayerBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PlayMusicBloc, PlayMusicState>(
         builder: (context, state) {
-      final  SongModel song = state.song;
+      final SongModel song = state.song;
       return state.isShowPlayBottomBar
           ? GestureDetector(
               onTap: () => DashboardCoordinator.showNowPlayingScreen(context),
@@ -91,7 +91,9 @@ class PlayerBottomBar extends StatelessWidget {
               child: IconButton(
                   onPressed: () => state.isPlaying
                       ? context.read<PlayMusicBloc>().onPause()
-                      : context.read<PlayMusicBloc>().onButtonPlayer(state.song),
+                      : context
+                          .read<PlayMusicBloc>()
+                          .onButtonPlayer(state.song),
                   icon: Icon(
                     state.playIcon,
                     color: MyColors.colorWhite,

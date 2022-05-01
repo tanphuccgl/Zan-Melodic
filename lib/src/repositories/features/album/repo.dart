@@ -3,4 +3,5 @@ import 'package:zanmelodic/src/models/result.dart';
 
 abstract class AlbumRepository {
   Future<XResult<List<AlbumModel>>> getListOfAlbums();
+  Future<XResult<List<SongModel>>> getListOfSongFromAlbum(int idAlbum);
 }

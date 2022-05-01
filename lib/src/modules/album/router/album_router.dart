@@ -22,5 +22,9 @@ class AlbumCoordinator {
         RedirectRoute(path: '*', redirectTo: ''),
       ]);
 
-static showAlbumDetailScreen(BuildContext context) =>
-      context.router.pushWidget(const AlbumDetailPage());}
+  static showAlbumDetailScreen(
+    BuildContext context,
+  ) {
+    context.router.pushWidget(const AlbumDetailPage());
+  }
+}

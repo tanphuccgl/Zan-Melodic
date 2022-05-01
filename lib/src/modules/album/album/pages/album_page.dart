@@ -17,14 +17,15 @@ class AlbumPage extends StatelessWidget {
             child: CustomScrollView(
                 physics: const BouncingScrollPhysics(),
                 slivers: [
-                  UpperControlBar(
-                    iconShuffle: state.shuffleIcon,
-                    iconSort: state.sortIcon,
-                    onPressedPlayer: () {},
-                    onPressedShuffle: () =>
-                        context.read<AlbumListBloc>().onShuffleToList(),
-                    onPressedSort: () =>
-                        context.read<AlbumListBloc>().onSortNameToList(),
+                  SliverToBoxAdapter(
+                    child: UpperControlBar(
+                      iconShuffle: state.shuffleIcon,
+                      iconSort: state.sortIcon,
+                      onPressedShuffle: () =>
+                          context.read<AlbumListBloc>().onShuffleToList(),
+                      onPressedSort: () =>
+                          context.read<AlbumListBloc>().onSortNameToList(),
+                    ),
                   ),
                   const ListAlbumWidget(),
                 ]),

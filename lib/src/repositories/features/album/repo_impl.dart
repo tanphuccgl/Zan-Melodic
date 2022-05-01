@@ -13,4 +13,14 @@ class AlbumRepositoryImpl extends AlbumRepository {
       return XResult.error(e.toString());
     }
   }
+
+  @override
+  Future<XResult<List<SongModel>>> getListOfSongFromAlbum(int idAlbum) async {
+    try {
+      var data = await XAudioQuery.getSongFromAlbum(idAlbum);
+      return XResult.success(data);
+    } catch (e) {
+      return XResult.error(e.toString());
+    }
+  }
 }
