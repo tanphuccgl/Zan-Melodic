@@ -21,7 +21,7 @@ import '../../modules/favorites/pages/favorites_page.dart' as _i6;
 import '../../modules/folder/pages/folder_page.dart' as _i11;
 import '../../modules/loading/pages/loading_page.dart' as _i2;
 import '../../modules/now_playing/pages/now_playing_page.dart' as _i4;
-import '../../modules/playlist/pages/playlist_page.dart' as _i8;
+import '../../modules/playlist/playlist/pages/playlist_page.dart' as _i8;
 import '../../modules/songs/pages/songs_page.dart' as _i7;
 
 class XRouter extends _i5.RootStackRouter {

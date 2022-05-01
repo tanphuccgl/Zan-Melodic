@@ -24,9 +24,8 @@ class AlbumDetailBloc extends Cubit<AlbumDetailState> {
       emit(state.copyWith(
           items: XHandle.completed(value.data ?? []), album: album));
       AlbumCoordinator.showAlbumDetailScreen(context);
-      XSnackbar.show(msg: 'Load All List Success');
     } else {
-      XSnackbar.show(msg: 'Load All LIst Error');
+      XSnackbar.show(msg: 'Load All List Error');
     }
   }
 

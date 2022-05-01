@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:on_audio_query/on_audio_query.dart';
 
 class XAudioQuery {
@@ -22,7 +24,7 @@ class XAudioQuery {
     return value;
   }
 
-  static Future<List<AlbumModel>> getAlbumfromLocal() async {
+  static Future<List<AlbumModel>> getAlbumFromLocal() async {
     List<AlbumModel> _listAlbum = await audioQuery.queryAlbums();
     return _listAlbum;
   }
@@ -34,6 +36,30 @@ class XAudioQuery {
             e.isMusic == true &&
             e.data.contains('/storage/emulated/0/Call/') == false &&
             e.albumId == idAlbum)
+        .toList();
+    return value;
+  }
+
+  static Future<List<PlaylistModel>> getPlaylistFromLocal() async {
+    List<PlaylistModel> _list = await audioQuery.queryPlaylists();
+    log(_list.toString());
+    return _list;
+  }
+
+  static Future<bool> createPlaylist(String name) async {
+    var _value = await audioQuery.createPlaylist(name);
+    log(_value.toString());
+    return _value;
+  }
+
+//TODO
+  static Future<List<SongModel>> getSongFromPlaylist(int idPlaylist) async {
+    final _list = await getAudiofromLocal();
+    var value = _list
+        .where((e) =>
+            e.isMusic == true &&
+            e.data.contains('/storage/emulated/0/Call/') == false &&
+            e.albumId == idPlaylist)
         .toList();
     return value;
   }
