@@ -12,12 +12,12 @@ part 'playlist_state.dart';
 
 class PlaylistBloc extends Cubit<PlaylistState> {
   PlaylistBloc() : super(PlaylistState(items: XHandle.loading())) {
-    fetchListOfSongs();
+    fetchPlaylists();
   }
 
   final Domain _domain = Domain();
 
-  Future<void> fetchListOfSongs() async {
+  Future<void> fetchPlaylists() async {
     await Future.delayed(const Duration(seconds: 2));
     final value = await _domain.playlist.getListOfPlaylist();
     if (value.isSuccess) {
@@ -52,6 +52,20 @@ class PlaylistBloc extends Cubit<PlaylistState> {
       XSnackbar.show(msg: 'Remove Success');
     } else {
       XSnackbar.show(msg: 'Remove Error');
+    }
+  }
+
+  Future<void> addToPlaylist(BuildContext context,
+      {required int idPlaylist, required int idSong}) async {
+    final _value = await _domain.playlist
+        .addToPlaylist(idPlaylist: idPlaylist, idSong: idSong);
+    if (_value.isSuccess) {
+      //  emit(state.copyWith(items: XHandle.completed(_value.data ?? [])));
+
+      XCoordinator.pop(context);
+      XSnackbar.show(msg: 'Add Success');
+    } else {
+      XSnackbar.show(msg: 'Add Error');
     }
   }
 

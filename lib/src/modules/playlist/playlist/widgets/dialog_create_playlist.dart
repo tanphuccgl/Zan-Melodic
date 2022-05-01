@@ -35,7 +35,7 @@ class DialogCreatePlaylist extends StatelessWidget {
                 onPressed: () => context
                     .read<PlaylistBloc>()
                     .addNewPlaylist(context, name: state.namePlaylist),
-                child: Text('OK',
+                child: Text('CREATE',
                     style: Style.textTheme()
                         .titleMedium!
                         .copyWith(fontWeight: FontWeight.w600, fontSize: 17))),

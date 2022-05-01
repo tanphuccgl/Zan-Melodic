@@ -16,7 +16,7 @@ class AlbumDetailBloc extends Cubit<AlbumDetailState> {
 
   final Domain _domain = Domain();
 
-  Future<void> fetchListOfSongs(BuildContext context,
+  Future<void> fetchListOfSongsFromAlbum(BuildContext context,
       {required AlbumModel album}) async {
     await Future.delayed(const Duration(seconds: 2));
     final value = await _domain.album.getListOfSongFromAlbum(album.id);

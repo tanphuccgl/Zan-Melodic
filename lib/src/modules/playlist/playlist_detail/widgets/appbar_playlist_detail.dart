@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
-import 'package:zanmelodic/src/modules/album/album_detail/logic/album_detail_bloc.dart';
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
+import 'package:zanmelodic/src/modules/playlist/playlist_detail/logic/playlist_detail_bloc.dart';
 import 'package:zanmelodic/src/utils/utils.dart';
 import 'package:zanmelodic/src/widgets/custom_bar/upper_control_bar.dart';
 import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
 
-class AppBarDetail extends StatelessWidget {
-  const AppBarDetail({Key? key}) : super(key: key);
+class AppBarPlaylistDetail extends StatelessWidget {
+  const AppBarPlaylistDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +18,10 @@ class AppBarDetail extends StatelessWidget {
     const hExpanded = 350.0;
     const hToolbar = 320.0;
 
-    return BlocBuilder<AlbumDetailBloc, AlbumDetailState>(
+    return BlocBuilder<PlaylistDetailBloc, PlaylistDetailState>(
       builder: (context, state) {
-        final _album = state.album;
+        final _playlist = state.playlist;
+
         return SliverAppBar(
             backgroundColor: MyColors.colorBlack,
             stretch: true,
@@ -34,9 +35,8 @@ class AppBarDetail extends StatelessWidget {
               bool isCollapsed = constraints.maxHeight < hExpanded + hStatusBar;
               return SafeArea(
                 child: Container(
-                  color: isCollapsed
-                      ? MyColors.colorBackground
-                      : MyColors.colorBlack,
+                  color:
+                      isCollapsed ? MyColors.colorGreen : MyColors.colorBlack,
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 5, top: 10),
                     child: Column(
@@ -44,13 +44,13 @@ class AppBarDetail extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          _album.album,
+                          _playlist.playlist,
                           style: Style.textTheme()
                               .displaySmall!
                               .copyWith(fontSize: 25),
                         ),
                         Text(
-                          '${_album.artist} | ${XUtil.formatNumberSong(_album.numOfSongs)}',
+                          'By: ${_playlist.dateAdded} | ${XUtil.formatNumberSong(_playlist.numOfSongs)}',
                           style: Style.textTheme().titleMedium!.copyWith(
                               fontSize: 15,
                               fontWeight: FontWeight.w300,
@@ -58,17 +58,17 @@ class AppBarDetail extends StatelessWidget {
                         ),
                         isCollapsed
                             ? CustomImageWidget(
-                                id: _album.id,
+                                id: _playlist.id,
                                 height: 190,
                                 width: double.infinity,
-                                artworkType: ArtworkType.ALBUM,
+                                artworkType: ArtworkType.PLAYLIST,
                                 isShadow: true,
                               )
                             : CustomImageWidget(
-                                id: _album.id,
+                                id: _playlist.id,
                                 height: 220,
                                 width: 220,
-                                artworkType: ArtworkType.ALBUM,
+                                artworkType: ArtworkType.PLAYLIST,
                                 isShadow: true,
                               ),
                         Padding(
@@ -77,10 +77,10 @@ class AppBarDetail extends StatelessWidget {
                               iconShuffle: state.shuffleIcon,
                               iconSort: state.sortIcon,
                               onPressedSort: () => context
-                                  .read<AlbumDetailBloc>()
+                                  .read<PlaylistDetailBloc>()
                                   .onSortNameToList(),
                               onPressedShuffle: () => context
-                                  .read<AlbumDetailBloc>()
+                                  .read<PlaylistDetailBloc>()
                                   .onShuffleToList(),
                               onPressedPlayer: () => context
                                   .read<PlayMusicBloc>()

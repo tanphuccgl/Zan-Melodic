@@ -5,6 +5,7 @@ import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/models/result.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/logic/playlist_bloc.dart';
+import 'package:zanmelodic/src/modules/playlist/playlist_detail/logic/playlist_detail_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/router/playlist_router.dart';
 import 'package:zanmelodic/src/utils/utils.dart';
 import 'package:zanmelodic/src/widgets/state/state_empty_widget.dart';
@@ -53,11 +54,8 @@ class PlaylistWidget extends StatelessWidget {
             shrinkWrap: true,
             scrollDirection: Axis.vertical,
             physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) => _itemCard(
-                context: context,
-                playlist: _listLeft[index],
-                width: 178,
-                height: 162),
+            itemBuilder: (context, index) => _itemCard(context,
+                playlist: _listLeft[index], width: 178, height: 162),
             itemCount: _listLeft.length,
           ),
         ),
@@ -67,11 +65,8 @@ class PlaylistWidget extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
-            itemBuilder: (context, index) => _itemCard(
-                context: context,
-                playlist: _listRight[index],
-                width: 182,
-                height: 150),
+            itemBuilder: (context, index) => _itemCard(context,
+                playlist: _listRight[index], width: 182, height: 150),
             itemCount: _listRight.length,
           ),
         ),
@@ -79,13 +74,16 @@ class PlaylistWidget extends StatelessWidget {
     ));
   }
 
-  Widget _itemCard({
+  Widget _itemCard(
+    BuildContext context, {
     required PlaylistModel playlist,
     required double width,
     required double height,
-    required BuildContext context,
   }) {
     return GestureDetector(
+      onTap: () => context
+          .read<PlaylistDetailBloc>()
+          .fetchListOfSongsFromPlaylist(context, playlist: playlist),
       onLongPress: () => PlaylistCoordinator.showDialogRemovePlaylist(context,
           playlist: playlist),
       child: Padding(

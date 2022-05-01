@@ -5,8 +5,11 @@ import 'package:zanmelodic/src/modules/dashboard/router/dashboard_router.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/pages/playlist_page.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/widgets/dialog_create_playlist.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/widgets/dialog_remove_playlist.dart';
+import 'package:zanmelodic/src/modules/playlist/playlist_detail/pages/playlist_detail_page.dart';
 
-class PlaylistRouters {}
+class PlaylistRouters {
+  static const String detail = 'detail';
+}
 
 class PlaylistCoordinator {
   static const autoRoute = AutoRoute(
@@ -19,6 +22,10 @@ class PlaylistCoordinator {
           page: PlaylistPage,
           name: "PlaylistRoute",
         ),
+        AutoRoute(
+            path: PlaylistRouters.detail,
+            page: PlaylistDetailPage,
+            name: "PlaylistDetailRoute"),
         RedirectRoute(path: '*', redirectTo: ''),
       ]);
   static showDialogCreatePlaylist(BuildContext context) async {
@@ -35,4 +42,9 @@ class PlaylistCoordinator {
         context: context,
         builder: (_) => DialogRemovePlaylist(playlist: playlist));
   }
+
+  static showPlaylistDetailScreen(
+    BuildContext context,
+  ) =>
+      context.router.pushWidget(const PlaylistDetailPage());
 }

@@ -6,6 +6,9 @@ class XAudioQuery {
   static late final OnAudioQuery audioQuery;
   static init() {
     audioQuery = OnAudioQuery();
+  }
+
+  static permissionsRequest() {
     audioQuery.permissionsRequest();
   }
 
@@ -16,11 +19,13 @@ class XAudioQuery {
 
   static Future<List<SongModel>> getSongFromLocal() async {
     final _list = await getAudiofromLocal();
-    var value = _list
+    final value = _list
         .where((e) =>
             e.isMusic == true &&
             e.data.contains('/storage/emulated/0/Call/') == false)
         .toList();
+    log(value.toString());
+
     return value;
   }
 
@@ -31,7 +36,7 @@ class XAudioQuery {
 
   static Future<List<SongModel>> getSongFromAlbum(int idAlbum) async {
     final _list = await getAudiofromLocal();
-    var value = _list
+    final value = _list
         .where((e) =>
             e.isMusic == true &&
             e.data.contains('/storage/emulated/0/Call/') == false &&
@@ -47,23 +52,36 @@ class XAudioQuery {
   }
 
   static Future<bool> createPlaylist(String name) async {
-    var _value = await audioQuery.createPlaylist(name);
+    final _value = await audioQuery.createPlaylist(name);
     return _value;
   }
 
   static Future<bool> removePlaylist(int idPlaylist) async {
-    var _value = await audioQuery.removePlaylist(idPlaylist);
+    final _value = await audioQuery.removePlaylist(idPlaylist);
+    return _value;
+  }
+
+  //TODO
+  static Future<bool> addToPlaylist(
+      {required int idPlaylist, required int idSongs}) async {
+    final _value = await audioQuery.addToPlaylist(idPlaylist, idSongs);
+    return _value;
+  }
+
+  //TODO
+  static Future<bool> renamePlaylist(
+      {required int idPlaylist, required String name}) async {
+    final _value = await audioQuery.renamePlaylist(idPlaylist, name);
     return _value;
   }
 
 //TODO
   static Future<List<SongModel>> getSongFromPlaylist(int idPlaylist) async {
     final _list = await getAudiofromLocal();
-    var value = _list
+    final value = _list
         .where((e) =>
             e.isMusic == true &&
-            e.data.contains('/storage/emulated/0/Call/') == false &&
-            e.albumId == idPlaylist)
+            e.data.contains('/storage/emulated/0/Call/') == false)
         .toList();
     return value;
   }

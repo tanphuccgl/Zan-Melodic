@@ -5,9 +5,21 @@ import 'package:zanmelodic/src/modules/album/album/logic/album_bloc.dart';
 import 'package:zanmelodic/src/modules/album/album_detail/logic/album_detail_bloc.dart';
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
 import 'package:zanmelodic/src/modules/songs/logic/song_list_bloc.dart';
+import 'package:zanmelodic/src/repositories/audio_query.dart';
 
-class DashboardWrapperPage extends StatelessWidget {
+class DashboardWrapperPage extends StatefulWidget {
   const DashboardWrapperPage({Key? key}) : super(key: key);
+
+  @override
+  State<DashboardWrapperPage> createState() => _DashboardWrapperPageState();
+}
+
+class _DashboardWrapperPageState extends State<DashboardWrapperPage> {
+  @override
+  void initState() {
+    super.initState();
+    XAudioQuery.permissionsRequest();
+  }
 
   @override
   Widget build(BuildContext context) {

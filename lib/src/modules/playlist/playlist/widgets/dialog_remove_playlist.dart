@@ -20,7 +20,7 @@ class DialogRemovePlaylist extends StatelessWidget {
           contentPadding: const EdgeInsets.all(16.0),
           content: RichText(
             text: TextSpan(
-                text: 'do you want to remove playlist ',
+                text: 'Do you want to remove playlist ',
                 style: Style.textTheme().titleMedium!.copyWith(fontSize: 17),
                 children: [
                   TextSpan(
@@ -30,7 +30,7 @@ class DialogRemovePlaylist extends StatelessWidget {
                         .copyWith(color: MyColors.colorPrimary),
                   ),
                   const TextSpan(
-                    text: '?',
+                    text: ' ?',
                   ),
                 ]),
           ),
@@ -47,7 +47,7 @@ class DialogRemovePlaylist extends StatelessWidget {
                 onPressed: () => context
                     .read<PlaylistBloc>()
                     .removePlaylist(context, idPlaylist: playlist.id),
-                child: Text('OK',
+                child: Text('REMOVE',
                     style: Style.textTheme()
                         .titleMedium!
                         .copyWith(fontWeight: FontWeight.w600, fontSize: 17))),

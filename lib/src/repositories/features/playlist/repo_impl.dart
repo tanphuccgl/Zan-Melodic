@@ -49,4 +49,17 @@ class PlaylistRepositoryImpl extends PlaylistRepository {
       return XResult.error(e.toString());
     }
   }
+
+  @override
+  Future<XResult> addToPlaylist(
+      {required int idPlaylist, required int idSong}) async {
+    try {
+      final _value = await XAudioQuery.addToPlaylist(
+          idPlaylist: idPlaylist, idSongs: idSong);
+
+      return XResult.success(_value);
+    } catch (e) {
+      return XResult.error(e.toString());
+    }
+  }
 }
