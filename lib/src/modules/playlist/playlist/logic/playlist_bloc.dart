@@ -31,7 +31,8 @@ class PlaylistBloc extends Cubit<PlaylistState> {
   }
 
   Future<void> addNewPlaylist(BuildContext context,
-      {required String name}) async { XLoading.show();
+      {required String name}) async {
+    XLoading.show();
     await Future.delayed(const Duration(seconds: 2));
     if (state.isValidName == '' && state.pureName == true) {
       final _value = await _domain.playlist.addNewPlaylist(name);
@@ -48,7 +49,8 @@ class PlaylistBloc extends Cubit<PlaylistState> {
   }
 
   Future<void> removePlaylist(BuildContext context,
-      {required int idPlaylist}) async {            XLoading.show();
+      {required int idPlaylist}) async {
+    XLoading.show();
     await Future.delayed(const Duration(seconds: 2));
     final _value = await _domain.playlist.removePlaylist(idPlaylist);
     if (_value.isSuccess) {
@@ -64,7 +66,7 @@ class PlaylistBloc extends Cubit<PlaylistState> {
 
   Future<void> addToPlaylist(BuildContext context,
       {required int idPlaylist, required int idSong}) async {
-            XLoading.show();
+    XLoading.show();
     await Future.delayed(const Duration(seconds: 2));
     final _value = await _domain.playlist
         .addToPlaylist(idPlaylist: idPlaylist, idSong: idSong);
@@ -77,6 +79,23 @@ class PlaylistBloc extends Cubit<PlaylistState> {
       XSnackbar.show(msg: 'Add Error');
     }
     XLoading.hide();
+  }
+
+//TODO
+  Future<bool> fetchPlaylistToDialog(BuildContext context,
+      {required PlaylistModel playlist, required int idSong}) async {
+    await Future.delayed(const Duration(seconds: 2));
+    final value = await _domain.playlist.getListOfSongFromPlaylist(playlist.id);
+    late final bool _result;
+    if (value.isSuccess) {
+      final _items = value.data ?? [];
+      for (int i = 0; i < _items.length; i++) {
+        _result = _items[i].id == idSong ? true : false;
+      }
+    } else {
+      XSnackbar.show(msg: 'Load All List Error');
+    }
+    return _result;
   }
 
   void onSortNameToList() =>
