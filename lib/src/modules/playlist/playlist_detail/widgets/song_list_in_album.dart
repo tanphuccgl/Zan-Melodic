@@ -27,8 +27,11 @@ class SongListInPlaylist extends StatelessWidget {
                   delegate: SliverChildBuilderDelegate(
                       (context, index) => Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child:
-                                SongCard(songList: _items, song: _items[index]),
+                            child: SongCard(
+                              songList: _items,
+                              song: _items[index],
+                              playlist: state.playlist,
+                            ),
                           ),
                       childCount: _items.length),
                 )

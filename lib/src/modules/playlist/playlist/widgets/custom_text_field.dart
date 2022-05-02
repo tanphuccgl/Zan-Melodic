@@ -7,12 +7,14 @@ class CutomTextField extends StatefulWidget {
   final String value;
   final bool isAction;
   final String error;
+  final String label;
   const CutomTextField({
     Key? key,
     required this.value,
     required this.onChanged,
     this.isAction = true,
     required this.error,
+    required this.label,
   }) : super(key: key);
 
   @override
@@ -80,7 +82,7 @@ class _CutomTextFieldState extends State<CutomTextField> {
           .copyWith(fontSize: 23, color: MyColors.colorPrimary),
       autofocus: true,
       decoration: InputDecoration(
-          labelText: 'Name Playlist',
+          labelText: widget.label,
           errorText: widget.error,
           errorStyle: Style.textTheme()
               .titleMedium!

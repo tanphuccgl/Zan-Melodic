@@ -3,6 +3,7 @@ part of 'playlist_detail_bloc.dart';
 class PlaylistDetailState extends Equatable {
   final XHandle<List<SongModel>> items;
   final PlaylistModel playlist;
+  final int numberSongs;
   final bool isSortName;
   final bool isShuffle;
   IconData get shuffleIcon => isShuffle ? Icons.shuffle_on : Icons.shuffle;
@@ -20,26 +21,36 @@ class PlaylistDetailState extends Equatable {
         return item2.compareTo(item1);
       });
 
-  const PlaylistDetailState(
-      {required this.items,
-      this.isSortName = false,
-      this.isShuffle = false,
-      required this.playlist});
+  const PlaylistDetailState({
+    required this.items,
+    this.isSortName = false,
+    this.isShuffle = false,
+    required this.playlist,
+    this.numberSongs = 0,
+  });
 
   @override
-  List<Object?> get props => [items, isSortName, isShuffle];
+  List<Object?> get props => [
+        items,
+        isSortName,
+        isShuffle,
+        playlist,
+        numberSongs,
+      ];
 
   PlaylistDetailState copyWith({
     XHandle<List<SongModel>>? items,
     bool? isSortName,
     bool? isShuffle,
     PlaylistModel? playlist,
+    int? numberSongs,
   }) {
     return PlaylistDetailState(
       items: items ?? this.items,
       isSortName: isSortName ?? this.isSortName,
       isShuffle: isShuffle ?? this.isShuffle,
       playlist: playlist ?? this.playlist,
+      numberSongs: numberSongs ?? this.numberSongs,
     );
   }
 }

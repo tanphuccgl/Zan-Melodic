@@ -17,10 +17,11 @@ class DialogCreatePlaylist extends StatelessWidget {
           backgroundColor: MyColors.colorBlack,
           contentPadding: const EdgeInsets.all(16.0),
           content: CutomTextField(
+            label: 'Name Playlist',
             value: state.namePlaylist,
             error: state.isValidName,
             onChanged: (value) =>
-                context.read<PlaylistBloc>().changedNameInNewCreate(value),
+                context.read<PlaylistBloc>().changedName(value),
           ),
           actions: <Widget>[
             TextButton(

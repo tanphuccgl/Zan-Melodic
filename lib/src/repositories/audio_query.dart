@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:on_audio_query/on_audio_query.dart';
 
 class XAudioQuery {
   static late final OnAudioQuery audioQuery;
+
   static init() {
     audioQuery = OnAudioQuery();
   }
@@ -24,8 +23,6 @@ class XAudioQuery {
             e.isMusic == true &&
             e.data.contains('/storage/emulated/0/Call/') == false)
         .toList();
-    log(value.toString());
-
     return value;
   }
 
@@ -47,7 +44,6 @@ class XAudioQuery {
 
   static Future<List<PlaylistModel>> getPlaylistFromLocal() async {
     List<PlaylistModel> _list = await audioQuery.queryPlaylists();
-    log(_list.toString());
     return _list;
   }
 
@@ -61,28 +57,31 @@ class XAudioQuery {
     return _value;
   }
 
-  //TODO
   static Future<bool> addToPlaylist(
       {required int idPlaylist, required int idSongs}) async {
     final _value = await audioQuery.addToPlaylist(idPlaylist, idSongs);
     return _value;
   }
 
-  //TODO
-  static Future<bool> renamePlaylist(
-      {required int idPlaylist, required String name}) async {
-    final _value = await audioQuery.renamePlaylist(idPlaylist, name);
+  static Future<bool> removeFromPlaylist(
+      {required int idPlaylist, required int idSongs}) async {
+    final _value = await audioQuery.removeFromPlaylist(idPlaylist, idSongs);
     return _value;
   }
 
-//TODO
+  // : catch error Stack Overflow
+  static Future<bool> renameToPlaylist(
+      {required int idPlaylist, required String name}) async {
+    var _value = await audioQuery.renamePlaylist(idPlaylist, name);
+
+    return _value;
+  }
+
   static Future<List<SongModel>> getSongFromPlaylist(int idPlaylist) async {
-    final _list = await getAudiofromLocal();
-    final value = _list
-        .where((e) =>
-            e.isMusic == true &&
-            e.data.contains('/storage/emulated/0/Call/') == false)
-        .toList();
-    return value;
+    List<SongModel> _list = await audioQuery.queryAudiosFrom(
+      AudiosFromType.PLAYLIST,
+      idPlaylist,
+    );
+    return _list;
   }
 }

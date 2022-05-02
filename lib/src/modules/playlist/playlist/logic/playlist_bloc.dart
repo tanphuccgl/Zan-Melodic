@@ -11,7 +11,9 @@ import 'package:zanmelodic/src/widgets/loading/bot_toast.dart';
 part 'playlist_state.dart';
 
 class PlaylistBloc extends Cubit<PlaylistState> {
-  PlaylistBloc() : super(PlaylistState(items: XHandle.loading())) {
+  PlaylistBloc()
+      : super(PlaylistState(
+            items: XHandle.loading(), playlist: PlaylistModel({}))) {
     fetchPlaylists();
   }
 
@@ -60,7 +62,7 @@ class PlaylistBloc extends Cubit<PlaylistState> {
     final _value = await _domain.playlist
         .addToPlaylist(idPlaylist: idPlaylist, idSong: idSong);
     if (_value.isSuccess) {
-      //  emit(state.copyWith(items: XHandle.completed(_value.data ?? [])));
+      emit(state.copyWith(items: XHandle.completed(_value.data ?? [])));
 
       XCoordinator.pop(context);
       XSnackbar.show(msg: 'Add Success');
@@ -69,15 +71,17 @@ class PlaylistBloc extends Cubit<PlaylistState> {
     }
   }
 
-  void onSortNameToList() {
-    emit(state.copyWith(isSortName: !state.isSortName));
-  }
+  void onSortNameToList() =>
+      emit(state.copyWith(isSortName: !state.isSortName));
 
-  void onShuffleToList() {
-    emit(state.copyWith(isShuffle: !state.isShuffle));
-  }
+  void onShuffleToList() => emit(state.copyWith(isShuffle: !state.isShuffle));
 
-  void changedNameInNewCreate(String name) {
-    emit(state.copyWith(namePlaylist: name.trim(), pureName: true));
-  }
+  void changedName(String name) =>
+      emit(state.copyWith(namePlaylist: name.trim(), pureName: true));
+
+  void initialNamePlaylist() =>
+      emit(state.copyWith(namePlaylist: '', pureName: false));
+
+  void changePlaylist(PlaylistModel playlist) =>
+      emit(state.copyWith(playlist: playlist));
 }

@@ -4,11 +4,13 @@ import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/routes/coordinator.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
-import 'package:zanmelodic/src/modules/playlist/playlist/logic/playlist_bloc.dart';
+import 'package:zanmelodic/src/modules/playlist/playlist_detail/logic/playlist_detail_bloc.dart';
 
-class DialogRemovePlaylist extends StatelessWidget {
-  const DialogRemovePlaylist({Key? key, required this.playlist})
+class DialogRemoveFromPlaylist extends StatelessWidget {
+  const DialogRemoveFromPlaylist(
+      {Key? key, required this.song, required this.playlist})
       : super(key: key);
+  final SongModel song;
   final PlaylistModel playlist;
 
   @override
@@ -18,9 +20,18 @@ class DialogRemovePlaylist extends StatelessWidget {
       contentPadding: const EdgeInsets.all(16.0),
       content: RichText(
         text: TextSpan(
-            text: 'Do you want to remove playlist ',
+            text: 'Do you want to remove ',
             style: Style.textTheme().titleMedium!.copyWith(fontSize: 17),
             children: [
+              TextSpan(
+                text: song.title,
+                style: Style.textTheme()
+                    .titleMedium!
+                    .copyWith(color: MyColors.colorGreen),
+              ),
+              const TextSpan(
+                text: '  from the ',
+              ),
               TextSpan(
                 text: playlist.playlist,
                 style: Style.textTheme()
@@ -28,7 +39,7 @@ class DialogRemovePlaylist extends StatelessWidget {
                     .copyWith(color: MyColors.colorPrimary),
               ),
               const TextSpan(
-                text: ' ?',
+                text: '  playlist ?',
               ),
             ]),
       ),
@@ -43,8 +54,9 @@ class DialogRemovePlaylist extends StatelessWidget {
             )),
         TextButton(
             onPressed: () => context
-                .read<PlaylistBloc>()
-                .removePlaylist(context, idPlaylist: playlist.id),
+                .read<PlaylistDetailBloc>()
+                .removeFromPlaylist(context,
+                    playlist: playlist, idSong: song.id),
             child: Text('REMOVE',
                 style: Style.textTheme()
                     .titleMedium!

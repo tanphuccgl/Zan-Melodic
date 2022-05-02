@@ -22,7 +22,7 @@ import '../../modules/folder/pages/folder_page.dart' as _i12;
 import '../../modules/loading/pages/loading_page.dart' as _i2;
 import '../../modules/now_playing/pages/now_playing_page.dart' as _i4;
 import '../../modules/playlist/playlist/pages/playlist_page.dart' as _i8;
-import '../../modules/playlist/playlist/widgets/dialog_create_playlist.dart'
+import '../../modules/playlist/playlist_detail/pages/playlist_detail_page.dart'
     as _i9;
 import '../../modules/songs/pages/songs_page.dart' as _i7;
 
@@ -80,9 +80,9 @@ class XRouter extends _i5.RootStackRouter {
       return _i5.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i8.PlaylistPage());
     },
-    DialogCreatePlaylistRoute.name: (routeData) {
+    PlaylistDetailRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i9.DialogCreatePlaylist());
+          routeData: routeData, child: const _i9.PlaylistDetailPage());
     },
     AlbumRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
@@ -139,8 +139,8 @@ class XRouter extends _i5.RootStackRouter {
                         children: [
                           _i5.RouteConfig(PlaylistRoute.name,
                               path: '', parent: PlaylistTab.name),
-                          _i5.RouteConfig(DialogCreatePlaylistRoute.name,
-                              path: 'eqw', parent: PlaylistTab.name),
+                          _i5.RouteConfig(PlaylistDetailRoute.name,
+                              path: 'detail', parent: PlaylistTab.name),
                           _i5.RouteConfig('*#redirect',
                               path: '*',
                               parent: PlaylistTab.name,
@@ -298,12 +298,11 @@ class PlaylistRoute extends _i5.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i9.DialogCreatePlaylist]
-class DialogCreatePlaylistRoute extends _i5.PageRouteInfo<void> {
-  const DialogCreatePlaylistRoute()
-      : super(DialogCreatePlaylistRoute.name, path: 'eqw');
+/// [_i9.PlaylistDetailPage]
+class PlaylistDetailRoute extends _i5.PageRouteInfo<void> {
+  const PlaylistDetailRoute() : super(PlaylistDetailRoute.name, path: 'detail');
 
-  static const String name = 'DialogCreatePlaylistRoute';
+  static const String name = 'PlaylistDetailRoute';
 }
 
 /// generated route for

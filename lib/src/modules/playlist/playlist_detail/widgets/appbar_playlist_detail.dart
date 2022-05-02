@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -15,12 +17,13 @@ class AppBarPlaylistDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hStatusBar = MediaQuery.of(context).viewPadding.top;
-    const hExpanded = 350.0;
-    const hToolbar = 320.0;
+    const hExpanded = 360.0;
+    const hToolbar = 330.0;
 
     return BlocBuilder<PlaylistDetailBloc, PlaylistDetailState>(
       builder: (context, state) {
         final _playlist = state.playlist;
+        log(state.numberSongs.toString());
 
         return SliverAppBar(
             backgroundColor: MyColors.colorBlack,
@@ -43,14 +46,17 @@ class AppBarPlaylistDetail extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
-                          _playlist.playlist,
-                          style: Style.textTheme()
-                              .displaySmall!
-                              .copyWith(fontSize: 25),
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            _playlist.playlist,
+                            style: Style.textTheme()
+                                .displaySmall!
+                                .copyWith(fontSize: 25),
+                          ),
                         ),
                         Text(
-                          'By: ${_playlist.dateAdded} | ${XUtil.formatNumberSong(_playlist.numOfSongs)}',
+                          'By: ${_playlist.dateAdded} | ${XUtil.formatNumberSong(state.numberSongs)}',
                           style: Style.textTheme().titleMedium!.copyWith(
                               fontSize: 15,
                               fontWeight: FontWeight.w300,
