@@ -24,7 +24,6 @@ class AlbumCoordinator {
 
   static showAlbumDetailScreen(
     BuildContext context,
-  ) {
-    context.router.pushWidget(const AlbumDetailPage());
-  }
+  ) =>
+      context.router.pushWidget(const AlbumDetailPage());
 }

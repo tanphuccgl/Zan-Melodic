@@ -7,7 +7,7 @@ import 'package:zanmelodic/src/modules/album/album/pages/album_page.dart';
 import 'package:zanmelodic/src/modules/favorites/pages/favorites_page.dart';
 import 'package:zanmelodic/src/modules/folder/pages/folder_page.dart';
 import 'package:zanmelodic/src/modules/play_music/pages/player_bottom_bar.dart';
-import 'package:zanmelodic/src/modules/playlist/pages/playlist_page.dart';
+import 'package:zanmelodic/src/modules/playlist/playlist/pages/playlist_page.dart';
 import 'package:zanmelodic/src/modules/songs/pages/songs_page.dart';
 import 'package:zanmelodic/src/utils/enums/tab_index.dart';
 

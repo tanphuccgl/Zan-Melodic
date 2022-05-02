@@ -4,17 +4,25 @@ import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
+import 'package:zanmelodic/src/modules/playlist/router/playlist_router.dart';
 import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
 
 class SongCard extends StatelessWidget {
-  const SongCard({Key? key, required this.song, required this.songList})
+  const SongCard(
+      {Key? key, required this.song, required this.songList, this.playlist})
       : super(key: key);
   final SongModel song;
   final List<SongModel> songList;
+  final PlaylistModel? playlist;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onLongPress: playlist != null
+          ? () => PlaylistCoordinator.showDialogRemoveFromPlaylist(context,
+              song: song, playlist: playlist!)
+          : () => PlaylistCoordinator.showDialogAddToPlaylist(context,
+              idSong: song.id),
       onTap: () => context
           .read<PlayMusicBloc>()
           .onPlayerItem(songList: songList, song: song),

@@ -16,7 +16,7 @@ class AlbumDetailBloc extends Cubit<AlbumDetailState> {
 
   final Domain _domain = Domain();
 
-  Future<void> fetchListOfSongs(BuildContext context,
+  Future<void> fetchListOfSongsFromAlbum(BuildContext context,
       {required AlbumModel album}) async {
     await Future.delayed(const Duration(seconds: 2));
     final value = await _domain.album.getListOfSongFromAlbum(album.id);
@@ -24,9 +24,8 @@ class AlbumDetailBloc extends Cubit<AlbumDetailState> {
       emit(state.copyWith(
           items: XHandle.completed(value.data ?? []), album: album));
       AlbumCoordinator.showAlbumDetailScreen(context);
-      XSnackbar.show(msg: 'Load All List Success');
     } else {
-      XSnackbar.show(msg: 'Load All LIst Error');
+      XSnackbar.show(msg: 'Load All List Error');
     }
   }
 

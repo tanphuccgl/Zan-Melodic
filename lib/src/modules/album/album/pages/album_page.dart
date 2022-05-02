@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zanmelodic/src/modules/album/album/logic/album_list_bloc.dart';
+import 'package:zanmelodic/src/modules/album/album/logic/album_bloc.dart';
 import 'package:zanmelodic/src/modules/album/album/widgets/list_album_widget.dart';
 import 'package:zanmelodic/src/widgets/custom_bar/upper_control_bar.dart';
 
@@ -9,7 +9,7 @@ class AlbumPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AlbumListBloc, AlbumListState>(
+    return BlocBuilder<AlbumBloc, AlbumState>(
       builder: (context, state) {
         return Scaffold(
           body: Padding(
@@ -22,9 +22,9 @@ class AlbumPage extends StatelessWidget {
                       iconShuffle: state.shuffleIcon,
                       iconSort: state.sortIcon,
                       onPressedShuffle: () =>
-                          context.read<AlbumListBloc>().onShuffleToList(),
+                          context.read<AlbumBloc>().onShuffleToList(),
                       onPressedSort: () =>
-                          context.read<AlbumListBloc>().onSortNameToList(),
+                          context.read<AlbumBloc>().onSortNameToList(),
                     ),
                   ),
                   const ListAlbumWidget(),

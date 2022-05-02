@@ -5,7 +5,7 @@ import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/models/result.dart';
-import 'package:zanmelodic/src/modules/album/album/logic/album_list_bloc.dart';
+import 'package:zanmelodic/src/modules/album/album/logic/album_bloc.dart';
 import 'package:zanmelodic/src/modules/album/album_detail/logic/album_detail_bloc.dart';
 import 'package:zanmelodic/src/utils/utils.dart';
 import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
@@ -18,7 +18,7 @@ class ListAlbumWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AlbumListBloc, AlbumListState>(
+    return BlocBuilder<AlbumBloc, AlbumState>(
       builder: (context, state) {
         XHandle<List<AlbumModel>> _handle = state.items;
         if (_handle.isCompleted) {
@@ -47,8 +47,9 @@ class ListAlbumWidget extends StatelessWidget {
 Widget _buildCard(BuildContext context, {required AlbumModel album}) {
   final String numberSong = XUtil.formatNumberSong(album.numOfSongs);
   return GestureDetector(
-    onTap: () =>
-        context.read<AlbumDetailBloc>().fetchListOfSongs(context, album: album),
+    onTap: () => context
+        .read<AlbumDetailBloc>()
+        .fetchListOfSongsFromAlbum(context, album: album),
     child: Padding(
       padding: const EdgeInsets.symmetric(vertical: 9),
       child: Row(

@@ -1,6 +1,6 @@
-part of 'album_list_bloc.dart';
+part of 'album_bloc.dart';
 
-class AlbumListState extends Equatable {
+class AlbumState extends Equatable {
   final XHandle<List<AlbumModel>> items;
   final bool isSortName;
   final bool isShuffle;
@@ -19,18 +19,18 @@ class AlbumListState extends Equatable {
         return item2.compareTo(item1);
       });
 
-  const AlbumListState(
+  const AlbumState(
       {required this.items, this.isSortName = false, this.isShuffle = false});
 
   @override
   List<Object?> get props => [items, isSortName, isShuffle];
 
-  AlbumListState copyWith({
+  AlbumState copyWith({
     XHandle<List<AlbumModel>>? items,
     bool? isSortName,
     bool? isShuffle,
   }) {
-    return AlbumListState(
+    return AlbumState(
       items: items ?? this.items,
       isSortName: isSortName ?? this.isSortName,
       isShuffle: isShuffle ?? this.isShuffle,

@@ -7,7 +7,7 @@ class AlbumRepositoryImpl extends AlbumRepository {
   @override
   Future<XResult<List<AlbumModel>>> getListOfAlbums() async {
     try {
-      var data = await XAudioQuery.getAlbumfromLocal();
+      var data = await XAudioQuery.getAlbumFromLocal();
       return XResult.success(data);
     } catch (e) {
       return XResult.error(e.toString());
