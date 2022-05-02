@@ -26,7 +26,7 @@ class SingerFavotiresWidget extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(20.0),
           child: Image.network(
-            'https://s3-alpha-sig.figma.com/img/bc17/79c9/a6255ef26368f8e90996f40892b8b589?Expires=1651449600&Signature=bx5nQD~9VJJNMi4qpDAs~EwFKp-kvyaWzMtdG3yUJskKUjNWoNZgKnNBNCi0-RDb8G7MfTnjOPuBHinN01Nly5TTuOX4pwNNKafE1lzpy0meo2XzvKPTp2GFevCotIdgZ0DD~zjCGd8vuxGiW7U4xlJ4Bb791dhoVFy3taIIHgC7z8FDTBT56R11tp0MpfEOFO9H9xUOkWiy1fUDjh-Dsf7gaYQyAt2asLAyBa8y9n62fWSgfRir8TH8cIyJfYqHJGziBXQAgCyy5wRgIeqCwrt1x8FXsShEHpjR1XNBRiHWCNoRKUZu0SD~LSeCACuoC~iKtBYrrJ0b3QOzhrREjA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA',
+            'https://s3-alpha-sig.figma.com/img/bc17/79c9/a6255ef26368f8e90996f40892b8b589?Expires=1652659200&Signature=MYUt-n~bt5OG9M9miwqETdm1rGFDt0YHh1to40hV4ae-I1DCg9u4OnTh9qjJLnZOhom6wh7nlQBpyzukTjbva4LOYYpwnQv9P-~3xAXB8D9jeFQy09LppQ8FW3mH0oW-v0dGRnAM7WG-QOiaSIF26tlBL~GmdDb9QyF9Pw-7bvFtYkvGd9joW7CvuLCu8EEi1aQtL0pS1qEjwMc41FgIN8pBGDOj3-9Sa5heFfUoq6sBqfK-uyL0ppQvXwWWosUTYUUF-JMsykHZuGMeD3SG6vvSJKW3rReXL1ocsb~PuDOrt6pLF17DK-AQ00MDUQGUZgjW834FUchXNpruaPUTGg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA',
             height: 120.0,
             width: 120.0,
             fit: BoxFit.fill,
