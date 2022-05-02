@@ -8,6 +8,7 @@ import 'package:zanmelodic/src/modules/playlist/playlist/logic/playlist_bloc.dar
 import 'package:zanmelodic/src/modules/playlist/router/playlist_router.dart';
 import 'package:zanmelodic/src/repositories/domain.dart';
 import 'package:zanmelodic/src/widgets/loading/bot_toast.dart';
+import 'package:zanmelodic/src/widgets/loading/loading.dart';
 
 part 'playlist_detail_state.dart';
 
@@ -43,24 +44,25 @@ class PlaylistDetailBloc extends Cubit<PlaylistDetailState> {
 
   Future<void> removeFromPlaylist(BuildContext context,
       {required PlaylistModel playlist, required int idSong}) async {
+    XLoading.show(); await Future.delayed(const Duration(seconds: 2));
     final _value = await _domain.playlist
         .removeFromPlaylist(idPlaylist: playlist.id, idSong: idSong);
     if (_value.isSuccess) {
       context.read<PlaylistBloc>().fetchPlaylists();
-
       emit(state.copyWith(
           items: XHandle.completed(_value.data ?? []),
           numberSongs: state.numberSongs - 1));
-
       XCoordinator.pop(context);
       XSnackbar.show(msg: 'Remove Success');
     } else {
       XSnackbar.show(msg: 'Remove Error');
     }
+    XLoading.hide();
   }
 
   Future<void> saveNewNamePlaylist(BuildContext context,
       {required PlaylistModel playlist, required String newName}) async {
+    XLoading.show(); await Future.delayed(const Duration(seconds: 2));
     final value = await _domain.playlist
         .newNamePlaylist(idPlaylist: playlist.id, newName: newName);
     if (value.isSuccess) {
@@ -69,5 +71,6 @@ class PlaylistDetailBloc extends Cubit<PlaylistDetailState> {
     } else {
       XSnackbar.show(msg: 'Rename Error');
     }
+    XLoading.hide();
   }
 }
