@@ -19,14 +19,14 @@ class PlayerBottomBar extends StatelessWidget {
           ? GestureDetector(
               onTap: () => DashboardCoordinator.showNowPlayingScreen(context),
               child: Container(
-                margin: const EdgeInsets.fromLTRB(20, 0, 10, 16),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
                 padding: const EdgeInsets.fromLTRB(7, 15, 12, 15),
                 height: 81,
                 width: 378,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
                   border: Border.all(width: 1.0, color: MyColors.colorPrimary),
-                  color: MyColors.colorBlack,
+                  color: MyColors.colorPrimary,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

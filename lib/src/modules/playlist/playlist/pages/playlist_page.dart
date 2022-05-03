@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/logic/playlist_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/widgets/playlist_widget.dart';
-import 'package:zanmelodic/src/modules/playlist/router/playlist_router.dart';
 import 'package:zanmelodic/src/widgets/custom_bar/upper_control_bar.dart';
 
 class PlaylistPage extends StatelessWidget {
@@ -14,13 +12,6 @@ class PlaylistPage extends StatelessWidget {
     return BlocBuilder<PlaylistBloc, PlaylistState>(
       builder: (context, state) {
         return Scaffold(
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: MyColors.colorPrimary,
-            onPressed: () =>
-                PlaylistCoordinator.showDialogCreatePlaylist(context),
-            child: const Icon(Icons.add),
-          ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
           body: Padding(
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
             child: CustomScrollView(

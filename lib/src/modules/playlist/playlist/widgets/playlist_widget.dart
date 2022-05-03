@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/models/result.dart';
@@ -51,24 +52,44 @@ class PlaylistWidget extends StatelessWidget {
       children: [
         Expanded(
           flex: 5,
-          child: ListView.builder(
+          child: ListView(
             shrinkWrap: true,
             scrollDirection: Axis.vertical,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) => _itemCard(context,
-                playlist: _listLeft[index], width: 178, height: 162),
-            itemCount: _listLeft.length,
+            children: [
+              ListView(
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                physics: const NeverScrollableScrollPhysics(),
+                children: _listLeft
+                    .map((e) => _itemCard(context,
+                        playlist: e, width: 178, height: 162))
+                    .toList(),
+              ),
+              playlists.length % 2 == 0
+                  ? _itemCardAddNewPlaylist(context, width: 178, height: 162)
+                  : const SizedBox.shrink()
+            ],
           ),
         ),
         Expanded(
           flex: 5,
-          child: ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            scrollDirection: Axis.vertical,
+          child: ListView(
             shrinkWrap: true,
-            itemBuilder: (context, index) => _itemCard(context,
-                playlist: _listRight[index], width: 182, height: 150),
-            itemCount: _listRight.length,
+            scrollDirection: Axis.vertical,
+            children: [
+              ListView(
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                physics: const NeverScrollableScrollPhysics(),
+                children: _listRight
+                    .map((e) => _itemCard(context,
+                        playlist: e, width: 178, height: 162))
+                    .toList(),
+              ),
+              playlists.length % 2 != 0
+                  ? _itemCardAddNewPlaylist(context, width: 178, height: 162)
+                  : const SizedBox.shrink()
+            ],
           ),
         ),
       ],
@@ -109,5 +130,28 @@ class PlaylistWidget extends StatelessWidget {
                 ),
               ],
             )));
+  }
+
+  Widget _itemCardAddNewPlaylist(
+    BuildContext context, {
+    required double width,
+    required double height,
+  }) {
+    return GestureDetector(
+        onTap: () => PlaylistCoordinator.showDialogCreatePlaylist(context),
+        child: Padding(
+            padding: const EdgeInsets.all(3.5),
+            child: Container(
+                width: width,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: MyColors.colorWhite,
+                ),
+                height: height,
+                child: const Icon(
+                  Icons.add,
+                  color: MyColors.colorPrimary,
+                  size: 60,
+                ))));
   }
 }

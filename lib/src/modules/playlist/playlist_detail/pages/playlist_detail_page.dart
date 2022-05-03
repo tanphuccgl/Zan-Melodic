@@ -12,7 +12,8 @@ class PlaylistDetailPage extends StatelessWidget {
     return GestureDetector(
       onDoubleTap: () => XCoordinator.pop(context),
       child: const Scaffold(
-        bottomNavigationBar: PlayerBottomBar(),
+        floatingActionButton: PlayerBottomBar(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: CustomScrollView(
           physics: BouncingScrollPhysics(),
           slivers: [AppBarPlaylistDetail(), SongListInPlaylist()],

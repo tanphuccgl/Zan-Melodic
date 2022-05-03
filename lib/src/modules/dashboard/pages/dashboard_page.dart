@@ -30,7 +30,9 @@ class DashboardPage extends StatelessWidget {
         return DefaultTabController(
           length: TabIndex.values.length,
           child: Scaffold(
-            bottomNavigationBar: const PlayerBottomBar(),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+            floatingActionButton: const PlayerBottomBar(),
             appBar: AppBar(
                 elevation: 0,
                 toolbarHeight: 20,
