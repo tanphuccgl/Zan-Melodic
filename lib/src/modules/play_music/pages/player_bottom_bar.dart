@@ -26,7 +26,7 @@ class PlayerBottomBar extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
                   border: Border.all(width: 1.0, color: MyColors.colorPrimary),
-                  color: MyColors.colorPrimary,
+                  color: MyColors.colorBlack,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
