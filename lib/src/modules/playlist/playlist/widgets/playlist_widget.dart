@@ -10,7 +10,6 @@ import 'package:zanmelodic/src/modules/playlist/playlist_detail/logic/playlist_d
 import 'package:zanmelodic/src/modules/playlist/router/playlist_router.dart';
 import 'package:zanmelodic/src/utils/utils.dart';
 import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
-import 'package:zanmelodic/src/widgets/state/state_empty_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_error_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_loading_widget.dart';
 
@@ -29,7 +28,7 @@ class PlaylistWidget extends StatelessWidget {
           state.isShuffle ? _items.shuffle() : null;
           return _items.isNotEmpty
               ? _buildGirdView(context, playlists: _items)
-              : const XStateEmptyWidget();
+              : _emptyListWidget(context);
         } else if (_handle.isLoading) {
           return const XStateLoadingWidget();
         } else {
@@ -153,5 +152,17 @@ class PlaylistWidget extends StatelessWidget {
                   color: MyColors.colorPrimary,
                   size: 60,
                 ))));
+  }
+
+  Widget _emptyListWidget(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Center(
+        child: TextButton(
+            onPressed: () =>
+                PlaylistCoordinator.showDialogCreatePlaylist(context),
+            child: Text('Click here to create a new playlist',
+                style: Style.textTheme().titleMedium)),
+      ),
+    );
   }
 }
