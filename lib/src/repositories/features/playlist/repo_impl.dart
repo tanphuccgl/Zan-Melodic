@@ -28,9 +28,11 @@ class PlaylistRepositoryImpl extends PlaylistRepository {
   @override
   Future<XResult<List<PlaylistModel>>> addNewPlaylist(String name) async {
     try {
-      await PlaylistAudioQuery().createPlaylist(name);
+      final _value = await PlaylistAudioQuery().createPlaylist(name);
 
-      return await getListOfPlaylist();
+      return _value
+          ? await getListOfPlaylist()
+          : XResult.error('Add new Playlist Error');
     } catch (e) {
       return XResult.error(e.toString());
     }
@@ -39,9 +41,11 @@ class PlaylistRepositoryImpl extends PlaylistRepository {
   @override
   Future<XResult<List<PlaylistModel>>> removePlaylist(int idPlaylist) async {
     try {
-      await PlaylistAudioQuery().removePlaylist(idPlaylist);
+      final _value = await PlaylistAudioQuery().removePlaylist(idPlaylist);
 
-      return await getListOfPlaylist();
+      return _value
+          ? await getListOfPlaylist()
+          : XResult.error('Remove Playlist Error');
     } catch (e) {
       return XResult.error(e.toString());
     }
@@ -51,10 +55,12 @@ class PlaylistRepositoryImpl extends PlaylistRepository {
   Future<XResult<List<PlaylistModel>>> addToPlaylist(
       {required int idPlaylist, required int idSong}) async {
     try {
-      await PlaylistAudioQuery()
+      final _value = await PlaylistAudioQuery()
           .addToPlaylist(idPlaylist: idPlaylist, idSongs: idSong);
 
-      return await getListOfPlaylist();
+      return _value
+          ? await getListOfPlaylist()
+          : XResult.error('Remove Playlist Error');
     } catch (e) {
       return XResult.error(e.toString());
     }
@@ -64,10 +70,11 @@ class PlaylistRepositoryImpl extends PlaylistRepository {
   Future<XResult<List<SongModel>>> removeFromPlaylist(
       {required int idPlaylist, required int idSong}) async {
     try {
-      await PlaylistAudioQuery()
+      final _value = await PlaylistAudioQuery()
           .removeFromPlaylist(idPlaylist: idPlaylist, idSongs: idSong);
-
-      return await getListOfSongFromPlaylist(idPlaylist);
+      return _value
+          ? await getListOfSongFromPlaylist(idPlaylist)
+          : XResult.error('Remove From Playlist Error');
     } catch (e) {
       return XResult.error(e.toString());
     }
