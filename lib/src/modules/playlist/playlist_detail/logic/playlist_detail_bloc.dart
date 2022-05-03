@@ -44,7 +44,8 @@ class PlaylistDetailBloc extends Cubit<PlaylistDetailState> {
 
   Future<void> removeFromPlaylist(BuildContext context,
       {required PlaylistModel playlist, required int idSong}) async {
-    XLoading.show(); await Future.delayed(const Duration(seconds: 2));
+    XLoading.show();
+    await Future.delayed(const Duration(seconds: 2));
     final _value = await _domain.playlist
         .removeFromPlaylist(idPlaylist: playlist.id, idSong: idSong);
     if (_value.isSuccess) {
@@ -52,25 +53,28 @@ class PlaylistDetailBloc extends Cubit<PlaylistDetailState> {
       emit(state.copyWith(
           items: XHandle.completed(_value.data ?? []),
           numberSongs: state.numberSongs - 1));
-      XCoordinator.pop(context);
       XSnackbar.show(msg: 'Remove Success');
     } else {
       XSnackbar.show(msg: 'Remove Error');
     }
+    XCoordinator.pop(context);
+
     XLoading.hide();
   }
 
   Future<void> saveNewNamePlaylist(BuildContext context,
       {required PlaylistModel playlist, required String newName}) async {
-    XLoading.show(); await Future.delayed(const Duration(seconds: 2));
+    XLoading.show();
+    await Future.delayed(const Duration(seconds: 2));
     final value = await _domain.playlist
         .newNamePlaylist(idPlaylist: playlist.id, newName: newName);
     if (value.isSuccess) {
-      XCoordinator.pop(context);
       XSnackbar.show(msg: 'Rename Success');
     } else {
       XSnackbar.show(msg: 'Rename Error');
     }
+    XCoordinator.pop(context);
+
     XLoading.hide();
   }
 }

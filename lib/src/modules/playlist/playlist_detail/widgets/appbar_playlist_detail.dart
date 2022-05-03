@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -23,8 +21,6 @@ class AppBarPlaylistDetail extends StatelessWidget {
     return BlocBuilder<PlaylistDetailBloc, PlaylistDetailState>(
       builder: (context, state) {
         final _playlist = state.playlist;
-        log(state.numberSongs.toString());
-
         return SliverAppBar(
             backgroundColor: MyColors.colorBlack,
             stretch: true,
