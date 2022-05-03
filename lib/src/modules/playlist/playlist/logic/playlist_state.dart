@@ -7,6 +7,8 @@ class PlaylistState extends Equatable {
   final String namePlaylist;
   final bool pureName;
   final PlaylistModel playlist;
+  final List<PlaylistModel> playlistsDialog;
+
   String get isValidName {
     return pureName ? XUtil.isValidNameCreatePlaylist(namePlaylist) : "";
   }
@@ -33,6 +35,7 @@ class PlaylistState extends Equatable {
     this.namePlaylist = '',
     this.pureName = false,
     required this.playlist,
+    required this.playlistsDialog,
   });
 
   @override
@@ -43,6 +46,7 @@ class PlaylistState extends Equatable {
         namePlaylist,
         pureName,
         playlist,
+        playlistsDialog,
       ];
 
   PlaylistState copyWith({
@@ -52,6 +56,7 @@ class PlaylistState extends Equatable {
     String? namePlaylist,
     bool? pureName,
     PlaylistModel? playlist,
+    List<PlaylistModel>? playlistsDialog,
   }) {
     return PlaylistState(
       items: items ?? this.items,
@@ -60,6 +65,7 @@ class PlaylistState extends Equatable {
       namePlaylist: namePlaylist ?? this.namePlaylist,
       pureName: pureName ?? this.pureName,
       playlist: playlist ?? this.playlist,
+      playlistsDialog: playlistsDialog ?? this.playlistsDialog,
     );
   }
 }

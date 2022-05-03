@@ -34,7 +34,7 @@ class PlaylistCoordinator {
         RedirectRoute(path: '*', redirectTo: ''),
       ]);
 
-  static showDialogCreatePlaylist(BuildContext context) async {
+  static showDialogCreatePlaylist(BuildContext context) {
     context.read<PlaylistBloc>().initialNamePlaylist();
     showDialog<String>(
         barrierDismissible: false,
@@ -43,18 +43,17 @@ class PlaylistCoordinator {
   }
 
   static showDialogRemovePlaylist(BuildContext context,
-      {required PlaylistModel playlist}) async {
-    showDialog<String>(
-        barrierDismissible: false,
-        context: context,
-        builder: (_) => DialogRemovePlaylist(playlist: playlist));
-  }
+          {required PlaylistModel playlist}) =>
+      showDialog<String>(
+          barrierDismissible: false,
+          context: context,
+          builder: (_) => DialogRemovePlaylist(playlist: playlist));
 
   static showPlaylistDetailScreen(BuildContext context) =>
       context.router.pushWidget(const PlaylistDetailPage());
 
   static showDialogRenamePlaylist(BuildContext context,
-      {required String namePlaylist}) async {
+      {required String namePlaylist}) {
     context.read<PlaylistBloc>().changedName(namePlaylist);
 
     showDialog<String>(
@@ -64,23 +63,26 @@ class PlaylistCoordinator {
   }
 
   static showDialogAddToPlaylist(BuildContext context,
-      {required int idSong}) async {
+      {required SongModel songModel}) {
+    context
+        .read<PlaylistBloc>()
+        .fetchPlaylistToDialog(context, songModel: songModel);
+
     showDialog<String>(
         barrierDismissible: false,
         context: context,
         builder: (_) => DialogAddToPlaylist(
-              idSong: idSong,
+              idSong: songModel.id,
             ));
   }
 
   static showDialogRemoveFromPlaylist(BuildContext context,
-      {required PlaylistModel playlist, required SongModel song}) async {
-    showDialog<String>(
-        barrierDismissible: false,
-        context: context,
-        builder: (_) => DialogRemoveFromPlaylist(
-              song: song,
-              playlist: playlist,
-            ));
-  }
+          {required PlaylistModel playlist, required SongModel song}) =>
+      showDialog<String>(
+          barrierDismissible: false,
+          context: context,
+          builder: (_) => DialogRemoveFromPlaylist(
+                song: song,
+                playlist: playlist,
+              ));
 }

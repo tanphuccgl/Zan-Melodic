@@ -22,7 +22,7 @@ class SongCard extends StatelessWidget {
           ? () => PlaylistCoordinator.showDialogRemoveFromPlaylist(context,
               song: song, playlist: playlist!)
           : () => PlaylistCoordinator.showDialogAddToPlaylist(context,
-              idSong: song.id),
+              songModel: song),
       onTap: () => context
           .read<PlayMusicBloc>()
           .onPlayerItem(songList: songList, song: song),

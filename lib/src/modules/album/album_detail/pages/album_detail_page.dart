@@ -10,7 +10,7 @@ class AlbumDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onVerticalDragEnd: (details) => XCoordinator.pop(context),
+      onDoubleTap: () => XCoordinator.pop(context),
       child: const Scaffold(
         bottomNavigationBar: PlayerBottomBar(),
         body: CustomScrollView(

@@ -14,7 +14,9 @@ part 'playlist_state.dart';
 class PlaylistBloc extends Cubit<PlaylistState> {
   PlaylistBloc()
       : super(PlaylistState(
-            items: XHandle.loading(), playlist: PlaylistModel({}))) {
+            playlistsDialog: const [],
+            items: XHandle.loading(),
+            playlist: PlaylistModel({}))) {
     fetchPlaylists();
   }
 
@@ -39,11 +41,11 @@ class PlaylistBloc extends Cubit<PlaylistState> {
       if (_value.isSuccess) {
         emit(state.copyWith(items: XHandle.completed(_value.data ?? [])));
 
-        XCoordinator.pop(context);
         XSnackbar.show(msg: 'Add Success');
       } else {
         XSnackbar.show(msg: 'Add Error');
       }
+      XCoordinator.pop(context);
     }
     XLoading.hide();
   }
@@ -56,11 +58,12 @@ class PlaylistBloc extends Cubit<PlaylistState> {
     if (_value.isSuccess) {
       emit(state.copyWith(items: XHandle.completed(_value.data ?? [])));
 
-      XCoordinator.pop(context);
       XSnackbar.show(msg: 'Remove Success');
     } else {
       XSnackbar.show(msg: 'Remove Error');
     }
+    XCoordinator.pop(context);
+
     XLoading.hide();
   }
 
@@ -73,29 +76,46 @@ class PlaylistBloc extends Cubit<PlaylistState> {
     if (_value.isSuccess) {
       emit(state.copyWith(items: XHandle.completed(_value.data ?? [])));
 
-      XCoordinator.pop(context);
       XSnackbar.show(msg: 'Add Success');
     } else {
       XSnackbar.show(msg: 'Add Error');
     }
+    XCoordinator.pop(context);
     XLoading.hide();
   }
 
-//TODO
-  Future<bool> fetchPlaylistToDialog(BuildContext context,
-      {required PlaylistModel playlist, required int idSong}) async {
-    await Future.delayed(const Duration(seconds: 2));
-    final value = await _domain.playlist.getListOfSongFromPlaylist(playlist.id);
-    late final bool _result;
-    if (value.isSuccess) {
-      final _items = value.data ?? [];
-      for (int i = 0; i < _items.length; i++) {
-        _result = _items[i].id == idSong ? true : false;
+  Future<List<PlaylistModel>> fetchPlaylistToDialog(BuildContext context,
+      {required SongModel songModel}) async {
+    late final List<PlaylistModel> _playlists;
+    final valuePlaylists = await _domain.playlist.getListOfPlaylist();
+    if (valuePlaylists.isSuccess) {
+      _playlists = valuePlaylists.data ?? [];
+
+      for (int i = 0; i < _playlists.length; i++) {
+        final valueSongs =
+            await _domain.playlist.getListOfSongFromPlaylist(_playlists[i].id);
+        if (valueSongs.isSuccess) {
+          final List<SongModel> _songs = valueSongs.data ?? [];
+
+          for (int j = 0; j < _songs.length; j++) {
+            if (_songs[j].title == songModel.title &&
+                _songs[j].size == songModel.size) {
+              _playlists.removeAt(i);
+            }
+          }
+        } else {
+          XCoordinator.pop(context);
+          XSnackbar.show(msg: 'Load All List Error');
+          break;
+        }
       }
+      emit(state.copyWith(playlistsDialog: _playlists));
     } else {
+      XCoordinator.pop(context);
       XSnackbar.show(msg: 'Load All List Error');
     }
-    return _result;
+
+    return _playlists;
   }
 
   void onSortNameToList() =>
