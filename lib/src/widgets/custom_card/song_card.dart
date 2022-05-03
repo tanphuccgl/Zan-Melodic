@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
+import 'package:zanmelodic/src/modules/favorites/logic/favorites_bloc.dart';
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/router/playlist_router.dart';
 import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
@@ -75,7 +76,8 @@ class SongCard extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () =>
+                        context.read<FavoritesBloc>().addToFavorites(song),
                     icon: const Icon(
                       Icons.favorite_border,
                       color: MyColors.colorWhite,

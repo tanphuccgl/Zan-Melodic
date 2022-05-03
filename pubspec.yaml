@@ -38,6 +38,7 @@ dependencies:
   intl: ^0.17.0
   just_audio: ^0.9.19
   on_audio_query: ^2.6.0
+  on_audio_room: ^2.2.1+1
 
 
 
