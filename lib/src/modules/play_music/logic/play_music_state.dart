@@ -18,8 +18,7 @@ class PlayMusicState extends Equatable {
     return _icon;
   }
 
-  // ignore: unnecessary_null_comparison
-  bool get isShowPlayBottomBar => song.id == null ? false : true;
+  bool get isShowPlayBottomBar => song.id == -1 ? false : true;
   String get currentTime => XUtil.formatDuration(currentPosition);
   String get totalTime => XUtil.formatDuration(endPosition);
 

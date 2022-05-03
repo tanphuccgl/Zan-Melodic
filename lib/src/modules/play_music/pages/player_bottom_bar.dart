@@ -14,7 +14,7 @@ class PlayerBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PlayMusicBloc, PlayMusicState>(
         builder: (context, state) {
-      final SongModel song = state.song;
+      final SongModel _song = state.song;
       return state.isShowPlayBottomBar
           ? GestureDetector(
               onTap: () => DashboardCoordinator.showNowPlayingScreen(context),
@@ -32,7 +32,7 @@ class PlayerBottomBar extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomImageWidget(
-                      id: song.id,
+                      id: _song.id,
                       height: 51.0,
                       width: 51.0,
                     ),
@@ -45,14 +45,14 @@ class PlayerBottomBar extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            '${song.title}\n',
+                            '${_song.title}\n',
                             style: Style.textTheme()
                                 .titleMedium!
                                 .copyWith(fontSize: 15, height: 1.25),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          Text(song.artist ?? '',
+                          Text(_song.artist ?? '',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: Style.textTheme().titleMedium!.copyWith(
