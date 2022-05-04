@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         darkTheme: XTheme.dark(),
         themeMode: ThemeMode.light,
-        restorationScopeId: 'app',
+        restorationScopeId: 'Zan Melodic  ',
         localizationsDelegates: [
           S.delegate,
           GlobalMaterialLocalizations.delegate,
