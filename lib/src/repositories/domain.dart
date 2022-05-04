@@ -2,6 +2,8 @@ import 'package:zanmelodic/src/repositories/features/album/repo.dart';
 import 'package:zanmelodic/src/repositories/features/album/repo_impl.dart';
 import 'package:zanmelodic/src/repositories/features/favorites/repo.dart';
 import 'package:zanmelodic/src/repositories/features/favorites/repo_impl.dart';
+import 'package:zanmelodic/src/repositories/features/folder/repo.dart';
+import 'package:zanmelodic/src/repositories/features/folder/repo_impl.dart';
 import 'package:zanmelodic/src/repositories/features/playlist/repo.dart';
 import 'package:zanmelodic/src/repositories/features/playlist/repo_impl.dart';
 import 'package:zanmelodic/src/repositories/features/song/repo.dart';
@@ -14,6 +16,7 @@ class Domain {
     album = AlbumRepositoryImpl();
     playlist = PlaylistRepositoryImpl();
     favorites = FavoriteRepositoryImpl();
+    folder = FolderRepositoryImpl();
   }
   factory Domain() {
     _internal ??= Domain._();
@@ -24,4 +27,5 @@ class Domain {
   late final AlbumRepository album;
   late final PlaylistRepository playlist;
   late final FavoriteRepository favorites;
+  late final FolderRepository folder;
 }

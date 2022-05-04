@@ -74,7 +74,7 @@ class SingerFavotiresWidget extends StatelessWidget {
                 title: favoritesEntity.artist ?? '',
               ),
               _customText(
-                  title: XUtil.getYear(favoritesEntity.dateAdded ?? -1)
+                  title: XUtils.getYear(favoritesEntity.dateAdded ?? -1)
                       .toString()),
               _customText(title: '1 track'),
             ],

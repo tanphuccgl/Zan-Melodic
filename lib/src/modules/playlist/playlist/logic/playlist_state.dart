@@ -10,7 +10,7 @@ class PlaylistState extends Equatable {
   final List<PlaylistModel> playlistsDialog;
 
   String get isValidName {
-    return pureName ? XUtil.isValidNameCreatePlaylist(namePlaylist) : "";
+    return pureName ? XUtils.isValidNameCreatePlaylist(namePlaylist) : "";
   }
 
   Color get shuffleColorIcon =>

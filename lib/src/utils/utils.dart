@@ -1,8 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 
-class XUtil {
+class XUtils {
   static String formatDuration(Duration duration) {
     return duration.toString().substring(2, 7);
   }
@@ -27,5 +28,17 @@ class XUtil {
   static int getYear(int timestamp) {
     var date = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
     return date.year;
+  }
+
+  static String getNameFolderOfLink(String s) {
+    int _pos = s.lastIndexOf('/');
+    var _result = s.substring(_pos + 1);
+
+    return _result;
+  }
+
+  static String dateTimeFolder() {
+    var date = DateTime.now();
+    return DateFormat("dd/MM/yyyy").format(date);
   }
 }

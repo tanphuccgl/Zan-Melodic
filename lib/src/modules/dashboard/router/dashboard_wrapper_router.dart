@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zanmelodic/src/modules/album/album/logic/album_bloc.dart';
 import 'package:zanmelodic/src/modules/album/album_detail/logic/album_detail_bloc.dart';
+import 'package:zanmelodic/src/modules/folder/logic/folder_bloc.dart';
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
 import 'package:zanmelodic/src/modules/songs/logic/song_list_bloc.dart';
 import 'package:zanmelodic/src/repositories/audio_query/base_audio_query.dart';
@@ -29,6 +30,7 @@ class _DashboardWrapperPageState extends State<DashboardWrapperPage> {
         BlocProvider(create: (_) => PlayMusicBloc()),
         BlocProvider(create: (_) => AlbumBloc()),
         BlocProvider(create: (_) => AlbumDetailBloc()),
+        BlocProvider(create: (_) => FolderBloc()),
       ],
       child: WillPopScope(
           onWillPop: () async => false,

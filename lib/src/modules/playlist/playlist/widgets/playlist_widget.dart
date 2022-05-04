@@ -123,7 +123,7 @@ class PlaylistWidget extends StatelessWidget {
                   children: [
                     Text(playlist.playlist,
                         style: Style.textTheme().titleMedium),
-                    Text(XUtil.formatNumberSong(playlist.numOfSongs),
+                    Text(XUtils.formatNumberSong(playlist.numOfSongs),
                         style: Style.textTheme().titleMedium),
                   ],
                 ),
@@ -161,6 +161,7 @@ class PlaylistWidget extends StatelessWidget {
             onPressed: () =>
                 PlaylistCoordinator.showDialogCreatePlaylist(context),
             child: Text('Click here to create a new playlist',
+                textAlign: TextAlign.center,
                 style: Style.textTheme().titleMedium)),
       ),
     );

@@ -50,7 +50,7 @@ class AppBarAlbumDetail extends StatelessWidget {
                               .copyWith(fontSize: 25),
                         ),
                         Text(
-                          '${_album.artist} | ${XUtil.formatNumberSong(_album.numOfSongs)}',
+                          '${_album.artist} | ${XUtils.formatNumberSong(_album.numOfSongs)}',
                           style: Style.textTheme().titleMedium!.copyWith(
                               fontSize: 15,
                               fontWeight: FontWeight.w300,

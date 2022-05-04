@@ -45,7 +45,7 @@ class ListAlbumWidget extends StatelessWidget {
 }
 
 Widget _buildCard(BuildContext context, {required AlbumModel album}) {
-  final String numberSong = XUtil.formatNumberSong(album.numOfSongs);
+  final String numberSong = XUtils.formatNumberSong(album.numOfSongs);
   return GestureDetector(
     onTap: () => context
         .read<AlbumDetailBloc>()

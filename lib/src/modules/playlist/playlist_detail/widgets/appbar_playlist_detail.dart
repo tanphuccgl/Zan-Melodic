@@ -52,7 +52,7 @@ class AppBarPlaylistDetail extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'By: ${_playlist.dateAdded} | ${XUtil.formatNumberSong(state.numberSongs)}',
+                          'By: ${_playlist.dateAdded} | ${XUtils.formatNumberSong(state.numberSongs)}',
                           style: Style.textTheme().titleMedium!.copyWith(
                               fontSize: 15,
                               fontWeight: FontWeight.w300,

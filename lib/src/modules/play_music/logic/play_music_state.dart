@@ -38,8 +38,8 @@ class PlayMusicState extends Equatable {
   }
 
   bool get isShowPlayBottomBar => song.id == -1 ? false : true;
-  String get currentTime => XUtil.formatDuration(currentPosition);
-  String get totalTime => XUtil.formatDuration(endPosition);
+  String get currentTime => XUtils.formatDuration(currentPosition);
+  String get totalTime => XUtils.formatDuration(endPosition);
 
   const PlayMusicState({
     this.currentPosition = Duration.zero,
