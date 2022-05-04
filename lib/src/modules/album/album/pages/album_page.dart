@@ -19,8 +19,8 @@ class AlbumPage extends StatelessWidget {
                 slivers: [
                   SliverToBoxAdapter(
                     child: UpperControlBar(
-                      iconShuffle: state.shuffleIcon,
-                      iconSort: state.sortIcon,
+                      colorIconShuffle: state.shuffleColorIcon,
+                      colorIconSort: state.sortColorIcon,
                       onPressedShuffle: () =>
                           context.read<AlbumBloc>().onShuffleToList(),
                       onPressedSort: () =>

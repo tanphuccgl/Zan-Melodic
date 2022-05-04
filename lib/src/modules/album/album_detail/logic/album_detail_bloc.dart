@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/modules/album/router/album_router.dart';
 import 'package:zanmelodic/src/repositories/domain.dart';

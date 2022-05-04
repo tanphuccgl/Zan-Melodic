@@ -4,6 +4,7 @@ import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/routes/coordinator.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
+import 'package:zanmelodic/src/constants/my_icons.dart';
 import 'package:zanmelodic/src/modules/now_playing/widgets/control_bar_now_playing.dart';
 import 'package:zanmelodic/src/modules/now_playing/widgets/custom_process_bar.dart';
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
@@ -43,12 +44,12 @@ class NowPlayingPage extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          _customIconButton(
-                            icon: songState.shuffleIcon,
+                          _iconButtonShuffle(
+                            color: songState.shuffleColorIcon,
                             onPressed: () =>
                                 context.read<SongListBloc>().onShuffleToList(),
                           ),
-                          _customIconButton(
+                          _iconButtonLoop(
                             icon: state.loopMode.iconOf(),
                             onPressed: () =>
                                 context.read<PlayMusicBloc>().onLoopMode(),
@@ -99,7 +100,7 @@ class NowPlayingPage extends StatelessWidget {
     );
   }
 
-  Widget _customIconButton(
+  Widget _iconButtonLoop(
       {required IconData icon, required VoidCallback onPressed}) {
     return SizedBox(
       height: 40,
@@ -110,6 +111,20 @@ class NowPlayingPage extends StatelessWidget {
             icon,
             size: 20,
             color: MyColors.colorWhite,
+          )),
+    );
+  }
+
+  Widget _iconButtonShuffle(
+      {required VoidCallback onPressed, required Color color}) {
+    return SizedBox(
+      height: 40,
+      width: 40,
+      child: IconButton(
+          onPressed: onPressed,
+          icon: Image.asset(
+            MyIcons.shuffleIcon,
+            color: color,
           )),
     );
   }

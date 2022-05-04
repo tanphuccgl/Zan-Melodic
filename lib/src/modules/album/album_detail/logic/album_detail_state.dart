@@ -5,9 +5,12 @@ class AlbumDetailState extends Equatable {
   final AlbumModel album;
   final bool isSortName;
   final bool isShuffle;
-  IconData get shuffleIcon => isShuffle ? Icons.shuffle_on : Icons.shuffle;
-  IconData get sortIcon =>
-      isSortName ? Icons.sort : Icons.sort_by_alpha_outlined;
+
+  Color get shuffleColorIcon =>
+      isShuffle ? MyColors.colorPrimary : MyColors.colorWhite;
+
+  Color get sortColorIcon =>
+      isSortName ? MyColors.colorPrimary : MyColors.colorWhite;
 
   void get sortListByName => (items.data ?? []).sort((a, b) {
         String item1 = a.title;

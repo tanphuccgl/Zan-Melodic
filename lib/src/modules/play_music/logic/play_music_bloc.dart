@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:zanmelodic/src/constants/my_icons.dart';
+import 'package:zanmelodic/src/utils/enums/loop_mode.dart';
 import 'package:zanmelodic/src/utils/utils.dart';
 import 'package:zanmelodic/src/widgets/loading/bot_toast.dart';
-import 'package:zanmelodic/src/utils/enums/loop_mode.dart';
 
 part 'play_music_state.dart';
 

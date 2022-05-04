@@ -19,8 +19,8 @@ class PlaylistPage extends StatelessWidget {
                 slivers: [
                   SliverToBoxAdapter(
                     child: UpperControlBar(
-                      iconShuffle: state.shuffleIcon,
-                      iconSort: state.sortIcon,
+                      colorIconShuffle: state.shuffleColorIcon,
+                      colorIconSort: state.sortColorIcon,
                       onPressedShuffle: () =>
                           context.read<PlaylistBloc>().onShuffleToList(),
                       onPressedSort: () =>

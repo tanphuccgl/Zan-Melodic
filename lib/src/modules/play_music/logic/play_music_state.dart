@@ -9,13 +9,32 @@ class PlayMusicState extends Equatable {
   final LoopMode loopMode;
   bool get isEndSong =>
       audioPlayer.processingState == ProcessingState.completed;
-  IconData get playIcon {
-    IconData _icon;
-    _icon = isPlaying ? Icons.pause : Icons.play_arrow;
+
+  String get playIconCircled {
+    String _icon;
+    _icon = isPlaying ? MyIcons.pauseCircledIcon : MyIcons.playCircledIcon;
     if (isEndSong) {
-      _icon = Icons.play_arrow;
+      _icon = MyIcons.playCircledIcon;
     }
     return _icon;
+  }
+
+  double get sizePlayIconCircled {
+    double _size;
+    _size = isPlaying ? 30 : 40;
+    if (isEndSong) {
+      _size = 40;
+    }
+    return _size;
+  }
+
+  double get sizePlayIconCircledMini {
+    double _size;
+    _size = isPlaying ? 30 : 35;
+    if (isEndSong) {
+      _size = 35;
+    }
+    return _size;
   }
 
   bool get isShowPlayBottomBar => song.id == -1 ? false : true;

@@ -74,8 +74,8 @@ class AppBarAlbumDetail extends StatelessWidget {
                         Padding(
                             padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
                             child: UpperControlBar(
-                              iconShuffle: state.shuffleIcon,
-                              iconSort: state.sortIcon,
+                              colorIconShuffle: state.shuffleColorIcon,
+                              colorIconSort: state.sortColorIcon,
                               onPressedSort: () => context
                                   .read<AlbumDetailBloc>()
                                   .onSortNameToList(),
