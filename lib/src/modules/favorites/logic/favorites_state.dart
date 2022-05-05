@@ -9,6 +9,21 @@ class FavoritesState extends Equatable {
     return _list.isEmpty ? false : true;
   }
 
+  List<SongModel> convertFavoritesEntityToSong(
+      {required List<SongModel> list,
+      required List<FavoritesEntity> favoritesEntity}) {
+    List<SongModel> result = [];
+    for (int i = 0; i < list.length; i++) {
+      for (int j = 0; j < favoritesEntity.length; j++) {
+        if (list[i].id == favoritesEntity[j].id) {
+          result.add(list[i]);
+        }
+      }
+    }
+
+    return result;
+  }
+
   const FavoritesState({required this.songs});
 
   @override

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:on_audio_room/details/rooms/favorites/favorites_entity.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/routes/coordinator.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/modules/favorites/logic/favorites_bloc.dart';
 
 class DialogRemoveFromFavorites extends StatelessWidget {
-  const DialogRemoveFromFavorites({Key? key, required this.favoritesEntity})
+  const DialogRemoveFromFavorites({Key? key, required this.song})
       : super(key: key);
-  final FavoritesEntity favoritesEntity;
+  final SongModel song;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class DialogRemoveFromFavorites extends StatelessWidget {
             style: Style.textTheme().titleMedium!.copyWith(fontSize: 17),
             children: [
               TextSpan(
-                text: favoritesEntity.title,
+                text: song.title,
                 style: Style.textTheme()
                     .titleMedium!
                     .copyWith(color: MyColors.colorPrimary),
@@ -44,7 +44,7 @@ class DialogRemoveFromFavorites extends StatelessWidget {
         TextButton(
             onPressed: () => context
                 .read<FavoritesBloc>()
-                .removeFromFavorites(context, id: favoritesEntity.id),
+                .removeFromFavorites(context, id: song.id),
             child: Text('REMOVE',
                 style: Style.textTheme()
                     .titleMedium!
