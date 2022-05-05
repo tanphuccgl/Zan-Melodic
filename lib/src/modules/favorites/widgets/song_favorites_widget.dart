@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_room/details/rooms/favorites/favorites_entity.dart';
@@ -7,6 +9,7 @@ import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/models/result.dart';
 import 'package:zanmelodic/src/modules/favorites/logic/favorites_bloc.dart';
 import 'package:zanmelodic/src/modules/favorites/router/favorites_router.dart';
+import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_empty_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_error_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_loading_widget.dart';
@@ -22,7 +25,7 @@ class SongFavotiresWidget extends StatelessWidget {
         if (_handle.isCompleted) {
           _handle = XHandle.result(XResult.success(state.songs.data ?? []));
           final List<FavoritesEntity> _items = _handle.data ?? [];
-
+          log(_items.toString());
           return _items.isNotEmpty
               ? SliverPadding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
@@ -54,13 +57,12 @@ class SongFavotiresWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: Image.network(
-              'https://s3-alpha-sig.figma.com/img/3396/b467/b81be7b8995e49b98686d41bcbe6a1e4?Expires=1652659200&Signature=fOgf7pxYm1UuMRIpqZ0hA6ADz8vIElkgVt29aUbepHjkfu4hvwxyCTdrB-ad1c8m0HLh7NVxc0lkPwIw6tUtgAXGF9ZEUkzSCaMhFBoyFZQFrOiRccvNotdBKmX5M~RkTwpkPVTsNdGyoNGWf0XwNwQsQqdvpCWx-sSY2UEE73cxt-npqwSvD0gvE3jkpn0UIdzrTPN-~mp-UJspICeKhSHq1mVrMNmZh4cBqyaxRzfl3YfmNXIhPHBaMbLL0AX~yw9Grqz-5S~p4BGkBjRZT1HgWlUhmsaggqQBE9nkeQGVG-tM4f1PhJdVzTgJj013b6ZuZ8Fnv8G3RxrtGKbJKg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA',
+          SizedBox(
+            width: 70,
+            child: CustomImageWidget(
+              id: favoritesEntity.id,
               height: 70.0,
               width: 70.0,
-              fit: BoxFit.fill,
             ),
           ),
           const SizedBox(
