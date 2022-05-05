@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:on_audio_query/on_audio_query.dart';
 
 class BaseAudioQuery {
@@ -16,7 +14,6 @@ class BaseAudioQuery {
 
   Future<bool> scanMedia(String path) async {
     bool result = await audioQuery.scanMedia(path);
-    log(result.toString());
     return result;
   }
 }

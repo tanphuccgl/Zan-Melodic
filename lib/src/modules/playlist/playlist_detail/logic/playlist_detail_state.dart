@@ -6,6 +6,7 @@ class PlaylistDetailState extends Equatable {
   final int numberSongs;
   final bool isSortName;
   final bool isShuffle;
+  final List<int> uriImageList;
   Color get shuffleColorIcon =>
       isShuffle ? MyColors.colorPrimary : MyColors.colorWhite;
 
@@ -28,6 +29,7 @@ class PlaylistDetailState extends Equatable {
     this.isShuffle = false,
     required this.playlist,
     this.numberSongs = 0,
+    required this.uriImageList,
   });
 
   @override
@@ -37,6 +39,7 @@ class PlaylistDetailState extends Equatable {
         isShuffle,
         playlist,
         numberSongs,
+        uriImageList,
       ];
 
   PlaylistDetailState copyWith({
@@ -45,6 +48,7 @@ class PlaylistDetailState extends Equatable {
     bool? isShuffle,
     PlaylistModel? playlist,
     int? numberSongs,
+    List<int>? uriImageList,
   }) {
     return PlaylistDetailState(
       items: items ?? this.items,
@@ -52,6 +56,7 @@ class PlaylistDetailState extends Equatable {
       isShuffle: isShuffle ?? this.isShuffle,
       playlist: playlist ?? this.playlist,
       numberSongs: numberSongs ?? this.numberSongs,
+      uriImageList: uriImageList ?? this.uriImageList,
     );
   }
 }

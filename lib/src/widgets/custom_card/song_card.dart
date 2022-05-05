@@ -10,11 +10,16 @@ import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
 
 class SongCard extends StatelessWidget {
   const SongCard(
-      {Key? key, required this.song, required this.songList, this.playlist})
+      {Key? key,
+      required this.song,
+      required this.songList,
+      this.playlist,
+      this.idImageSong})
       : super(key: key);
   final SongModel song;
   final List<SongModel> songList;
   final PlaylistModel? playlist;
+  final int? idImageSong;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +48,7 @@ class SongCard extends StatelessWidget {
                       SizedBox(
                         width: 70,
                         child: CustomImageWidget(
-                          id: song.id,
+                          id: idImageSong ?? song.id,
                           height: 70.0,
                           width: 70.0,
                         ),

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:zanmelodic/src/repositories/audio_query/base_audio_query.dart';
 
 class FolderAudioQuery extends BaseAudioQuery {
@@ -23,7 +21,6 @@ class FolderAudioQuery extends BaseAudioQuery {
 
   Future<bool> scan(String path) async {
     bool result = await audioQuery.scanMedia(path);
-    log(result.toString());
     return result;
   }
 }

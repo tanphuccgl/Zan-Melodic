@@ -18,13 +18,16 @@ class PlaylistDetailBloc extends Cubit<PlaylistDetailState> {
 
   PlaylistDetailBloc()
       : super(PlaylistDetailState(
-            items: XHandle.loading(), playlist: PlaylistModel({})));
+            uriImageList: const [],
+            items: XHandle.loading(),
+            playlist: PlaylistModel({})));
 
   Future<void> fetchListOfSongsFromPlaylist(BuildContext context,
       {required PlaylistModel playlist}) async {
     await Future.delayed(const Duration(seconds: 2));
     final value = await _domain.playlist.getListOfSongFromPlaylist(playlist.id);
     if (value.isSuccess) {
+      await fetchUriImageList(playlist.id);
       emit(state.copyWith(
           items: XHandle.completed(value.data ?? []),
           playlist: playlist,
@@ -50,10 +53,15 @@ class PlaylistDetailBloc extends Cubit<PlaylistDetailState> {
     final _value = await _domain.playlist
         .removeFromPlaylist(idPlaylist: playlist.id, idSong: idSong);
     if (_value.isSuccess) {
+      state.uriImageList.clear();
+      await fetchUriImageList(playlist.id);
+
       context.read<PlaylistBloc>().fetchPlaylists();
+
       emit(state.copyWith(
           items: XHandle.completed(_value.data ?? []),
-          numberSongs: state.numberSongs - 1));
+          numberSongs: state.numberSongs - 1,
+          uriImageList: state.uriImageList));
       XSnackbar.show(msg: 'Remove Success');
     } else {
       XSnackbar.show(msg: 'Remove Error');
@@ -77,5 +85,29 @@ class PlaylistDetailBloc extends Cubit<PlaylistDetailState> {
     XCoordinator.pop(context);
 
     XLoading.hide();
+  }
+
+  Future<void> fetchUriImageList(int idPlaylist) async {
+    List<int> uriImageList = [];
+    final _valueSongs = await _domain.song.getListOfSongs();
+    final _valueSongsFromPlaylist =
+        await _domain.playlist.getListOfSongFromPlaylist(idPlaylist);
+
+    if (_valueSongs.isSuccess && _valueSongsFromPlaylist.isSuccess) {
+      final _song = _valueSongs.data ?? [];
+      final _songsPlaylist = _valueSongsFromPlaylist.data ?? [];
+
+      for (int i = 0; i < _song.length; i++) {
+        for (int j = 0; j < _songsPlaylist.length; j++) {
+          if (_songsPlaylist[j].title == _song[i].title &&
+              _songsPlaylist[j].size == _song[i].size) {
+            uriImageList.add(_song[i].id);
+          }
+        }
+      }
+      emit(state.copyWith(uriImageList: uriImageList));
+    } else {
+      XSnackbar.show(msg: 'Load All List Error');
+    }
   }
 }

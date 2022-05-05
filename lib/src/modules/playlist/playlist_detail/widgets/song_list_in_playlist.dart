@@ -31,6 +31,7 @@ class SongListInPlaylist extends StatelessWidget {
                               songList: _items,
                               song: _items[index],
                               playlist: state.playlist,
+                              idImageSong: state.uriImageList[index],
                             ),
                           ),
                       childCount: _items.length),
