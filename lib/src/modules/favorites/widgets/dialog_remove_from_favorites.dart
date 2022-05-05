@@ -44,7 +44,7 @@ class DialogRemoveFromFavorites extends StatelessWidget {
         TextButton(
             onPressed: () => context
                 .read<FavoritesBloc>()
-                .removeFromFavorites(context, favoritesEntity: favoritesEntity),
+                .removeFromFavorites(context, id: favoritesEntity.id),
             child: Text('REMOVE',
                 style: Style.textTheme()
                     .titleMedium!

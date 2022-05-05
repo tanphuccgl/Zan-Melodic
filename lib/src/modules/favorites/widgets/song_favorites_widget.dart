@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_room/details/rooms/favorites/favorites_entity.dart';
@@ -25,7 +23,6 @@ class SongFavotiresWidget extends StatelessWidget {
         if (_handle.isCompleted) {
           _handle = XHandle.result(XResult.success(state.songs.data ?? []));
           final List<FavoritesEntity> _items = _handle.data ?? [];
-          log(_items.toString());
           return _items.isNotEmpty
               ? SliverPadding(
                   padding: const EdgeInsets.symmetric(vertical: 10),

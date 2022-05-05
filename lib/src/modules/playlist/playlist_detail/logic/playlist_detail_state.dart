@@ -7,6 +7,17 @@ class PlaylistDetailState extends Equatable {
   final bool isSortName;
   final bool isShuffle;
   final List<int> uriImageList;
+  int idSong({required List<SongModel> list, required SongModel song}) {
+    late final int result;
+    for (int i = 0; i < list.length; i++) {
+      if (song.title == list[i].title && song.size == list[i].size) {
+        result = list[i].id;
+      }
+    }
+
+    return result;
+  }
+
   Color get shuffleColorIcon =>
       isShuffle ? MyColors.colorPrimary : MyColors.colorWhite;
 

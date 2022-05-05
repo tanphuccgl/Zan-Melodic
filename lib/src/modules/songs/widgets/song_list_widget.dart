@@ -25,10 +25,12 @@ class SongListWidget extends StatelessWidget {
           state.isShuffle ? _items.shuffle() : null;
           return _items.isNotEmpty
               ? SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                      (context, index) =>
-                          SongCard(songList: _items, song: _items[index]),
-                      childCount: _items.length),
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    return SongCard(
+                      songList: _items,
+                      song: _items[index],
+                    );
+                  }, childCount: _items.length),
                 )
               : const XStateEmptyWidget();
         } else if (_handle.isLoading) {

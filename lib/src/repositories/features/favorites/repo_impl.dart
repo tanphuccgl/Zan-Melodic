@@ -41,4 +41,14 @@ class FavoriteRepositoryImpl extends FavoriteRepository {
       return XResult.error(e.toString());
     }
   }
+
+  @override
+  Future<XResult<bool>> checkSongisFavorire(SongModel song) async {
+    try {
+      var data = await FavoriteAudioRoom().isFavorites(song);
+      return XResult.success(data);
+    } catch (e) {
+      return XResult.error(e.toString());
+    }
+  }
 }

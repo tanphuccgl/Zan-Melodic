@@ -5,7 +5,7 @@ import 'package:zanmelodic/src/models/result.dart';
 abstract class FavoriteRepository {
   Future<XResult<List<FavoritesEntity>>> getSongsFromFavorites();
   Future<XResult<List<FavoritesEntity>>> removeFromFavorites(int key);
-
   Future<XResult<List<FavoritesEntity>>> addToFavorite(
       {required SongModel song});
+  Future<XResult<bool>> checkSongisFavorire(SongModel song);
 }

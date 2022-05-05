@@ -37,11 +37,10 @@ class FavoritesBloc extends Cubit<FavoritesState> {
   }
 
   Future<void> removeFromFavorites(BuildContext context,
-      {required FavoritesEntity favoritesEntity}) async {
+      {required int id}) async {
     XLoading.show();
     await Future.delayed(const Duration(seconds: 2));
-    final value =
-        await _domain.favorites.removeFromFavorites(favoritesEntity.id);
+    final value = await _domain.favorites.removeFromFavorites(id);
     if (value.isSuccess) {
       emit(state.copyWith(songs: XHandle.completed(value.data ?? [])));
       XSnackbar.show(msg: 'Remove Success');

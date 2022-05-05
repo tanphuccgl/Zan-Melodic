@@ -78,17 +78,29 @@ class SongCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                Expanded(
-                  flex: 2,
-                  child: IconButton(
-                    onPressed: () =>
-                        context.read<FavoritesBloc>().addToFavorites(song),
-                    icon: const Icon(
-                      Icons.favorite_border,
-                      color: MyColors.colorWhite,
-                    ),
-                    iconSize: 25,
-                  ),
+                BlocBuilder<FavoritesBloc, FavoritesState>(
+                  builder: (context, state) {
+                    return Expanded(
+                      flex: 2,
+                      child: IconButton(
+                        onPressed: () =>
+                            state.isFavorite(idImageSong ?? song.id)
+                                ? context
+                                    .read<FavoritesBloc>()
+                                    .removeFromFavorites(context, id: song.id)
+                                : context
+                                    .read<FavoritesBloc>()
+                                    .addToFavorites(song),
+                        icon: Icon(
+                          state.isFavorite(idImageSong ?? song.id)
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color: MyColors.colorWhite,
+                        ),
+                        iconSize: 25,
+                      ),
+                    );
+                  },
                 )
               ]),
         ),
