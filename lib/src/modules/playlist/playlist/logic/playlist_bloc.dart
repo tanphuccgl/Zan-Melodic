@@ -110,7 +110,8 @@ class PlaylistBloc extends Cubit<PlaylistState> {
           break;
         }
       }
-      emit(state.copyWith(playlistsDialog: _playlists));
+      emit(state.copyWith(
+          playlistsDialog: _playlists, playlist: PlaylistModel({"_id": -1})));
     } else {
       XCoordinator.pop(context);
       XSnackbar.show(msg: 'Load All List Error');

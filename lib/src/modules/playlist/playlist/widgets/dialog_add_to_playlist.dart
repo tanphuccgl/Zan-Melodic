@@ -59,7 +59,7 @@ class DialogAddToPlaylist extends StatelessWidget {
                       .copyWith(fontWeight: FontWeight.w600, fontSize: 17),
                 )),
             TextButton(
-                onPressed: _items.isNotEmpty
+                onPressed: _items.isNotEmpty && state.playlist.id != -1
                     ? () => context.read<PlaylistBloc>().addToPlaylist(context,
                         idPlaylist: state.playlist.id, idSong: idSong)
                     : null,

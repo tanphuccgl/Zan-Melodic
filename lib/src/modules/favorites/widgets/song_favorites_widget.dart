@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -34,8 +32,6 @@ class SongFavotiresWidget extends StatelessWidget {
               final List<FavoritesEntity> _items = _handle.data ?? [];
               final _listSong = state.convertFavoritesEntityToSong(
                   list: _handleSong.data ?? [], favoritesEntity: _items);
-              log(_listSong.toString());
-
               return _listSong.isNotEmpty
                   ? SliverPadding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
