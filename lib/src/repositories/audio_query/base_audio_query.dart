@@ -11,9 +11,4 @@ class BaseAudioQuery {
     List<SongModel> _listAudio = await audioQuery.querySongs();
     return _listAudio;
   }
-
-  Future<bool> scanMedia(String path) async {
-    bool result = await audioQuery.scanMedia(path);
-    return result;
-  }
 }

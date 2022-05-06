@@ -16,7 +16,10 @@ class PlaylistDetailPage extends StatelessWidget {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: CustomScrollView(
           physics: BouncingScrollPhysics(),
-          slivers: [AppBarPlaylistDetail(), SongListInPlaylist()],
+          slivers: [
+            AppBarPlaylistDetail(),
+            SongListInPlaylist(),
+          ],
         ),
       ),
     );

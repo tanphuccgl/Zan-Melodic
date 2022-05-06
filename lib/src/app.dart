@@ -10,6 +10,7 @@ import 'package:zanmelodic/src/localization/localization_util.dart';
 import 'package:zanmelodic/src/modules/favorites/logic/favorites_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/logic/playlist_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist_detail/logic/playlist_detail_bloc.dart';
+import 'package:zanmelodic/src/modules/upper_control/logic/upper_control_bloc.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -22,6 +23,8 @@ class MyApp extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+            create: (_) => UpperControlBloc(const UpperControlState())),
         BlocProvider(create: (_) => PlaylistBloc()),
         BlocProvider(create: (_) => PlaylistDetailBloc()),
         BlocProvider(create: (_) => FavoritesBloc()),

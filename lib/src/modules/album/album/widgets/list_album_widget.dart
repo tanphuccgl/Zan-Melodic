@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/models/handle.dart';
-import 'package:zanmelodic/src/models/result.dart';
 import 'package:zanmelodic/src/modules/album/album/logic/album_bloc.dart';
 import 'package:zanmelodic/src/modules/album/album_detail/logic/album_detail_bloc.dart';
 import 'package:zanmelodic/src/utils/utils.dart';
+import 'package:zanmelodic/src/widgets/custom_text/custom_text.dart';
 import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_empty_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_error_widget.dart';
@@ -22,9 +21,10 @@ class ListAlbumWidget extends StatelessWidget {
       builder: (context, state) {
         XHandle<List<AlbumModel>> _handle = state.items;
         if (_handle.isCompleted) {
-          _handle = XHandle.result(XResult.success(state.items.data ?? []));
           final List<AlbumModel> _items = _handle.data ?? [];
-          state.isSortName ? state.sortListByNameReverse : state.sortListByName;
+          state.isSortName
+              ? state.sortListByName(reverse: true)
+              : state.sortListByName();
           state.isShuffle ? _items.shuffle() : null;
           return _items.isNotEmpty
               ? SliverList(
@@ -45,7 +45,7 @@ class ListAlbumWidget extends StatelessWidget {
 }
 
 Widget _buildCard(BuildContext context, {required AlbumModel album}) {
-  final String numberSong = XUtils.formatNumberSong(album.numOfSongs);
+  final String _numberSong = XUtils.formatNumberSong(album.numOfSongs);
   return GestureDetector(
     onTap: () => context
         .read<AlbumDetailBloc>()
@@ -68,14 +68,14 @@ Widget _buildCard(BuildContext context, {required AlbumModel album}) {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _customText(
+                CustomText(
                   title: album.album,
                   style: Style.textTheme().titleMedium,
                 ),
-                _customText(
+                CustomText(
                   title: album.artist ?? '',
                 ),
-                _customText(title: numberSong),
+                CustomText(title: _numberSong),
               ],
             ),
           )
@@ -83,14 +83,4 @@ Widget _buildCard(BuildContext context, {required AlbumModel album}) {
       ),
     ),
   );
-}
-
-Text _customText({required String title, TextStyle? style}) {
-  return Text(title,
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
-      style: style ??
-          Style.textTheme()
-              .titleMedium!
-              .copyWith(color: MyColors.colorGray, fontSize: 17, height: 1.23));
 }

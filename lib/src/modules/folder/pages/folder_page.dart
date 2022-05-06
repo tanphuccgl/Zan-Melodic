@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:zanmelodic/src/constants/my_padding.dart';
 import 'package:zanmelodic/src/modules/folder/widgets/list_folder_widget.dart';
-import 'package:zanmelodic/src/widgets/custom_bar/upper_control_bar.dart';
+import 'package:zanmelodic/src/modules/upper_control/widgets/upper_control_bar.dart';
 
 class FolderPage extends StatelessWidget {
   const FolderPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Padding(
-        padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
+        padding: MyPadding.pPage,
         child: CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(child: UpperControlBar()),
-            ListFolderWidget()
+            SliverToBoxAdapter(
+                child: UpperControlBar(
+              onPressedShuffle: () {},
+              onPressedSort: () {},
+            )),
+            const ListFolderWidget()
           ],
         ),
       ),

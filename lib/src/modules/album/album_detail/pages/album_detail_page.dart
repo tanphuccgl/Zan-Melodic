@@ -16,7 +16,10 @@ class AlbumDetailPage extends StatelessWidget {
         floatingActionButton: PlayerBottomBar(),
         body: CustomScrollView(
           physics: BouncingScrollPhysics(),
-          slivers: [AppBarAlbumDetail(), SongListInAlbum()],
+          slivers: [
+            AppBarAlbumDetail(),
+            SongListInAlbum(),
+          ],
         ),
       ),
     );

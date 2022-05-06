@@ -6,6 +6,7 @@ import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/constants/my_icons.dart';
 import 'package:zanmelodic/src/modules/dashboard/router/dashboard_router.dart';
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
+import 'package:zanmelodic/src/widgets/custom_ic_button/custom_icon_button_with_image.dart';
 import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
 
 class PlayerBottomBar extends StatelessWidget {
@@ -78,39 +79,23 @@ class PlayerBottomBar extends StatelessWidget {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(
-              width: 35,
-              child: IconButton(
-                  onPressed: () =>
-                      context.read<PlayMusicBloc>().onSkipToPrevious(),
-                  icon: Image.asset(
-                    MyIcons.skipIcon,
-                    color: MyColors.colorWhite,
-                  )),
+            CustomIconButtonWithImage(
+              size: 35,
+              onPressed: () => context.read<PlayMusicBloc>().onSkipToPrevious(),
+              icon: MyIcons.skipIcon,
             ),
-            SizedBox(
-              width: 35,
-              child: IconButton(
-                  onPressed: () => state.isPlaying
-                      ? context.read<PlayMusicBloc>().onPause()
-                      : context
-                          .read<PlayMusicBloc>()
-                          .onButtonPlayer(state.song),
-                  icon: Image.asset(
-                    state.playIconCircled,
-                    width: state.sizePlayIconCircledMini,
-                    color: MyColors.colorWhite,
-                  )),
+            CustomIconButtonWithImage(
+              size: state.sizePlayIconCircledMini,
+              onPressed: () => state.isPlaying
+                  ? context.read<PlayMusicBloc>().onPause()
+                  : context.read<PlayMusicBloc>().onButtonPlayer(state.song),
+              icon: state.playIconCircled,
             ),
-            SizedBox(
-              width: 35,
-              child: IconButton(
-                  onPressed: () => context.read<PlayMusicBloc>().onSkipToNext(),
-                  icon: Image.asset(
-                    MyIcons.endIcon,
-                    color: MyColors.colorWhite,
-                  )),
-            )
+            CustomIconButtonWithImage(
+              size: 35,
+              onPressed: () => context.read<PlayMusicBloc>().onSkipToNext(),
+              icon: MyIcons.endIcon,
+            ),
           ],
         );
       },

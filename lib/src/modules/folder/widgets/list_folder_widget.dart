@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/models/handle.dart';
-import 'package:zanmelodic/src/models/result.dart';
 import 'package:zanmelodic/src/modules/folder/logic/folder_bloc.dart';
 import 'package:zanmelodic/src/utils/utils.dart';
 import 'package:zanmelodic/src/widgets/state/state_error_widget.dart';
@@ -19,7 +18,6 @@ class ListFolderWidget extends StatelessWidget {
         XHandle<Set<String>> _handle = state.items;
 
         if (_handle.isCompleted) {
-          _handle = XHandle.result(XResult.success(state.items.data ?? {}));
           final Set<String> _items = _handle.data ?? {};
 
           return SliverToBoxAdapter(

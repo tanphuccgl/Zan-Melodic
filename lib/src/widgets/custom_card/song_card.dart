@@ -27,8 +27,8 @@ class SongCard extends StatelessWidget {
       onLongPress: playlist != null
           ? () => PlaylistCoordinator.showDialogRemoveFromPlaylist(context,
               song: song, playlist: playlist!)
-          : () => PlaylistCoordinator.showDialogAddToPlaylist(context,
-              songModel: song),
+          : () =>
+              PlaylistCoordinator.showDialogAddToPlaylist(context, song: song),
       onTap: () => context
           .read<PlayMusicBloc>()
           .onPlayerItem(songList: songList, song: song),
@@ -83,16 +83,16 @@ class SongCard extends StatelessWidget {
                     return Expanded(
                       flex: 2,
                       child: IconButton(
-                        onPressed: () =>
-                            state.isFavorite(idImageSong ?? song.id)
-                                ? context
-                                    .read<FavoritesBloc>()
-                                    .removeFromFavorites(context, id: song.id)
-                                : context
-                                    .read<FavoritesBloc>()
-                                    .addToFavorites(song),
+                        onPressed: () => state
+                                .isFavorites(idImageSong ?? song.id)
+                            ? context
+                                .read<FavoritesBloc>()
+                                .removeFromFavorites(context, idSong: song.id)
+                            : context
+                                .read<FavoritesBloc>()
+                                .addToFavorites(song),
                         icon: Icon(
-                          state.isFavorite(idImageSong ?? song.id)
+                          state.isFavorites(idImageSong ?? song.id)
                               ? Icons.favorite
                               : Icons.favorite_border,
                           color: MyColors.colorWhite,

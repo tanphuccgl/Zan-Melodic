@@ -1,36 +1,32 @@
 part of 'album_detail_bloc.dart';
 
-class AlbumDetailState extends Equatable {
+class AlbumDetailState extends UpperControlState {
   final XHandle<List<SongModel>> items;
   final AlbumModel album;
-  final bool isSortName;
-  final bool isShuffle;
 
-  Color get shuffleColorIcon =>
-      isShuffle ? MyColors.colorPrimary : MyColors.colorWhite;
-
-  Color get sortColorIcon =>
-      isSortName ? MyColors.colorPrimary : MyColors.colorWhite;
-
-  void get sortListByName => (items.data ?? []).sort((a, b) {
-        String item1 = a.title;
-        String item2 = b.title;
-        return item1.compareTo(item2);
-      });
-  void get sortListByNameReverse => (items.data ?? []).sort((a, b) {
-        String item1 = a.title;
-        String item2 = b.title;
-        return item2.compareTo(item1);
-      });
+  @override
+  void sortListByName({bool reverse = false}) =>
+      (items.data ?? []).sort((a, b) => reverse
+          ? (b.title).compareTo((a.title))
+          : (a.title).compareTo((b.title)));
 
   const AlbumDetailState(
       {required this.items,
-      this.isSortName = false,
-      this.isShuffle = false,
-      required this.album});
+      bool isSortName = false,
+      bool isShuffle = false,
+      required this.album})
+      : super(
+          isShuffle: isShuffle,
+          isSortName: isSortName,
+        );
 
   @override
-  List<Object?> get props => [items, isSortName, isShuffle];
+  List<Object?> get props => [
+        items,
+        isSortName,
+        isShuffle,
+        album,
+      ];
 
   AlbumDetailState copyWith({
     XHandle<List<SongModel>>? items,

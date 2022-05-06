@@ -25,7 +25,7 @@ class DashboardPage extends StatelessWidget {
         FolderTab(),
       ],
       builder: (context, child, animation) {
-        final tabsRouter = AutoTabsRouter.of(context);
+        final _tabsRouter = AutoTabsRouter.of(context);
 
         return DefaultTabController(
           length: TabIndex.values.length,
@@ -44,10 +44,10 @@ class DashboardPage extends StatelessWidget {
                     unselectedLabelStyle:
                         Style.textTheme().labelMedium!.copyWith(fontSize: 21),
                     onTap: (index) {
-                      if (index == tabsRouter.activeIndex) {
-                        tabsRouter.stackRouterOfIndex(index)?.popUntilRoot();
+                      if (index == _tabsRouter.activeIndex) {
+                        _tabsRouter.stackRouterOfIndex(index)?.popUntilRoot();
                       } else {
-                        tabsRouter.setActiveIndex(index);
+                        _tabsRouter.setActiveIndex(index);
                       }
                     },
                     tabs: <Tab>[
