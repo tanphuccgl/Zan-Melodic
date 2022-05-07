@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/constants/my_icons.dart';
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
+import 'package:zanmelodic/src/widgets/custom_ic_button/custom_icon_button_with_image.dart';
 
 class ControlBarNowPlaying extends StatelessWidget {
   const ControlBarNowPlaying({Key? key}) : super(key: key);
@@ -16,34 +16,26 @@ class ControlBarNowPlaying extends StatelessWidget {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          IconButton(
-              iconSize: 40,
-              onPressed: () => context.read<PlayMusicBloc>().onSkipToPrevious(),
-              icon: Image.asset(
-                MyIcons.skipIcon,
-                color: MyColors.colorWhite,
-              )),
-          IconButton(
-              iconSize: state.sizePlayIconCircled,
-              onPressed: () {
-                if (state.isEndSong) {
-                  context.read<PlayMusicBloc>().onButtonPlayer(_song);
-                }
-                state.isPlaying
-                    ? context.read<PlayMusicBloc>().onPause()
-                    : context.read<PlayMusicBloc>().onButtonPlayer(_song);
-              },
-              icon: Image.asset(
-                state.playIconCircled,
-                color: MyColors.colorWhite,
-              )),
-          IconButton(
-              iconSize: 40,
-              onPressed: () => context.read<PlayMusicBloc>().onSkipToNext(),
-              icon: Image.asset(
-                MyIcons.endIcon,
-                color: MyColors.colorWhite,
-              ))
+          CustomIconButtonWithImage(
+            icon: MyIcons.skipIcon,
+            onPressed: () => context.read<PlayMusicBloc>().onSkipToPrevious(),
+          ),
+          CustomIconButtonWithImage(
+            icon: state.playIconCircled,
+            onPressed: () {
+              if (state.isEndSong) {
+                context.read<PlayMusicBloc>().onButtonPlayer(_song);
+              }
+              state.isPlaying
+                  ? context.read<PlayMusicBloc>().onPause()
+                  : context.read<PlayMusicBloc>().onButtonPlayer(_song);
+            },
+            size: state.sizePlayIconCircled,
+          ),
+          CustomIconButtonWithImage(
+            icon: MyIcons.endIcon,
+            onPressed: () => context.read<PlayMusicBloc>().onSkipToNext(),
+          ),
         ],
       );
     });

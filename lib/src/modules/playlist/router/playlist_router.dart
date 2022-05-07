@@ -63,16 +63,14 @@ class PlaylistCoordinator {
   }
 
   static showDialogAddToPlaylist(BuildContext context,
-      {required SongModel songModel}) {
-    context
-        .read<PlaylistBloc>()
-        .fetchPlaylistToDialog(context, songModel: songModel);
+      {required SongModel song}) {
+    context.read<PlaylistBloc>().fetchPlaylistToDialog(context, song: song);
 
     showDialog<String>(
         barrierDismissible: false,
         context: context,
         builder: (_) => DialogAddToPlaylist(
-              idSong: songModel.id,
+              idSong: song.id,
             ));
   }
 

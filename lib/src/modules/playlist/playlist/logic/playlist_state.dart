@@ -1,44 +1,34 @@
 part of 'playlist_bloc.dart';
 
-class PlaylistState extends Equatable {
+class PlaylistState extends UpperControlState {
   final XHandle<List<PlaylistModel>> items;
-  final bool isSortName;
-  final bool isShuffle;
+
   final String namePlaylist;
   final bool pureName;
   final PlaylistModel playlist;
   final List<PlaylistModel> playlistsDialog;
-
   String get isValidName {
     return pureName ? XUtils.isValidNameCreatePlaylist(namePlaylist) : "";
   }
 
-  Color get shuffleColorIcon =>
-      isShuffle ? MyColors.colorPrimary : MyColors.colorWhite;
-
-  Color get sortColorIcon =>
-      isSortName ? MyColors.colorPrimary : MyColors.colorWhite;
-
-  void get sortListByName => (items.data ?? []).sort((a, b) {
-        String item1 = a.playlist;
-        String item2 = b.playlist;
-        return item1.compareTo(item2);
-      });
-  void get sortListByNameReverse => (items.data ?? []).sort((a, b) {
-        String item1 = a.playlist;
-        String item2 = b.playlist;
-        return item2.compareTo(item1);
-      });
+  @override
+  void sortListByName({bool reverse = false}) =>
+      (items.data ?? []).sort((a, b) => reverse
+          ? (b.playlist).compareTo((a.playlist))
+          : (a.playlist).compareTo((b.playlist)));
 
   const PlaylistState({
     required this.items,
-    this.isSortName = false,
-    this.isShuffle = false,
+    bool isSortName = false,
+    bool isShuffle = false,
     this.namePlaylist = '',
     this.pureName = false,
     required this.playlist,
     required this.playlistsDialog,
-  });
+  }) : super(
+          isShuffle: isShuffle,
+          isSortName: isSortName,
+        );
 
   @override
   List<Object?> get props => [

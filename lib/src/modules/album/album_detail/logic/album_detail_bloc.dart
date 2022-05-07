@@ -1,16 +1,14 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/modules/album/router/album_router.dart';
+import 'package:zanmelodic/src/modules/upper_control/logic/upper_control_bloc.dart';
 import 'package:zanmelodic/src/repositories/domain.dart';
 import 'package:zanmelodic/src/widgets/loading/bot_toast.dart';
 
 part 'album_detail_state.dart';
 
-class AlbumDetailBloc extends Cubit<AlbumDetailState> {
+class AlbumDetailBloc extends UpperControlBloc<AlbumDetailState> {
   AlbumDetailBloc()
       : super(
             AlbumDetailState(items: XHandle.loading(), album: AlbumModel({})));
@@ -28,13 +26,5 @@ class AlbumDetailBloc extends Cubit<AlbumDetailState> {
     } else {
       XSnackbar.show(msg: 'Load All List Error');
     }
-  }
-
-  void onSortNameToList() {
-    emit(state.copyWith(isSortName: !state.isSortName));
-  }
-
-  void onShuffleToList() {
-    emit(state.copyWith(isShuffle: !state.isShuffle));
   }
 }

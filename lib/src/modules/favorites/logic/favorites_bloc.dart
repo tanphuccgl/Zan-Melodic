@@ -12,37 +12,38 @@ import 'package:zanmelodic/src/widgets/loading/loading.dart';
 part 'favorites_state.dart';
 
 class FavoritesBloc extends Cubit<FavoritesState> {
-  FavoritesBloc() : super(FavoritesState(songs: XHandle.loading())) {
+  FavoritesBloc() : super(FavoritesState(items: XHandle.loading())) {
     fetchSongsFromFavorites();
   }
   final Domain _domain = Domain();
 
   Future<void> fetchSongsFromFavorites() async {
     await Future.delayed(const Duration(seconds: 2));
-    final value = await _domain.favorites.getSongsFromFavorites();
-    if (value.isSuccess) {
-      emit(state.copyWith(songs: XHandle.completed(value.data ?? [])));
+
+    final _value = await _domain.favorites.getSongsFromFavorites();
+    if (_value.isSuccess) {
+      emit(state.copyWithItems(items: XHandle.completed(_value.data ?? [])));
     } else {
       XSnackbar.show(msg: 'Load All List Error');
     }
   }
 
   Future<void> addToFavorites(SongModel song) async {
-    final value = await _domain.favorites.addToFavorite(song: song);
-    if (value.isSuccess) {
-      emit(state.copyWith(songs: XHandle.completed(value.data ?? [])));
+    final _value = await _domain.favorites.addToFavorite(song: song);
+    if (_value.isSuccess) {
+      emit(state.copyWithItems(items: XHandle.completed(_value.data ?? [])));
     } else {
       XSnackbar.show(msg: 'Add Error');
     }
   }
 
   Future<void> removeFromFavorites(BuildContext context,
-      {required int id}) async {
+      {required int idSong}) async {
     XLoading.show();
     await Future.delayed(const Duration(seconds: 2));
-    final value = await _domain.favorites.removeFromFavorites(id);
-    if (value.isSuccess) {
-      emit(state.copyWith(songs: XHandle.completed(value.data ?? [])));
+    final _value = await _domain.favorites.removeFromFavorites(idSong);
+    if (_value.isSuccess) {
+      emit(state.copyWithItems(items: XHandle.completed(_value.data ?? [])));
       XSnackbar.show(msg: 'Remove Success');
     } else {
       XSnackbar.show(msg: 'Remove Error');

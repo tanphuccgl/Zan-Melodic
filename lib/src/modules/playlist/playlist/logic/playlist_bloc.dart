@@ -1,10 +1,8 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/routes/coordinator.dart';
-import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/models/handle.dart';
+import 'package:zanmelodic/src/modules/upper_control/logic/upper_control_bloc.dart';
 import 'package:zanmelodic/src/repositories/domain.dart';
 import 'package:zanmelodic/src/utils/utils.dart';
 import 'package:zanmelodic/src/widgets/loading/bot_toast.dart';
@@ -12,7 +10,7 @@ import 'package:zanmelodic/src/widgets/loading/loading.dart';
 
 part 'playlist_state.dart';
 
-class PlaylistBloc extends Cubit<PlaylistState> {
+class PlaylistBloc extends UpperControlBloc<PlaylistState> {
   PlaylistBloc()
       : super(PlaylistState(
             playlistsDialog: const [],
@@ -85,22 +83,23 @@ class PlaylistBloc extends Cubit<PlaylistState> {
     XLoading.hide();
   }
 
-  Future<List<PlaylistModel>> fetchPlaylistToDialog(BuildContext context,
-      {required SongModel songModel}) async {
+  Future<void> fetchPlaylistToDialog(BuildContext context,
+      {required SongModel song}) async {
     late final List<PlaylistModel> _playlists;
-    final valuePlaylists = await _domain.playlist.getListOfPlaylist();
-    if (valuePlaylists.isSuccess) {
-      _playlists = valuePlaylists.data ?? [];
+    final _valuePlaylists = await _domain.playlist.getListOfPlaylist();
+
+    if (_valuePlaylists.isSuccess) {
+      _playlists = _valuePlaylists.data ?? [];
 
       for (int i = 0; i < _playlists.length; i++) {
-        final valueSongs =
+        final _valueSongs =
             await _domain.playlist.getListOfSongFromPlaylist(_playlists[i].id);
-        if (valueSongs.isSuccess) {
-          final List<SongModel> _songs = valueSongs.data ?? [];
+
+        if (_valueSongs.isSuccess) {
+          final List<SongModel> _songs = _valueSongs.data ?? [];
 
           for (int j = 0; j < _songs.length; j++) {
-            if (_songs[j].title == songModel.title &&
-                _songs[j].size == songModel.size) {
+            if (_songs[j].title == song.title && _songs[j].size == song.size) {
               _playlists.removeAt(i);
             }
           }
@@ -116,14 +115,7 @@ class PlaylistBloc extends Cubit<PlaylistState> {
       XCoordinator.pop(context);
       XSnackbar.show(msg: 'Load All List Error');
     }
-
-    return _playlists;
   }
-
-  void onSortNameToList() =>
-      emit(state.copyWith(isSortName: !state.isSortName));
-
-  void onShuffleToList() => emit(state.copyWith(isShuffle: !state.isShuffle));
 
   void changedName(String name) =>
       emit(state.copyWith(namePlaylist: name.trim(), pureName: true));
@@ -131,6 +123,6 @@ class PlaylistBloc extends Cubit<PlaylistState> {
   void initialNamePlaylist() =>
       emit(state.copyWith(namePlaylist: '', pureName: false));
 
-  void changePlaylist(PlaylistModel playlist) =>
+  void changePlaylistFromDialogAddToPlaylist(PlaylistModel playlist) =>
       emit(state.copyWith(playlist: playlist));
 }

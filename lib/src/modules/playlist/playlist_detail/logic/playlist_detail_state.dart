@@ -1,12 +1,10 @@
 part of 'playlist_detail_bloc.dart';
 
-class PlaylistDetailState extends Equatable {
+class PlaylistDetailState extends UpperControlState {
   final XHandle<List<SongModel>> items;
   final PlaylistModel playlist;
   final int numberSongs;
-  final bool isSortName;
-  final bool isShuffle;
-  final List<int> uriImageList;
+
   int idSong({required List<SongModel> list, required SongModel song}) {
     late final int result;
     for (int i = 0; i < list.length; i++) {
@@ -18,30 +16,19 @@ class PlaylistDetailState extends Equatable {
     return result;
   }
 
-  Color get shuffleColorIcon =>
-      isShuffle ? MyColors.colorPrimary : MyColors.colorWhite;
-
-  Color get sortColorIcon =>
-      isSortName ? MyColors.colorPrimary : MyColors.colorWhite;
-  void get sortListByName => (items.data ?? []).sort((a, b) {
-        String item1 = a.title;
-        String item2 = b.title;
-        return item1.compareTo(item2);
-      });
-  void get sortListByNameReverse => (items.data ?? []).sort((a, b) {
-        String item1 = a.title;
-        String item2 = b.title;
-        return item2.compareTo(item1);
-      });
+  @override
+  void sortListByName({bool reverse = false}) =>
+      (items.data ?? []).sort((a, b) => reverse
+          ? (b.title).compareTo((a.title))
+          : (a.title).compareTo((b.title)));
 
   const PlaylistDetailState({
     required this.items,
-    this.isSortName = false,
-    this.isShuffle = false,
+    bool isSortName = false,
+    bool isShuffle = false,
     required this.playlist,
     this.numberSongs = 0,
-    required this.uriImageList,
-  });
+  }) : super(isShuffle: isShuffle, isSortName: isSortName);
 
   @override
   List<Object?> get props => [
@@ -50,7 +37,6 @@ class PlaylistDetailState extends Equatable {
         isShuffle,
         playlist,
         numberSongs,
-        uriImageList,
       ];
 
   PlaylistDetailState copyWith({
@@ -59,7 +45,6 @@ class PlaylistDetailState extends Equatable {
     bool? isShuffle,
     PlaylistModel? playlist,
     int? numberSongs,
-    List<int>? uriImageList,
   }) {
     return PlaylistDetailState(
       items: items ?? this.items,
@@ -67,7 +52,6 @@ class PlaylistDetailState extends Equatable {
       isShuffle: isShuffle ?? this.isShuffle,
       playlist: playlist ?? this.playlist,
       numberSongs: numberSongs ?? this.numberSongs,
-      uriImageList: uriImageList ?? this.uriImageList,
     );
   }
 }

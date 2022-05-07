@@ -1,38 +1,38 @@
 part of 'song_list_bloc.dart';
 
-class SongListState extends Equatable {
-  final XHandle<List<SongModel>> items;
-  final bool isSortName;
-  final bool isShuffle;
-  Color get shuffleColorIcon =>
-      isShuffle ? MyColors.colorPrimary : MyColors.colorWhite;
-
-  Color get sortColorIcon =>
-      isSortName ? MyColors.colorPrimary : MyColors.colorWhite;
-  void get sortListByName => (items.data ?? []).sort((a, b) {
-        String item1 = a.title;
-        String item2 = b.title;
-        return item1.compareTo(item2);
-      });
-  void get sortListByNameReverse => (items.data ?? []).sort((a, b) {
-        String item1 = a.title;
-        String item2 = b.title;
-        return item2.compareTo(item1);
-      });
-
-  const SongListState(
-      {required this.items, this.isSortName = false, this.isShuffle = false});
+class SongListState extends UpperControlState {
+  final XHandle<List<SongModel>> songs;
 
   @override
-  List<Object?> get props => [items, isSortName, isShuffle];
+  void sortListByName({bool reverse = false}) =>
+      (songs.data ?? []).sort((a, b) => reverse
+          ? (b.title).compareTo((a.title))
+          : (a.title).compareTo((b.title)));
 
-  SongListState copyWith({
-    XHandle<List<SongModel>>? items,
+  const SongListState({
+    required this.songs,
+    bool isSortName = false,
+    bool isShuffle = false,
+  }) : super(
+          isShuffle: isShuffle,
+          isSortName: isSortName,
+        );
+
+  @override
+  List<Object?> get props => [
+        songs,
+        isSortName,
+        isShuffle,
+      ];
+
+  @override
+  SongListState copyWithItems({
+    XHandle<List<SongModel>>? songs,
     bool? isSortName,
     bool? isShuffle,
   }) {
     return SongListState(
-      items: items ?? this.items,
+      songs: songs ?? this.songs,
       isSortName: isSortName ?? this.isSortName,
       isShuffle: isShuffle ?? this.isShuffle,
     );

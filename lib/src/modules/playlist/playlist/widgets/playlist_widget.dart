@@ -4,7 +4,6 @@ import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/models/handle.dart';
-import 'package:zanmelodic/src/models/result.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/logic/playlist_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist_detail/logic/playlist_detail_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/router/playlist_router.dart';
@@ -22,9 +21,10 @@ class PlaylistWidget extends StatelessWidget {
       builder: (context, state) {
         XHandle<List<PlaylistModel>> _handle = state.items;
         if (_handle.isCompleted) {
-          _handle = XHandle.result(XResult.success(state.items.data ?? []));
           final List<PlaylistModel> _items = _handle.data ?? [];
-          state.isSortName ? state.sortListByNameReverse : state.sortListByName;
+          state.isSortName
+              ? state.sortListByName(reverse: true)
+              : state.sortListByName();
           state.isShuffle ? _items.shuffle() : null;
           return _items.isNotEmpty
               ? _buildGirdView(context, playlists: _items)

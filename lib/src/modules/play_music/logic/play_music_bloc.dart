@@ -12,7 +12,9 @@ part 'play_music_state.dart';
 class PlayMusicBloc extends Cubit<PlayMusicState> {
   PlayMusicBloc()
       : super(PlayMusicState(
-            song: SongModel({"_id": -1}), audioPlayer: AudioPlayer()));
+          song: SongModel({"_id": -1}),
+          audioPlayer: AudioPlayer(),
+        ));
 
   Future<void> onButtonPlayer(SongModel song) async {
     try {

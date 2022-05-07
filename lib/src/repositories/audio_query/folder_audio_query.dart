@@ -18,9 +18,4 @@ class FolderAudioQuery extends BaseAudioQuery {
     }
     return _listFolder;
   }
-
-  Future<bool> scan(String path) async {
-    bool result = await audioQuery.scanMedia(path);
-    return result;
-  }
 }

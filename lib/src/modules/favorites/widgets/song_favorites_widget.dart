@@ -5,7 +5,6 @@ import 'package:on_audio_room/details/rooms/favorites/favorites_entity.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/models/handle.dart';
-import 'package:zanmelodic/src/models/result.dart';
 import 'package:zanmelodic/src/modules/favorites/logic/favorites_bloc.dart';
 import 'package:zanmelodic/src/modules/favorites/router/favorites_router.dart';
 import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
@@ -22,16 +21,18 @@ class SongFavotiresWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SongListBloc, SongListState>(
       builder: (context, songState) {
-        XHandle<List<SongModel>> _handleSong = songState.items;
+        final XHandle<List<SongModel>> _handleSong = songState.songs;
 
         return BlocBuilder<FavoritesBloc, FavoritesState>(
-          builder: (context, state) {
-            XHandle<List<FavoritesEntity>> _handle = state.songs;
-            if (_handle.isCompleted && _handleSong.isCompleted) {
-              _handle = XHandle.result(XResult.success(state.songs.data ?? []));
-              final List<FavoritesEntity> _items = _handle.data ?? [];
-              final _listSong = state.convertFavoritesEntityToSong(
-                  list: _handleSong.data ?? [], favoritesEntity: _items);
+          builder: (context, favoritesState) {
+            final XHandle<List<FavoritesEntity>> _handleFavorites =
+                favoritesState.items;
+            if (_handleFavorites.isCompleted && _handleSong.isCompleted) {
+              final List<FavoritesEntity> _items = _handleFavorites.data ?? [];
+              final _listSong = favoritesState.castFavoritesEntityToSong(
+                  listOfSongs: _handleSong.data ?? [],
+                  listOfFavoritesEntity: _items);
+
               return _listSong.isNotEmpty
                   ? SliverPadding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
@@ -45,7 +46,7 @@ class SongFavotiresWidget extends StatelessWidget {
                       ),
                     )
                   : const XStateEmptyWidget();
-            } else if (_handle.isLoading) {
+            } else if (_handleFavorites.isLoading || _handleSong.isLoading) {
               return const XStateLoadingWidget();
             } else {
               return const XStateErrorWidget();
@@ -68,13 +69,10 @@ class SongFavotiresWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
-            width: 70,
-            child: CustomImageWidget(
-              id: song.id,
-              height: 70.0,
-              width: 70.0,
-            ),
+          CustomImageWidget(
+            id: song.id,
+            height: 70.0,
+            width: 70.0,
           ),
           const SizedBox(
             width: 15,
