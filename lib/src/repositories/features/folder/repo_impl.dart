@@ -4,7 +4,7 @@ import 'package:zanmelodic/src/repositories/features/folder/repo.dart';
 
 class FolderRepositoryImpl implements FolderRepository {
   @override
-  Future<XResult<Set<String>>> getListFolder() async {
+  Future<XResult<List<String>>> getListFolder() async {
     try {
       var data = await FolderAudioQuery().getFolderFromLocal();
       return XResult.success(data);

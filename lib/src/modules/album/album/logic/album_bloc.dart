@@ -7,17 +7,17 @@ import 'package:zanmelodic/src/widgets/loading/bot_toast.dart';
 part 'album_state.dart';
 
 class AlbumBloc extends UpperControlBloc<AlbumState> {
+  final Domain _domain = Domain();
+
   AlbumBloc() : super(AlbumState(items: XHandle.loading())) {
     fetchListOfAlbums();
   }
-
-  final Domain _domain = Domain();
 
   Future<void> fetchListOfAlbums() async {
     await Future.delayed(const Duration(seconds: 2));
     final value = await _domain.album.getListOfAlbums();
     if (value.isSuccess) {
-      emit(state.copyWith(items: XHandle.completed(value.data ?? [])));
+      emit(state.copyWithItems(items: XHandle.completed(value.data ?? [])));
     } else {
       XSnackbar.show(msg: 'Load All List Error');
     }

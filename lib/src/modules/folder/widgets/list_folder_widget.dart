@@ -15,10 +15,14 @@ class ListFolderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FolderBloc, FolderState>(
       builder: (context, state) {
-        XHandle<Set<String>> _handle = state.items;
+        XHandle<List<String>> _handle = state.items;
 
         if (_handle.isCompleted) {
-          final Set<String> _items = _handle.data ?? {};
+          final List<String> _items = _handle.data ?? [];
+          state.isSortName
+              ? state.sortListByName(reverse: true)
+              : state.sortListByName();
+          state.isShuffle ? _items.shuffle() : null;
 
           return SliverToBoxAdapter(
             child: ListView(

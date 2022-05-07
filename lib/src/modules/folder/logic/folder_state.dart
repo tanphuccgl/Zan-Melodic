@@ -1,18 +1,38 @@
 part of 'folder_bloc.dart';
 
-class FolderState extends Equatable {
-  final XHandle<Set<String>> items;
-
-  const FolderState({required this.items});
+class FolderState extends UpperControlState {
+  final XHandle<List<String>> items;
 
   @override
-  List<Object?> get props => [items];
+  void sortListByName({bool reverse = false}) => (items.data ?? [])
+      .sort((a, b) => reverse ? (b).compareTo((a)) : (a).compareTo((b)));
 
-  FolderState copyWith({
-    XHandle<Set<String>>? items,
+  const FolderState({
+    required this.items,
+    bool isSortName = false,
+    bool isShuffle = false,
+  }) : super(
+          isShuffle: isShuffle,
+          isSortName: isSortName,
+        );
+
+  @override
+  List<Object?> get props => [
+        items,
+        isSortName,
+        isShuffle,
+      ];
+
+  @override
+  FolderState copyWithItems({
+    XHandle<List<String>>? items,
+    bool? isSortName,
+    bool? isShuffle,
   }) {
     return FolderState(
       items: items ?? this.items,
+      isSortName: isSortName ?? this.isSortName,
+      isShuffle: isShuffle ?? this.isShuffle,
     );
   }
 }

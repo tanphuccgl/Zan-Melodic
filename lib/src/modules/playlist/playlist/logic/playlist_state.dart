@@ -41,7 +41,8 @@ class PlaylistState extends UpperControlState {
         playlistsDialog,
       ];
 
-  PlaylistState copyWith({
+  @override
+  PlaylistState copyWithItems({
     XHandle<List<PlaylistModel>>? items,
     bool? isSortName,
     bool? isShuffle,

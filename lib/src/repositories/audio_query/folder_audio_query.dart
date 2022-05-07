@@ -1,7 +1,7 @@
 import 'package:zanmelodic/src/repositories/audio_query/base_audio_query.dart';
 
 class FolderAudioQuery extends BaseAudioQuery {
-  Future<Set<String>> getFolderFromLocal() async {
+  Future<List<String>> getFolderFromLocal() async {
     final _listAudio = await getAudiofromLocal();
     final _listFolder = <String>{};
     final _listSong = _listAudio
@@ -16,6 +16,6 @@ class FolderAudioQuery extends BaseAudioQuery {
 
       _listFolder.add(_cutLastCharacter);
     }
-    return _listFolder;
+    return _listFolder.toList();
   }
 }
