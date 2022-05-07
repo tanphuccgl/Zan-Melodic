@@ -25,7 +25,7 @@ class PlaylistBloc extends UpperControlBloc<PlaylistState> {
     await Future.delayed(const Duration(seconds: 2));
     final value = await _domain.playlist.getListOfPlaylist();
     if (value.isSuccess) {
-      emit(state.copyWith(items: XHandle.completed(value.data ?? [])));
+      emit(state.copyWithItems(items: XHandle.completed(value.data ?? [])));
     } else {
       XSnackbar.show(msg: 'Load All List Error');
     }
@@ -38,7 +38,7 @@ class PlaylistBloc extends UpperControlBloc<PlaylistState> {
     if (state.isValidName == '' && state.pureName == true) {
       final _value = await _domain.playlist.addNewPlaylist(name);
       if (_value.isSuccess) {
-        emit(state.copyWith(items: XHandle.completed(_value.data ?? [])));
+        emit(state.copyWithItems(items: XHandle.completed(_value.data ?? [])));
 
         XSnackbar.show(msg: 'Add Success');
       } else {
@@ -55,7 +55,7 @@ class PlaylistBloc extends UpperControlBloc<PlaylistState> {
     await Future.delayed(const Duration(seconds: 2));
     final _value = await _domain.playlist.removePlaylist(idPlaylist);
     if (_value.isSuccess) {
-      emit(state.copyWith(items: XHandle.completed(_value.data ?? [])));
+      emit(state.copyWithItems(items: XHandle.completed(_value.data ?? [])));
 
       XSnackbar.show(msg: 'Remove Success');
     } else {
@@ -73,7 +73,7 @@ class PlaylistBloc extends UpperControlBloc<PlaylistState> {
     final _value = await _domain.playlist
         .addToPlaylist(idPlaylist: idPlaylist, idSong: idSong);
     if (_value.isSuccess) {
-      emit(state.copyWith(items: XHandle.completed(_value.data ?? [])));
+      emit(state.copyWithItems(items: XHandle.completed(_value.data ?? [])));
 
       XSnackbar.show(msg: 'Add Success');
     } else {
@@ -109,7 +109,7 @@ class PlaylistBloc extends UpperControlBloc<PlaylistState> {
           break;
         }
       }
-      emit(state.copyWith(
+      emit(state.copyWithItems(
           playlistsDialog: _playlists, playlist: PlaylistModel({"_id": -1})));
     } else {
       XCoordinator.pop(context);
@@ -118,11 +118,11 @@ class PlaylistBloc extends UpperControlBloc<PlaylistState> {
   }
 
   void changedName(String name) =>
-      emit(state.copyWith(namePlaylist: name.trim(), pureName: true));
+      emit(state.copyWithItems(namePlaylist: name.trim(), pureName: true));
 
   void initialNamePlaylist() =>
-      emit(state.copyWith(namePlaylist: '', pureName: false));
+      emit(state.copyWithItems(namePlaylist: '', pureName: false));
 
   void changePlaylistFromDialogAddToPlaylist(PlaylistModel playlist) =>
-      emit(state.copyWith(playlist: playlist));
+      emit(state.copyWithItems(playlist: playlist));
 }
