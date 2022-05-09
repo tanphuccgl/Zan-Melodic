@@ -11,6 +11,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   BaseAudioQuery().audioQuery;
   FavoriteAudioRoom().init();
+ // XAudioHandler().init();
   GetIt.I.registerLazySingleton(() => XRouter());
   BlocOverrides.runZoned(
     () => runApp(const MyApp()),

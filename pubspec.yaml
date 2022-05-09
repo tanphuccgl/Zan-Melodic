@@ -40,6 +40,7 @@ dependencies:
   on_audio_query: ^2.6.0
   on_audio_room: ^2.2.1+1
   file_picker: ^4.5.1
+  audio_service: ^0.18.4
 
 
 
