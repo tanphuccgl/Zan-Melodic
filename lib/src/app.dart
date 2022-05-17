@@ -7,6 +7,7 @@ import 'package:get_it/get_it.dart';
 import 'package:zanmelodic/src/config/routes/auto_route.gr.dart';
 import 'package:zanmelodic/src/config/themes/themes.dart';
 import 'package:zanmelodic/src/localization/localization_util.dart';
+import 'package:zanmelodic/src/modules/discover/logic/discover_bloc.dart';
 import 'package:zanmelodic/src/modules/favorites/logic/favorites_bloc.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/logic/playlist_bloc.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => PlaylistDetailBloc()),
         BlocProvider(create: (_) => FavoritesBloc()),
         BlocProvider(create: (_) => AudioHandleBloc()),
+        BlocProvider(create: (_) => DiscoverBloc()),
       ],
       child: MaterialApp.router(
         theme: XTheme.light(),
