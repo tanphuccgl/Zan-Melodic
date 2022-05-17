@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
+import 'package:zanmelodic/src/models/enums/repeat_state.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
-import 'package:zanmelodic/src/utils/enums/repeat_state.dart';
 
 class RepeatButton extends StatelessWidget {
   const RepeatButton({Key? key}) : super(key: key);

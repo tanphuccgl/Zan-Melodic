@@ -7,9 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
+import 'package:zanmelodic/src/models/enums/button_state.dart';
+import 'package:zanmelodic/src/models/enums/repeat_state.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/progress_bar_bloc.dart';
-import 'package:zanmelodic/src/utils/enums/button_state.dart';
-import 'package:zanmelodic/src/utils/enums/repeat_state.dart';
 
 part 'audio_handle_state.dart';
 
