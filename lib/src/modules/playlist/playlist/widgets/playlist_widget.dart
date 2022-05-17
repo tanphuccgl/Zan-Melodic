@@ -167,9 +167,13 @@ class PlaylistWidget extends StatelessWidget {
         child: TextButton(
             onPressed: () =>
                 PlaylistCoordinator.showDialogCreatePlaylist(context),
-            child: Text('Click here to create a new playlist',
-                textAlign: TextAlign.center,
-                style: Style.textTheme().titleMedium)),
+            child: Text(
+              'Click here to create a new playlist',
+              textAlign: TextAlign.center,
+              style: Style.textTheme()
+                  .titleMedium!
+                  .copyWith(color: MyColors.colorWhite.withOpacity(0.5)),
+            )),
       ),
     );
   }

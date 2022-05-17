@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 
 class XStateErrorWidget extends StatelessWidget {
@@ -14,8 +15,10 @@ class XStateErrorWidget extends StatelessWidget {
 
   Widget _customError() {
     return Center(
-      child:
-          Text('Please try again later', style: Style.textTheme().titleMedium),
+      child: Text('Please try again later',
+          style: Style.textTheme()
+              .titleMedium!
+              .copyWith(color: MyColors.colorWhite.withOpacity(0.5))),
     );
   }
 }
