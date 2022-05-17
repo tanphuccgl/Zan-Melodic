@@ -1,4 +1,5 @@
 enum TabIndex {
+  discover,
   favorites,
   song,
   playlist,
@@ -9,6 +10,8 @@ enum TabIndex {
 extension TabIndexExt on TabIndex {
   String lableOf() {
     switch (this) {
+      case TabIndex.discover:
+        return "Discover";
       case TabIndex.favorites:
         return "Favorites";
       case TabIndex.song:

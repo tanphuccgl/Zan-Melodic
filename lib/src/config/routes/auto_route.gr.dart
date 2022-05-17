@@ -11,12 +11,13 @@
 // ignore_for_file: type=lint
 
 import 'package:auto_route/auto_route.dart' as _i5;
-import 'package:flutter/material.dart' as _i13;
+import 'package:flutter/material.dart' as _i14;
 
 import '../../modules/album/album/pages/album_page.dart' as _i10;
 import '../../modules/album/album_detail/pages/album_detail_page.dart' as _i11;
 import '../../modules/dashboard/pages/dashboard_page.dart' as _i3;
 import '../../modules/dashboard/router/dashboard_wrapper_router.dart' as _i1;
+import '../../modules/discover/pages/discover_page.dart' as _i13;
 import '../../modules/favorites/pages/favorites_page.dart' as _i6;
 import '../../modules/folder/pages/folder_page.dart' as _i12;
 import '../../modules/loading/pages/loading_page.dart' as _i2;
@@ -27,7 +28,7 @@ import '../../modules/playlist/playlist_detail/pages/playlist_detail_page.dart'
 import '../../modules/songs/pages/songs_page.dart' as _i7;
 
 class XRouter extends _i5.RootStackRouter {
-  XRouter([_i13.GlobalKey<_i13.NavigatorState>? navigatorKey])
+  XRouter([_i14.GlobalKey<_i14.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
@@ -68,6 +69,10 @@ class XRouter extends _i5.RootStackRouter {
       return _i5.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i5.EmptyRouterPage());
     },
+    DiscoverTab.name: (routeData) {
+      return _i5.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i5.EmptyRouterPage());
+    },
     FavoritesRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i6.FavoritesPage());
@@ -95,6 +100,10 @@ class XRouter extends _i5.RootStackRouter {
     FolderRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i12.FolderPage());
+    },
+    DiscoverRoute.name: (routeData) {
+      return _i5.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i13.DiscoverPage());
     }
   };
 
@@ -170,6 +179,18 @@ class XRouter extends _i5.RootStackRouter {
                           _i5.RouteConfig('*#redirect',
                               path: '*',
                               parent: FolderTab.name,
+                              redirectTo: '',
+                              fullMatch: true)
+                        ]),
+                    _i5.RouteConfig(DiscoverTab.name,
+                        path: 'folder',
+                        parent: DashboardRoute.name,
+                        children: [
+                          _i5.RouteConfig(DiscoverRoute.name,
+                              path: '', parent: DiscoverTab.name),
+                          _i5.RouteConfig('*#redirect',
+                              path: '*',
+                              parent: DiscoverTab.name,
                               redirectTo: '',
                               fullMatch: true)
                         ]),
@@ -274,6 +295,15 @@ class FolderTab extends _i5.PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [_i5.EmptyRouterPage]
+class DiscoverTab extends _i5.PageRouteInfo<void> {
+  const DiscoverTab({List<_i5.PageRouteInfo>? children})
+      : super(DiscoverTab.name, path: 'folder', initialChildren: children);
+
+  static const String name = 'DiscoverTab';
+}
+
+/// generated route for
 /// [_i6.FavoritesPage]
 class FavoritesRoute extends _i5.PageRouteInfo<void> {
   const FavoritesRoute() : super(FavoritesRoute.name, path: '');
@@ -327,4 +357,12 @@ class FolderRoute extends _i5.PageRouteInfo<void> {
   const FolderRoute() : super(FolderRoute.name, path: '');
 
   static const String name = 'FolderRoute';
+}
+
+/// generated route for
+/// [_i13.DiscoverPage]
+class DiscoverRoute extends _i5.PageRouteInfo<void> {
+  const DiscoverRoute() : super(DiscoverRoute.name, path: '');
+
+  static const String name = 'DiscoverRoute';
 }

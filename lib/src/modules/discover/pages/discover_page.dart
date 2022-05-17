@@ -4,8 +4,8 @@ import 'package:zanmelodic/src/modules/discover/widgets/playlist_favorites_widge
 import 'package:zanmelodic/src/modules/discover/widgets/singer_favorites_widget.dart';
 import 'package:zanmelodic/src/modules/discover/widgets/song_favorites_widget.dart';
 
-class FavoritesPage extends StatelessWidget {
-  const FavoritesPage({Key? key}) : super(key: key);
+class DiscoverPage extends StatelessWidget {
+  const DiscoverPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

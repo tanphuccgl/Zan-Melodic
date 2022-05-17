@@ -8,6 +8,7 @@ import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/modules/album/album/pages/album_page.dart';
 import 'package:zanmelodic/src/modules/audio_control/pages/player_bottom_bar.dart';
+import 'package:zanmelodic/src/modules/discover/pages/discover_page.dart';
 import 'package:zanmelodic/src/modules/favorites/pages/favorites_page.dart';
 import 'package:zanmelodic/src/modules/folder/pages/folder_page.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/pages/playlist_page.dart';
@@ -22,6 +23,7 @@ class DashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
         routes: const [
+          DiscoverTab(),
           FavoritesTab(),
           SongTab(),
           PlaylistTab(),
@@ -68,6 +70,7 @@ class DashboardPage extends StatelessWidget {
                               Tab(text: item.lableOf()),
                           ])),
                   body: const TabBarView(children: [
+                    DiscoverPage(),
                     FavoritesPage(),
                     SongPage(),
                     PlaylistPage(),
