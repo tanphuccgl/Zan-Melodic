@@ -1,11 +1,11 @@
+import 'dart:developer';
+
 import 'package:audio_service/audio_service.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-import 'package:on_audio_room/details/rooms/favorites/favorites_entity.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/progress_bar_bloc.dart';
 import 'package:zanmelodic/src/utils/enums/button_state.dart';
@@ -28,21 +28,6 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
     init();
   }
 
-  List<SongModel> castFavoritesEntityToSong(
-      {required List<SongModel> listOfSongs,
-      required List<FavoritesEntity> listOfFavoritesEntity}) {
-    List<SongModel> _listResult = [];
-    for (int i = 0; i < listOfSongs.length; i++) {
-      for (int j = 0; j < listOfFavoritesEntity.length; j++) {
-        if (listOfSongs[i].id == listOfFavoritesEntity[j].id) {
-          _listResult.add(listOfSongs[i]);
-        }
-      }
-    }
-
-    return _listResult;
-  }
-
   void dispose() {
     state.audioHandler.customAction('dispose');
   }
@@ -56,30 +41,29 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
     _listenToChangesInSong();
   }
 
+  Future<void> loadPlaylist(List<MediaItem> items) async {
+    final mediaItems = (items).map((song) => song).toList();
+
+    if (state.audioHandler.queue.value.isEmpty) {
+      log('123');
+      await state.audioHandler.addQueueItems(mediaItems);
+      log(state.audioHandler.queue.value.length.toString());
+    } else {
+      log('456');
+
+      await state.audioHandler.updateQueue(mediaItems);
+      log(state.audioHandler.queue.value.length.toString());
+    }
+    emit(state.copyWith(
+      playlist: mediaItems,
+    ));
+  }
+
   void next() => state.audioHandler.skipToNext();
 
   void pause() => state.audioHandler.pause();
 
   void play() => state.audioHandler.play();
-
-  /// khi chưa play nhạc:
-  ///  - click vào trang nào thì load queue của trang đó
-  /// khi đang play nhạc:
-  ///  - queue hiện tại:
-  ///     + click play thì lấy queue của trang đó
-  ///  - queue mới:
-  ///     + click nhạc của trang khác thì update queue lại
-
-  Future<void> skipToQueueItem(
-      List<MediaItem> items, int index, MediaItem media) async {
-    bool isEqual = listEquals(items, state.audioHandler.queue.value);
-    if (isEqual == false) {
-      await updatePlaylist(items);
-    }
-    state.audioHandler.skipToQueueItem(index);
-
-    emit(state.copyWith(isShowBottomBar: true));
-  }
 
   void previous() => state.audioHandler.skipToPrevious();
 
@@ -119,6 +103,21 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
     }
   }
 
+  /// khi chưa play nhạc:
+  ///  - click vào trang nào thì load queue của trang đó
+  /// khi đang play nhạc:
+  ///  - queue hiện tại:
+  ///     + click play thì lấy queue của trang đó
+  ///  - queue mới:
+  ///     + click nhạc của trang khác thì update queue lại
+
+  Future<void> skipToQueueItem(
+      List<MediaItem> items, int index, MediaItem media) async {
+    state.audioHandler.skipToQueueItem(index);
+
+    emit(state.copyWith(isShowBottomBar: true));
+  }
+
   void sort() {
     final enable = !state.isSortModeEnabled;
     emit(state.copyWith(isSortModeEnabled: enable));
@@ -146,13 +145,13 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
 
   void _listenToChangesInPlaylist() {
     state.audioHandler.queue.listen((playlist) {
+      log(playlist.length.toString());
       if (playlist.isEmpty) {
         emit(state.copyWith(
             playlist: [],
             currentSong: const MediaItem(title: 'N/A', id: 'N/A')));
       } else {
-        final newList = playlist.map((item) => item).toList();
-        emit(state.copyWith(playlist: newList));
+        emit(state.copyWith(playlist: playlist));
       }
       _updateSkipButtons();
     });
@@ -203,20 +202,6 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
         total: mediaItem?.duration ?? Duration.zero,
       )));
     });
-  }
-
-  Future<void> loadPlaylist(List<MediaItem> items) async {
-    final mediaItems = (items).map((song) => song).toList();
-
-    await state.audioHandler.addQueueItems(mediaItems);
-    emit(state.copyWith(playlist: mediaItems));
-  }
-
-  Future<void> updatePlaylist(List<MediaItem> items) async {
-    final mediaItems = (items).map((song) => song).toList();
-
-    await state.audioHandler.updateQueue(mediaItems);
-    emit(state.copyWith(playlist: mediaItems));
   }
 
   void _updateSkipButtons() {

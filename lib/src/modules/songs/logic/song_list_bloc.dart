@@ -14,38 +14,30 @@ part 'song_list_state.dart';
 class SongListBloc extends UpperControlBloc<SongListState> {
   SongListBloc()
       : super(SongListState(songs: XHandle.loading(), mediaItems: const [])) {
-    //  fetchListOfSongs();
+    fetchListOfSongs();
   }
   final Domain _domain = Domain();
 
-  // @override
-  // Future<void> fetchListOfSongs() async {
-  //   await Future.delayed(const Duration(seconds: 2));
+  @override
+  Future<void> fetchListOfSongs() async {
+    await Future.delayed(const Duration(seconds: 2));
 
-  //   final _value = await _domain.song.getListOfSongs();
-  //   if (_value.isSuccess) {
-  //     var a = (_value.data ?? []).map((e) => converSongToModel(e)).toList();
-
-  //     emit(state.copyWithItems(
-  //         songs: XHandle.completed(_value.data ?? []), mediaItems: a));
-  //   } else {
-  //     XSnackbar.show(msg: 'Load All List Error');
-  //   }
-  // }
-
-  Future<void> fetchMediaItems(BuildContext context) async {
     final _value = await _domain.song.getListOfSongs();
     if (_value.isSuccess) {
-      final items =
-          (_value.data ?? []).map((e) => converSongToModel(e)).toList();
-      context.read<AudioHandleBloc>().loadPlaylist(items);
+      var a = (_value.data ?? []).map((e) => converSongToModel(e)).toList();
 
       emit(state.copyWithItems(
-          songs: XHandle.completed(_value.data ?? []),
-          mediaItems: items,
-          isLoadPlaylist: true));
+          songs: XHandle.completed(_value.data ?? []), mediaItems: a));
     } else {
       XSnackbar.show(msg: 'Load All List Error');
     }
+  }
+
+  Future<void> fetchMediaItems(BuildContext context) async {
+    final items =
+        (state.songs.data ?? []).map((e) => converSongToModel(e)).toList();
+    context.read<AudioHandleBloc>().loadPlaylist(items);
+
+    emit(state.copyWithItems(mediaItems: items, isLoadPlaylist: true));
   }
 }

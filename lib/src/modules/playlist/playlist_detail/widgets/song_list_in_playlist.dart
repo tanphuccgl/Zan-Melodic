@@ -12,25 +12,28 @@ class SongListInPlaylist extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PlaylistDetailBloc, PlaylistDetailState>(
-      builder: (context, state) {
-        List<MediaItem> _items = state.mediaItems;
+        builder: (context, playlistState) {
+      return BlocBuilder<AudioHandleBloc, AudioHandleState>(
+        builder: (context, state) {
+          List<MediaItem> _items = state.playlist;
 
-        return _items.isNotEmpty
-            ? SliverList(
-                delegate: SliverChildBuilderDelegate(
-                    (context, index) => Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: SongCard(
-                          media: _items[index],
-                          playlist: state.playlist,
-                          onTap: () => context
-                              .read<AudioHandleBloc>()
-                              .skipToQueueItem(_items, index, _items[index]),
-                        )),
-                    childCount: _items.length),
-              )
-            : const XStateEmptyWidget();
-      },
-    );
+          return _items.isNotEmpty
+              ? SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                      (context, index) => Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: SongCard(
+                            media: _items[index],
+                            playlist: playlistState.playlist,
+                            onTap: () => context
+                                .read<AudioHandleBloc>()
+                                .skipToQueueItem(_items, index, _items[index]),
+                          )),
+                      childCount: _items.length),
+                )
+              : const XStateEmptyWidget();
+        },
+      );
+    });
   }
 }
