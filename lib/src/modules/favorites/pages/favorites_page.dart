@@ -1,37 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:zanmelodic/src/config/themes/styles.dart';
-import 'package:zanmelodic/src/modules/discover/widgets/playlist_favorites_widget.dart';
-import 'package:zanmelodic/src/modules/discover/widgets/singer_favorites_widget.dart';
-import 'package:zanmelodic/src/modules/discover/widgets/song_favorites_widget.dart';
+import 'package:zanmelodic/src/constants/my_padding.dart';
+import 'package:zanmelodic/src/modules/favorites/widgets/song_list_in_favorite.dart';
+import 'package:zanmelodic/src/modules/upper_control/widgets/upper_control_bar.dart';
 
 class FavoritesPage extends StatelessWidget {
   const FavoritesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(left: 20, top: 20),
+        padding: MyPadding.pPage,
         child: CustomScrollView(
-          physics: const BouncingScrollPhysics(),
+          physics: BouncingScrollPhysics(),
           slivers: [
-            _headerTitle('Singer'),
-            const SingerFavotiresWidget(),
-            _headerTitle('Playlist'),
-            const PlaylistFavotiresWidget(),
-            _headerTitle('Tracks'),
-            const SongFavotiresWidget()
+            SliverToBoxAdapter(child: UpperControlBar()),
+            SongListFavoriteWidget(),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _headerTitle(String title) {
-    return SliverToBoxAdapter(
-      child: Text(
-        title,
-        style: Style.textTheme().titleLarge,
       ),
     );
   }
