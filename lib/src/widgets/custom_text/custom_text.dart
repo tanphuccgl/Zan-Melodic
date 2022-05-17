@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 
-class CustomText extends StatelessWidget {
-  const CustomText({Key? key, required this.title, this.style})
-      : super(key: key);
+class CusText extends StatelessWidget {
   final String title;
   final TextStyle? style;
+  const CusText({Key? key, required this.title, this.style}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Text(title,

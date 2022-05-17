@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 
-class CustomIconButtonWithImage extends StatelessWidget {
-  const CustomIconButtonWithImage({
+class CusIconButton extends StatelessWidget {
+  const CusIconButton({
     Key? key,
     this.size = 40,
     required this.onPressed,
@@ -11,7 +11,7 @@ class CustomIconButtonWithImage extends StatelessWidget {
   }) : super(key: key);
   final double size;
   final VoidCallback onPressed;
-  final String icon;
+  final IconData icon;
   final Color color;
 
   @override
@@ -19,7 +19,7 @@ class CustomIconButtonWithImage extends StatelessWidget {
     return IconButton(
         iconSize: size,
         onPressed: onPressed,
-        icon: Image.asset(
+        icon: Icon(
           icon,
           color: color,
         ));

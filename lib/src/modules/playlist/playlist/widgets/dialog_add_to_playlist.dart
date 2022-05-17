@@ -50,7 +50,7 @@ class DialogAddToPlaylist extends StatelessWidget {
                     )),
           textAccept: 'ADD',
           onPressed: () => _items.isNotEmpty && state.playlist.id != -1
-              ? () => context.read<PlaylistBloc>().addToPlaylist(context,
+              ? context.read<PlaylistBloc>().addToPlaylist(context,
                   idPlaylist: state.playlist.id, idSong: idSong)
               : null,
           title: Text('Playlist', style: Style.textTheme().titleMedium),

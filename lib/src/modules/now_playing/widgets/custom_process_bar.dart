@@ -1,9 +1,11 @@
+import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/constants/my_images.dart';
-import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
+import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
+import 'package:zanmelodic/src/utils/utils.dart';
 
 class CutomProcessBar extends StatelessWidget {
   const CutomProcessBar({Key? key}) : super(key: key);
@@ -12,11 +14,11 @@ class CutomProcessBar extends StatelessWidget {
   Widget build(BuildContext context) {
     const _pHori = 40.0;
     final _size = MediaQuery.of(context).size.width - _pHori * 2;
-    return BlocBuilder<PlayMusicBloc, PlayMusicState>(
+    return BlocBuilder<AudioHandleBloc, AudioHandleState>(
       builder: (context, state) {
-        final _currentPosition = state.currentPosition.inSeconds.toDouble();
-        final _endPosition = state.endPosition.inSeconds.toDouble();
-        final _ratioCurrentPosition = _currentPosition / (_endPosition / _size);
+        final _current = state.progress.current.inSeconds.toDouble();
+        final _total = state.progress.total.inSeconds.toDouble();
+        final _posSeek = _current / (_total / _size);
 
         return Column(
           children: [
@@ -28,22 +30,39 @@ class CutomProcessBar extends StatelessWidget {
                     MyImage.audio,
                     color: MyColors.colorWhite1,
                   ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: ProgressBar(
+                      progress: state.progress.current,
+                      buffered: state.progress.buffered,
+                      total: state.progress.total,
+                      onSeek: state.audioHandler.seek,
+                      timeLabelLocation: TimeLabelLocation.none,
+                      thumbCanPaintOutsideBar: false,
+                      baseBarColor: Colors.transparent,
+                      thumbColor: Colors.transparent,
+                      thumbGlowColor: Colors.transparent,
+                      progressBarColor: Colors.transparent,
+                      bufferedBarColor: Colors.transparent,
+                      thumbGlowRadius: 30,
+                    ),
+                  ),
                   Positioned(
-                    left: _ratioCurrentPosition,
+                    left: _posSeek,
                     width: 1,
                     height: 60,
                     child: Container(
                       color: MyColors.colorGray,
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _timeSong(state.currentTime),
-                _timeSong(state.totalTime)
+                _timeSong(state.progress.current),
+                _timeSong(state.progress.total)
               ],
             ),
           ],
@@ -52,9 +71,9 @@ class CutomProcessBar extends StatelessWidget {
     );
   }
 
-  Text _timeSong(String time) {
+  Text _timeSong(Duration duration) {
     return Text(
-      time,
+      XUtils.formatDuration(duration),
       style: Style.textTheme().titleMedium!.copyWith(fontSize: 17),
     );
   }

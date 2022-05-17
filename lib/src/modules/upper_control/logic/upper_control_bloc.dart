@@ -9,12 +9,4 @@ class UpperControlBloc<T extends UpperControlState> extends Cubit<T> {
   UpperControlBloc(T initialState) : super(initialState);
 
   Future<void> fetchListOfSongs() async {}
-
-  void onSortNameToList() {
-    emit(state.copyWithItems(isSortName: !state.isSortName) as T);
-  }
-
-  void onShuffleToList() {
-    emit(state.copyWithItems(isShuffle: !state.isShuffle) as T);
-  }
 }

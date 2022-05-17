@@ -5,12 +5,57 @@ import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/modules/album/album/logic/album_bloc.dart';
 import 'package:zanmelodic/src/modules/album/album_detail/logic/album_detail_bloc.dart';
+import 'package:zanmelodic/src/modules/songs/logic/song_list_bloc.dart';
 import 'package:zanmelodic/src/utils/utils.dart';
 import 'package:zanmelodic/src/widgets/custom_text/custom_text.dart';
 import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_empty_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_error_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_loading_widget.dart';
+
+Widget _buildCard(BuildContext context, {required AlbumModel album}) {
+  final String _numberSong = XUtils.formatNumberSong(album.numOfSongs);
+  return BlocBuilder<SongListBloc, SongListState>(builder: (context, state) {
+    return GestureDetector(
+      onTap: () => context.read<AlbumDetailBloc>().fetchListOfSongsFromAlbum(
+          context,
+          album: album,
+          songs: state.songs.data ?? []),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 9),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CustomImageWidget(
+                id: album.id,
+                height: 120,
+                width: 120,
+                artworkType: ArtworkType.ALBUM),
+            const SizedBox(
+              width: 15,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CusText(
+                    title: album.album,
+                    style: Style.textTheme().titleMedium,
+                  ),
+                  CusText(
+                    title: album.artist ?? '',
+                  ),
+                  CusText(title: _numberSong),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  });
+}
 
 class ListAlbumWidget extends StatelessWidget {
   const ListAlbumWidget({Key? key}) : super(key: key);
@@ -42,45 +87,4 @@ class ListAlbumWidget extends StatelessWidget {
       },
     );
   }
-}
-
-Widget _buildCard(BuildContext context, {required AlbumModel album}) {
-  final String _numberSong = XUtils.formatNumberSong(album.numOfSongs);
-  return GestureDetector(
-    onTap: () => context
-        .read<AlbumDetailBloc>()
-        .fetchListOfSongsFromAlbum(context, album: album),
-    child: Padding(
-      padding: const EdgeInsets.symmetric(vertical: 9),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CustomImageWidget(
-              id: album.id,
-              height: 120,
-              width: 120,
-              artworkType: ArtworkType.ALBUM),
-          const SizedBox(
-            width: 15,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomText(
-                  title: album.album,
-                  style: Style.textTheme().titleMedium,
-                ),
-                CustomText(
-                  title: album.artist ?? '',
-                ),
-                CustomText(title: _numberSong),
-              ],
-            ),
-          )
-        ],
-      ),
-    ),
-  );
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zanmelodic/src/config/routes/coordinator.dart';
-import 'package:zanmelodic/src/modules/play_music/pages/player_bottom_bar.dart';
+import 'package:zanmelodic/src/modules/audio_control/pages/player_bottom_bar.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist_detail/widgets/appbar_playlist_detail.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist_detail/widgets/song_list_in_playlist.dart';
 

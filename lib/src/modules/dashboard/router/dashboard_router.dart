@@ -44,8 +44,6 @@ class DashboardCoordinator {
       RedirectRoute(path: '*', redirectTo: ''),
     ],
   );
-  static showNowPlayingScreen(
-    BuildContext context,
-  ) =>
+  static showNowPlayingScreen(BuildContext context) =>
       context.router.push(const NowPlayingRoute());
 }
