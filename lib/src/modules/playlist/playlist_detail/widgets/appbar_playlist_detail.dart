@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist_detail/logic/playlist_detail_bloc.dart';
 import 'package:zanmelodic/src/modules/upper_control/widgets/upper_control_bar.dart';
 import 'package:zanmelodic/src/utils/utils.dart';
@@ -23,17 +22,7 @@ class AppBarPlaylistDetail extends StatelessWidget {
           subTile:
               'By: ${_playlist.dateAdded} | ${XUtils.formatNumberSong(state.numberSongs)}',
           title: _playlist.playlist,
-          upperControlBar: UpperControlBar(
-            colorOfShuffleIcon: state.shuffleColorIcon,
-            colorOfSortIcon: state.sortColorIcon,
-            onPressedSort: () =>
-                context.read<PlaylistDetailBloc>().onSortNameToList(),
-            onPressedShuffle: () =>
-                context.read<PlaylistDetailBloc>().onShuffleToList(),
-            onPressedPlayer: () => context
-                .read<PlayMusicBloc>()
-                .onPlayerItem(songList: state.items.data ?? []),
-          ),
+          upperControlBar: const UpperControlBar(),
         );
       },
     );

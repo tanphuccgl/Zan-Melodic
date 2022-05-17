@@ -19,7 +19,7 @@ class DialogRemoveFromFavorites extends StatelessWidget {
             text: 'Do you want to unfavorite the ',
             style: Style.textTheme()
                 .titleMedium!
-                .copyWith(fontSize: 17, color: MyColors.colorPrimary),
+                .copyWith(fontSize: 17, color: MyColors.colorWhite),
             children: [
               TextSpan(
                 text: song.title,

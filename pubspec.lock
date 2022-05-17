@@ -64,6 +64,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.6+1"
+  audio_video_progress_bar:
+    dependency: "direct main"
+    description:
+      name: audio_video_progress_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.10.0"
   auto_route:
     dependency: "direct main"
     description:

@@ -60,17 +60,17 @@ class SingerFavotiresWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CustomText(
+              CusText(
                 title: favoritesEntity.title,
                 style: Style.textTheme().titleMedium,
               ),
-              CustomText(
+              CusText(
                 title: favoritesEntity.artist ?? '',
               ),
-              CustomText(
+              CusText(
                   title: XUtils.getYear(favoritesEntity.dateAdded ?? -1)
                       .toString()),
-              const CustomText(title: '1 track'),
+              const CusText(title: '1 track'),
             ],
           ),
         )

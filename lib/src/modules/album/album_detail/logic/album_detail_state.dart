@@ -3,6 +3,7 @@ part of 'album_detail_bloc.dart';
 class AlbumDetailState extends UpperControlState {
   final XHandle<List<SongModel>> items;
   final AlbumModel album;
+  final List<MediaItem> mediaItems;
 
   @override
   void sortListByName({bool reverse = false}) =>
@@ -14,6 +15,7 @@ class AlbumDetailState extends UpperControlState {
       {required this.items,
       bool isSortName = false,
       bool isShuffle = false,
+      required this.mediaItems,
       required this.album})
       : super(
           isShuffle: isShuffle,
@@ -26,6 +28,7 @@ class AlbumDetailState extends UpperControlState {
         isSortName,
         isShuffle,
         album,
+        mediaItems,
       ];
 
   AlbumDetailState copyWith({
@@ -33,12 +36,14 @@ class AlbumDetailState extends UpperControlState {
     bool? isSortName,
     bool? isShuffle,
     AlbumModel? album,
+    List<MediaItem>? mediaItems,
   }) {
     return AlbumDetailState(
       items: items ?? this.items,
       isSortName: isSortName ?? this.isSortName,
       isShuffle: isShuffle ?? this.isShuffle,
       album: album ?? this.album,
+      mediaItems: mediaItems ?? this.mediaItems,
     );
   }
 }

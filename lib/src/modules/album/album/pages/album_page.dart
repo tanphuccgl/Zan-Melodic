@@ -12,31 +12,19 @@ class AlbumPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AlbumBloc, AlbumState>(
       builder: (context, state) {
-        return Scaffold(
+        return const Scaffold(
           body: Padding(
             padding: MyPadding.pPage,
             child: CustomScrollView(
-                physics: const BouncingScrollPhysics(),
-                slivers: [
-                  _upperControlBar(context),
-                  const ListAlbumWidget(),
-                ]),
+              physics: BouncingScrollPhysics(),
+              slivers: [
+                SliverToBoxAdapter(child: UpperControlBar()),
+                ListAlbumWidget(),
+              ],
+            ),
           ),
         );
       },
     );
-  }
-
-  Widget _upperControlBar(BuildContext context) {
-    return BlocBuilder<AlbumBloc, AlbumState>(builder: (context, state) {
-      return SliverToBoxAdapter(
-        child: UpperControlBar(
-          colorOfShuffleIcon: state.shuffleColorIcon,
-          colorOfSortIcon: state.sortColorIcon,
-          onPressedShuffle: () => context.read<AlbumBloc>().onShuffleToList(),
-          onPressedSort: () => context.read<AlbumBloc>().onSortNameToList(),
-        ),
-      );
-    });
   }
 }

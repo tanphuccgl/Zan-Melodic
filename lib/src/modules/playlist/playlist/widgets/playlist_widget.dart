@@ -7,6 +7,7 @@ import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/logic/playlist_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist_detail/logic/playlist_detail_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/router/playlist_router.dart';
+import 'package:zanmelodic/src/modules/songs/logic/song_list_bloc.dart';
 import 'package:zanmelodic/src/utils/utils.dart';
 import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_error_widget.dart';
@@ -101,34 +102,40 @@ class PlaylistWidget extends StatelessWidget {
     required double width,
     required double height,
   }) {
-    return GestureDetector(
-        onTap: () => context
-            .read<PlaylistDetailBloc>()
-            .fetchListOfSongsFromPlaylist(context, playlist: playlist),
-        onLongPress: () => PlaylistCoordinator.showDialogRemovePlaylist(context,
-            playlist: playlist),
-        child: Padding(
-            padding: const EdgeInsets.all(3.5),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                CustomImageWidget(
-                  id: playlist.id,
-                  height: width,
-                  width: height,
-                  artworkType: ArtworkType.PLAYLIST,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+    return BlocBuilder<SongListBloc, SongListState>(
+      builder: (context, state) {
+        return GestureDetector(
+            onTap: () => context
+                .read<PlaylistDetailBloc>()
+                .fetchListOfSongsFromPlaylist(context,
+                    playlist: playlist, songs: state.songs.data ?? []),
+            onLongPress: () => PlaylistCoordinator.showDialogRemovePlaylist(
+                context,
+                playlist: playlist),
+            child: Padding(
+                padding: const EdgeInsets.all(3.5),
+                child: Stack(
+                  alignment: Alignment.center,
                   children: [
-                    Text(playlist.playlist,
-                        style: Style.textTheme().titleMedium),
-                    Text(XUtils.formatNumberSong(playlist.numOfSongs),
-                        style: Style.textTheme().titleMedium),
+                    CustomImageWidget(
+                      id: playlist.id,
+                      height: width,
+                      width: height,
+                      artworkType: ArtworkType.PLAYLIST,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(playlist.playlist,
+                            style: Style.textTheme().titleMedium),
+                        Text(XUtils.formatNumberSong(playlist.numOfSongs),
+                            style: Style.textTheme().titleMedium),
+                      ],
+                    ),
                   ],
-                ),
-              ],
-            )));
+                )));
+      },
+    );
   }
 
   Widget _itemCardAddNewPlaylist(

@@ -7,7 +7,6 @@ import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/modules/favorites/logic/favorites_bloc.dart';
 import 'package:zanmelodic/src/modules/favorites/router/favorites_router.dart';
-import 'package:zanmelodic/src/modules/play_music/logic/play_music_bloc.dart';
 import 'package:zanmelodic/src/modules/songs/logic/song_list_bloc.dart';
 import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_empty_widget.dart';
@@ -32,10 +31,9 @@ class SongFavotiresWidget extends StatelessWidget {
               final _listSong = favoritesState.castFavoritesEntityToSong(
                   listOfSongs: _handleSong.data ?? [],
                   listOfFavoritesEntity: _items);
-
               return _listSong.isNotEmpty
                   ? SliverPadding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 100),
                       sliver: SliverList(
                         delegate: SliverChildBuilderDelegate((context, index) {
                           return Padding(
@@ -63,9 +61,8 @@ class SongFavotiresWidget extends StatelessWidget {
       onLongPress: () => FavoritesCoordinator.showDialogRemoveFromFavorites(
           context,
           song: song),
-      onTap: () => context
-          .read<PlayMusicBloc>()
-          .onPlayerItem(songList: songs, song: song),
+
+      ///  onTap: () => context.read<AudioHandleBloc>().playMediaItem(songs, song),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

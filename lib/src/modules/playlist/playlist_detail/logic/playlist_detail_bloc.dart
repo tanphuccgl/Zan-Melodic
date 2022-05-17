@@ -1,8 +1,10 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/routes/coordinator.dart';
 import 'package:zanmelodic/src/models/handle.dart';
+import 'package:zanmelodic/src/modules/dashboard/pages/dashboard_page.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/logic/playlist_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/router/playlist_router.dart';
 import 'package:zanmelodic/src/modules/upper_control/logic/upper_control_bloc.dart';
@@ -17,30 +19,35 @@ class PlaylistDetailBloc extends Cubit<PlaylistDetailState> {
 
   PlaylistDetailBloc()
       : super(PlaylistDetailState(
-            items: XHandle.loading(), playlist: PlaylistModel({})));
+            mediaItems: const [],
+            items: XHandle.loading(),
+            playlist: PlaylistModel({})));
 
   Future<void> fetchListOfSongsFromPlaylist(BuildContext context,
-      {required PlaylistModel playlist}) async {
+      {required PlaylistModel playlist, required List<SongModel> songs}) async {
     await Future.delayed(const Duration(seconds: 2));
     final _value =
         await _domain.playlist.getListOfSongFromPlaylist(playlist.id);
     if (_value.isSuccess) {
+      List<SongModel> newList = [];
+      for (SongModel item in (songs)) {
+        for (SongModel item1 in (_value.data ?? [])) {
+          if (item.title == item1.title) {
+            newList.add(item);
+          }
+        }
+      }
+      var a = (newList).map((e) => converSongToModel(e)).toList();
+
       emit(state.copyWith(
           items: XHandle.completed(_value.data ?? []),
           playlist: playlist,
+          mediaItems: a,
           numberSongs: playlist.numOfSongs));
       PlaylistCoordinator.showPlaylistDetailScreen(context);
     } else {
       XSnackbar.show(msg: 'Load All List Error');
     }
-  }
-
-  void onShuffleToList() {
-    emit(state.copyWith(isShuffle: !state.isShuffle));
-  }
-
-  void onSortNameToList() {
-    emit(state.copyWith(isSortName: !state.isSortName));
   }
 
   Future<void> removeFromPlaylist(BuildContext context,

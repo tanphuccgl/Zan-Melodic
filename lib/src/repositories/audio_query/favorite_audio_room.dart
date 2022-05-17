@@ -3,7 +3,7 @@ import 'package:on_audio_room/on_audio_room.dart';
 
 class FavoriteAudioRoom {
   Future<void> init() async {
-    await OnAudioRoom().initRoom(RoomType.FAVORITES); //Add the RoomType.
+    await OnAudioRoom().initRoom(RoomType.FAVORITES);
   }
 
   Map<dynamic, dynamic> songGetMap(
