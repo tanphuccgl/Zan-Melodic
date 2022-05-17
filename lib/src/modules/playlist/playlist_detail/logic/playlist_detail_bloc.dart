@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/routes/coordinator.dart';
 import 'package:zanmelodic/src/models/handle.dart';
+import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
 import 'package:zanmelodic/src/modules/dashboard/pages/dashboard_page.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/logic/playlist_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/router/playlist_router.dart';
@@ -38,7 +39,7 @@ class PlaylistDetailBloc extends Cubit<PlaylistDetailState> {
         }
       }
       var a = (newList).map((e) => converSongToModel(e)).toList();
-
+      context.read<AudioHandleBloc>().loadPlaylist(a);
       emit(state.copyWith(
           items: XHandle.completed(_value.data ?? []),
           playlist: playlist,

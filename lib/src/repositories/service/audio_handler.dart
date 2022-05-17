@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:audio_service/audio_service.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:zanmelodic/src/widgets/loading/bot_toast.dart';
@@ -128,10 +130,11 @@ class MyAudioHandler extends BaseAudioHandler {
     final audioSource = queue.map(_createAudioSource);
     _playlist.children
         .replaceRange(0, _playlist.children.length, audioSource.toList());
-
     this
         .queue
         .add(this.queue.value..replaceRange(0, this.queue.value.length, queue));
+    log(this.queue.value.length.toString());
+    log(_playlist.children.length.toString());
   }
 
   UriAudioSource _createAudioSource(MediaItem mediaItem) {
