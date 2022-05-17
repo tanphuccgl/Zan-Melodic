@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
+import 'package:zanmelodic/src/constants/my_icons.dart';
 
 class CustomImageWidget extends StatelessWidget {
   const CustomImageWidget(
@@ -35,10 +36,11 @@ class CustomImageWidget extends StatelessWidget {
         id: id,
         type: artworkType,
         keepOldArtwork: true,
-        nullArtworkWidget: Icon(
-          Icons.image_not_supported,
-          size: height,
-          color: MyColors.colorWhite,
+        nullArtworkWidget: Image.asset(
+          MyIcons.noImageIcon,
+          height: height,
+          width: width,
+          fit: BoxFit.fill,
         ),
       ),
     );

@@ -7,4 +7,5 @@ class MyIcons {
   static const String shuffleIcon = "assets/images/ic_shuffle.png";
   static const String skipIcon = "assets/images/ic_skip.png";
   static const String sortIcon = "assets/images/ic_sort.png";
+  static const String noImageIcon = "assets/images/ic_no_image.png";
 }
