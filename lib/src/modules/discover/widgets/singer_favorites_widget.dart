@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:on_audio_room/on_audio_room.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
+import 'package:zanmelodic/src/models/audio_model.dart';
 import 'package:zanmelodic/src/models/handle.dart';
-import 'package:zanmelodic/src/modules/favorites/logic/favorites_bloc.dart';
-import 'package:zanmelodic/src/utils/utils.dart';
+import 'package:zanmelodic/src/modules/discover/logic/discover_bloc.dart';
 import 'package:zanmelodic/src/widgets/custom_text/custom_text.dart';
-import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_empty_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_error_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_loading_widget.dart';
@@ -16,11 +14,11 @@ class SingerFavotiresWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FavoritesBloc, FavoritesState>(
+    return BlocBuilder<DiscoverBloc, DiscoverState>(
       builder: (context, state) {
-        final XHandle<List<FavoritesEntity>> _handle = state.items;
+        XHandle<List<XAudio>> _handle = state.items;
         if (_handle.isCompleted) {
-          final List<FavoritesEntity> _items = _handle.data ?? [];
+          final List<XAudio> _items = _handle.data ?? [];
 
           return _items.isNotEmpty
               ? SliverPadding(
@@ -43,14 +41,23 @@ class SingerFavotiresWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(FavoritesEntity favoritesEntity) {
+  Widget _buildCard(XAudio audio) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        CustomImageWidget(
-          id: favoritesEntity.id,
-          height: 120.0,
-          width: 120.0,
+        ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          clipBehavior: Clip.antiAlias,
+          child: Image.network(
+            audio.image,
+            gaplessPlayback: false,
+            repeat: ImageRepeat.noRepeat,
+            scale: 1.0,
+            width: 120,
+            height: 120,
+            fit: BoxFit.cover,
+            filterQuality: FilterQuality.low,
+          ),
         ),
         const SizedBox(
           width: 15,
@@ -61,15 +68,13 @@ class SingerFavotiresWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CusText(
-                title: favoritesEntity.title,
+                title: audio.name,
                 style: Style.textTheme().titleMedium,
               ),
               CusText(
-                title: favoritesEntity.artist ?? '',
+                title: audio.author,
               ),
-              CusText(
-                  title: XUtils.getYear(favoritesEntity.dateAdded ?? -1)
-                      .toString()),
+              const CusText(title: '2022'),
               const CusText(title: '1 track'),
             ],
           ),
