@@ -40,13 +40,42 @@ class NowPlayingPage extends StatelessWidget {
                       style: Style.textTheme().displaySmall,
                     ),
                     Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: CustomImageWidget(
-                          id: id,
-                          height: 220,
-                          width: 220,
-                          isShadow: true,
-                        )),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: media.extras!['isFirebase'] == false
+                          ? CustomImageWidget(
+                              id: id,
+                              height: 220,
+                              width: 220,
+                              isShadow: true,
+                            )
+                          : Container(
+                              height: 220.0,
+                              width: 220.0,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      offset: const Offset(10, 20),
+                                      color: MyColors.colorShadowImageNowPlaying
+                                          .withOpacity(0.25),
+                                    )
+                                  ]),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                clipBehavior: Clip.antiAlias,
+                                child: Image.network(
+                                  media.extras!['image'],
+                                  gaplessPlayback: false,
+                                  repeat: ImageRepeat.noRepeat,
+                                  scale: 1.0,
+                                  height: 220.0,
+                                  width: 220.0,
+                                  fit: BoxFit.cover,
+                                  filterQuality: FilterQuality.low,
+                                ),
+                              ),
+                            ),
+                    ),
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
