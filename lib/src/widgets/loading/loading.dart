@@ -3,10 +3,11 @@ import 'package:bot_toast/bot_toast.dart';
 class XLoading {
   static CancelFunc? cancel;
 
-  static void show() {
+  static show() {
     if (cancel != null) {
       cancel = null;
     }
+
     cancel ??= BotToast.showLoading();
   }
 
