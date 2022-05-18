@@ -39,8 +39,8 @@ class SongListFavoriteWidget extends StatelessWidget {
                             song: _listSong[index],
                             onTap: () =>
                                 context.read<AudioHandleBloc>().skipToQueueItem(
-                                      _listSong,
-                                      index,
+                                      items: _listSong,
+                                      index: index,
                                     ),
                           );
                         }, childCount: _listSong.length),

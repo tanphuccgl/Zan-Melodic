@@ -9,8 +9,8 @@ import 'package:zanmelodic/src/widgets/state/state_empty_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_error_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_loading_widget.dart';
 
-class SingerFavotiresWidget extends StatelessWidget {
-  const SingerFavotiresWidget({Key? key}) : super(key: key);
+class SingerDiscoverWidget extends StatelessWidget {
+  const SingerDiscoverWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -7,8 +7,8 @@ import 'package:zanmelodic/src/widgets/state/state_empty_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_error_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_loading_widget.dart';
 
-class PlaylistFavotiresWidget extends StatelessWidget {
-  const PlaylistFavotiresWidget({Key? key}) : super(key: key);
+class PlaylistDiscoverWidget extends StatelessWidget {
+  const PlaylistDiscoverWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

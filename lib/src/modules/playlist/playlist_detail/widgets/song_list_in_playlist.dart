@@ -40,8 +40,8 @@ class SongListInPlaylist extends StatelessWidget {
                                 onTap: () => context
                                     .read<AudioHandleBloc>()
                                     .skipToQueueItem(
-                                      a,
-                                      index,
+                                      items: a,
+                                      index: index,
                                     ),
                               ),
                             ),

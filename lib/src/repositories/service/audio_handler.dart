@@ -132,10 +132,15 @@ class MyAudioHandler extends BaseAudioHandler {
   }
 
   UriAudioSource _createAudioSource(MediaItem mediaItem) {
-    return AudioSource.uri(
-      Uri.file(mediaItem.extras!['data']),
-      tag: mediaItem,
-    );
+    return mediaItem.extras!['isFirebase'] == false
+        ? AudioSource.uri(
+            Uri.file(mediaItem.extras!['data']),
+            tag: mediaItem,
+          )
+        : AudioSource.uri(
+            Uri.parse(mediaItem.extras!['url']),
+            tag: mediaItem,
+          );
   }
 
   void _listenForCurrentSongIndexChanges() {

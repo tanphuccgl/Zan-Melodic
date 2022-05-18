@@ -22,8 +22,8 @@ class SongListInAlbum extends StatelessWidget {
                             song: _items[index],
                             onTap: () =>
                                 context.read<AudioHandleBloc>().skipToQueueItem(
-                                      _items,
-                                      index,
+                                      items: _items,
+                                      index: index,
                                     ),
                           ),
                         ),

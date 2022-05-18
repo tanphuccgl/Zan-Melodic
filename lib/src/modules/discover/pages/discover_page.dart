@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
-import 'package:zanmelodic/src/modules/discover/widgets/playlist_favorites_widget.dart';
-import 'package:zanmelodic/src/modules/discover/widgets/singer_favorites_widget.dart';
-import 'package:zanmelodic/src/modules/discover/widgets/song_favorites_widget.dart';
+import 'package:zanmelodic/src/modules/discover/widgets/playlist_discover.dart';
+import 'package:zanmelodic/src/modules/discover/widgets/singer_discover.dart';
+import 'package:zanmelodic/src/modules/discover/widgets/song_discover.dart';
 
 class DiscoverPage extends StatelessWidget {
   const DiscoverPage({Key? key}) : super(key: key);
@@ -16,11 +16,11 @@ class DiscoverPage extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           slivers: [
             _headerTitle('Singer'),
-            const SingerFavotiresWidget(),
+            const SingerDiscoverWidget(),
             _headerTitle('Playlist'),
-            const PlaylistFavotiresWidget(),
+            const PlaylistDiscoverWidget(),
             _headerTitle('Tracks'),
-            const SongFavotiresWidget()
+            const SongDiscoverWidget()
           ],
         ),
       ),
