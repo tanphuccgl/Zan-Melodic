@@ -89,7 +89,7 @@ MediaItem converSongToModel(SongModel song) {
     genre: song.genre,
     duration: Duration(microseconds: song.duration ?? -1),
     artist: song.artist,
-    extras: {'data': song.data},
+    extras: {'data': song.data, 'isFirebase': false},
   );
   return result;
 }

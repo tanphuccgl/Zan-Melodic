@@ -36,11 +36,26 @@ class PlayerBottomBar extends StatelessWidget {
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      CustomImageWidget(
-                        id: int.parse(media.id),
-                        height: 51.0,
-                        width: 51.0,
-                      ),
+                      media.extras!['isFirebase'] == false
+                          ? CustomImageWidget(
+                              id: int.parse(media.id),
+                              height: 51.0,
+                              width: 51.0,
+                            )
+                          : ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              clipBehavior: Clip.antiAlias,
+                              child: Image.network(
+                                media.extras!['image'],
+                                gaplessPlayback: false,
+                                repeat: ImageRepeat.noRepeat,
+                                scale: 1.0,
+                                height: 51.0,
+                                width: 51.0,
+                                fit: BoxFit.cover,
+                                filterQuality: FilterQuality.low,
+                              ),
+                            ),
                       const SizedBox(
                         width: 11,
                       ),

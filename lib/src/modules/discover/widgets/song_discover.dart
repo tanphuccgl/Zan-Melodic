@@ -4,13 +4,14 @@ import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/models/audio_model.dart';
 import 'package:zanmelodic/src/models/handle.dart';
+import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
 import 'package:zanmelodic/src/modules/discover/logic/discover_bloc.dart';
 import 'package:zanmelodic/src/widgets/state/state_empty_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_error_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_loading_widget.dart';
 
-class SongFavotiresWidget extends StatelessWidget {
-  const SongFavotiresWidget({Key? key}) : super(key: key);
+class SongDiscoverWidget extends StatelessWidget {
+  const SongDiscoverWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,10 @@ class SongFavotiresWidget extends StatelessWidget {
                     delegate: SliverChildBuilderDelegate((context, index) {
                       return Padding(
                           padding: const EdgeInsets.fromLTRB(0, 6, 20, 6),
-                          child: _buildCard(context, audio: _items[index]));
+                          child: _buildCard(context,
+                              audio: _items[index],
+                              audios: _items,
+                              index: index));
                     }, childCount: _items.length),
                   ),
                 )
@@ -44,6 +48,8 @@ class SongFavotiresWidget extends StatelessWidget {
   Widget _buildCard(
     BuildContext context, {
     required XAudio audio,
+    required List<XAudio> audios,
+    required int index,
   }) {
     return GestureDetector(
       onLongPress: () {},
@@ -51,7 +57,9 @@ class SongFavotiresWidget extends StatelessWidget {
       //     context,
       //     song: song),
 
-      ///  onTap: () => context.read<AudioHandleBloc>().playMediaItem(songs, song),
+      onTap: () => context
+          .read<AudioHandleBloc>()
+          .skipToQueueItem(index: index, audios: audios),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
+import 'package:zanmelodic/src/models/audio_model.dart';
 import 'package:zanmelodic/src/models/enums/button_state.dart';
 import 'package:zanmelodic/src/models/enums/repeat_state.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/progress_bar_bloc.dart';
@@ -93,11 +94,18 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
     }
   }
 
-  Future<void> skipToQueueItem(
-    List<SongModel> items,
-    int index,
-  ) async {
-    var mediaItems = items.map((e) => converSongToModel(e)).toList();
+  Future<void> skipToQueueItem({
+    List<SongModel>? items,
+    required int index,
+    List<XAudio>? audios,
+  }) async {
+    List<MediaItem> mediaItems = [];
+    if (items != null) {
+      mediaItems = (items).map((e) => converSongToModel(e)).toList();
+    }
+    if (audios != null) {
+      mediaItems = (audios).map((e) => converSongOnlineToModel(e)).toList();
+    }
 
     bool isEqual = listEquals(mediaItems, state.playlist);
     if (isEqual == false) {
@@ -111,6 +119,17 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
     emit(state.copyWith(
       isShowBottomBar: true,
     ));
+  }
+
+  MediaItem converSongOnlineToModel(XAudio audio) {
+    final result = MediaItem(
+      id: audio.id.toString(),
+      album: 'Firebase',
+      title: audio.name,
+      artist: audio.author,
+      extras: {'url': audio.link, 'isFirebase': true, 'image': audio.image},
+    );
+    return result;
   }
 
   void sort() {
