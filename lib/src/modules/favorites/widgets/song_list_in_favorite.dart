@@ -4,7 +4,6 @@ import 'package:on_audio_query/on_audio_query.dart';
 import 'package:on_audio_room/details/rooms/favorites/favorites_entity.dart';
 import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
-import 'package:zanmelodic/src/modules/dashboard/pages/dashboard_page.dart';
 import 'package:zanmelodic/src/modules/favorites/logic/favorites_bloc.dart';
 import 'package:zanmelodic/src/modules/songs/logic/song_list_bloc.dart';
 import 'package:zanmelodic/src/widgets/custom_card/song_card.dart';
@@ -30,21 +29,21 @@ class SongListFavoriteWidget extends StatelessWidget {
               final _listSong = favoritesState.castFavoritesEntityToSong(
                   listOfSongs: _handleSong.data ?? [],
                   listOfFavoritesEntity: _items);
-              final _listResult =
-                  _listSong.map((e) => converSongToModel(e)).toList();
+
               return _listSong.isNotEmpty
                   ? SliverPadding(
                       padding: const EdgeInsets.only(bottom: 90),
                       sliver: SliverList(
                         delegate: SliverChildBuilderDelegate((context, index) {
                           return SongCard(
-                            media: _listResult[index],
-                            onTap: () => context
-                                .read<AudioHandleBloc>()
-                                .skipToQueueItem(
-                                    _listResult, index, _listResult[index]),
+                            song: _listSong[index],
+                            onTap: () =>
+                                context.read<AudioHandleBloc>().skipToQueueItem(
+                                      _listSong,
+                                      index,
+                                    ),
                           );
-                        }, childCount: _listResult.length),
+                        }, childCount: _listSong.length),
                       ),
                     )
                   : const XStateEmptyWidget();

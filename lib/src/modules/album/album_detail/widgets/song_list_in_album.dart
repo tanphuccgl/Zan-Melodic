@@ -12,19 +12,18 @@ class SongListInAlbum extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AlbumDetailBloc, AlbumDetailState>(
       builder: (context, state) {
-        final _items = state.mediaItems;
+        final _items = state.items.data ?? [];
         return _items.isNotEmpty
             ? SliverList(
                 delegate: SliverChildBuilderDelegate(
                     (context, index) => Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: SongCard(
-                            media: _items[index],
+                            song: _items[index],
                             onTap: () =>
                                 context.read<AudioHandleBloc>().skipToQueueItem(
                                       _items,
                                       index,
-                                      _items[index],
                                     ),
                           ),
                         ),

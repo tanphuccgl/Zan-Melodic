@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:audio_service/audio_service.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:zanmelodic/src/widgets/loading/bot_toast.dart';
@@ -41,6 +39,10 @@ class MyAudioHandler extends BaseAudioHandler {
 
   @override
   Future<void> addQueueItems(List<MediaItem> mediaItems) async {
+    if (_playlist.sequence.isNotEmpty && queue.value.isNotEmpty) {
+      clearQueue();
+    }
+
 // manage Just Audio
     final audioSource = mediaItems.map(_createAudioSource);
     _playlist.addAll(audioSource.toList());
@@ -48,6 +50,11 @@ class MyAudioHandler extends BaseAudioHandler {
     // notify system
     final newQueue = queue.value..addAll(mediaItems);
     queue.add(newQueue);
+  }
+
+  void clearQueue() {
+    _playlist.clear();
+    queue.value.clear();
   }
 
   @override
@@ -116,25 +123,12 @@ class MyAudioHandler extends BaseAudioHandler {
     }
 
     _player.seek(Duration.zero, index: index);
-    play();
   }
 
   @override
   Future<void> stop() async {
     await _player.stop();
     return super.stop();
-  }
-
-  @override
-  Future<void> updateQueue(List<MediaItem> queue) async {
-    final audioSource = queue.map(_createAudioSource);
-    _playlist.children
-        .replaceRange(0, _playlist.children.length, audioSource.toList());
-    this
-        .queue
-        .add(this.queue.value..replaceRange(0, this.queue.value.length, queue));
-    log(this.queue.value.length.toString());
-    log(_playlist.children.length.toString());
   }
 
   UriAudioSource _createAudioSource(MediaItem mediaItem) {
@@ -148,11 +142,10 @@ class MyAudioHandler extends BaseAudioHandler {
     _player.currentIndexStream.listen((index) {
       final playlist = queue.value;
       if (index == null || playlist.isEmpty) return;
-      int result = index;
       if (_player.shuffleModeEnabled) {
-        result = _player.shuffleIndices!.indexWhere((e) => e == index);
+        index = _player.shuffleIndices![index];
       }
-      mediaItem.add(playlist[result]);
+      mediaItem.add(playlist[index]);
     });
   }
 

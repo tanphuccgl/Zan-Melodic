@@ -4,7 +4,6 @@ class PlaylistDetailState extends UpperControlState {
   final XHandle<List<SongModel>> items;
   final PlaylistModel playlist;
   final int numberSongs;
-  final List<MediaItem> mediaItems;
 
   int idSong({required List<SongModel> list, required SongModel song}) {
     late final int result;
@@ -23,7 +22,6 @@ class PlaylistDetailState extends UpperControlState {
     bool isShuffle = false,
     required this.playlist,
     this.numberSongs = 0,
-    required this.mediaItems,
   }) : super(isShuffle: isShuffle, isSortName: isSortName);
 
   @override
@@ -33,7 +31,6 @@ class PlaylistDetailState extends UpperControlState {
         isShuffle,
         playlist,
         numberSongs,
-        mediaItems,
       ];
 
   PlaylistDetailState copyWith({
@@ -42,7 +39,6 @@ class PlaylistDetailState extends UpperControlState {
     bool? isShuffle,
     PlaylistModel? playlist,
     int? numberSongs,
-    List<MediaItem>? mediaItems,
   }) {
     return PlaylistDetailState(
       items: items ?? this.items,
@@ -50,7 +46,6 @@ class PlaylistDetailState extends UpperControlState {
       isShuffle: isShuffle ?? this.isShuffle,
       playlist: playlist ?? this.playlist,
       numberSongs: numberSongs ?? this.numberSongs,
-      mediaItems: mediaItems ?? this.mediaItems,
     );
   }
 }
