@@ -2,7 +2,6 @@ part of 'song_list_bloc.dart';
 
 class SongListState extends UpperControlState {
   final XHandle<List<SongModel>> songs;
-  final List<MediaItem> mediaItems;
   final bool isLoadPlaylist;
 
   @override
@@ -15,7 +14,6 @@ class SongListState extends UpperControlState {
     required this.songs,
     bool isSortName = false,
     bool isShuffle = false,
-    required this.mediaItems,
     this.isLoadPlaylist = false,
   }) : super(
           isShuffle: isShuffle,
@@ -27,7 +25,6 @@ class SongListState extends UpperControlState {
         songs,
         isSortName,
         isShuffle,
-        mediaItems,
         isLoadPlaylist,
       ];
 
@@ -36,14 +33,12 @@ class SongListState extends UpperControlState {
     XHandle<List<SongModel>>? songs,
     bool? isSortName,
     bool? isShuffle,
-    List<MediaItem>? mediaItems,
     bool? isLoadPlaylist,
   }) {
     return SongListState(
       songs: songs ?? this.songs,
       isSortName: isSortName ?? this.isSortName,
       isShuffle: isShuffle ?? this.isShuffle,
-      mediaItems: mediaItems ?? this.mediaItems,
       isLoadPlaylist: isLoadPlaylist ?? this.isLoadPlaylist,
     );
   }

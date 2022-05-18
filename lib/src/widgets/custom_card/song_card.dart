@@ -1,96 +1,83 @@
-import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
-import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
 import 'package:zanmelodic/src/modules/favorites/logic/favorites_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/router/playlist_router.dart';
-import 'package:zanmelodic/src/modules/songs/logic/song_list_bloc.dart';
 import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
 
 class SongCard extends StatelessWidget {
+  final SongModel song;
+  final VoidCallback? onTap;
+  final PlaylistModel? playlistModel;
   const SongCard({
     Key? key,
-    required this.media,
+    required this.song,
     this.onTap,
-    this.playlist,
+    this.playlistModel,
   }) : super(key: key);
-  final MediaItem media;
-  final VoidCallback? onTap;
-  final PlaylistModel? playlist;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SongListBloc, SongListState>(builder: (context, state) {
-      return BlocBuilder<AudioHandleBloc, AudioHandleState>(
-          builder: (context, audioHandleState) {
-        SongModel song =
-            audioHandleState.convertMediaToSong(media, state.songs.data ?? []);
-        return GestureDetector(
-          onLongPress: playlist != null
-              ? () => PlaylistCoordinator.showDialogRemoveFromPlaylist(context,
-                  song: song, playlist: playlist!)
-              : () => PlaylistCoordinator.showDialogAddToPlaylist(context,
-                  song: song),
-          onTap: onTap,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 13),
-            child: SizedBox(
-              height: 70,
-              width: 70,
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex: 8,
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 70,
-                            child: CustomImageWidget(
-                              id: song.id,
-                              height: 70.0,
-                              width: 70.0,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '${song.title}\n',
-                                  style: Style.textTheme().titleMedium,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                Text(song.artist ?? '',
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: Style.textTheme()
-                                        .titleMedium!
-                                        .copyWith(
-                                            fontSize: 17,
-                                            color: MyColors.colorGray))
-                              ],
-                            ),
-                          ),
-                        ],
+    return GestureDetector(
+      onLongPress: playlistModel != null
+          ? () => PlaylistCoordinator.showDialogRemoveFromPlaylist(context,
+              song: song, playlist: playlistModel!)
+          : () =>
+              PlaylistCoordinator.showDialogAddToPlaylist(context, song: song),
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 13),
+        child: SizedBox(
+          height: 70,
+          width: 70,
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: 8,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 70,
+                        child: CustomImageWidget(
+                          id: song.id,
+                          height: 70.0,
+                          width: 70.0,
+                        ),
                       ),
-                    ),
-                    _favoriteButton(context, song)
-                  ]),
-            ),
-          ),
-        );
-      });
-    });
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '${song.title}\n',
+                              style: Style.textTheme().titleMedium,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(song.artist ?? '',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: Style.textTheme().titleMedium!.copyWith(
+                                    fontSize: 17, color: MyColors.colorGray))
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                _favoriteButton(context, song)
+              ]),
+        ),
+      ),
+    );
   }
 
   Widget _favoriteButton(BuildContext context, SongModel song) {

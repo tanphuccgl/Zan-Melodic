@@ -59,11 +59,6 @@ class DashboardPage extends StatelessWidget {
                             } else {
                               _tabsRouter.setActiveIndex(index);
                             }
-                            if (index == 1) {
-                              context
-                                  .read<SongListBloc>()
-                                  .fetchMediaItems(context);
-                            }
                           },
                           tabs: <Tab>[
                             for (final item in TabIndex.values)

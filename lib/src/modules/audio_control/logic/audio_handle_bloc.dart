@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:audio_service/audio_service.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -10,6 +9,7 @@ import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/models/enums/button_state.dart';
 import 'package:zanmelodic/src/models/enums/repeat_state.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/progress_bar_bloc.dart';
+import 'package:zanmelodic/src/modules/dashboard/pages/dashboard_page.dart';
 
 part 'audio_handle_state.dart';
 
@@ -43,17 +43,7 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
 
   Future<void> loadPlaylist(List<MediaItem> items) async {
     final mediaItems = (items).map((song) => song).toList();
-
-    if (state.audioHandler.queue.value.isEmpty) {
-      log('123');
-      await state.audioHandler.addQueueItems(mediaItems);
-      log(state.audioHandler.queue.value.length.toString());
-    } else {
-      log('456');
-
-      await state.audioHandler.updateQueue(mediaItems);
-      log(state.audioHandler.queue.value.length.toString());
-    }
+    state.audioHandler.addQueueItems(mediaItems);
     emit(state.copyWith(
       playlist: mediaItems,
     ));
@@ -103,19 +93,24 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
     }
   }
 
-  /// khi chưa play nhạc:
-  ///  - click vào trang nào thì load queue của trang đó
-  /// khi đang play nhạc:
-  ///  - queue hiện tại:
-  ///     + click play thì lấy queue của trang đó
-  ///  - queue mới:
-  ///     + click nhạc của trang khác thì update queue lại
-
   Future<void> skipToQueueItem(
-      List<MediaItem> items, int index, MediaItem media) async {
-    state.audioHandler.skipToQueueItem(index);
+    List<SongModel> items,
+    int index,
+  ) async {
+    var mediaItems = items.map((e) => converSongToModel(e)).toList();
 
-    emit(state.copyWith(isShowBottomBar: true));
+    bool isEqual = listEquals(mediaItems, state.playlist);
+    if (isEqual == false) {
+      loadPlaylist(mediaItems);
+      await Future.delayed(const Duration(milliseconds: 500));
+    }
+
+    state.audioHandler.skipToQueueItem(index);
+    play();
+
+    emit(state.copyWith(
+      isShowBottomBar: true,
+    ));
   }
 
   void sort() {
@@ -145,7 +140,6 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
 
   void _listenToChangesInPlaylist() {
     state.audioHandler.queue.listen((playlist) {
-      log(playlist.length.toString());
       if (playlist.isEmpty) {
         emit(state.copyWith(
             playlist: [],
@@ -153,6 +147,7 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
       } else {
         emit(state.copyWith(playlist: playlist));
       }
+
       _updateSkipButtons();
     });
   }
