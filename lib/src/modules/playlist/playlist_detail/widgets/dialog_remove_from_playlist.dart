@@ -44,6 +44,6 @@ class DialogRemoveFromPlaylist extends StatelessWidget {
         textAccept: 'REMOVE',
         onPressed: () => context
             .read<PlaylistDetailBloc>()
-            .removeFromPlaylist(context, playlist: playlist, idSong: song.id));
+            .removeFromPlaylist(context, playlist: playlist, song: song));
   }
 }

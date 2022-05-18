@@ -19,7 +19,7 @@ class AlbumDetailBloc extends UpperControlBloc<AlbumDetailState> {
 
   Future<void> fetchListOfSongsFromAlbum(BuildContext context,
       {required AlbumModel album, required List<SongModel> songs}) async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     final value = await _domain.album.getListOfSongFromAlbum(album.id);
     if (value.isSuccess) {
       emit(state.copyWith(

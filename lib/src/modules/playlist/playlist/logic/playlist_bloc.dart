@@ -22,7 +22,7 @@ class PlaylistBloc extends UpperControlBloc<PlaylistState> {
   final Domain _domain = Domain();
 
   Future<void> fetchPlaylists() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     final value = await _domain.playlist.getListOfPlaylist();
     if (value.isSuccess) {
       emit(state.copyWithItems(items: XHandle.completed(value.data ?? [])));
@@ -34,7 +34,6 @@ class PlaylistBloc extends UpperControlBloc<PlaylistState> {
   Future<void> addNewPlaylist(BuildContext context,
       {required String name}) async {
     XLoading.show();
-    await Future.delayed(const Duration(seconds: 2));
     if (state.isValidName == '' && state.pureName == true) {
       final _value = await _domain.playlist.addNewPlaylist(name);
       if (_value.isSuccess) {
@@ -52,7 +51,6 @@ class PlaylistBloc extends UpperControlBloc<PlaylistState> {
   Future<void> removePlaylist(BuildContext context,
       {required int idPlaylist}) async {
     XLoading.show();
-    await Future.delayed(const Duration(seconds: 2));
     final _value = await _domain.playlist.removePlaylist(idPlaylist);
     if (_value.isSuccess) {
       emit(state.copyWithItems(items: XHandle.completed(_value.data ?? [])));
@@ -69,7 +67,6 @@ class PlaylistBloc extends UpperControlBloc<PlaylistState> {
   Future<void> addToPlaylist(BuildContext context,
       {required int idPlaylist, required int idSong}) async {
     XLoading.show();
-    await Future.delayed(const Duration(seconds: 2));
     final _value = await _domain.playlist
         .addToPlaylist(idPlaylist: idPlaylist, idSong: idSong);
     if (_value.isSuccess) {

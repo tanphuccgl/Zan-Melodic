@@ -21,7 +21,7 @@ class PlaylistDetailBloc extends Cubit<PlaylistDetailState> {
 
   Future<void> fetchListOfSongsFromPlaylist(BuildContext context,
       {required PlaylistModel playlist, required List<SongModel> songs}) async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     final _value =
         await _domain.playlist.getListOfSongFromPlaylist(playlist.id);
     if (_value.isSuccess) {
@@ -36,11 +36,18 @@ class PlaylistDetailBloc extends Cubit<PlaylistDetailState> {
   }
 
   Future<void> removeFromPlaylist(BuildContext context,
-      {required PlaylistModel playlist, required int idSong}) async {
+      {required PlaylistModel playlist, required SongModel song}) async {
     XLoading.show();
-    await Future.delayed(const Duration(seconds: 2));
-    final _value = await _domain.playlist
-        .removeFromPlaylist(idPlaylist: playlist.id, idSong: idSong);
+    late int idSongFromPlaylist;
+
+    for (SongModel item in state.items.data ?? []) {
+      if (song.title == item.title) {
+        idSongFromPlaylist = item.id;
+      }
+    }
+
+    final _value = await _domain.playlist.removeFromPlaylist(
+        idPlaylist: playlist.id, idSong: idSongFromPlaylist);
     if (_value.isSuccess) {
       context.read<PlaylistBloc>().fetchPlaylists();
 
@@ -60,7 +67,6 @@ class PlaylistDetailBloc extends Cubit<PlaylistDetailState> {
   Future<void> saveNewNamePlaylist(BuildContext context,
       {required PlaylistModel playlist, required String newName}) async {
     XLoading.show();
-    await Future.delayed(const Duration(seconds: 2));
     final _value = await _domain.playlist
         .newNamePlaylist(idPlaylist: playlist.id, newName: newName);
     if (_value.isSuccess) {
