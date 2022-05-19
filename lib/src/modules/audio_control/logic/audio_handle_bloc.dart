@@ -96,7 +96,7 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
 
   Future<void> skipToQueueItem({
     List<SongModel>? items,
-    required int index,
+    int? index,
     List<XAudio>? audios,
     List<MediaItem>? medias,
   }) async {
@@ -114,7 +114,8 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
       await Future.delayed(const Duration(milliseconds: 500));
     }
 
-    state.audioHandler.skipToQueueItem(index);
+    state.audioHandler.skipToQueueItem(index ?? 0);
+
     play();
 
     emit(state.copyWith(

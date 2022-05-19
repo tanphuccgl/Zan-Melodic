@@ -5,7 +5,8 @@ import 'package:zanmelodic/src/modules/audio_control/widgets/sort_button.dart';
 import 'package:zanmelodic/src/widgets/button/image_button.dart';
 
 class UpperControlBar extends StatelessWidget {
-  const UpperControlBar({Key? key}) : super(key: key);
+  final VoidCallback onPressed;
+  const UpperControlBar({Key? key, required this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class UpperControlBar extends StatelessWidget {
             ImageButton(
               icon: MyIcons.playIcon,
               size: 30,
-              onPressed: () {},
+              onPressed: onPressed,
             )
           ],
         )
