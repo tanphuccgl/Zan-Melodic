@@ -98,8 +98,9 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
     List<SongModel>? items,
     required int index,
     List<XAudio>? audios,
+    List<MediaItem>? medias,
   }) async {
-    List<MediaItem> mediaItems = [];
+    List<MediaItem> mediaItems = medias ?? [];
     if (items != null) {
       mediaItems = (items).map((e) => converSongToModel(e)).toList();
     }

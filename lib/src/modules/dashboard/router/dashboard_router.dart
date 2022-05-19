@@ -11,8 +11,6 @@ import 'package:zanmelodic/src/modules/folder/router/folder_router.dart';
 import 'package:zanmelodic/src/modules/playlist/router/playlist_router.dart';
 import 'package:zanmelodic/src/modules/songs/router/songs_router.dart';
 
-import '../../now_playing/pages/now_playing_page.dart';
-
 class DashboardTaps {
   static const String discoverTab = 'discover';
 
@@ -43,11 +41,9 @@ class DashboardCoordinator {
             DiscoverCoordinator.autoRoute,
             RedirectRoute(path: '*', redirectTo: ''),
           ]),
-      AutoRoute(
-          name: 'NowPlayingRoute', path: 'now-playing', page: NowPlayingPage),
       RedirectRoute(path: '*', redirectTo: ''),
     ],
   );
   static showNowPlayingScreen(BuildContext context) =>
-      context.router.push(const NowPlayingRoute());
+      context.router.push(const DetailSongWrapperRoute());
 }

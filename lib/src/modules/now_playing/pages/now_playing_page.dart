@@ -28,7 +28,7 @@ class NowPlayingPage extends StatelessWidget {
         return Scaffold(
           backgroundColor: MyColors.colorBackground,
           body: GestureDetector(
-            onVerticalDragEnd: (details) => XCoordinator.pop(context),
+            onDoubleTap: () => XCoordinator.pop(context),
             child: Padding(
                 padding: EdgeInsets.fromLTRB(_pHori, _pTop, _pHori, _pHori / 2),
                 child: Column(
