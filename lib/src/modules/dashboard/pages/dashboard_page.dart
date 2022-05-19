@@ -14,7 +14,6 @@ import 'package:zanmelodic/src/modules/discover/pages/discover_page.dart';
 import 'package:zanmelodic/src/modules/favorites/pages/favorites_page.dart';
 import 'package:zanmelodic/src/modules/folder/pages/folder_page.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/pages/playlist_page.dart';
-import 'package:zanmelodic/src/modules/songs/logic/song_list_bloc.dart';
 import 'package:zanmelodic/src/modules/songs/pages/songs_page.dart';
 
 class DashboardPage extends StatelessWidget {
