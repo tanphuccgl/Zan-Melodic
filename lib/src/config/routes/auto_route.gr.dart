@@ -11,24 +11,28 @@
 // ignore_for_file: type=lint
 
 import 'package:auto_route/auto_route.dart' as _i5;
-import 'package:flutter/material.dart' as _i14;
+import 'package:flutter/material.dart' as _i17;
 
 import '../../modules/album/album/pages/album_page.dart' as _i10;
 import '../../modules/album/album_detail/pages/album_detail_page.dart' as _i11;
-import '../../modules/dashboard/pages/dashboard_page.dart' as _i3;
+import '../../modules/dashboard/pages/dashboard_page.dart' as _i4;
 import '../../modules/dashboard/router/dashboard_wrapper_router.dart' as _i1;
 import '../../modules/discover/pages/discover_page.dart' as _i13;
 import '../../modules/favorites/pages/favorites_page.dart' as _i6;
 import '../../modules/folder/pages/folder_page.dart' as _i12;
 import '../../modules/loading/pages/loading_page.dart' as _i2;
-import '../../modules/now_playing/pages/now_playing_page.dart' as _i4;
+import '../../modules/now_playing/info_song/pages/info_song_page.dart' as _i15;
+import '../../modules/now_playing/lyric/pages/lyric_page.dart' as _i16;
+import '../../modules/now_playing/pages/now_playing_page.dart' as _i14;
+import '../../modules/now_playing/router/detail_song_wrapper_router.dart'
+    as _i3;
 import '../../modules/playlist/playlist/pages/playlist_page.dart' as _i8;
 import '../../modules/playlist/playlist_detail/pages/playlist_detail_page.dart'
     as _i9;
 import '../../modules/songs/pages/songs_page.dart' as _i7;
 
 class XRouter extends _i5.RootStackRouter {
-  XRouter([_i14.GlobalKey<_i14.NavigatorState>? navigatorKey])
+  XRouter([_i17.GlobalKey<_i17.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
@@ -41,13 +45,13 @@ class XRouter extends _i5.RootStackRouter {
       return _i5.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i2.LoadingPage());
     },
+    DetailSongWrapperRoute.name: (routeData) {
+      return _i5.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i3.DetailSongWrapperPage());
+    },
     DashboardRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i3.DashboardPage());
-    },
-    NowPlayingRoute.name: (routeData) {
-      return _i5.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i4.NowPlayingPage());
+          routeData: routeData, child: const _i4.DashboardPage());
     },
     FavoritesTab.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
@@ -104,6 +108,18 @@ class XRouter extends _i5.RootStackRouter {
     DiscoverRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i13.DiscoverPage());
+    },
+    NowPlayingRoute.name: (routeData) {
+      return _i5.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i14.NowPlayingPage());
+    },
+    InfoSongRoute.name: (routeData) {
+      return _i5.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i15.InfoSongPage());
+    },
+    LyricRoute.name: (routeData) {
+      return _i5.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i16.LyricPage());
     }
   };
 
@@ -200,8 +216,6 @@ class XRouter extends _i5.RootStackRouter {
                         redirectTo: '',
                         fullMatch: true)
                   ]),
-              _i5.RouteConfig(NowPlayingRoute.name,
-                  path: 'now-playing', parent: DashboardWrapperRoute.name),
               _i5.RouteConfig('*#redirect',
                   path: '*',
                   parent: DashboardWrapperRoute.name,
@@ -209,6 +223,21 @@ class XRouter extends _i5.RootStackRouter {
                   fullMatch: true)
             ]),
         _i5.RouteConfig(LoadingRoute.name, path: ''),
+        _i5.RouteConfig(DetailSongWrapperRoute.name,
+            path: 'now_playing',
+            children: [
+              _i5.RouteConfig(NowPlayingRoute.name,
+                  path: '', parent: DetailSongWrapperRoute.name),
+              _i5.RouteConfig(InfoSongRoute.name,
+                  path: 'info', parent: DetailSongWrapperRoute.name),
+              _i5.RouteConfig(LyricRoute.name,
+                  path: 'lyric', parent: DetailSongWrapperRoute.name),
+              _i5.RouteConfig('*#redirect',
+                  path: '*',
+                  parent: DetailSongWrapperRoute.name,
+                  redirectTo: '',
+                  fullMatch: true)
+            ]),
         _i5.RouteConfig('*#redirect',
             path: '*', redirectTo: '', fullMatch: true)
       ];
@@ -233,20 +262,22 @@ class LoadingRoute extends _i5.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i3.DashboardPage]
+/// [_i3.DetailSongWrapperPage]
+class DetailSongWrapperRoute extends _i5.PageRouteInfo<void> {
+  const DetailSongWrapperRoute({List<_i5.PageRouteInfo>? children})
+      : super(DetailSongWrapperRoute.name,
+            path: 'now_playing', initialChildren: children);
+
+  static const String name = 'DetailSongWrapperRoute';
+}
+
+/// generated route for
+/// [_i4.DashboardPage]
 class DashboardRoute extends _i5.PageRouteInfo<void> {
   const DashboardRoute({List<_i5.PageRouteInfo>? children})
       : super(DashboardRoute.name, path: '', initialChildren: children);
 
   static const String name = 'DashboardRoute';
-}
-
-/// generated route for
-/// [_i4.NowPlayingPage]
-class NowPlayingRoute extends _i5.PageRouteInfo<void> {
-  const NowPlayingRoute() : super(NowPlayingRoute.name, path: 'now-playing');
-
-  static const String name = 'NowPlayingRoute';
 }
 
 /// generated route for
@@ -365,4 +396,28 @@ class DiscoverRoute extends _i5.PageRouteInfo<void> {
   const DiscoverRoute() : super(DiscoverRoute.name, path: '');
 
   static const String name = 'DiscoverRoute';
+}
+
+/// generated route for
+/// [_i14.NowPlayingPage]
+class NowPlayingRoute extends _i5.PageRouteInfo<void> {
+  const NowPlayingRoute() : super(NowPlayingRoute.name, path: '');
+
+  static const String name = 'NowPlayingRoute';
+}
+
+/// generated route for
+/// [_i15.InfoSongPage]
+class InfoSongRoute extends _i5.PageRouteInfo<void> {
+  const InfoSongRoute() : super(InfoSongRoute.name, path: 'info');
+
+  static const String name = 'InfoSongRoute';
+}
+
+/// generated route for
+/// [_i16.LyricPage]
+class LyricRoute extends _i5.PageRouteInfo<void> {
+  const LyricRoute() : super(LyricRoute.name, path: 'lyric');
+
+  static const String name = 'LyricRoute';
 }
