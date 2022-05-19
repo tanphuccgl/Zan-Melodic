@@ -24,7 +24,7 @@ class RepeatButton extends StatelessWidget {
       }
       return IconButton(
         icon: icon,
-        onPressed: () {},
+        onPressed: () => context.read<AudioHandleBloc>().repeat(),
       );
     });
   }

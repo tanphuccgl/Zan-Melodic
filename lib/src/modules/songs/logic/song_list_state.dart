@@ -5,7 +5,9 @@ class SongListState extends UpperControlState {
   final bool isLoadPlaylist;
 
   @override
-  void sortListByName({bool reverse = false}) =>
+  void sortListByName({
+    bool reverse = false,
+  }) =>
       (songs.data ?? []).sort((a, b) => reverse
           ? (b.title).compareTo((a.title))
           : (a.title).compareTo((b.title)));

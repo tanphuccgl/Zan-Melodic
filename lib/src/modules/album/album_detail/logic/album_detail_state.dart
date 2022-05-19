@@ -28,7 +28,8 @@ class AlbumDetailState extends UpperControlState {
         album,
       ];
 
-  AlbumDetailState copyWith({
+  @override
+  AlbumDetailState copyWithItems({
     XHandle<List<SongModel>>? items,
     bool? isSortName,
     bool? isShuffle,

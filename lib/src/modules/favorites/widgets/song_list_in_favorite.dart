@@ -29,7 +29,9 @@ class SongListFavoriteWidget extends StatelessWidget {
               final _listSong = favoritesState.castFavoritesEntityToSong(
                   listOfSongs: _handleSong.data ?? [],
                   listOfFavoritesEntity: _items);
-
+              songState.isSortName
+                  ? songState.sortListByName(reverse: true)
+                  : songState.sortListByName();
               return _listSong.isNotEmpty
                   ? SliverPadding(
                       padding: const EdgeInsets.only(bottom: 90),

@@ -22,7 +22,7 @@ class AlbumDetailBloc extends UpperControlBloc<AlbumDetailState> {
     await Future.delayed(const Duration(seconds: 1));
     final value = await _domain.album.getListOfSongFromAlbum(album.id);
     if (value.isSuccess) {
-      emit(state.copyWith(
+      emit(state.copyWithItems(
         items: XHandle.completed(value.data ?? []),
         album: album,
       ));

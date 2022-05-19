@@ -27,7 +27,7 @@ class AppBarAlbumDetail extends StatelessWidget {
                 '${_album.artist} | ${XUtils.formatNumberSong(_album.numOfSongs)}',
             title: _album.album,
             upperControlBar: UpperControlBar(
-              onPressed: () => context
+              onPressedPlay: () => context
                   .read<AudioHandleBloc>()
                   .skipToQueueItem(items: _items),
             ),

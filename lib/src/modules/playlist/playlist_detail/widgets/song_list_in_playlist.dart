@@ -19,6 +19,7 @@ class SongListInPlaylist extends StatelessWidget {
         return BlocBuilder<AudioHandleBloc, AudioHandleState>(
           builder: (context, state) {
             List<SongModel> _items = playlistState.items.data ?? [];
+
             List<SongModel> songs = songState.songs.data ?? [];
             List<SongModel> a = [];
             for (var item in _items) {
@@ -28,6 +29,9 @@ class SongListInPlaylist extends StatelessWidget {
                 }
               }
             }
+            playlistState.isSortName
+                ? playlistState.sortListByName1(reverse: true, songs: a)
+                : playlistState.sortListByName1(songs: a);
             return _items.isNotEmpty
                 ? SliverPadding(
                     padding: state.isShowBottomBar == true

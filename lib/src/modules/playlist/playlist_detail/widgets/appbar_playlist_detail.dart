@@ -40,7 +40,7 @@ class AppBarPlaylistDetail extends StatelessWidget {
                   'By: ${_playlist.dateAdded} | ${XUtils.formatNumberSong(playlistState.numberSongs)}',
               title: _playlist.playlist,
               upperControlBar: UpperControlBar(
-                onPressed: () => context
+                onPressedPlay: () => context
                     .read<AudioHandleBloc>()
                     .skipToQueueItem(items: _items),
               ),

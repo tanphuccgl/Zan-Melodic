@@ -31,7 +31,9 @@ class AlbumPage extends StatelessWidget {
                   slivers: [
                     SliverToBoxAdapter(
                         child: UpperControlBar(
-                      onPressed: () => context
+                      onPressedSort: () =>
+                          context.read<AlbumBloc>().onSortNameToList(),
+                      onPressedPlay: () => context
                           .read<AudioHandleBloc>()
                           .skipToQueueItem(items: _items),
                     )),

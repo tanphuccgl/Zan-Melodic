@@ -2,22 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/constants/my_icons.dart';
-import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
+import 'package:zanmelodic/src/modules/album/album/logic/album_bloc.dart';
+import 'package:zanmelodic/src/modules/album/album_detail/logic/album_detail_bloc.dart';
+import 'package:zanmelodic/src/modules/favorites/logic/favorites_bloc.dart';
+import 'package:zanmelodic/src/modules/folder/logic/folder_bloc.dart';
+import 'package:zanmelodic/src/modules/playlist/playlist/logic/playlist_bloc.dart';
+import 'package:zanmelodic/src/modules/playlist/playlist_detail/logic/playlist_detail_bloc.dart';
+import 'package:zanmelodic/src/modules/songs/logic/song_list_bloc.dart';
 import 'package:zanmelodic/src/widgets/button/image_button.dart';
 
 class SortButton extends StatelessWidget {
-  const SortButton({Key? key}) : super(key: key);
+  const SortButton({Key? key, this.onPressed}) : super(key: key);
+  final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AudioHandleBloc, AudioHandleState>(
-        builder: (context, state) {
+    return BlocBuilder<SongListBloc, SongListState>(builder: (context, state) {
       return ImageButton(
         size: 30,
-        onPressed: () => context.read<AudioHandleBloc>().sort(),
+        onPressed: () {
+          context.read<AlbumBloc>().onSortNameToList();
+          context.read<FavoritesBloc>().onSortNameToList();
+          context.read<SongListBloc>().onSortNameToList();
+          context.read<PlaylistBloc>().onSortNameToList();
+          context.read<FolderBloc>().onSortNameToList();
+          context.read<PlaylistDetailBloc>().onSortNameToList();
+          context.read<AlbumDetailBloc>().onSortNameToList();
+        },
         icon: MyIcons.sortIcon,
-        color: state.isSortModeEnabled
-            ? MyColors.colorPrimary
-            : MyColors.colorWhite,
+        color: state.isSortName ? MyColors.colorPrimary : MyColors.colorWhite,
       );
     });
   }

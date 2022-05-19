@@ -15,6 +15,11 @@ class SongListInAlbum extends StatelessWidget {
       return BlocBuilder<AudioHandleBloc, AudioHandleState>(
         builder: (context, audioState) {
           final _items = state.items.data ?? [];
+          state.isSortName
+              ? state.sortListByName(
+                  reverse: true,
+                )
+              : state.sortListByName();
           return _items.isNotEmpty
               ? SliverPadding(
                   padding: audioState.isShowBottomBar == true
