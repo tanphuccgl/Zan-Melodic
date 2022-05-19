@@ -15,20 +15,17 @@ class SongListWidget extends StatelessWidget {
       builder: (context, state) {
         List<SongModel> _items = state.songs.data ?? [];
         return _items.isNotEmpty
-            ? SliverPadding(
-                padding: const EdgeInsets.only(bottom: 90),
-                sliver: SliverList(
-                  delegate: SliverChildBuilderDelegate((context, index) {
-                    return SongCard(
-                      song: _items[index],
-                      onTap: () =>
-                          context.read<AudioHandleBloc>().skipToQueueItem(
-                                items: _items,
-                                index: index,
-                              ),
-                    );
-                  }, childCount: _items.length),
-                ),
+            ? SliverList(
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  return SongCard(
+                    song: _items[index],
+                    onTap: () =>
+                        context.read<AudioHandleBloc>().skipToQueueItem(
+                              items: _items,
+                              index: index,
+                            ),
+                  );
+                }, childCount: _items.length),
               )
             : const XStateEmptyWidget();
       },

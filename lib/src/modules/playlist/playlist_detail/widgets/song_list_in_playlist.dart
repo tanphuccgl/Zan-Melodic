@@ -29,23 +29,28 @@ class SongListInPlaylist extends StatelessWidget {
               }
             }
             return _items.isNotEmpty
-                ? SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                        (context, index) => Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 20),
-                              child: SongCard(
-                                song: a[index],
-                                playlistModel: playlistState.playlist,
-                                onTap: () => context
-                                    .read<AudioHandleBloc>()
-                                    .skipToQueueItem(
-                                      items: a,
-                                      index: index,
-                                    ),
+                ? SliverPadding(
+                    padding: state.isShowBottomBar == true
+                        ? const EdgeInsets.only(bottom: 90)
+                        : EdgeInsets.zero,
+                    sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                          (context, index) => Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: SongCard(
+                                  song: a[index],
+                                  playlistModel: playlistState.playlist,
+                                  onTap: () => context
+                                      .read<AudioHandleBloc>()
+                                      .skipToQueueItem(
+                                        items: a,
+                                        index: index,
+                                      ),
+                                ),
                               ),
-                            ),
-                        childCount: a.length),
+                          childCount: a.length),
+                    ),
                   )
                 : const XStateEmptyWidget();
           },

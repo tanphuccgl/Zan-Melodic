@@ -8,6 +8,7 @@ import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/models/enums/tab_index.dart';
 import 'package:zanmelodic/src/modules/album/album/pages/album_page.dart';
+import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
 import 'package:zanmelodic/src/modules/audio_control/pages/player_bottom_bar.dart';
 import 'package:zanmelodic/src/modules/discover/pages/discover_page.dart';
 import 'package:zanmelodic/src/modules/favorites/pages/favorites_page.dart';
@@ -32,7 +33,7 @@ class DashboardPage extends StatelessWidget {
         ],
         builder: (context, child, animation) {
           final _tabsRouter = AutoTabsRouter.of(context);
-          return BlocBuilder<SongListBloc, SongListState>(
+          return BlocBuilder<AudioHandleBloc, AudioHandleState>(
             builder: (context, state) {
               return DefaultTabController(
                 length: TabIndex.values.length,
@@ -64,14 +65,19 @@ class DashboardPage extends StatelessWidget {
                             for (final item in TabIndex.values)
                               Tab(text: item.lableOf()),
                           ])),
-                  body: const TabBarView(children: [
-                    DiscoverPage(),
-                    FavoritesPage(),
-                    SongPage(),
-                    PlaylistPage(),
-                    AlbumPage(),
-                    FolderPage(),
-                  ]),
+                  body: Padding(
+                    padding: state.isShowBottomBar == true
+                        ? const EdgeInsets.only(bottom: 90)
+                        : EdgeInsets.zero,
+                    child: const TabBarView(children: [
+                      DiscoverPage(),
+                      FavoritesPage(),
+                      SongPage(),
+                      PlaylistPage(),
+                      AlbumPage(),
+                      FolderPage(),
+                    ]),
+                  ),
                 ),
               );
             },
