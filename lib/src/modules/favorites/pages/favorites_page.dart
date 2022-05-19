@@ -40,7 +40,7 @@ class FavoritesPage extends StatelessWidget {
                 slivers: [
                   SliverToBoxAdapter(
                       child: UpperControlBar(
-                    onPressed: () => context
+                    onPressedPlay: () => context
                         .read<AudioHandleBloc>()
                         .skipToQueueItem(items: _listSong),
                   )),

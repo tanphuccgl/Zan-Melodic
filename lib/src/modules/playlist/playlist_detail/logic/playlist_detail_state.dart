@@ -16,6 +16,12 @@ class PlaylistDetailState extends UpperControlState {
     return result;
   }
 
+  void sortListByName1(
+          {bool reverse = false, required List<SongModel> songs}) =>
+      (songs).sort((a, b) => reverse
+          ? (b.title).compareTo((a.title))
+          : (a.title).compareTo((b.title)));
+
   const PlaylistDetailState({
     required this.items,
     bool isSortName = false,
@@ -33,7 +39,8 @@ class PlaylistDetailState extends UpperControlState {
         numberSongs,
       ];
 
-  PlaylistDetailState copyWith({
+  @override
+  PlaylistDetailState copyWithItems({
     XHandle<List<SongModel>>? items,
     bool? isSortName,
     bool? isShuffle,

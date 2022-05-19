@@ -1,6 +1,6 @@
 part of 'favorites_bloc.dart';
 
-class FavoritesState extends Equatable {
+class FavoritesState extends UpperControlState {
   final XHandle<List<FavoritesEntity>> items;
   bool isFavorites(int idSong) {
     var _list = (items.data ?? []).where(
@@ -8,6 +8,12 @@ class FavoritesState extends Equatable {
     );
     return _list.isEmpty ? false : true;
   }
+
+  @override
+  void sortListByName({bool reverse = false}) =>
+      (items.data ?? []).sort((a, b) => reverse
+          ? (b.title).compareTo((a.title))
+          : (a.title).compareTo((b.title)));
 
   List<SongModel> castFavoritesEntityToSong(
       {required List<SongModel> listOfSongs,
@@ -24,18 +30,31 @@ class FavoritesState extends Equatable {
     return _listResult;
   }
 
-  const FavoritesState({required this.items});
+  const FavoritesState({
+    required this.items,
+    bool isSortName = false,
+    bool isShuffle = false,
+  }) : super(
+          isShuffle: isShuffle,
+          isSortName: isSortName,
+        );
 
   @override
   List<Object?> get props => [
         items,
+        isShuffle,
+        isSortName,
       ];
-
+  @override
   FavoritesState copyWithItems({
     XHandle<List<FavoritesEntity>>? items,
+    bool? isSortName,
+    bool? isShuffle,
   }) {
     return FavoritesState(
       items: items ?? this.items,
+      isSortName: isSortName ?? this.isSortName,
+      isShuffle: isShuffle ?? this.isShuffle,
     );
   }
 }

@@ -14,6 +14,9 @@ class SongListWidget extends StatelessWidget {
     return BlocBuilder<SongListBloc, SongListState>(
       builder: (context, state) {
         List<SongModel> _items = state.songs.data ?? [];
+        state.isSortName
+            ? state.sortListByName(reverse: true)
+            : state.sortListByName();
         return _items.isNotEmpty
             ? SliverList(
                 delegate: SliverChildBuilderDelegate((context, index) {

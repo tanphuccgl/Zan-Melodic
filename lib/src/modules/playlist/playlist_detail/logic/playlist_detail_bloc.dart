@@ -12,7 +12,7 @@ import 'package:zanmelodic/src/widgets/loading/loading.dart';
 
 part 'playlist_detail_state.dart';
 
-class PlaylistDetailBloc extends Cubit<PlaylistDetailState> {
+class PlaylistDetailBloc extends UpperControlBloc<PlaylistDetailState> {
   final Domain _domain = Domain();
 
   PlaylistDetailBloc()
@@ -25,7 +25,7 @@ class PlaylistDetailBloc extends Cubit<PlaylistDetailState> {
     final _value =
         await _domain.playlist.getListOfSongFromPlaylist(playlist.id);
     if (_value.isSuccess) {
-      emit(state.copyWith(
+      emit(state.copyWithItems(
           items: XHandle.completed(_value.data ?? []),
           playlist: playlist,
           numberSongs: playlist.numOfSongs));
@@ -51,7 +51,7 @@ class PlaylistDetailBloc extends Cubit<PlaylistDetailState> {
     if (_value.isSuccess) {
       context.read<PlaylistBloc>().fetchPlaylists();
 
-      emit(state.copyWith(
+      emit(state.copyWithItems(
         items: XHandle.completed(_value.data ?? []),
         numberSongs: state.numberSongs - 1,
       ));

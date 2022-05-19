@@ -5,22 +5,27 @@ import 'package:zanmelodic/src/modules/audio_control/widgets/sort_button.dart';
 import 'package:zanmelodic/src/widgets/button/image_button.dart';
 
 class UpperControlBar extends StatelessWidget {
-  final VoidCallback onPressed;
-  const UpperControlBar({Key? key, required this.onPressed}) : super(key: key);
+  final VoidCallback onPressedPlay;
+  final VoidCallback? onPressedSort;
+  const UpperControlBar(
+      {Key? key, required this.onPressedPlay, this.onPressedSort})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        const SortButton(),
+        SortButton(
+          onPressed: onPressedSort,
+        ),
         Row(
           children: [
             const ShuffleButton(size: 30),
             ImageButton(
               icon: MyIcons.playIcon,
               size: 30,
-              onPressed: onPressed,
+              onPressed: onPressedPlay,
             )
           ],
         )
