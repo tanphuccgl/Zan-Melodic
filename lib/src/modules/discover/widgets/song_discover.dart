@@ -23,7 +23,7 @@ class SongDiscoverWidget extends StatelessWidget {
 
           return _items.isNotEmpty
               ? SliverPadding(
-                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 100),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   sliver: SliverList(
                     delegate: SliverChildBuilderDelegate((context, index) {
                       return Padding(

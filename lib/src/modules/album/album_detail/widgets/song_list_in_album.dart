@@ -11,26 +11,36 @@ class SongListInAlbum extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AlbumDetailBloc, AlbumDetailState>(
-      builder: (context, state) {
-        final _items = state.items.data ?? [];
-        return _items.isNotEmpty
-            ? SliverList(
-                delegate: SliverChildBuilderDelegate(
-                    (context, index) => Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: SongCard(
-                            song: _items[index],
-                            onTap: () =>
-                                context.read<AudioHandleBloc>().skipToQueueItem(
+        builder: (context, state) {
+      return BlocBuilder<AudioHandleBloc, AudioHandleState>(
+        builder: (context, audioState) {
+          final _items = state.items.data ?? [];
+          return _items.isNotEmpty
+              ? SliverPadding(
+                  padding: audioState.isShowBottomBar == true
+                      ? const EdgeInsets.only(bottom: 90)
+                      : EdgeInsets.zero,
+                  sliver: SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                        (context, index) => Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: SongCard(
+                                song: _items[index],
+                                onTap: () => context
+                                    .read<AudioHandleBloc>()
+                                    .skipToQueueItem(
                                       items: _items,
                                       index: index,
                                     ),
-                          ),
-                        ),
-                    childCount: _items.length),
-              )
-            : const XStateEmptyWidget();
-      },
-    );
+                              ),
+                            ),
+                        childCount: _items.length),
+                  ),
+                )
+              : const XStateEmptyWidget();
+        },
+      );
+    });
   }
 }
