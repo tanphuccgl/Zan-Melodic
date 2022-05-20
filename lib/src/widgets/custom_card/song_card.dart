@@ -5,6 +5,7 @@ import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/modules/favorites/logic/favorites_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/router/playlist_router.dart';
+import 'package:zanmelodic/src/widgets/custom_text/custom_text.dart';
 import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
 
 class SongCard extends StatelessWidget {
@@ -56,15 +57,12 @@ class SongCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              '${song.title}\n',
+                            CusText(
+                              title: '${song.title}\n',
                               style: Style.textTheme().titleMedium,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
                             ),
-                            Text(song.artist ?? '',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
+                            CusText(
+                                title: song.artist ?? '',
                                 style: Style.textTheme().titleMedium!.copyWith(
                                     fontSize: 17, color: MyColors.colorGray))
                           ],

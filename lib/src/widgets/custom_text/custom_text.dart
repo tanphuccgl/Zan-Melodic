@@ -5,11 +5,13 @@ import 'package:zanmelodic/src/config/themes/styles.dart';
 class CusText extends StatelessWidget {
   final String title;
   final TextStyle? style;
-  const CusText({Key? key, required this.title, this.style}) : super(key: key);
+  final int maxLines;
+  const CusText({Key? key, required this.title, this.style, this.maxLines = 1})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Text(title,
-        maxLines: 1,
+        maxLines: maxLines,
         overflow: TextOverflow.ellipsis,
         style: style ??
             Style.textTheme().titleMedium!.copyWith(

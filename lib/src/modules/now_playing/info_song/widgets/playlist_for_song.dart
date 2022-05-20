@@ -5,6 +5,7 @@ import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/constants/my_properties.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
+import 'package:zanmelodic/src/widgets/custom_text/custom_text.dart';
 import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_empty_widget.dart';
 
@@ -82,15 +83,12 @@ Widget _buildCard({required MediaItem media, required VoidCallback onTap}) {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            '${media.title}\n',
+                          CusText(
+                            title: '${media.title}\n',
                             style: Style.textTheme().titleMedium,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
                           ),
-                          Text(media.artist ?? '',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                          CusText(
+                              title: media.artist ?? '',
                               style: Style.textTheme().titleMedium!.copyWith(
                                   fontSize: 17, color: MyColors.colorGray))
                         ],

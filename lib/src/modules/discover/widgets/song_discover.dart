@@ -7,6 +7,7 @@ import 'package:zanmelodic/src/models/audio_model.dart';
 import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
 import 'package:zanmelodic/src/modules/discover/logic/discover_bloc.dart';
+import 'package:zanmelodic/src/widgets/custom_text/custom_text.dart';
 import 'package:zanmelodic/src/widgets/state/state_empty_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_error_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_loading_widget.dart';
@@ -86,15 +87,12 @@ class SongDiscoverWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  '${audio.name}\n',
+                CusText(
+                  title: '${audio.name}\n',
                   style: Style.textTheme().titleMedium,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
                 ),
-                Text(audio.author,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                CusText(
+                    title: audio.author,
                     style: Style.textTheme()
                         .titleMedium!
                         .copyWith(fontSize: 17, color: MyColors.colorGray))
