@@ -18,7 +18,7 @@ class FavoritesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SongListBloc, SongListState>(
         builder: (context, songState) {
-      final XHandle<List<SongModel>> _handleSong = songState.songs;
+      final XHandle<List<SongModel>> _handleSong = songState.items;
 
       return BlocBuilder<FavoritesBloc, FavoritesState>(
           builder: (context, favoritesState) {

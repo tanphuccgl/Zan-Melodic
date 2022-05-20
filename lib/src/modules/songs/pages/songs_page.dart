@@ -14,7 +14,7 @@ class SongPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SongListBloc, SongListState>(builder: (context, state) {
-      List<SongModel> _items = state.songs.data ?? [];
+      List<SongModel> _items = state.items.data ?? [];
       return Scaffold(
         body: RefreshIndicator(
           color: MyColors.colorPrimary,

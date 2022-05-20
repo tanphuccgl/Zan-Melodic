@@ -20,7 +20,7 @@ Widget _buildCard(BuildContext context, {required AlbumModel album}) {
       onTap: () => context.read<AlbumDetailBloc>().fetchListOfSongsFromAlbum(
           context,
           album: album,
-          songs: state.songs.data ?? []),
+          songs: state.items.data ?? []),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 9),
         child: Row(

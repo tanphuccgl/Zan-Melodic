@@ -12,8 +12,9 @@ import 'package:zanmelodic/src/modules/songs/logic/song_list_bloc.dart';
 import 'package:zanmelodic/src/widgets/button/image_button.dart';
 
 class SortButton extends StatelessWidget {
-  const SortButton({Key? key, this.onPressed}) : super(key: key);
-  final VoidCallback? onPressed;
+  const SortButton({
+    Key? key,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SongListBloc, SongListState>(builder: (context, state) {

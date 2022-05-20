@@ -18,7 +18,7 @@ class SongListFavoriteWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SongListBloc, SongListState>(
       builder: (context, songState) {
-        final XHandle<List<SongModel>> _handleSong = songState.songs;
+        final XHandle<List<SongModel>> _handleSong = songState.items;
 
         return BlocBuilder<FavoritesBloc, FavoritesState>(
           builder: (context, favoritesState) {
@@ -29,9 +29,10 @@ class SongListFavoriteWidget extends StatelessWidget {
               final _listSong = favoritesState.castFavoritesEntityToSong(
                   listOfSongs: _handleSong.data ?? [],
                   listOfFavoritesEntity: _items);
-              songState.isSortName
-                  ? songState.sortListByName(reverse: true)
-                  : songState.sortListByName();
+              //TODO
+              // songState.isSortName
+              //     ? songState.sortListByName(reverse: true)
+              //     : songState.sortListByName();
               return _listSong.isNotEmpty
                   ? SliverPadding(
                       padding: const EdgeInsets.only(bottom: 90),

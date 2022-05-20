@@ -9,7 +9,6 @@ class FavoritesState extends UpperControlState {
     return _list.isEmpty ? false : true;
   }
 
-  @override
   void sortListByName({bool reverse = false}) =>
       (items.data ?? []).sort((a, b) => reverse
           ? (b.title).compareTo((a.title))

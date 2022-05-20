@@ -3,7 +3,6 @@ part of 'folder_bloc.dart';
 class FolderState extends UpperControlState {
   final XHandle<List<String>> items;
 
-  @override
   void sortListByName({bool reverse = false}) => (items.data ?? [])
       .sort((a, b) => reverse ? (b).compareTo((a)) : (a).compareTo((b)));
 

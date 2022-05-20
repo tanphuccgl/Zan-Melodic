@@ -97,6 +97,23 @@ class PlaylistWidget extends StatelessWidget {
     ));
   }
 
+  Widget _emptyListWidget(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Center(
+        child: TextButton(
+            onPressed: () =>
+                PlaylistCoordinator.showDialogCreatePlaylist(context),
+            child: Text(
+              'Click here to create a new playlist',
+              textAlign: TextAlign.center,
+              style: Style.textTheme()
+                  .titleMedium!
+                  .copyWith(color: MyColors.colorWhite.withOpacity(0.5)),
+            )),
+      ),
+    );
+  }
+
   Widget _itemCard(
     BuildContext context, {
     required PlaylistModel playlist,
@@ -109,7 +126,7 @@ class PlaylistWidget extends StatelessWidget {
             onTap: () => context
                 .read<PlaylistDetailBloc>()
                 .fetchListOfSongsFromPlaylist(context,
-                    playlist: playlist, songs: state.songs.data ?? []),
+                    playlist: playlist, songs: state.items.data ?? []),
             onLongPress: () => PlaylistCoordinator.showDialogRemovePlaylist(
                 context,
                 playlist: playlist),
@@ -160,22 +177,5 @@ class PlaylistWidget extends StatelessWidget {
                   color: MyColors.colorPrimary,
                   size: 60,
                 ))));
-  }
-
-  Widget _emptyListWidget(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Center(
-        child: TextButton(
-            onPressed: () =>
-                PlaylistCoordinator.showDialogCreatePlaylist(context),
-            child: Text(
-              'Click here to create a new playlist',
-              textAlign: TextAlign.center,
-              style: Style.textTheme()
-                  .titleMedium!
-                  .copyWith(color: MyColors.colorWhite.withOpacity(0.5)),
-            )),
-      ),
-    );
   }
 }

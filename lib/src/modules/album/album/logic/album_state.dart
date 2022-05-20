@@ -3,7 +3,6 @@ part of 'album_bloc.dart';
 class AlbumState extends UpperControlState {
   final XHandle<List<AlbumModel>> items;
 
-  @override
   void sortListByName({bool reverse = false}) =>
       (items.data ?? []).sort((a, b) => reverse
           ? (b.album).compareTo((a.album))

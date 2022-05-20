@@ -1,19 +1,11 @@
 part of 'song_list_bloc.dart';
 
 class SongListState extends UpperControlState {
-  final XHandle<List<SongModel>> songs;
+  final XHandle<List<SongModel>> items;
   final bool isLoadPlaylist;
 
-  @override
-  void sortListByName({
-    bool reverse = false,
-  }) =>
-      (songs.data ?? []).sort((a, b) => reverse
-          ? (b.title).compareTo((a.title))
-          : (a.title).compareTo((b.title)));
-
   const SongListState({
-    required this.songs,
+    required this.items,
     bool isSortName = false,
     bool isShuffle = false,
     this.isLoadPlaylist = false,
@@ -24,7 +16,7 @@ class SongListState extends UpperControlState {
 
   @override
   List<Object?> get props => [
-        songs,
+        items,
         isSortName,
         isShuffle,
         isLoadPlaylist,
@@ -32,16 +24,21 @@ class SongListState extends UpperControlState {
 
   @override
   SongListState copyWithItems({
-    XHandle<List<SongModel>>? songs,
+    XHandle<List<SongModel>>? items,
     bool? isSortName,
     bool? isShuffle,
     bool? isLoadPlaylist,
   }) {
+    sortListByName();
     return SongListState(
-      songs: songs ?? this.songs,
+      items: items ?? this.items,
       isSortName: isSortName ?? this.isSortName,
       isShuffle: isShuffle ?? this.isShuffle,
       isLoadPlaylist: isLoadPlaylist ?? this.isLoadPlaylist,
     );
   }
+
+  void sortListByName() => (items.data ?? []).sort((a, b) => isSortName
+      ? (b.title).compareTo((a.title))
+      : (a.title).compareTo((b.title)));
 }

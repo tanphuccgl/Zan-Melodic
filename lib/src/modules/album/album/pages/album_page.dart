@@ -15,7 +15,7 @@ class AlbumPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SongListBloc, SongListState>(builder: (context, state) {
-      List<SongModel> _items = state.songs.data ?? [];
+      List<SongModel> _items = state.items.data ?? [];
       return BlocBuilder<AlbumBloc, AlbumState>(
         builder: (context, state) {
           return Scaffold(
@@ -31,8 +31,6 @@ class AlbumPage extends StatelessWidget {
                   slivers: [
                     SliverToBoxAdapter(
                         child: UpperControlBar(
-                      onPressedSort: () =>
-                          context.read<AlbumBloc>().onSortNameToList(),
                       onPressedPlay: () => context
                           .read<AudioHandleBloc>()
                           .skipToQueueItem(items: _items),

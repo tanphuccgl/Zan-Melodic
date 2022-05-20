@@ -20,7 +20,7 @@ class SongListInPlaylist extends StatelessWidget {
           builder: (context, state) {
             List<SongModel> _items = playlistState.items.data ?? [];
 
-            List<SongModel> songs = songState.songs.data ?? [];
+            List<SongModel> songs = songState.items.data ?? [];
             List<SongModel> a = [];
             for (var item in _items) {
               for (var item1 in songs) {

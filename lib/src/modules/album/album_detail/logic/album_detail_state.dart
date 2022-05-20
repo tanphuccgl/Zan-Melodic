@@ -4,7 +4,6 @@ class AlbumDetailState extends UpperControlState {
   final XHandle<List<SongModel>> items;
   final AlbumModel album;
 
-  @override
   void sortListByName({bool reverse = false}) =>
       (items.data ?? []).sort((a, b) => reverse
           ? (b.title).compareTo((a.title))

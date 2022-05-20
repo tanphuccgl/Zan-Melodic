@@ -11,7 +11,6 @@ class PlaylistState extends UpperControlState {
     return pureName ? XUtils.isValidNameCreatePlaylist(namePlaylist) : "";
   }
 
-  @override
   void sortListByName({bool reverse = false}) =>
       (items.data ?? []).sort((a, b) => reverse
           ? (b.playlist).compareTo((a.playlist))
