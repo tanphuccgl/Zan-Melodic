@@ -14,8 +14,6 @@ class SongListBloc extends UpperControlBloc<SongListState> {
 
   @override
   Future<void> fetchListOfSongs() async {
-    await Future.delayed(const Duration(seconds: 1));
-
     final _value = await _domain.song.getListOfSongs();
     if (_value.isSuccess) {
       emit(state.copyWithItems(

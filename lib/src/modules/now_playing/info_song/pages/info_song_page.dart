@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zanmelodic/src/config/routes/coordinator.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
-import 'package:zanmelodic/src/constants/my_padding.dart';
+import 'package:zanmelodic/src/constants/my_properties.dart';
 import 'package:zanmelodic/src/modules/audio_control/widgets/next_button.dart';
 import 'package:zanmelodic/src/modules/audio_control/widgets/play_button.dart';
 import 'package:zanmelodic/src/modules/audio_control/widgets/previous_button.dart';

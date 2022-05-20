@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/constants/fonts.dart';
-import 'package:zanmelodic/src/constants/my_padding.dart';
+import 'package:zanmelodic/src/constants/my_properties.dart';
 
 class XTheme {
   static ThemeData light() => ThemeData(

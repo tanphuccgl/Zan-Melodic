@@ -22,7 +22,6 @@ class PlaylistBloc extends UpperControlBloc<PlaylistState> {
   final Domain _domain = Domain();
 
   Future<void> fetchPlaylists() async {
-    await Future.delayed(const Duration(seconds: 1));
     final value = await _domain.playlist.getListOfPlaylist();
     if (value.isSuccess) {
       emit(state.copyWithItems(items: XHandle.completed(value.data ?? [])));

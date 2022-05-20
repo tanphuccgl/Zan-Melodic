@@ -16,8 +16,6 @@ class FavoritesBloc extends UpperControlBloc<FavoritesState> {
   final Domain _domain = Domain();
 
   Future<void> fetchSongsFromFavorites() async {
-    await Future.delayed(const Duration(seconds: 1));
-
     final _value = await _domain.favorites.getSongsFromFavorites();
     if (_value.isSuccess) {
       emit(state.copyWithItems(items: XHandle.completed(_value.data ?? [])));

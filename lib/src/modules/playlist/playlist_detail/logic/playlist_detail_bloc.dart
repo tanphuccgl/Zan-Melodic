@@ -21,7 +21,6 @@ class PlaylistDetailBloc extends UpperControlBloc<PlaylistDetailState> {
 
   Future<void> fetchListOfSongsFromPlaylist(BuildContext context,
       {required PlaylistModel playlist, required List<SongModel> songs}) async {
-    await Future.delayed(const Duration(seconds: 1));
     final _value =
         await _domain.playlist.getListOfSongFromPlaylist(playlist.id);
     if (_value.isSuccess) {
