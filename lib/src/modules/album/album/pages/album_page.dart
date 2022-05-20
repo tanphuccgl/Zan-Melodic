@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/constants/my_properties.dart';
 import 'package:zanmelodic/src/modules/album/album/logic/album_bloc.dart';
 import 'package:zanmelodic/src/modules/album/album/widgets/list_album_widget.dart';
-import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
-import 'package:zanmelodic/src/modules/songs/logic/song_list_bloc.dart';
 import 'package:zanmelodic/src/modules/upper_control/widgets/upper_control_bar.dart';
 
 class AlbumPage extends StatelessWidget {
@@ -14,35 +11,27 @@ class AlbumPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SongListBloc, SongListState>(builder: (context, state) {
-      List<SongModel> _items = state.items.data ?? [];
-      return BlocBuilder<AlbumBloc, AlbumState>(
-        builder: (context, state) {
-          return Scaffold(
-            body: RefreshIndicator(
-              color: MyColors.colorPrimary,
-              backgroundColor: MyColors.colorWhite,
-              onRefresh: () async =>
-                  context.read<AlbumBloc>().fetchListOfAlbums(),
-              child: Padding(
-                padding: MyProperties.pPage,
-                child: CustomScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  slivers: [
-                    SliverToBoxAdapter(
-                        child: UpperControlBar(
-                      onPressedPlay: () => context
-                          .read<AudioHandleBloc>()
-                          .skipToQueueItem(items: _items),
-                    )),
-                    const ListAlbumWidget(),
-                  ],
-                ),
+    return BlocBuilder<AlbumBloc, AlbumState>(
+      builder: (context, state) {
+        return Scaffold(
+          body: RefreshIndicator(
+            color: MyColors.colorPrimary,
+            backgroundColor: MyColors.colorWhite,
+            onRefresh: () async =>
+                context.read<AlbumBloc>().fetchListOfAlbums(),
+            child: const Padding(
+              padding: MyProperties.pPage,
+              child: CustomScrollView(
+                physics: BouncingScrollPhysics(),
+                slivers: [
+                  SliverToBoxAdapter(child: UpperControlBar()),
+                  ListAlbumWidget(),
+                ],
               ),
             ),
-          );
-        },
-      );
-    });
+          ),
+        );
+      },
+    );
   }
 }

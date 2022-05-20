@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/constants/my_properties.dart';
 import 'package:zanmelodic/src/models/handle.dart';
-import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
 import 'package:zanmelodic/src/modules/songs/logic/song_list_bloc.dart';
 import 'package:zanmelodic/src/modules/songs/widgets/song_list_widget.dart';
 import 'package:zanmelodic/src/modules/upper_control/widgets/upper_control_bar.dart';
@@ -26,12 +25,7 @@ class SongPage extends StatelessWidget {
           child: CustomScrollView(
             physics: const BouncingScrollPhysics(),
             slivers: [
-              SliverToBoxAdapter(
-                  child: UpperControlBar(
-                onPressedPlay: () => context
-                    .read<AudioHandleBloc>()
-                    .skipToQueueItem(items: songs),
-              )),
+              const SliverToBoxAdapter(child: UpperControlBar()),
               SongListWidget(songs: songs),
             ],
           ),
