@@ -8,17 +8,16 @@ import 'package:zanmelodic/src/widgets/loading/bot_toast.dart';
 part 'discover_state.dart';
 
 class DiscoverBloc extends Cubit<DiscoverState> {
+  final Domain _domain = Domain();
+
   DiscoverBloc() : super(DiscoverState(items: XHandle.loading())) {
     getAllTracks();
   }
 
-  final Domain _domain = Domain();
-
   Future<void> getAllTracks() async {
     final value = await _domain.audio.getAllAudios();
     if (value.isSuccess) {
-      emit(state.copyWith(items: XHandle.completed(value.data ?? [])));
-      XSnackbar.show(msg: 'Load Success');
+      emit(state.copyWithItems(items: XHandle.completed(value.data ?? [])));
     } else {
       XSnackbar.show(msg: 'Load Error');
     }
