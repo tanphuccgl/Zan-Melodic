@@ -22,7 +22,7 @@ class FolderPage extends StatelessWidget {
           backgroundColor: MyColors.colorWhite,
           onRefresh: () async => context.read<FolderBloc>().fetchListFolder(),
           child: Padding(
-            padding: MyPadding.pPage,
+            padding: MyProperties.pPage,
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(

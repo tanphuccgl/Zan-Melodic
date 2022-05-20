@@ -27,7 +27,7 @@ class InfoSongPage extends StatelessWidget {
             child: Stack(
               children: [
                 const Padding(
-                  padding: MyPadding.pPage,
+                  padding: MyProperties.pPage,
                   child: CustomScrollView(
                     physics: BouncingScrollPhysics(),
                     slivers: [

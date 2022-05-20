@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
+import 'package:zanmelodic/src/constants/my_padding.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
 import 'package:zanmelodic/src/modules/audio_control/widgets/next_button.dart';
 import 'package:zanmelodic/src/modules/audio_control/widgets/play_button.dart';
@@ -29,7 +30,7 @@ class PlayerBottomBar extends StatelessWidget {
                 height: 81,
                 width: 378,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20.0),
+                  borderRadius: MyProperties.borderRadius,
                   border: Border.all(width: 1.0, color: MyColors.colorPrimary),
                   color: MyColors.colorBlack,
                 ),
@@ -43,7 +44,7 @@ class PlayerBottomBar extends StatelessWidget {
                               width: 51.0,
                             )
                           : ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: MyProperties.borderRadius,
                               clipBehavior: Clip.antiAlias,
                               child: Image.network(
                                 media.extras!['image'],

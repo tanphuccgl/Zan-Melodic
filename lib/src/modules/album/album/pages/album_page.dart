@@ -25,7 +25,7 @@ class AlbumPage extends StatelessWidget {
               onRefresh: () async =>
                   context.read<AlbumBloc>().fetchListOfAlbums(),
               child: Padding(
-                padding: MyPadding.pPage,
+                padding: MyProperties.pPage,
                 child: CustomScrollView(
                   physics: const BouncingScrollPhysics(),
                   slivers: [

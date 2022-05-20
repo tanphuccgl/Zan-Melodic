@@ -34,7 +34,7 @@ class FavoritesPage extends StatelessWidget {
             onRefresh: () async =>
                 context.read<FavoritesBloc>().fetchSongsFromFavorites(),
             child: Padding(
-              padding: MyPadding.pPage,
+              padding: MyProperties.pPage,
               child: CustomScrollView(
                 physics: const BouncingScrollPhysics(),
                 slivers: [

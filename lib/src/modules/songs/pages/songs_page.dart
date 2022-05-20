@@ -22,7 +22,7 @@ class SongPage extends StatelessWidget {
           onRefresh: () async =>
               context.read<SongListBloc>().fetchListOfSongs(),
           child: Padding(
-            padding: MyPadding.pPage,
+            padding: MyProperties.pPage,
             child: CustomScrollView(
               physics: const BouncingScrollPhysics(),
               slivers: [

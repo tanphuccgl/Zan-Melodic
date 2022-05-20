@@ -22,7 +22,7 @@ class PlaylistPage extends StatelessWidget {
           backgroundColor: MyColors.colorWhite,
           onRefresh: () async => context.read<PlaylistBloc>().fetchPlaylists(),
           child: Padding(
-            padding: MyPadding.pPage,
+            padding: MyProperties.pPage,
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(

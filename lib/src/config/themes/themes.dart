@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/constants/fonts.dart';
+import 'package:zanmelodic/src/constants/my_padding.dart';
 
 class XTheme {
   static ThemeData light() => ThemeData(
@@ -17,7 +18,7 @@ class XTheme {
             textStyle: const TextStyle(
                 fontSize: 14, fontWeight: FontWeight.w500, height: 1.42),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25),
+              borderRadius: MyProperties.borderRadius,
             ),
           ),
         ),

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zanmelodic/src/config/routes/coordinator.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
+import 'package:zanmelodic/src/constants/my_padding.dart';
 import 'package:zanmelodic/src/modules/now_playing/widgets/custom_process_bar.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
 import 'package:zanmelodic/src/modules/audio_control/widgets/next_button.dart';
@@ -52,7 +53,7 @@ class NowPlayingPage extends StatelessWidget {
                               height: 220.0,
                               width: 220.0,
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: MyProperties.borderRadius,
                                   boxShadow: [
                                     BoxShadow(
                                       offset: const Offset(10, 20),
@@ -61,7 +62,7 @@ class NowPlayingPage extends StatelessWidget {
                                     )
                                   ]),
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: MyProperties.borderRadius,
                                 clipBehavior: Clip.antiAlias,
                                 child: Image.network(
                                   media.extras!['image'],

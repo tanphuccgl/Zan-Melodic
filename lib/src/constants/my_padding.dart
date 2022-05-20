@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class MyPadding {
-  static const EdgeInsets pPage = EdgeInsets.fromLTRB(20, 10, 20, 0);
+class MyProperties {
+  static const EdgeInsets pPage = EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0);
+  static final BorderRadius borderRadius = BorderRadius.circular(20.0);
 }

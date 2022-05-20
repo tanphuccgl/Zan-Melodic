@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
+import 'package:zanmelodic/src/constants/my_padding.dart';
 import 'package:zanmelodic/src/models/audio_model.dart';
 import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
@@ -64,7 +65,7 @@ class SongDiscoverWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: MyProperties.borderRadius,
             clipBehavior: Clip.antiAlias,
             child: Image.network(
               audio.image,

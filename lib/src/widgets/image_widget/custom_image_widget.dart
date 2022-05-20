@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/constants/my_icons.dart';
+import 'package:zanmelodic/src/constants/my_padding.dart';
 
 class CustomImageWidget extends StatelessWidget {
   const CustomImageWidget(
@@ -24,7 +25,7 @@ class CustomImageWidget extends StatelessWidget {
       height: height,
       width: width,
       decoration: isShadow
-          ? BoxDecoration(borderRadius: BorderRadius.circular(20), boxShadow: [
+          ? BoxDecoration(borderRadius: MyProperties.borderRadius, boxShadow: [
               BoxShadow(
                 offset: const Offset(10, 20),
                 color: MyColors.colorShadowImageNowPlaying.withOpacity(0.25),
@@ -32,7 +33,7 @@ class CustomImageWidget extends StatelessWidget {
             ])
           : null,
       child: QueryArtworkWidget(
-        artworkBorder: BorderRadius.circular(20.0),
+        artworkBorder: MyProperties.borderRadius,
         id: id,
         type: artworkType,
         keepOldArtwork: true,
