@@ -29,7 +29,7 @@ class SongListState extends UpperControlState {
     bool? isShuffle,
     bool? isLoadPlaylist,
   }) {
-    sortListByName();
+    sortListByName;
     return SongListState(
       items: items ?? this.items,
       isSortName: isSortName ?? this.isSortName,
@@ -38,7 +38,7 @@ class SongListState extends UpperControlState {
     );
   }
 
-  void sortListByName() => (items.data ?? []).sort((a, b) => isSortName
+  void get sortListByName => (items.data ?? []).sort((a, b) => isSortName
       ? (b.title).compareTo((a.title))
       : (a.title).compareTo((b.title)));
 }
