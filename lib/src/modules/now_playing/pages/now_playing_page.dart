@@ -6,11 +6,12 @@ import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/constants/my_properties.dart';
 import 'package:zanmelodic/src/modules/now_playing/widgets/custom_process_bar.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
-import 'package:zanmelodic/src/modules/audio_control/widgets/next_button.dart';
-import 'package:zanmelodic/src/modules/audio_control/widgets/play_button.dart';
-import 'package:zanmelodic/src/modules/audio_control/widgets/previous_button.dart';
-import 'package:zanmelodic/src/modules/audio_control/widgets/repeat_button.dart';
-import 'package:zanmelodic/src/modules/audio_control/widgets/shuffle_button.dart';
+import 'package:zanmelodic/src/widgets/button/next_button.dart';
+import 'package:zanmelodic/src/widgets/button/play_button.dart';
+import 'package:zanmelodic/src/widgets/button/previous_button.dart';
+import 'package:zanmelodic/src/widgets/button/repeat_button.dart';
+import 'package:zanmelodic/src/widgets/button/shuffle_button.dart';
+
 import 'package:zanmelodic/src/widgets/custom_text/custom_text.dart';
 import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
 

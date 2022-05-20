@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:zanmelodic/src/config/routes/coordinator.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/constants/my_properties.dart';
-import 'package:zanmelodic/src/modules/audio_control/widgets/next_button.dart';
-import 'package:zanmelodic/src/modules/audio_control/widgets/play_button.dart';
-import 'package:zanmelodic/src/modules/audio_control/widgets/previous_button.dart';
-import 'package:zanmelodic/src/modules/audio_control/widgets/repeat_button.dart';
-import 'package:zanmelodic/src/modules/audio_control/widgets/shuffle_button.dart';
+
 import 'package:zanmelodic/src/modules/now_playing/info_song/widgets/frames_info.dart';
 import 'package:zanmelodic/src/modules/now_playing/info_song/widgets/playlist_for_song.dart';
 import 'package:zanmelodic/src/modules/now_playing/widgets/custom_process_bar.dart';
+import 'package:zanmelodic/src/widgets/button/next_button.dart';
+import 'package:zanmelodic/src/widgets/button/play_button.dart';
+import 'package:zanmelodic/src/widgets/button/previous_button.dart';
+import 'package:zanmelodic/src/widgets/button/repeat_button.dart';
+import 'package:zanmelodic/src/widgets/button/shuffle_button.dart';
 
 class InfoSongPage extends StatelessWidget {
   const InfoSongPage({Key? key}) : super(key: key);
