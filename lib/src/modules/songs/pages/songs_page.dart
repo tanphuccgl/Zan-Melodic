@@ -17,7 +17,7 @@ class SongPage extends StatelessWidget {
       final XHandle<List<SongModel>> _handle = state.items;
       final List<SongModel> songs = _handle.data ?? [];
 
-      return BaseScreen(
+      return BaseScaffold(
         handle: _handle,
         onRefresh: () => context.read<SongListBloc>().fetchListOfSongs(),
         child: Padding(

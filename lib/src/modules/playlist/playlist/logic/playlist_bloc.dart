@@ -11,13 +11,13 @@ import 'package:zanmelodic/src/widgets/loading/loading.dart';
 part 'playlist_state.dart';
 
 class PlaylistBloc extends UpperControlBloc<PlaylistState> {
-  PlaylistBloc()
-      : super(PlaylistState(
-            playlistsDialog: const [],
-            items: XHandle.loading(),
-            playlist: PlaylistModel({}))) {
+  PlaylistBloc() : super(_initialValue) {
     fetchPlaylists();
   }
+  static final PlaylistState _initialValue = PlaylistState(
+      playlistsDialog: const [],
+      items: XHandle.loading(),
+      playlist: PlaylistModel({}));
 
   final Domain _domain = Domain();
 

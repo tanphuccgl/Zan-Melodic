@@ -53,8 +53,7 @@ class FavoritesBloc extends UpperControlBloc<FavoritesState> {
     final _currentSongs = state.items.data ?? [];
     final _value = await _domain.song.getListOfSongs();
     if (_value.isSuccess) {
-      final _songs = state.items.data ?? [];
-
+      final _songs = _value.data ?? [];
       for (var item in _songs) {
         for (var itemFavorite in favoriteList) {
           if (item.id == itemFavorite.id) {

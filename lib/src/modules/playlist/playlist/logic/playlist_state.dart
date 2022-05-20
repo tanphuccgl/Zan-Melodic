@@ -2,19 +2,18 @@ part of 'playlist_bloc.dart';
 
 class PlaylistState extends UpperControlState {
   final XHandle<List<PlaylistModel>> items;
-
   final String namePlaylist;
   final bool pureName;
   final PlaylistModel playlist;
   final List<PlaylistModel> playlistsDialog;
+
   String get isValidName {
     return pureName ? XUtils.isValidNameCreatePlaylist(namePlaylist) : "";
   }
 
-  void sortListByName({bool reverse = false}) =>
-      (items.data ?? []).sort((a, b) => reverse
-          ? (b.playlist).compareTo((a.playlist))
-          : (a.playlist).compareTo((b.playlist)));
+  void get sortListByName => (items.data ?? []).sort((a, b) => isSortName
+      ? (b.playlist).compareTo((a.playlist))
+      : (a.playlist).compareTo((b.playlist)));
 
   const PlaylistState({
     required this.items,
@@ -50,6 +49,8 @@ class PlaylistState extends UpperControlState {
     PlaylistModel? playlist,
     List<PlaylistModel>? playlistsDialog,
   }) {
+    sortListByName;
+
     return PlaylistState(
       items: items ?? this.items,
       isSortName: isSortName ?? this.isSortName,

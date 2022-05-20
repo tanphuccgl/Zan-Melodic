@@ -4,16 +4,16 @@ import 'package:zanmelodic/src/widgets/base/custom_refresh.dart';
 import 'package:zanmelodic/src/widgets/state/state_error_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_loading_widget.dart';
 
-class BaseScreen<T> extends StatelessWidget {
-  const BaseScreen(
+class BaseScaffold<T> extends StatelessWidget {
+  final XHandle<List<T>> handle;
+  final Widget child;
+  final Future<void> Function() onRefresh;
+  const BaseScaffold(
       {Key? key,
       required this.handle,
       required this.child,
       required this.onRefresh})
       : super(key: key);
-  final XHandle<List<T>> handle;
-  final Widget child;
-  final Future<void> Function() onRefresh;
 
   @override
   Widget build(BuildContext context) {

@@ -19,7 +19,7 @@ class FavoritesPage extends StatelessWidget {
       final XHandle<List<SongModel>> _handle = state.items;
       final List<SongModel> _items = _handle.data ?? [];
 
-      return BaseScreen<SongModel>(
+      return BaseScaffold<SongModel>(
         handle: _handle,
         onRefresh: () =>
             context.read<FavoritesBloc>().fetchSongsFromFavorites(),

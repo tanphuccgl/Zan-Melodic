@@ -18,7 +18,7 @@ class DiscoverPage extends StatelessWidget {
       final XHandle<List<XAudio>> _handle = state.items;
       final List<XAudio> _items = _handle.data ?? [];
 
-      return BaseScreen<XAudio>(
+      return BaseScaffold<XAudio>(
         handle: _handle,
         onRefresh: () => context.read<DiscoverBloc>().getAllTracks(),
         child: Padding(
