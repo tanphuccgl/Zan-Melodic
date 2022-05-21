@@ -19,8 +19,7 @@ class PlaylistCard extends StatelessWidget {
         return GestureDetector(
             onTap: () => context
                 .read<PlaylistDetailBloc>()
-                .fetchListOfSongsFromPlaylist(context,
-                    playlist: playlist, songs: state.items.data ?? []),
+                .fetchListOfSongsFromPlaylist(context, playlist: playlist),
             onLongPress: () => PlaylistCoordinator.showDialogRemovePlaylist(
                 context,
                 playlist: playlist),

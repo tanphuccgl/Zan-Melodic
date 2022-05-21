@@ -15,12 +15,8 @@ class DialogAddToPlaylist extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PlaylistBloc, PlaylistState>(
       builder: (context, state) {
-        final List<PlaylistModel> _items = state.playlistsDialog;
-        // state.isSortName
-        //     ? state.sortListByName(reverse: true)
-        //     : state.sortListByName();
-        //TODO
-        state.isShuffle ? _items.shuffle() : null;
+        final List<PlaylistModel> _items = state.playlistsToDialog;
+
         return CustomDialog(
           body: SizedBox(
               width: 300.0,

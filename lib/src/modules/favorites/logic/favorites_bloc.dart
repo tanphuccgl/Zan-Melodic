@@ -20,7 +20,7 @@ class FavoritesBloc extends UpperControlBloc<FavoritesState> {
   Future<void> fetchSongsFromFavorites() async {
     final _value = await _domain.favorites.getSongsFromFavorites();
     if (_value.isSuccess) {
-      converToSongs(_value.data ?? []);
+      _convertToSongs(_value.data ?? []);
     } else {
       XSnackbar.show(msg: 'Load All List Error');
     }
@@ -30,7 +30,7 @@ class FavoritesBloc extends UpperControlBloc<FavoritesState> {
     XLoading.show();
     final _value = await _domain.favorites.addToFavorite(song: song);
     if (_value.isSuccess) {
-      converToSongs(_value.data ?? []);
+      _convertToSongs(_value.data ?? []);
     } else {
       XSnackbar.show(msg: 'Add Error');
     }
@@ -42,27 +42,27 @@ class FavoritesBloc extends UpperControlBloc<FavoritesState> {
     XLoading.show();
     final _value = await _domain.favorites.removeFromFavorites(idSong);
     if (_value.isSuccess) {
-      converToSongs(_value.data ?? []);
+      _convertToSongs(_value.data ?? []);
     } else {
       XSnackbar.show(msg: 'Remove Error');
     }
     XLoading.hide();
   }
 
-  Future<void> converToSongs(List<FavoritesEntity> favoriteList) async {
-    final _currentSongs = state.items.data ?? [];
+  Future<void> _convertToSongs(List<FavoritesEntity> favoriteList) async {
+    final List<SongModel> _newSongs = [];
     final _value = await _domain.song.getListOfSongs();
     if (_value.isSuccess) {
       final _songs = _value.data ?? [];
       for (var item in _songs) {
         for (var itemFavorite in favoriteList) {
           if (item.id == itemFavorite.id) {
-            _currentSongs.add(item);
+            _newSongs.add(item);
           }
         }
       }
       emit(state.copyWithItems(
-          items: XHandle.completed(_currentSongs), favoriteList: favoriteList));
+          items: XHandle.completed(_newSongs), favoriteList: favoriteList));
     } else {
       XSnackbar.show(msg: 'List Load Error');
     }

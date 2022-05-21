@@ -8,9 +8,13 @@ class BaseScaffold<T> extends StatelessWidget {
   final XHandle<List<T>> handle;
   final Widget child;
   final Future<void> Function() onRefresh;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
+  final Widget? floatingActionButton;
   const BaseScaffold(
       {Key? key,
       required this.handle,
+      this.floatingActionButtonLocation,
+      this.floatingActionButton,
       required this.child,
       required this.onRefresh})
       : super(key: key);
@@ -19,10 +23,12 @@ class BaseScaffold<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     if (handle.isCompleted) {
       return Scaffold(
+          floatingActionButton: floatingActionButton,
+          floatingActionButtonLocation: floatingActionButtonLocation,
           body: CustomRefresh(
-        child: child,
-        onRefresh: onRefresh,
-      ));
+            child: child,
+            onRefresh: onRefresh,
+          ));
     } else if (handle.isLoading) {
       return const XStateLoadingWidget(
         isSliver: false,

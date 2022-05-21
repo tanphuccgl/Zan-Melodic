@@ -15,22 +15,42 @@ part 'playlist_detail_state.dart';
 class PlaylistDetailBloc extends UpperControlBloc<PlaylistDetailState> {
   final Domain _domain = Domain();
 
-  PlaylistDetailBloc()
-      : super(PlaylistDetailState(
-            items: XHandle.loading(), playlist: PlaylistModel({})));
+  PlaylistDetailBloc() : super(_initialState);
+
+  static final PlaylistDetailState _initialState = PlaylistDetailState(
+      items: XHandle.loading(), playlist: PlaylistModel({}));
 
   Future<void> fetchListOfSongsFromPlaylist(BuildContext context,
-      {required PlaylistModel playlist, required List<SongModel> songs}) async {
+      {required PlaylistModel playlist}) async {
     final _value =
         await _domain.playlist.getListOfSongFromPlaylist(playlist.id);
     if (_value.isSuccess) {
+      _convertToSongs(_value.data ?? []);
       emit(state.copyWithItems(
-          items: XHandle.completed(_value.data ?? []),
-          playlist: playlist,
-          numberSongs: playlist.numOfSongs));
+          playlist: playlist, numberSongs: playlist.numOfSongs));
       PlaylistCoordinator.showPlaylistDetailScreen(context);
     } else {
       XSnackbar.show(msg: 'Load All List Error');
+    }
+  }
+
+  Future<void> _convertToSongs(List<SongModel> songs) async {
+    final List<SongModel> _newSongs = [];
+    final _value = await _domain.song.getListOfSongs();
+    if (_value.isSuccess) {
+      final _items = _value.data ?? [];
+      for (var item in _items) {
+        for (var item1 in songs) {
+          if (item.title == item1.title) {
+            _newSongs.add(item);
+          }
+        }
+      }
+      emit(state.copyWithItems(
+        items: XHandle.completed(_newSongs),
+      ));
+    } else {
+      XSnackbar.show(msg: 'Load List Error');
     }
   }
 
@@ -49,9 +69,8 @@ class PlaylistDetailBloc extends UpperControlBloc<PlaylistDetailState> {
         idPlaylist: playlist.id, idSong: idSongFromPlaylist);
     if (_value.isSuccess) {
       context.read<PlaylistBloc>().fetchPlaylists();
-
+      _convertToSongs(_value.data ?? []);
       emit(state.copyWithItems(
-        items: XHandle.completed(_value.data ?? []),
         numberSongs: state.numberSongs - 1,
       ));
       XSnackbar.show(msg: 'Remove Success');

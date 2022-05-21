@@ -1,33 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/routes/coordinator.dart';
-import 'package:zanmelodic/src/config/themes/my_colors.dart';
+import 'package:zanmelodic/src/models/handle.dart';
+import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
 import 'package:zanmelodic/src/modules/audio_control/pages/player_bottom_bar.dart';
+import 'package:zanmelodic/src/modules/playlist/playlist_detail/logic/playlist_detail_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist_detail/widgets/appbar_playlist_detail.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist_detail/widgets/song_list_in_playlist.dart';
+import 'package:zanmelodic/src/widgets/base/base_screen.dart';
 
 class PlaylistDetailPage extends StatelessWidget {
   const PlaylistDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onDoubleTap: () => XCoordinator.pop(context),
-      child: Scaffold(
-        floatingActionButton: const PlayerBottomBar(),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        body: RefreshIndicator(
-          color: MyColors.colorPrimary,
-          backgroundColor: MyColors.colorWhite,
-          onRefresh: () async {},
-          child: const CustomScrollView(
-            physics: BouncingScrollPhysics(),
-            slivers: [
-              AppBarPlaylistDetail(),
-              SongListInPlaylist(),
-            ],
+    return BlocBuilder<AudioHandleBloc, AudioHandleState>(
+        builder: (context, audioState) {
+      return BlocBuilder<PlaylistDetailBloc, PlaylistDetailState>(
+          builder: (context, state) {
+        final XHandle<List<SongModel>> _handle = state.items;
+        final List<SongModel> _items = _handle.data ?? [];
+        return GestureDetector(
+          onDoubleTap: () => XCoordinator.pop(context),
+          child: BaseScaffold<SongModel>(
+            handle: _handle,
+            onRefresh: () =>
+                context.read<PlaylistDetailBloc>().fetchListOfSongsFromPlaylist(
+                      context,
+                      playlist: state.playlist,
+                    ),
+            floatingActionButton: const PlayerBottomBar(),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+            child: Padding(
+              padding: audioState.isShowBottomBar == true
+                  ? const EdgeInsets.only(bottom: 90)
+                  : EdgeInsets.zero,
+              child: CustomScrollView(
+                physics: const BouncingScrollPhysics(),
+                slivers: [
+                  AppBarPlaylistDetail(
+                      numberSongs: state.numberSongs,
+                      playlist: state.playlist,
+                      songs: _items),
+                  SongListInPlaylist(songs: _items, playlist: state.playlist),
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
-    );
+        );
+      });
+    });
   }
 }

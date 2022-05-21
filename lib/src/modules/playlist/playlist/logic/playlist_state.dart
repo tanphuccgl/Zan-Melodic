@@ -5,7 +5,7 @@ class PlaylistState extends UpperControlState {
   final String namePlaylist;
   final bool pureName;
   final PlaylistModel playlist;
-  final List<PlaylistModel> playlistsDialog;
+  final List<PlaylistModel> playlistsToDialog;
 
   String get isValidName {
     return pureName ? XUtils.isValidNameCreatePlaylist(namePlaylist) : "";
@@ -22,7 +22,7 @@ class PlaylistState extends UpperControlState {
     this.namePlaylist = '',
     this.pureName = false,
     required this.playlist,
-    required this.playlistsDialog,
+    required this.playlistsToDialog,
   }) : super(
           isShuffle: isShuffle,
           isSortName: isSortName,
@@ -36,7 +36,7 @@ class PlaylistState extends UpperControlState {
         namePlaylist,
         pureName,
         playlist,
-        playlistsDialog,
+        playlistsToDialog,
       ];
 
   @override
@@ -47,7 +47,7 @@ class PlaylistState extends UpperControlState {
     String? namePlaylist,
     bool? pureName,
     PlaylistModel? playlist,
-    List<PlaylistModel>? playlistsDialog,
+    List<PlaylistModel>? playlistsToDialog,
   }) {
     sortListByName;
 
@@ -58,7 +58,7 @@ class PlaylistState extends UpperControlState {
       namePlaylist: namePlaylist ?? this.namePlaylist,
       pureName: pureName ?? this.pureName,
       playlist: playlist ?? this.playlist,
-      playlistsDialog: playlistsDialog ?? this.playlistsDialog,
+      playlistsToDialog: playlistsToDialog ?? this.playlistsToDialog,
     );
   }
 }

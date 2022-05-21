@@ -2,52 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
-import 'package:zanmelodic/src/modules/playlist/playlist_detail/logic/playlist_detail_bloc.dart';
-import 'package:zanmelodic/src/modules/songs/logic/song_list_bloc.dart';
 import 'package:zanmelodic/src/modules/upper_control/widgets/upper_control_bar.dart';
 import 'package:zanmelodic/src/utils/utils.dart';
 import 'package:zanmelodic/src/widgets/custom_appbar_sliver/custom_appbar_sliver.dart';
 
 class AppBarPlaylistDetail extends StatelessWidget {
-  const AppBarPlaylistDetail({Key? key}) : super(key: key);
+  const AppBarPlaylistDetail({
+    Key? key,
+    required this.songs,
+    required this.playlist,
+    required this.numberSongs,
+  }) : super(key: key);
+  final List<SongModel> songs;
+  final PlaylistModel playlist;
+  final int numberSongs;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PlaylistDetailBloc, PlaylistDetailState>(
-        builder: (context, playlistState) {
-      return BlocBuilder<SongListBloc, SongListState>(
-          builder: (context, songState) {
-        return BlocBuilder<AudioHandleBloc, AudioHandleState>(
-          builder: (context, state) {
-            List<SongModel> _items = playlistState.items.data ?? [];
-            List<SongModel> songs = songState.items.data ?? [];
-            List<SongModel> a = [];
-            for (var item in _items) {
-              for (var item1 in songs) {
-                if (item.title == item1.title) {
-                  a.add(item1);
-                }
-              }
-            }
-
-            final _playlist = playlistState.playlist;
-            return CustomAppBarSliver(
-              artworkType: ArtworkType.PLAYLIST,
-              hExpanded: 360.0,
-              hToolbar: 330.0,
-              id: _playlist.id,
-              subTile:
-                  'By: ${_playlist.dateAdded} | ${XUtils.formatNumberSong(playlistState.numberSongs)}',
-              title: _playlist.playlist,
-              upperControlBar: UpperControlBar(
-                onPressedPlay: () => context
-                    .read<AudioHandleBloc>()
-                    .skipToQueueItem(items: _items),
-              ),
-            );
-          },
-        );
-      });
-    });
+    return CustomAppBarSliver(
+      artworkType: ArtworkType.PLAYLIST,
+      hExpanded: 360.0,
+      hToolbar: 330.0,
+      id: playlist.id,
+      subTile:
+          'By: ${playlist.dateAdded} | ${XUtils.formatNumberSong(numberSongs)}',
+      title: playlist.playlist,
+      upperControlBar: UpperControlBar(
+        onPressedPlay: () =>
+            context.read<AudioHandleBloc>().skipToQueueItem(items: songs),
+      ),
+    );
   }
 }
