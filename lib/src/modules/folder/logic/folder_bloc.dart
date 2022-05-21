@@ -9,10 +9,12 @@ import 'package:zanmelodic/src/widgets/loading/bot_toast.dart';
 part 'folder_state.dart';
 
 class FolderBloc extends UpperControlBloc<FolderState> {
-  FolderBloc() : super(FolderState(items: XHandle.loading())) {
+  FolderBloc() : super(_initialValue) {
     fetchListFolder();
   }
   final Domain _domain = Domain();
+  static final FolderState _initialValue =
+      FolderState(items: XHandle.loading());
 
   Future<void> fetchListFolder() async {
     final _value = await _domain.folder.getListFolder();

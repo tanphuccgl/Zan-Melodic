@@ -15,9 +15,9 @@ part 'playlist_detail_state.dart';
 class PlaylistDetailBloc extends UpperControlBloc<PlaylistDetailState> {
   final Domain _domain = Domain();
 
-  PlaylistDetailBloc() : super(_initialState);
+  PlaylistDetailBloc() : super(_initialValue);
 
-  static final PlaylistDetailState _initialState = PlaylistDetailState(
+  static final PlaylistDetailState _initialValue = PlaylistDetailState(
       items: XHandle.loading(), playlist: PlaylistModel({}));
 
   Future<void> fetchListOfSongsFromPlaylist(BuildContext context,

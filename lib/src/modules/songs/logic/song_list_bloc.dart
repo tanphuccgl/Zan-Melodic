@@ -8,9 +8,11 @@ part 'song_list_state.dart';
 
 class SongListBloc extends UpperControlBloc<SongListState> {
   final Domain _domain = Domain();
-  SongListBloc() : super(SongListState(items: XHandle.loading())) {
+  SongListBloc() : super(_initialValue) {
     fetchListOfSongs();
   }
+  static final SongListState _initialValue =
+      SongListState(items: XHandle.loading());
 
   Future<void> fetchListOfSongs() async {
     final _value = await _domain.song.getListOfSongs();
