@@ -5,23 +5,6 @@ class PlaylistDetailState extends UpperControlState {
   final PlaylistModel playlist;
   final int numberSongs;
 
-  int idSong({required List<SongModel> list, required SongModel song}) {
-    late final int result;
-    for (int i = 0; i < list.length; i++) {
-      if (song.title == list[i].title && song.size == list[i].size) {
-        result = list[i].id;
-      }
-    }
-
-    return result;
-  }
-
-  void sortListByName1(
-          {bool reverse = false, required List<SongModel> songs}) =>
-      (songs).sort((a, b) => reverse
-          ? (b.title).compareTo((a.title))
-          : (a.title).compareTo((b.title)));
-
   const PlaylistDetailState({
     required this.items,
     bool isSortName = false,
@@ -47,6 +30,7 @@ class PlaylistDetailState extends UpperControlState {
     PlaylistModel? playlist,
     int? numberSongs,
   }) {
+    sortListByName;
     return PlaylistDetailState(
       items: items ?? this.items,
       isSortName: isSortName ?? this.isSortName,
@@ -55,4 +39,8 @@ class PlaylistDetailState extends UpperControlState {
       numberSongs: numberSongs ?? this.numberSongs,
     );
   }
+
+  void get sortListByName => (items.data ?? []).sort((a, b) => isSortName
+      ? (b.title).compareTo((a.title))
+      : (a.title).compareTo((b.title)));
 }

@@ -2,20 +2,18 @@ part of 'playlist_bloc.dart';
 
 class PlaylistState extends UpperControlState {
   final XHandle<List<PlaylistModel>> items;
-
   final String namePlaylist;
   final bool pureName;
   final PlaylistModel playlist;
-  final List<PlaylistModel> playlistsDialog;
+  final List<PlaylistModel> playlistsToDialog;
+
   String get isValidName {
     return pureName ? XUtils.isValidNameCreatePlaylist(namePlaylist) : "";
   }
 
-  @override
-  void sortListByName({bool reverse = false}) =>
-      (items.data ?? []).sort((a, b) => reverse
-          ? (b.playlist).compareTo((a.playlist))
-          : (a.playlist).compareTo((b.playlist)));
+  void get sortListByName => (items.data ?? []).sort((a, b) => isSortName
+      ? (b.playlist).compareTo((a.playlist))
+      : (a.playlist).compareTo((b.playlist)));
 
   const PlaylistState({
     required this.items,
@@ -24,7 +22,7 @@ class PlaylistState extends UpperControlState {
     this.namePlaylist = '',
     this.pureName = false,
     required this.playlist,
-    required this.playlistsDialog,
+    required this.playlistsToDialog,
   }) : super(
           isShuffle: isShuffle,
           isSortName: isSortName,
@@ -38,7 +36,7 @@ class PlaylistState extends UpperControlState {
         namePlaylist,
         pureName,
         playlist,
-        playlistsDialog,
+        playlistsToDialog,
       ];
 
   @override
@@ -49,8 +47,10 @@ class PlaylistState extends UpperControlState {
     String? namePlaylist,
     bool? pureName,
     PlaylistModel? playlist,
-    List<PlaylistModel>? playlistsDialog,
+    List<PlaylistModel>? playlistsToDialog,
   }) {
+    sortListByName;
+
     return PlaylistState(
       items: items ?? this.items,
       isSortName: isSortName ?? this.isSortName,
@@ -58,7 +58,7 @@ class PlaylistState extends UpperControlState {
       namePlaylist: namePlaylist ?? this.namePlaylist,
       pureName: pureName ?? this.pureName,
       playlist: playlist ?? this.playlist,
-      playlistsDialog: playlistsDialog ?? this.playlistsDialog,
+      playlistsToDialog: playlistsToDialog ?? this.playlistsToDialog,
     );
   }
 }

@@ -1,109 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zanmelodic/src/config/themes/my_colors.dart';
-import 'package:zanmelodic/src/config/themes/styles.dart';
-import 'package:zanmelodic/src/models/handle.dart';
-import 'package:zanmelodic/src/modules/folder/logic/folder_bloc.dart';
-import 'package:zanmelodic/src/utils/utils.dart';
-import 'package:zanmelodic/src/widgets/state/state_error_widget.dart';
-import 'package:zanmelodic/src/widgets/state/state_loading_widget.dart';
+import 'package:zanmelodic/src/modules/folder/widgets/browse_file_card.dart';
+import 'package:zanmelodic/src/modules/folder/widgets/folder_card.dart';
 
 class ListFolderWidget extends StatelessWidget {
-  const ListFolderWidget({Key? key}) : super(key: key);
+  const ListFolderWidget({Key? key, required this.folders}) : super(key: key);
+  final List<String> folders;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FolderBloc, FolderState>(
-      builder: (context, state) {
-        XHandle<List<String>> _handle = state.items;
-
-        if (_handle.isCompleted) {
-          final List<String> _items = _handle.data ?? [];
-          state.isSortName
-              ? state.sortListByName(reverse: true)
-              : state.sortListByName();
-          state.isShuffle ? _items.shuffle() : null;
-
-          return SliverToBoxAdapter(
-            child: ListView(
-              shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
-              children: [
-                ListView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  children: _items.map((e) => _buildCard(context, e)).toList(),
-                ),
-                _cardBrowseFiles(context)
-              ],
-            ),
-          );
-        } else if (_handle.isLoading) {
-          return const XStateLoadingWidget();
-        } else {
-          return const XStateErrorWidget();
-        }
-      },
-    );
-  }
-
-  Widget _buildCard(BuildContext context, String folder) {
-    return GestureDetector(
-      onTap: () => context.read<FolderBloc>().pickFolder(),
-      child: Padding(
-        padding: const EdgeInsets.all(4),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Icon(Icons.folder, color: Colors.amber, size: 60),
-            const SizedBox(
-              width: 10,
-            ),
-            Expanded(
-              child: RichText(
-                  text: TextSpan(
-                      text: XUtils.getNameFolderOfLink(folder) + '\n',
-                      style: Style.textTheme().titleMedium,
-                      children: [
-                    TextSpan(
-                      text: XUtils.dateTimeFolder(),
-                      style: Style.textTheme()
-                          .titleMedium!
-                          .copyWith(fontSize: 17, color: MyColors.colorGray),
-                    )
-                  ])),
-            ),
-            Text(
-              '1.5GB',
-              style: Style.textTheme().titleMedium!.copyWith(fontSize: 17),
-            )
-          ],
-        ),
+    return SliverToBoxAdapter(
+      child: ListView(
+        shrinkWrap: true,
+        physics: const BouncingScrollPhysics(),
+        children: [
+          ListView(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            children: folders.map((e) => FolderCard(folder: e)).toList(),
+          ),
+          const BrowseFileCard()
+        ],
       ),
     );
-  }
-
-  Widget _cardBrowseFiles(BuildContext context) {
-    return GestureDetector(
-        onTap: () => context.read<FolderBloc>().browseFiles(),
-        child: Padding(
-            padding: const EdgeInsets.all(4),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Icon(Icons.rule_folder,
-                    color: MyColors.colorWhite, size: 60),
-                const SizedBox(
-                  width: 10,
-                ),
-                Expanded(
-                  child: Text(
-                    'Browse files...',
-                    style: Style.textTheme().titleMedium,
-                  ),
-                )
-              ],
-            )));
   }
 }

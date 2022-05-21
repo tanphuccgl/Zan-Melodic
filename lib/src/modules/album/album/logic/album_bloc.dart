@@ -14,7 +14,6 @@ class AlbumBloc extends UpperControlBloc<AlbumState> {
   }
 
   Future<void> fetchListOfAlbums() async {
-    await Future.delayed(const Duration(seconds: 1));
     final value = await _domain.album.getListOfAlbums();
     if (value.isSuccess) {
       emit(state.copyWithItems(items: XHandle.completed(value.data ?? [])));

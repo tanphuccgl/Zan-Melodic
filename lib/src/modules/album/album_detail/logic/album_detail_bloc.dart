@@ -9,17 +9,17 @@ import 'package:zanmelodic/src/widgets/loading/bot_toast.dart';
 part 'album_detail_state.dart';
 
 class AlbumDetailBloc extends UpperControlBloc<AlbumDetailState> {
-  AlbumDetailBloc()
-      : super(AlbumDetailState(
-          items: XHandle.loading(),
-          album: AlbumModel({}),
-        ));
-
   final Domain _domain = Domain();
 
-  Future<void> fetchListOfSongsFromAlbum(BuildContext context,
-      {required AlbumModel album, required List<SongModel> songs}) async {
-    await Future.delayed(const Duration(seconds: 1));
+  AlbumDetailBloc() : super(_initialState);
+  static final AlbumDetailState _initialState = AlbumDetailState(
+    items: XHandle.loading(),
+    album: AlbumModel({}),
+  );
+  Future<void> fetchListOfSongsFromAlbum(
+    BuildContext context, {
+    required AlbumModel album,
+  }) async {
     final value = await _domain.album.getListOfSongFromAlbum(album.id);
     if (value.isSuccess) {
       emit(state.copyWithItems(

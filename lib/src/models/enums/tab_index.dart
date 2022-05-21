@@ -6,11 +6,6 @@ enum TabIndex {
   album,
   folder,
 }
-enum TabDetailSongIndex {
-  info,
-  now,
-  lyric,
-}
 
 extension TabIndexExt on TabIndex {
   String lableOf() {

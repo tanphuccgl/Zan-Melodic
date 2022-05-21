@@ -4,11 +4,9 @@ class AlbumDetailState extends UpperControlState {
   final XHandle<List<SongModel>> items;
   final AlbumModel album;
 
-  @override
-  void sortListByName({bool reverse = false}) =>
-      (items.data ?? []).sort((a, b) => reverse
-          ? (b.title).compareTo((a.title))
-          : (a.title).compareTo((b.title)));
+  void get sortListByName => (items.data ?? []).sort((a, b) => isSortName
+      ? (b.title).compareTo((a.title))
+      : (a.title).compareTo((b.title)));
 
   const AlbumDetailState(
       {required this.items,
@@ -35,6 +33,7 @@ class AlbumDetailState extends UpperControlState {
     bool? isShuffle,
     AlbumModel? album,
   }) {
+    sortListByName;
     return AlbumDetailState(
       items: items ?? this.items,
       isSortName: isSortName ?? this.isSortName,

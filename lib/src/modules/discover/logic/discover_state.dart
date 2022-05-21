@@ -8,7 +8,7 @@ class DiscoverState extends Equatable {
   @override
   List<Object?> get props => [items];
 
-  DiscoverState copyWith({
+  DiscoverState copyWithItems({
     XHandle<List<XAudio>>? items,
   }) {
     return DiscoverState(

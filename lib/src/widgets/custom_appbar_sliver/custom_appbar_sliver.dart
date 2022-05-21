@@ -2,10 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
-import 'package:zanmelodic/src/constants/my_padding.dart';
+import 'package:zanmelodic/src/constants/my_properties.dart';
 import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
 
 class CustomAppBarSliver extends StatelessWidget {
+  final Color colorBackgroundCollapsed;
+  final double hExpanded;
+  final double hToolbar;
+  final ArtworkType artworkType;
+  final String subTile;
+  final String title;
+  final int id;
+  final Widget upperControlBar;
   const CustomAppBarSliver({
     Key? key,
     this.colorBackgroundCollapsed = MyColors.colorBackground,
@@ -17,14 +25,6 @@ class CustomAppBarSliver extends StatelessWidget {
     required this.upperControlBar,
     required this.subTile,
   }) : super(key: key);
-  final Color colorBackgroundCollapsed;
-  final double hExpanded;
-  final double hToolbar;
-  final ArtworkType artworkType;
-  final String subTile;
-  final String title;
-  final int id;
-  final Widget upperControlBar;
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +82,7 @@ class CustomAppBarSliver extends StatelessWidget {
                             artworkType: artworkType,
                             isShadow: true,
                           ),
-                    Padding(padding: MyPadding.pPage, child: upperControlBar)
+                    Padding(padding: MyProperties.pPage, child: upperControlBar)
                   ],
                 ),
               ),

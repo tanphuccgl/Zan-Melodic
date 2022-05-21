@@ -39,7 +39,6 @@ class XAudio extends BaseModel {
     data['link'] = link;
     data['name'] = name;
     data['image'] = image;
-
     return data;
   }
 }

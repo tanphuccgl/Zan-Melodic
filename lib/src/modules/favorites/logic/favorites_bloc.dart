@@ -10,17 +10,17 @@ import 'package:zanmelodic/src/widgets/loading/loading.dart';
 part 'favorites_state.dart';
 
 class FavoritesBloc extends UpperControlBloc<FavoritesState> {
-  FavoritesBloc() : super(FavoritesState(items: XHandle.loading())) {
+  FavoritesBloc()
+      : super(
+            FavoritesState(items: XHandle.loading(), favoriteList: const [])) {
     fetchSongsFromFavorites();
   }
   final Domain _domain = Domain();
 
   Future<void> fetchSongsFromFavorites() async {
-    await Future.delayed(const Duration(seconds: 1));
-
     final _value = await _domain.favorites.getSongsFromFavorites();
     if (_value.isSuccess) {
-      emit(state.copyWithItems(items: XHandle.completed(_value.data ?? [])));
+      _convertToSongs(_value.data ?? []);
     } else {
       XSnackbar.show(msg: 'Load All List Error');
     }
@@ -30,7 +30,7 @@ class FavoritesBloc extends UpperControlBloc<FavoritesState> {
     XLoading.show();
     final _value = await _domain.favorites.addToFavorite(song: song);
     if (_value.isSuccess) {
-      emit(state.copyWithItems(items: XHandle.completed(_value.data ?? [])));
+      _convertToSongs(_value.data ?? []);
     } else {
       XSnackbar.show(msg: 'Add Error');
     }
@@ -42,10 +42,29 @@ class FavoritesBloc extends UpperControlBloc<FavoritesState> {
     XLoading.show();
     final _value = await _domain.favorites.removeFromFavorites(idSong);
     if (_value.isSuccess) {
-      emit(state.copyWithItems(items: XHandle.completed(_value.data ?? [])));
+      _convertToSongs(_value.data ?? []);
     } else {
       XSnackbar.show(msg: 'Remove Error');
     }
     XLoading.hide();
+  }
+
+  Future<void> _convertToSongs(List<FavoritesEntity> favoriteList) async {
+    final List<SongModel> _newSongs = [];
+    final _value = await _domain.song.getListOfSongs();
+    if (_value.isSuccess) {
+      final _songs = _value.data ?? [];
+      for (var item in _songs) {
+        for (var itemFavorite in favoriteList) {
+          if (item.id == itemFavorite.id) {
+            _newSongs.add(item);
+          }
+        }
+      }
+      emit(state.copyWithItems(
+          items: XHandle.completed(_newSongs), favoriteList: favoriteList));
+    } else {
+      XSnackbar.show(msg: 'List Load Error');
+    }
   }
 }
