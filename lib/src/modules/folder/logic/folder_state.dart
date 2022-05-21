@@ -3,8 +3,8 @@ part of 'folder_bloc.dart';
 class FolderState extends UpperControlState {
   final XHandle<List<String>> items;
 
-  void sortListByName({bool reverse = false}) => (items.data ?? [])
-      .sort((a, b) => reverse ? (b).compareTo((a)) : (a).compareTo((b)));
+  void get sortListByName => (items.data ?? [])
+      .sort((a, b) => isSortName ? (b).compareTo((a)) : (a).compareTo((b)));
 
   const FolderState({
     required this.items,
@@ -28,6 +28,7 @@ class FolderState extends UpperControlState {
     bool? isSortName,
     bool? isShuffle,
   }) {
+    sortListByName;
     return FolderState(
       items: items ?? this.items,
       isSortName: isSortName ?? this.isSortName,

@@ -26,7 +26,6 @@ class FavoritesPage extends StatelessWidget {
         child: Padding(
           padding: MyProperties.pPage,
           child: CustomScrollView(
-            physics: const BouncingScrollPhysics(),
             slivers: [
               SliverToBoxAdapter(
                   child: UpperControlBar(
