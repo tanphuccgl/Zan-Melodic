@@ -5,6 +5,7 @@ class FolderState extends UpperControlState {
 
   void get sortListByName => (items.data ?? []).sort((a, b) =>
       isSortName ? (b.name).compareTo((a.name)) : (a.name).compareTo((b.name)));
+  void get shuffleList => isShuffle ? null : (items.data ?? []).shuffle();
 
   const FolderState({
     required this.items,
@@ -29,6 +30,7 @@ class FolderState extends UpperControlState {
     bool? isShuffle,
   }) {
     sortListByName;
+    isShuffle;
     return FolderState(
       items: items ?? this.items,
       isSortName: isSortName ?? this.isSortName,
