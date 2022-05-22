@@ -20,8 +20,8 @@ class CustomAppBarSliver extends StatelessWidget {
     required this.id,
     required this.title,
     required this.artworkType,
-    required this.hExpanded,
-    required this.hToolbar,
+    this.hExpanded = 360.0,
+    this.hToolbar = 330.0,
     required this.upperControlBar,
     required this.subTile,
   }) : super(key: key);

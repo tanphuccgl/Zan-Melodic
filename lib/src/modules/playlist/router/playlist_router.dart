@@ -5,12 +5,13 @@ import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/modules/dashboard/router/dashboard_router.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/logic/playlist_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/pages/playlist_page.dart';
-import 'package:zanmelodic/src/modules/playlist/playlist/widgets/dialog_add_to_playlist.dart';
-import 'package:zanmelodic/src/modules/playlist/playlist/widgets/dialog_create_playlist.dart';
-import 'package:zanmelodic/src/modules/playlist/playlist/widgets/dialog_remove_playlist.dart';
+
 import 'package:zanmelodic/src/modules/playlist/playlist_detail/pages/playlist_detail_page.dart';
-import 'package:zanmelodic/src/modules/playlist/playlist_detail/widgets/dialog_remove_from_playlist.dart';
-import 'package:zanmelodic/src/modules/playlist/playlist_detail/widgets/dialog_rename_playlist.dart';
+import 'package:zanmelodic/src/widgets/dialogs/playlist/dialog_add_to_playlist.dart';
+import 'package:zanmelodic/src/widgets/dialogs/playlist/dialog_create_playlist.dart';
+import 'package:zanmelodic/src/widgets/dialogs/playlist/dialog_remove_from_playlist.dart';
+import 'package:zanmelodic/src/widgets/dialogs/playlist/dialog_remove_playlist.dart';
+import 'package:zanmelodic/src/widgets/dialogs/playlist/dialog_rename_playlist.dart';
 
 class PlaylistRouters {
   static const String detail = 'detail';

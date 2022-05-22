@@ -4,15 +4,14 @@ import 'package:zanmelodic/src/modules/upper_control/logic/upper_control_bloc.da
 import 'package:zanmelodic/src/repositories/domain.dart';
 import 'package:zanmelodic/src/widgets/loading/bot_toast.dart';
 
-part 'song_list_state.dart';
+part 'songs_state.dart';
 
-class SongListBloc extends UpperControlBloc<SongListState> {
+class SongsBloc extends UpperControlBloc<SongsState> {
+  static final SongsState _initialValue = SongsState(items: XHandle.loading());
   final Domain _domain = Domain();
-  SongListBloc() : super(_initialValue) {
+  SongsBloc() : super(_initialValue) {
     fetchListOfSongs();
   }
-  static final SongListState _initialValue =
-      SongListState(items: XHandle.loading());
 
   Future<void> fetchListOfSongs() async {
     final _value = await _domain.song.getListOfSongs();

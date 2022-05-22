@@ -8,7 +8,7 @@ import 'package:zanmelodic/src/modules/favorites/logic/favorites_bloc.dart';
 import 'package:zanmelodic/src/modules/folder/logic/folder_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/logic/playlist_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist_detail/logic/playlist_detail_bloc.dart';
-import 'package:zanmelodic/src/modules/songs/logic/song_list_bloc.dart';
+import 'package:zanmelodic/src/modules/songs/logic/songs_bloc.dart';
 import 'package:zanmelodic/src/widgets/button/image_button.dart';
 
 class SortButton extends StatelessWidget {
@@ -17,13 +17,13 @@ class SortButton extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SongListBloc, SongListState>(builder: (context, state) {
+    return BlocBuilder<SongsBloc, SongsState>(builder: (context, state) {
       return ImageButton(
         size: 30,
         onPressed: () {
           context.read<AlbumBloc>().onSortNameToList();
           context.read<FavoritesBloc>().onSortNameToList();
-          context.read<SongListBloc>().onSortNameToList();
+          context.read<SongsBloc>().onSortNameToList();
           context.read<PlaylistBloc>().onSortNameToList();
           context.read<FolderBloc>().onSortNameToList();
           context.read<PlaylistDetailBloc>().onSortNameToList();

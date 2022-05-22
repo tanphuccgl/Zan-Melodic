@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zanmelodic/src/models/handle.dart';
-import 'package:zanmelodic/src/widgets/base/custom_refresh.dart';
+import 'package:zanmelodic/src/widgets/base/base_refresh.dart';
 import 'package:zanmelodic/src/widgets/state/state_error_widget.dart';
 import 'package:zanmelodic/src/widgets/state/state_loading_widget.dart';
 
@@ -25,7 +25,7 @@ class BaseScaffold<T> extends StatelessWidget {
       return Scaffold(
           floatingActionButton: floatingActionButton,
           floatingActionButtonLocation: floatingActionButtonLocation,
-          body: CustomRefresh(
+          body: BaseRefresh(
             child: child,
             onRefresh: onRefresh,
           ));

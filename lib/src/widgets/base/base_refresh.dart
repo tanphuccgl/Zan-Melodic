@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 
-class CustomRefresh extends StatelessWidget {
-  const CustomRefresh({
+class BaseRefresh extends StatelessWidget {
+  final Widget child;
+  final VoidCallback onRefresh;
+  const BaseRefresh({
     Key? key,
     required this.child,
     required this.onRefresh,
   }) : super(key: key);
-  final Widget child;
-  final VoidCallback onRefresh;
 
   @override
   Widget build(BuildContext context) {

@@ -29,6 +29,17 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
     init();
   }
 
+  MediaItem converSongOnlineToModel(XAudio audio) {
+    final result = MediaItem(
+      id: audio.id.toString(),
+      album: 'Firebase',
+      title: audio.name,
+      artist: audio.author,
+      extras: {'url': audio.link, 'isFirebase': true, 'image': audio.image},
+    );
+    return result;
+  }
+
   void dispose() {
     state.audioHandler.customAction('dispose');
   }
@@ -55,6 +66,35 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
   void pause() => state.audioHandler.pause();
 
   void play() => state.audioHandler.play();
+
+  Future<void> playItem({
+    List<SongModel>? items,
+    int? index,
+    List<XAudio>? audios,
+    List<MediaItem>? medias,
+  }) async {
+    List<MediaItem> mediaItems = medias ?? [];
+    if (items != null) {
+      mediaItems = (items).map((e) => converSongToModel(e)).toList();
+    }
+    if (audios != null) {
+      mediaItems = (audios).map((e) => converSongOnlineToModel(e)).toList();
+    }
+
+    bool isEqual = listEquals(mediaItems, state.playlist);
+    if (isEqual == false) {
+      loadPlaylist(mediaItems);
+      await Future.delayed(const Duration(milliseconds: 500));
+    }
+
+    state.audioHandler.skipToQueueItem(index ?? 0);
+
+    play();
+
+    emit(state.copyWith(
+      isShowBottomBar: true,
+    ));
+  }
 
   void previous() => state.audioHandler.skipToPrevious();
 
@@ -92,46 +132,6 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
     } else {
       state.audioHandler.setShuffleMode(AudioServiceShuffleMode.none);
     }
-  }
-
-  Future<void> skipToQueueItem({
-    List<SongModel>? items,
-    int? index,
-    List<XAudio>? audios,
-    List<MediaItem>? medias,
-  }) async {
-    List<MediaItem> mediaItems = medias ?? [];
-    if (items != null) {
-      mediaItems = (items).map((e) => converSongToModel(e)).toList();
-    }
-    if (audios != null) {
-      mediaItems = (audios).map((e) => converSongOnlineToModel(e)).toList();
-    }
-
-    bool isEqual = listEquals(mediaItems, state.playlist);
-    if (isEqual == false) {
-      loadPlaylist(mediaItems);
-      await Future.delayed(const Duration(milliseconds: 500));
-    }
-
-    state.audioHandler.skipToQueueItem(index ?? 0);
-
-    play();
-
-    emit(state.copyWith(
-      isShowBottomBar: true,
-    ));
-  }
-
-  MediaItem converSongOnlineToModel(XAudio audio) {
-    final result = MediaItem(
-      id: audio.id.toString(),
-      album: 'Firebase',
-      title: audio.name,
-      artist: audio.author,
-      extras: {'url': audio.link, 'isFirebase': true, 'image': audio.image},
-    );
-    return result;
   }
 
   void sort() {

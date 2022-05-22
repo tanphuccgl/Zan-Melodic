@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zanmelodic/src/modules/album/album/logic/album_bloc.dart';
 import 'package:zanmelodic/src/modules/album/album_detail/logic/album_detail_bloc.dart';
 import 'package:zanmelodic/src/modules/folder/logic/folder_bloc.dart';
-import 'package:zanmelodic/src/modules/songs/logic/song_list_bloc.dart';
+import 'package:zanmelodic/src/modules/songs/logic/songs_bloc.dart';
 import 'package:zanmelodic/src/repositories/audio_query/base_audio_query.dart';
 
 class DashboardWrapperPage extends StatefulWidget {
@@ -16,16 +16,10 @@ class DashboardWrapperPage extends StatefulWidget {
 
 class _DashboardWrapperPageState extends State<DashboardWrapperPage> {
   @override
-  void initState() {
-    super.initState();
-    BaseAudioQuery().permissionsRequest();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => SongListBloc()),
+        BlocProvider(create: (_) => SongsBloc()),
         BlocProvider(create: (_) => AlbumBloc()),
         BlocProvider(create: (_) => AlbumDetailBloc()),
         BlocProvider(create: (_) => FolderBloc()),
@@ -34,5 +28,11 @@ class _DashboardWrapperPageState extends State<DashboardWrapperPage> {
           onWillPop: () async => false,
           child: const Scaffold(body: AutoRouter())),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    BaseAudioQuery().permissionsRequest();
   }
 }

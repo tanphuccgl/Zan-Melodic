@@ -4,13 +4,12 @@ import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/constants/my_properties.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
-
 import 'package:zanmelodic/src/modules/dashboard/router/dashboard_router.dart';
 import 'package:zanmelodic/src/widgets/button/next_button.dart';
 import 'package:zanmelodic/src/widgets/button/play_button.dart';
 import 'package:zanmelodic/src/widgets/button/previous_button.dart';
-import 'package:zanmelodic/src/widgets/custom_text/custom_text.dart';
 import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
+import 'package:zanmelodic/src/widgets/text/custom_text.dart';
 
 class PlayerBottomBar extends StatelessWidget {
   const PlayerBottomBar({Key? key}) : super(key: key);
@@ -67,13 +66,13 @@ class PlayerBottomBar extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            CusText(
+                            XText(
                               title: '${media.title}\n',
                               style: Style.textTheme()
                                   .titleMedium!
                                   .copyWith(fontSize: 15, height: 1.25),
                             ),
-                            CusText(
+                            XText(
                                 title: media.artist ?? '',
                                 style: Style.textTheme().titleMedium!.copyWith(
                                     fontSize: 12,

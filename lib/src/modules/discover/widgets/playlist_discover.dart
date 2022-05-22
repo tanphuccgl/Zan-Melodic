@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zanmelodic/src/constants/my_properties.dart';
 import 'package:zanmelodic/src/models/audio_model.dart';
+import 'package:zanmelodic/src/widgets/card/discover/playlist_card.dart';
 import 'package:zanmelodic/src/widgets/state/state_empty_widget.dart';
 
 class PlaylistDiscoverWidget extends StatelessWidget {
@@ -18,27 +18,13 @@ class PlaylistDiscoverWidget extends StatelessWidget {
               height: 110,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemBuilder: ((context, index) => _buildCard(audios[index])),
+                itemBuilder: ((context, index) =>
+                    PlaylistCard(audio: audios[index])),
                 itemCount: audios.length,
                 physics: const BouncingScrollPhysics(),
               ),
             ),
           ))
         : const XStateEmptyWidget();
-  }
-
-  Widget _buildCard(XAudio audio) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 12),
-      child: ClipRRect(
-        borderRadius: MyProperties.borderRadius,
-        child: Image.network(
-          audio.image,
-          height: 115.0,
-          width: 115.0,
-          fit: BoxFit.fill,
-        ),
-      ),
-    );
   }
 }

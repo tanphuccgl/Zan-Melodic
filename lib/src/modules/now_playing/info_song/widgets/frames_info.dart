@@ -4,7 +4,7 @@ import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/constants/my_properties.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
-import 'package:zanmelodic/src/widgets/custom_text/custom_text.dart';
+import 'package:zanmelodic/src/widgets/text/custom_text.dart';
 
 class FramesInfoWidget extends StatelessWidget {
   const FramesInfoWidget({Key? key}) : super(key: key);
@@ -48,7 +48,7 @@ class FramesInfoWidget extends StatelessWidget {
                       fontSize: 15,
                       color: MyColors.colorWhite.withOpacity(0.5)))),
           Expanded(
-            child: CusText(
+            child: XText(
                 title: subTile,
                 maxLines: 2,
                 style: Style.textTheme()

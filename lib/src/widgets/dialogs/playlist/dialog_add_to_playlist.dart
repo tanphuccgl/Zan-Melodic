@@ -4,12 +4,12 @@ import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/logic/playlist_bloc.dart';
-import 'package:zanmelodic/src/widgets/custom_dialog/custom_dialog.dart';
+import 'package:zanmelodic/src/widgets/base/base_dialog.dart';
 import 'package:zanmelodic/src/widgets/state/state_empty_widget.dart';
 
 class DialogAddToPlaylist extends StatelessWidget {
-  const DialogAddToPlaylist({Key? key, required this.idSong}) : super(key: key);
   final int idSong;
+  const DialogAddToPlaylist({Key? key, required this.idSong}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class DialogAddToPlaylist extends StatelessWidget {
       builder: (context, state) {
         final List<PlaylistModel> _items = state.playlistsToDialog;
 
-        return CustomDialog(
+        return BaseDialog(
           body: SizedBox(
               width: 300.0,
               child: _items.isNotEmpty
