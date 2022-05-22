@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
-import 'package:zanmelodic/src/constants/my_properties.dart';
 import 'package:zanmelodic/src/models/audio_model.dart';
+import 'package:zanmelodic/src/widgets/image_widget/custom_image.dart';
 import 'package:zanmelodic/src/widgets/text/custom_text.dart';
 
 class SingerCard extends StatelessWidget {
@@ -17,19 +17,11 @@ class SingerCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          ClipRRect(
-            borderRadius: MyProperties.borderRadius,
-            clipBehavior: Clip.antiAlias,
-            child: Image.network(
-              audio.image,
-              gaplessPlayback: false,
-              repeat: ImageRepeat.noRepeat,
-              scale: 1.0,
-              width: 120,
-              height: 120,
-              fit: BoxFit.cover,
-              filterQuality: FilterQuality.low,
-            ),
+          CustomImage(
+            urlImage: audio.image,
+            id: int.parse(audio.id),
+            height: 120.0,
+            width: 120.0,
           ),
           const SizedBox(
             width: 15,

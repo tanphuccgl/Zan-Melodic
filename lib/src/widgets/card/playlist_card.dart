@@ -5,11 +5,11 @@ import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist_detail/logic/playlist_detail_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/router/playlist_router.dart';
 import 'package:zanmelodic/src/utils/utils.dart';
-import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
+import 'package:zanmelodic/src/widgets/image_widget/custom_image.dart';
 
 class PlaylistCard extends StatelessWidget {
-  const PlaylistCard({Key? key, required this.playlist}) : super(key: key);
   final PlaylistModel playlist;
+  const PlaylistCard({Key? key, required this.playlist}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class PlaylistCard extends StatelessWidget {
             child: Stack(
               alignment: Alignment.center,
               children: [
-                CustomImageWidget(
+                CustomImage(
                   id: playlist.id,
                   height: 162.0,
                   width: 178.0,

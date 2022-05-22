@@ -7,8 +7,8 @@ import 'package:zanmelodic/src/constants/my_images.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
 import 'package:zanmelodic/src/utils/utils.dart';
 
-class CutomProcessBar extends StatelessWidget {
-  const CutomProcessBar({Key? key}) : super(key: key);
+class ProcessBar extends StatelessWidget {
+  const ProcessBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

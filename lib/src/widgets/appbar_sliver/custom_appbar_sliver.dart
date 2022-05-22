@@ -3,7 +3,7 @@ import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/constants/my_properties.dart';
-import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
+import 'package:zanmelodic/src/widgets/image_widget/custom_image.dart';
 
 class CustomAppBarSliver extends StatelessWidget {
   final Color colorBackgroundCollapsed;
@@ -68,14 +68,14 @@ class CustomAppBarSliver extends StatelessWidget {
                           color: MyColors.colorGray),
                     ),
                     _isCollapsed
-                        ? CustomImageWidget(
+                        ? CustomImage(
                             id: id,
                             height: 190,
                             width: double.infinity,
                             artworkType: artworkType,
                             isShadow: true,
                           )
-                        : CustomImageWidget(
+                        : CustomImage(
                             id: id,
                             height: 220,
                             width: 220,

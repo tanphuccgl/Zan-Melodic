@@ -6,6 +6,7 @@ import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/routes/auto_route.gr.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
+import 'package:zanmelodic/src/constants/my_properties.dart';
 import 'package:zanmelodic/src/models/enums/tab_index.dart';
 import 'package:zanmelodic/src/modules/album/album/pages/album_page.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
@@ -66,7 +67,7 @@ class DashboardPage extends StatelessWidget {
                           ])),
                   body: Padding(
                     padding: state.isShowBottomBar == true
-                        ? const EdgeInsets.only(bottom: 90)
+                        ? MyProperties.pBottomBar
                         : EdgeInsets.zero,
                     child: const TabBarView(children: [
                       DiscoverPage(),

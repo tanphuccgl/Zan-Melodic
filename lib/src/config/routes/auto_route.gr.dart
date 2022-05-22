@@ -21,14 +21,15 @@ import '../../modules/discover/pages/discover_page.dart' as _i13;
 import '../../modules/favorites/pages/favorites_page.dart' as _i6;
 import '../../modules/folder/pages/folder_page.dart' as _i12;
 import '../../modules/loading/pages/loading_page.dart' as _i2;
-import '../../modules/now_playing/info_song/pages/info_song_page.dart' as _i15;
-import '../../modules/now_playing/lyric/pages/lyric_page.dart' as _i16;
-import '../../modules/now_playing/pages/now_playing_page.dart' as _i14;
-import '../../modules/now_playing/router/detail_song_wrapper_router.dart'
-    as _i3;
 import '../../modules/playlist/playlist/pages/playlist_page.dart' as _i8;
 import '../../modules/playlist/playlist_detail/pages/playlist_detail_page.dart'
     as _i9;
+import '../../modules/song_detail/info_song/pages/info_song_page.dart' as _i15;
+import '../../modules/song_detail/lyric/pages/lyric_page.dart' as _i16;
+import '../../modules/song_detail/now_playing/page/now_playing_page.dart'
+    as _i14;
+import '../../modules/song_detail/router/detail_song_wrapper_router.dart'
+    as _i3;
 import '../../modules/songs/pages/songs_page.dart' as _i7;
 
 class XRouter extends _i5.RootStackRouter {

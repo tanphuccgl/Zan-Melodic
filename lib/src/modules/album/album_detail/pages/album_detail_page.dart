@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/routes/coordinator.dart';
+import 'package:zanmelodic/src/constants/my_properties.dart';
 import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/modules/album/album_detail/logic/album_detail_bloc.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
@@ -33,7 +34,7 @@ class AlbumDetailPage extends StatelessWidget {
             floatingActionButton: const PlayerBottomBar(),
             child: Padding(
               padding: audioState.isShowBottomBar == true
-                  ? const EdgeInsets.only(bottom: 90)
+                  ? MyProperties.pBottomBar
                   : EdgeInsets.zero,
               child: CustomScrollView(
                 physics: const BouncingScrollPhysics(),

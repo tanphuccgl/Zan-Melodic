@@ -8,7 +8,7 @@ import 'package:zanmelodic/src/modules/dashboard/router/dashboard_router.dart';
 import 'package:zanmelodic/src/widgets/button/next_button.dart';
 import 'package:zanmelodic/src/widgets/button/play_button.dart';
 import 'package:zanmelodic/src/widgets/button/previous_button.dart';
-import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
+import 'package:zanmelodic/src/widgets/image_widget/custom_image.dart';
 import 'package:zanmelodic/src/widgets/text/custom_text.dart';
 
 class PlayerBottomBar extends StatelessWidget {
@@ -38,26 +38,12 @@ class PlayerBottomBar extends StatelessWidget {
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      media.extras!['isFirebase'] == false
-                          ? CustomImageWidget(
-                              id: int.parse(media.id),
-                              height: 51.0,
-                              width: 51.0,
-                            )
-                          : ClipRRect(
-                              borderRadius: MyProperties.borderRadius,
-                              clipBehavior: Clip.antiAlias,
-                              child: Image.network(
-                                media.extras!['image'],
-                                gaplessPlayback: false,
-                                repeat: ImageRepeat.noRepeat,
-                                scale: 1.0,
-                                height: 51.0,
-                                width: 51.0,
-                                fit: BoxFit.cover,
-                                filterQuality: FilterQuality.low,
-                              ),
-                            ),
+                      CustomImage(
+                        urlImage: media.extras!['image'],
+                        id: int.parse(media.id),
+                        height: 51.0,
+                        width: 51.0,
+                      ),
                       const SizedBox(
                         width: 11,
                       ),

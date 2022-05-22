@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:zanmelodic/src/modules/now_playing/info_song/pages/info_song_page.dart';
-import 'package:zanmelodic/src/modules/now_playing/lyric/pages/lyric_page.dart';
-import 'package:zanmelodic/src/modules/now_playing/pages/now_playing_page.dart';
-import 'package:zanmelodic/src/modules/now_playing/router/detail_song_wrapper_router.dart';
+import 'package:zanmelodic/src/modules/song_detail/info_song/pages/info_song_page.dart';
+import 'package:zanmelodic/src/modules/song_detail/lyric/pages/lyric_page.dart';
+import 'package:zanmelodic/src/modules/song_detail/now_playing/page/now_playing_page.dart';
+import 'package:zanmelodic/src/modules/song_detail/router/detail_song_wrapper_router.dart';
 
 class DetailSongTaps {
   static const String infoTab = 'info';

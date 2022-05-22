@@ -2,15 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:zanmelodic/src/config/routes/coordinator.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/constants/my_properties.dart';
-
-import 'package:zanmelodic/src/modules/now_playing/info_song/widgets/frames_info.dart';
-import 'package:zanmelodic/src/modules/now_playing/info_song/widgets/playlist_for_song.dart';
-import 'package:zanmelodic/src/modules/now_playing/widgets/custom_process_bar.dart';
-import 'package:zanmelodic/src/widgets/button/next_button.dart';
-import 'package:zanmelodic/src/widgets/button/play_button.dart';
-import 'package:zanmelodic/src/widgets/button/previous_button.dart';
-import 'package:zanmelodic/src/widgets/button/repeat_button.dart';
-import 'package:zanmelodic/src/widgets/button/shuffle_button.dart';
+import 'package:zanmelodic/src/modules/song_detail/info_song/widgets/frames_info.dart';
+import 'package:zanmelodic/src/modules/song_detail/info_song/widgets/playlist_for_song.dart';
+import 'package:zanmelodic/src/modules/song_detail/widgets/bottom_control.dart';
 
 class InfoSongPage extends StatelessWidget {
   const InfoSongPage({Key? key}) : super(key: key);
@@ -67,21 +61,7 @@ class InfoSongPage extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [ShuffleButton(), RepeatButton()],
-                          ),
-                          const CutomProcessBar(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              PreviousButton(),
-                              PlayButton(),
-                              NextButton()
-                            ],
-                          )
-                        ],
+                        children: const [BottomControl()],
                       ),
                     ),
                   ),

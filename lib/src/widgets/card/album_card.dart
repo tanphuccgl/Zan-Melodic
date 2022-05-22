@@ -4,7 +4,7 @@ import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/modules/album/album_detail/logic/album_detail_bloc.dart';
 import 'package:zanmelodic/src/utils/utils.dart';
-import 'package:zanmelodic/src/widgets/image_widget/custom_image_widget.dart';
+import 'package:zanmelodic/src/widgets/image_widget/custom_image.dart';
 import 'package:zanmelodic/src/widgets/text/custom_text.dart';
 
 class AlbumCard extends StatelessWidget {
@@ -25,7 +25,7 @@ class AlbumCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomImageWidget(
+            CustomImage(
                 id: album.id,
                 height: 120,
                 width: 120,
