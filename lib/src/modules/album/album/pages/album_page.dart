@@ -4,7 +4,7 @@ import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/constants/my_properties.dart';
 import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/modules/album/album/logic/album_bloc.dart';
-import 'package:zanmelodic/src/modules/album/album/widgets/list_album_widget.dart';
+import 'package:zanmelodic/src/modules/album/album/widgets/albums_widget.dart';
 import 'package:zanmelodic/src/modules/upper_control/widgets/upper_control_bar.dart';
 import 'package:zanmelodic/src/widgets/base/base_screen.dart';
 
@@ -27,7 +27,7 @@ class AlbumPage extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               slivers: [
                 const SliverToBoxAdapter(child: UpperControlBar()),
-                ListAlbumWidget(albums: _items),
+                AlbumsWidget(albums: _items),
               ],
             ),
           ),

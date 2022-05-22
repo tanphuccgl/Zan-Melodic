@@ -11,8 +11,8 @@ part 'album_detail_state.dart';
 class AlbumDetailBloc extends UpperControlBloc<AlbumDetailState> {
   final Domain _domain = Domain();
 
-  AlbumDetailBloc() : super(_initialState);
-  static final AlbumDetailState _initialState = AlbumDetailState(
+  AlbumDetailBloc() : super(_initialValue);
+  static final AlbumDetailState _initialValue = AlbumDetailState(
     items: XHandle.loading(),
     album: AlbumModel({}),
   );

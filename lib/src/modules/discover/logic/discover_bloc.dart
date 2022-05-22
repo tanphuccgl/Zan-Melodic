@@ -10,9 +10,11 @@ part 'discover_state.dart';
 class DiscoverBloc extends Cubit<DiscoverState> {
   final Domain _domain = Domain();
 
-  DiscoverBloc() : super(DiscoverState(items: XHandle.loading())) {
+  DiscoverBloc() : super(_initialValue) {
     getAllTracks();
   }
+  static final DiscoverState _initialValue =
+      DiscoverState(items: XHandle.loading());
 
   Future<void> getAllTracks() async {
     final value = await _domain.audio.getAllAudios();

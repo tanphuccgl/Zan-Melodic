@@ -10,11 +10,12 @@ import 'package:zanmelodic/src/widgets/loading/loading.dart';
 part 'favorites_state.dart';
 
 class FavoritesBloc extends UpperControlBloc<FavoritesState> {
-  FavoritesBloc()
-      : super(
-            FavoritesState(items: XHandle.loading(), favoriteList: const [])) {
+  FavoritesBloc() : super(_initialValue) {
     fetchSongsFromFavorites();
   }
+  static final FavoritesState _initialValue =
+      FavoritesState(items: XHandle.loading(), favoriteList: const []);
+
   final Domain _domain = Domain();
 
   Future<void> fetchSongsFromFavorites() async {

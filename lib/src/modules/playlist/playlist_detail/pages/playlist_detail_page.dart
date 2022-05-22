@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/routes/coordinator.dart';
+import 'package:zanmelodic/src/constants/my_properties.dart';
 import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
 import 'package:zanmelodic/src/modules/audio_control/pages/player_bottom_bar.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist_detail/logic/playlist_detail_bloc.dart';
-import 'package:zanmelodic/src/modules/playlist/playlist_detail/widgets/appbar_playlist_detail.dart';
-import 'package:zanmelodic/src/modules/playlist/playlist_detail/widgets/song_list_in_playlist.dart';
+import 'package:zanmelodic/src/widgets/base/base_appbar_detail.dart';
 import 'package:zanmelodic/src/widgets/base/base_screen.dart';
+import 'package:zanmelodic/src/widgets/base/base_songs.dart';
 
 class PlaylistDetailPage extends StatelessWidget {
   const PlaylistDetailPage({Key? key}) : super(key: key);
@@ -35,16 +36,16 @@ class PlaylistDetailPage extends StatelessWidget {
                 FloatingActionButtonLocation.centerFloat,
             child: Padding(
               padding: audioState.isShowBottomBar == true
-                  ? const EdgeInsets.only(bottom: 90)
+                  ? MyProperties.pBottomBar
                   : EdgeInsets.zero,
               child: CustomScrollView(
                 physics: const BouncingScrollPhysics(),
                 slivers: [
-                  AppBarPlaylistDetail(
+                  BaseAppBarDetail(
                       numberSongs: state.numberSongs,
                       playlist: state.playlist,
                       songs: _items),
-                  SongListInPlaylist(songs: _items, playlist: state.playlist),
+                  BaseSongs(songs: _items, playlist: state.playlist),
                 ],
               ),
             ),

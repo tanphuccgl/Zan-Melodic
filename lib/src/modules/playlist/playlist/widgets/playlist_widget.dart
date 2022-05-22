@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-import 'package:zanmelodic/src/config/themes/my_colors.dart';
-import 'package:zanmelodic/src/config/themes/styles.dart';
-import 'package:zanmelodic/src/modules/playlist/playlist/widgets/add_playlist_card.dart';
-import 'package:zanmelodic/src/modules/playlist/playlist/widgets/playlist_card.dart';
-import 'package:zanmelodic/src/modules/playlist/router/playlist_router.dart';
+import 'package:zanmelodic/src/modules/playlist/playlist/widgets/empty_text_button.dart';
+import 'package:zanmelodic/src/widgets/card/add_playlist_card.dart';
+import 'package:zanmelodic/src/widgets/card/playlist_card.dart';
 
 class PlaylistWidget extends StatelessWidget {
   const PlaylistWidget({Key? key, required this.playlists}) : super(key: key);
@@ -35,7 +33,7 @@ class PlaylistWidget extends StatelessWidget {
               ),
             ],
           ))
-        : _emptyListWidget(context);
+        : const EmptyTextButton();
   }
 
   Widget _listWidget({
@@ -59,23 +57,6 @@ class PlaylistWidget extends StatelessWidget {
               ? const AddPlaylistCard()
               : const SizedBox.shrink()
         ],
-      ),
-    );
-  }
-
-  Widget _emptyListWidget(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Center(
-        child: TextButton(
-            onPressed: () =>
-                PlaylistCoordinator.showDialogCreatePlaylist(context),
-            child: Text(
-              'Click here to create a new playlist',
-              textAlign: TextAlign.center,
-              style: Style.textTheme()
-                  .titleMedium!
-                  .copyWith(color: MyColors.colorWhite.withOpacity(0.5)),
-            )),
       ),
     );
   }

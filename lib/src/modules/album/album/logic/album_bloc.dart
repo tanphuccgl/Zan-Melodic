@@ -9,9 +9,11 @@ part 'album_state.dart';
 class AlbumBloc extends UpperControlBloc<AlbumState> {
   final Domain _domain = Domain();
 
-  AlbumBloc() : super(AlbumState(items: XHandle.loading())) {
+  AlbumBloc() : super(_initialValue) {
     fetchListOfAlbums();
   }
+
+  static final AlbumState _initialValue = AlbumState(items: XHandle.loading());
 
   Future<void> fetchListOfAlbums() async {
     final value = await _domain.album.getListOfAlbums();

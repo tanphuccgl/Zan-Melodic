@@ -1,10 +1,10 @@
 part of 'folder_bloc.dart';
 
 class FolderState extends UpperControlState {
-  final XHandle<List<String>> items;
+  final XHandle<List<XFolder>> items;
 
-  void get sortListByName => (items.data ?? [])
-      .sort((a, b) => isSortName ? (b).compareTo((a)) : (a).compareTo((b)));
+  void get sortListByName => (items.data ?? []).sort((a, b) =>
+      isSortName ? (b.name).compareTo((a.name)) : (a.name).compareTo((b.name)));
 
   const FolderState({
     required this.items,
@@ -24,7 +24,7 @@ class FolderState extends UpperControlState {
 
   @override
   FolderState copyWithItems({
-    XHandle<List<String>>? items,
+    XHandle<List<XFolder>>? items,
     bool? isSortName,
     bool? isShuffle,
   }) {

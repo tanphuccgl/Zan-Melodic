@@ -5,9 +5,9 @@ import 'package:zanmelodic/src/constants/my_properties.dart';
 import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
 import 'package:zanmelodic/src/modules/favorites/logic/favorites_bloc.dart';
-import 'package:zanmelodic/src/modules/favorites/widgets/song_list_in_favorite.dart';
 import 'package:zanmelodic/src/modules/upper_control/widgets/upper_control_bar.dart';
 import 'package:zanmelodic/src/widgets/base/base_screen.dart';
+import 'package:zanmelodic/src/widgets/base/base_songs.dart';
 
 class FavoritesPage extends StatelessWidget {
   const FavoritesPage({Key? key}) : super(key: key);
@@ -29,11 +29,10 @@ class FavoritesPage extends StatelessWidget {
             slivers: [
               SliverToBoxAdapter(
                   child: UpperControlBar(
-                onPressedPlay: () => context
-                    .read<AudioHandleBloc>()
-                    .skipToQueueItem(items: _items),
+                onPressedPlay: () =>
+                    context.read<AudioHandleBloc>().playItem(items: _items),
               )),
-              SongListFavoriteWidget(songs: _items),
+              BaseSongs(songs: _items),
             ],
           ),
         ),
