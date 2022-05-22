@@ -1,9 +1,10 @@
+import 'package:zanmelodic/src/models/folder_model.dart';
 import 'package:zanmelodic/src/repositories/audio_query/base_audio_query.dart';
 
 class FolderAudioQuery extends BaseAudioQuery {
-  Future<List<String>> getFolderFromLocal() async {
+  Future<List<XFolder>> getFolderFromLocal() async {
     final _listAudio = await getAudiofromLocal();
-    final _listFolder = <String>{};
+    final List<XFolder> _listFolder = [];
     final _listSong = _listAudio
         .where((e) =>
             e.isMusic == true &&
@@ -14,8 +15,10 @@ class FolderAudioQuery extends BaseAudioQuery {
 
       final _cutLastCharacter = _dir.substring(0, _dir.length - 1);
 
-      _listFolder.add(_cutLastCharacter);
+      _listFolder.add(XFolder(name: _cutLastCharacter));
     }
+    final ids = _listFolder.map((e) => e.name).toSet();
+    _listFolder.retainWhere((x) => ids.remove(x.name));
     return _listFolder.toList();
   }
 }

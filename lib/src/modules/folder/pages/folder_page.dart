@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zanmelodic/src/constants/my_properties.dart';
+import 'package:zanmelodic/src/models/folder_model.dart';
 import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/modules/folder/logic/folder_bloc.dart';
 import 'package:zanmelodic/src/modules/folder/widgets/list_folder_widget.dart';
@@ -13,8 +14,8 @@ class FolderPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FolderBloc, FolderState>(builder: (context, state) {
-      final XHandle<List<String>> _handle = state.items;
-      final List<String> _items = _handle.data ?? [];
+      final XHandle<List<XFolder>> _handle = state.items;
+      final List<XFolder> _items = _handle.data ?? [];
       return BaseScaffold(
         handle: _handle,
         onRefresh: () => context.read<FolderBloc>().fetchListFolder(),
