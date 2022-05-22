@@ -3,6 +3,7 @@ part of 'album_detail_bloc.dart';
 class AlbumDetailState extends UpperControlState {
   final XHandle<List<SongModel>> items;
   final AlbumModel album;
+  void get shuffleList => isShuffle ? null : (items.data ?? []).shuffle();
 
   void get sortListByName => (items.data ?? []).sort((a, b) => isSortName
       ? (b.title).compareTo((a.title))
@@ -34,6 +35,7 @@ class AlbumDetailState extends UpperControlState {
     AlbumModel? album,
   }) {
     sortListByName;
+    shuffleList;
     return AlbumDetailState(
       items: items ?? this.items,
       isSortName: isSortName ?? this.isSortName,

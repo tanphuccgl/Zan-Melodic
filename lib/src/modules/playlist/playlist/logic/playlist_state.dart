@@ -11,6 +11,8 @@ class PlaylistState extends UpperControlState {
     return pureName ? XUtils.isValidNameCreatePlaylist(namePlaylist) : "";
   }
 
+  void get shuffleList => isShuffle ? null : (items.data ?? []).shuffle();
+
   void get sortListByName => (items.data ?? []).sort((a, b) => isSortName
       ? (b.playlist).compareTo((a.playlist))
       : (a.playlist).compareTo((b.playlist)));
@@ -50,7 +52,7 @@ class PlaylistState extends UpperControlState {
     List<PlaylistModel>? playlistsToDialog,
   }) {
     sortListByName;
-
+    shuffleList;
     return PlaylistState(
       items: items ?? this.items,
       isSortName: isSortName ?? this.isSortName,

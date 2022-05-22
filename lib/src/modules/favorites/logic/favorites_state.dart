@@ -10,6 +10,8 @@ class FavoritesState extends UpperControlState {
     return _list.isEmpty ? false : true;
   }
 
+  void get shuffleList => isShuffle ? null : (items.data ?? []).shuffle();
+
   void get sortListByName => (items.data ?? []).sort((a, b) => isSortName
       ? (b.title).compareTo((a.title))
       : (a.title).compareTo((b.title)));
@@ -39,6 +41,7 @@ class FavoritesState extends UpperControlState {
     List<FavoritesEntity>? favoriteList,
   }) {
     sortListByName;
+    shuffleList;
     return FavoritesState(
       items: items ?? this.items,
       isSortName: isSortName ?? this.isSortName,

@@ -31,6 +31,7 @@ class PlaylistDetailState extends UpperControlState {
     int? numberSongs,
   }) {
     sortListByName;
+    shuffleList;
     return PlaylistDetailState(
       items: items ?? this.items,
       isSortName: isSortName ?? this.isSortName,
@@ -39,6 +40,8 @@ class PlaylistDetailState extends UpperControlState {
       numberSongs: numberSongs ?? this.numberSongs,
     );
   }
+
+  void get shuffleList => isShuffle ? null : (items.data ?? []).shuffle();
 
   void get sortListByName => (items.data ?? []).sort((a, b) => isSortName
       ? (b.title).compareTo((a.title))

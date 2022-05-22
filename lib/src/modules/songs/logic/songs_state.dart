@@ -25,6 +25,7 @@ class SongsState extends UpperControlState {
   void get sortListByName => (items.data ?? []).sort((a, b) => isSortName
       ? (b.title).compareTo((a.title))
       : (a.title).compareTo((b.title)));
+  void get shuffleList => isShuffle ? null : (items.data ?? []).shuffle();
 
   @override
   SongsState copyWithItems({
@@ -34,6 +35,7 @@ class SongsState extends UpperControlState {
     bool? isLoadPlaylist,
   }) {
     sortListByName;
+    shuffleList;
     return SongsState(
       items: items ?? this.items,
       isSortName: isSortName ?? this.isSortName,
