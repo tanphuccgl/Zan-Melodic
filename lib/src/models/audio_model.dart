@@ -6,12 +6,14 @@ class XAudio extends BaseModel {
   String author;
   String link;
   String image;
+  String lyric;
 
   XAudio({
     this.name = '',
     this.author = '',
     this.link = '',
     this.image = '',
+    this.lyric = '',
     String id = '',
   }) : super(id: id);
 
@@ -22,6 +24,7 @@ class XAudio extends BaseModel {
       link: json['link'],
       id: json['id'],
       image: json['image'],
+      lyric: json['lyric'],
     );
   }
 
@@ -39,6 +42,7 @@ class XAudio extends BaseModel {
     data['link'] = link;
     data['name'] = name;
     data['image'] = image;
+    data['lyric'] = lyric;
     return data;
   }
 }
