@@ -20,6 +20,58 @@ class ProcessBar extends StatelessWidget {
         final _total = state.progress.total.inSeconds.toDouble();
         final _posSeek = _current / (_total / _size);
 
+//     File(p.join((await getTemporaryDirectory()).path, 'waveform.wave'));
+//       JustWaveform.extract(audioInFile: audioFile, waveOutFile: waveFile)
+//           .listen(progressStream.add, onError: progressStream.addError);
+//         state.currentSong.paud
+// WaveformProgress().waveform.data
+
+//         const minoractiveColor = Color(0xFFffbf99);
+//         const minorinactiveColor = Color(0xFFE1DFDF);
+//         const borderColor = Color(0xFFEBEBEB);
+//         return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+//           RectangleWaveform(
+//             maxDuration: state.progress.total,
+//             elapsedDuration: state.progress.current,
+//             samples: [100],
+//             height: 100,
+//             absolute: true,
+//             borderWidth: 0.5,
+//             inactiveBorderColor: borderColor,
+//             width: MediaQuery.of(context).size.width,
+//             inactiveColor: Colors.white,
+//             activeBorderColor: borderColor,
+//             activeGradient: LinearGradient(
+//               begin: Alignment.bottomCenter,
+//               end: Alignment.topCenter,
+//               colors: [
+//                 Color(0xFFff3701),
+//                 Color(0xFFff6d00),
+//               ],
+//               stops: [
+//                 0,
+//                 0.3,
+//               ],
+//             ),
+//           ),
+//           SizedBox(
+//             height: 2,
+//           ),
+//           RectangleWaveform(
+//             maxDuration: state.progress.total,
+//             elapsedDuration: state.progress.current,
+//             samples: [],
+//             height: 50,
+//             width: MediaQuery.of(context).size.width,
+//             absolute: true,
+//             invert: true,
+//             borderWidth: 0.5,
+//             inactiveBorderColor: borderColor,
+//             activeBorderColor: borderColor,
+//             activeColor: minoractiveColor,
+//             inactiveColor: minorinactiveColor,
+//           ),
+//         ]);
         return Column(
           children: [
             SizedBox(
