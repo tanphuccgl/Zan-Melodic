@@ -35,7 +35,12 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
       album: 'Firebase',
       title: audio.name,
       artist: audio.author,
-      extras: {'url': audio.link, 'isFirebase': true, 'image': audio.image},
+      extras: {
+        'url': audio.link,
+        'isFirebase': true,
+        'image': audio.image,
+        'lyric': audio.lyric
+      },
     );
     return result;
   }
