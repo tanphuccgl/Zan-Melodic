@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:audio_service/audio_service.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:just_waveform/just_waveform.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/models/audio_model.dart';
@@ -11,12 +14,14 @@ import 'package:zanmelodic/src/models/enums/button_state.dart';
 import 'package:zanmelodic/src/models/enums/repeat_state.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/progress_bar_bloc.dart';
 import 'package:zanmelodic/src/modules/dashboard/pages/dashboard_page.dart';
+import 'package:zanmelodic/src/utils/utils.dart';
 
 part 'audio_handle_state.dart';
 
 class AudioHandleBloc extends Cubit<AudioHandleState> {
   static final AudioHandleState _initialValue = AudioHandleState(
-      currentSong: const MediaItem(title: 'N/A', id: 'N/A'),
+      currentSong: const MediaItem(title: 'N/A', id: '-1'),
+      waveform: const [],
       progress: const ProgressBarState(
         current: Duration.zero,
         buffered: Duration.zero,
@@ -97,8 +102,8 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
     play();
 
     emit(state.copyWith(
-      isShowBottomBar: true,
-    ));
+        isShowBottomBar: true,
+        currentSong: state.audioHandler.mediaItem.value));
   }
 
   void previous() => state.audioHandler.skipToPrevious();
@@ -169,7 +174,7 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
       if (playlist.isEmpty) {
         emit(state.copyWith(
             playlist: [],
-            currentSong: const MediaItem(title: 'N/A', id: 'N/A')));
+            currentSong: const MediaItem(title: 'N/A', id: '-1')));
       } else {
         emit(state.copyWith(playlist: playlist));
       }
@@ -181,8 +186,32 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
   void _listenToChangesInSong() {
     state.audioHandler.mediaItem.listen((mediaItem) {
       emit(state.copyWith(currentSong: mediaItem));
+      getWaveform();
+
       _updateSkipButtons();
     });
+  }
+
+  void getWaveform() {
+    emit(state.copyWith(progressWidget: 0.0, waveform: []));
+    final audioFile = File(state.currentSong.extras!['data']);
+    final progressStream = JustWaveform.extract(
+      audioInFile: audioFile,
+      waveOutFile: XUtils.convertMediaToWaveFile(audioFile),
+      zoom: const WaveformZoom.pixelsPerSecond(1),
+    );
+    progressStream.listen(
+      (waveformProgress) {
+        emit(state.copyWith(progressWidget: (waveformProgress.progress)));
+
+        if (waveformProgress.waveform != null) {
+          emit(state.copyWith(
+              waveform: (waveformProgress.waveform?.data
+                  .map((e) => (e / 3).toDouble())
+                  .toList())));
+        }
+      },
+    );
   }
 
   void _listenToCurrentPosition() {

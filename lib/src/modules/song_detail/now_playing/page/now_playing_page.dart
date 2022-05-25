@@ -28,7 +28,6 @@ class NowPlayingPage extends StatelessWidget {
                 padding: EdgeInsets.fromLTRB(_pHori, _pTop, _pHori, _pHori / 2),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       'Now Playing',

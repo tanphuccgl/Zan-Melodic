@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:intl/intl.dart';
 
 class XUtils {
@@ -23,6 +25,14 @@ class XUtils {
     var _result = s.substring(_pos + 1);
 
     return _result;
+  }
+
+  static File convertMediaToWaveFile(File media) {
+    int _pos = media.path.lastIndexOf('.');
+
+    var _result = media.path.substring(0, _pos);
+    final waveFile = File('$_result.wave');
+    return waveFile;
   }
 
   static String dateTimeFolder() {

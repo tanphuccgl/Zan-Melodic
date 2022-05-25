@@ -12,6 +12,8 @@ class AudioHandleState extends Equatable {
   final AudioHandler audioHandler;
   final bool isSortModeEnabled;
   final bool isShowBottomBar;
+  final List<double> waveform;
+  final double progressWidget;
 
   const AudioHandleState({
     required this.currentSong,
@@ -25,6 +27,8 @@ class AudioHandleState extends Equatable {
     this.repeatButton = RepeatState.off,
     this.isSortModeEnabled = false,
     this.isShowBottomBar = false,
+    required this.waveform,
+    this.progressWidget = 0.0,
   });
 
   @override
@@ -40,6 +44,8 @@ class AudioHandleState extends Equatable {
         repeatButton,
         isSortModeEnabled,
         isShowBottomBar,
+        waveform,
+        progressWidget,
       ];
 
   Color get shuffleColorIcon =>
@@ -68,6 +74,8 @@ class AudioHandleState extends Equatable {
     RepeatState? repeatButton,
     bool? isSortModeEnabled,
     bool? isShowBottomBar,
+    List<double>? waveform,
+    double? progressWidget,
   }) {
     return AudioHandleState(
       currentSong: currentSong ?? this.currentSong,
@@ -81,6 +89,8 @@ class AudioHandleState extends Equatable {
       repeatButton: repeatButton ?? this.repeatButton,
       isSortModeEnabled: isSortModeEnabled ?? this.isSortModeEnabled,
       isShowBottomBar: isShowBottomBar ?? this.isShowBottomBar,
+      waveform: waveform ?? this.waveform,
+      progressWidget: progressWidget ?? this.progressWidget,
     );
   }
 }
