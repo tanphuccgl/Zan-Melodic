@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:audio_service/audio_service.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
@@ -9,14 +12,17 @@ import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/models/audio_model.dart';
 import 'package:zanmelodic/src/models/enums/button_state.dart';
 import 'package:zanmelodic/src/models/enums/repeat_state.dart';
+import 'package:zanmelodic/src/modules/audio_control/logic/just_waveform.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/progress_bar_bloc.dart';
 import 'package:zanmelodic/src/modules/dashboard/pages/dashboard_page.dart';
+import 'package:zanmelodic/src/utils/utils.dart';
 
 part 'audio_handle_state.dart';
 
 class AudioHandleBloc extends Cubit<AudioHandleState> {
   static final AudioHandleState _initialValue = AudioHandleState(
-      currentSong: const MediaItem(title: 'N/A', id: 'N/A'),
+      currentSong: const MediaItem(title: 'N/A', id: '-1'),
+      waveform: const [],
       progress: const ProgressBarState(
         current: Duration.zero,
         buffered: Duration.zero,
@@ -28,6 +34,8 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
   AudioHandleBloc() : super(_initialValue) {
     init();
   }
+  StreamSubscription? _eventStream;
+  Stream<XWaveformProgress>? _progressStream;
 
   MediaItem converSongOnlineToModel(XAudio audio) {
     final result = MediaItem(
@@ -97,8 +105,8 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
     play();
 
     emit(state.copyWith(
-      isShowBottomBar: true,
-    ));
+        isShowBottomBar: true,
+        currentSong: state.audioHandler.mediaItem.value));
   }
 
   void previous() => state.audioHandler.skipToPrevious();
@@ -169,7 +177,7 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
       if (playlist.isEmpty) {
         emit(state.copyWith(
             playlist: [],
-            currentSong: const MediaItem(title: 'N/A', id: 'N/A')));
+            currentSong: const MediaItem(title: 'N/A', id: '-1')));
       } else {
         emit(state.copyWith(playlist: playlist));
       }
@@ -181,8 +189,35 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
   void _listenToChangesInSong() {
     state.audioHandler.mediaItem.listen((mediaItem) {
       emit(state.copyWith(currentSong: mediaItem));
+
+      ///Fix   getWaveform();
       _updateSkipButtons();
     });
+  }
+
+  void getWaveform() {
+    final audioFile = File(state.currentSong.extras!['data']);
+
+    if (_eventStream != null) {
+      _eventStream!.cancel();
+      emit(state.copyWith(waveform: []));
+    }
+    _progressStream = XJustWaveform.extract(
+      audioInFile: audioFile,
+      waveOutFile: XUtils.convertMediaToWaveFile(audioFile),
+      zoom: const XWaveformZoom.pixelsPerSecond(1),
+    );
+
+    _eventStream = _progressStream!.listen(
+      (waveformProgress) {
+        if (waveformProgress.waveform != null) {
+          emit(state.copyWith(
+              waveform: (waveformProgress.waveform?.data
+                  .map((e) => (e / 3).toDouble())
+                  .toList())));
+        }
+      },
+    );
   }
 
   void _listenToCurrentPosition() {

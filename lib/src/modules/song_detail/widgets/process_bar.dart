@@ -20,6 +20,18 @@ class ProcessBar extends StatelessWidget {
         final _total = state.progress.total.inSeconds.toDouble();
         final _posSeek = _current / (_total / _size);
 
+        // return state.waveform.isEmpty
+        //     ? const Center(child:  CircularProgressIndicator())
+        //     : SquigglyWaveform(
+        //         inactiveColor: MyColors.colorWhite,
+        //         activeColor: MyColors.colorPrimary,
+        //         strokeWidth: 1,
+        //         maxDuration: state.progress.total,
+        //         elapsedDuration: state.progress.current,
+        //         samples: state.waveform,
+        //         height: 60,
+        //         width: 280,
+        //       );
         return Column(
           children: [
             SizedBox(

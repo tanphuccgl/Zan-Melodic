@@ -45,6 +45,8 @@ dependencies:
   file_picker: ^4.5.1
   audio_service: ^0.18.4
   audio_video_progress_bar: ^0.10.0
+  flutter_audio_waveforms: ^1.2.1+5
+  just_waveform: ^0.0.2
 
 
 

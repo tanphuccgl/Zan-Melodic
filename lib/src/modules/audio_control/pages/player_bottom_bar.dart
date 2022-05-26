@@ -39,7 +39,7 @@ class PlayerBottomBar extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CustomImage(
-                        urlImage: media.extras!['image'],
+                        urlImage: media.extras?['image'],
                         id: int.parse(media.id),
                         height: 51.0,
                         width: 51.0,
