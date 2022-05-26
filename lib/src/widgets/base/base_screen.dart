@@ -9,7 +9,7 @@ class BaseScaffold<T> extends StatelessWidget {
   final XHandle<List<T>>? handle2;
 
   final Widget child;
-  final Future<void> Function() onRefresh;
+  final Function() onRefresh;
   final FloatingActionButtonLocation? floatingActionButtonLocation;
   final Widget? floatingActionButton;
   const BaseScaffold(
@@ -31,7 +31,7 @@ class BaseScaffold<T> extends StatelessWidget {
             floatingActionButtonLocation: floatingActionButtonLocation,
             body: BaseRefresh(
               child: child,
-              onRefresh: onRefresh,
+              onRefresh: () async => onRefresh,
             ));
       } else if (handle.isLoading) {
         return const XStateLoadingWidget(
@@ -49,7 +49,7 @@ class BaseScaffold<T> extends StatelessWidget {
             floatingActionButtonLocation: floatingActionButtonLocation,
             body: BaseRefresh(
               child: child,
-              onRefresh: onRefresh,
+              onRefresh: () async => onRefresh,
             ));
       } else if (handle.isLoading || handle2!.isLoading) {
         return const XStateLoadingWidget(

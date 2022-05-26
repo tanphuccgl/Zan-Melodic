@@ -16,14 +16,16 @@ class TypeSongPage extends StatelessWidget {
       final XHandle<List<SongModel>> _handleNewList = state.newList;
       final List<SongModel> _newList = _handleNewList.data ?? [];
 
-      final XHandle<List<SongModel>> _handleMoreListenList = state.newList;
+      final XHandle<List<SongModel>> _handleMoreListenList =
+          state.mostListenList;
       final List<SongModel> _moreListenList = _handleMoreListenList.data ?? [];
 
       return BaseScaffold<SongModel>(
         handle: _handleNewList,
         handle2: _handleMoreListenList,
-        onRefresh: () {
-          return context.read<TypeSongBloc>().getNewSongs();
+        onRefresh: () async {
+          context.read<TypeSongBloc>().getNewSongs();
+          context.read<TypeSongBloc>().getMostListenSongs();
         },
         child: Padding(
           padding: const EdgeInsets.only(left: 20.0, top: 20.0),
@@ -33,7 +35,10 @@ class TypeSongPage extends StatelessWidget {
               _headerTitle('New'),
               BaseSongs(songs: _newList),
               _headerTitle('Most Listen'),
-              BaseSongs(songs: _moreListenList),
+              BaseSongs(
+                  songs: _moreListenList,
+                  childCount:
+                      _moreListenList.length < 3 ? _moreListenList.length : 3),
             ],
           ),
         ),

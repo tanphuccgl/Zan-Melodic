@@ -12,6 +12,7 @@ class TypeSongState extends Equatable {
   @override
   List<Object?> get props => [
         newList,
+        mostListenList,
       ];
 
   TypeSongState copyWith({

@@ -12,6 +12,7 @@ import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/models/audio_model.dart';
 import 'package:zanmelodic/src/models/enums/button_state.dart';
 import 'package:zanmelodic/src/models/enums/repeat_state.dart';
+import 'package:zanmelodic/src/models/presf.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/just_waveform.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/progress_bar_bloc.dart';
 import 'package:zanmelodic/src/modules/dashboard/pages/dashboard_page.dart';
@@ -189,6 +190,9 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
   void _listenToChangesInSong() {
     state.audioHandler.mediaItem.listen((mediaItem) {
       emit(state.copyWith(currentSong: mediaItem));
+      if (mediaItem != null) {
+        Prefs.saveMedia(mediaItem.title);
+      }
 
       ///Fix   getWaveform();
       _updateSkipButtons();

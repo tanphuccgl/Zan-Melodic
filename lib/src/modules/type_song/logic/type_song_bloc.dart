@@ -10,6 +10,7 @@ part 'type_song_state.dart';
 class TypeSongBloc extends Cubit<TypeSongState> {
   TypeSongBloc() : super(_initialValue) {
     getNewSongs();
+    getMostListenSongs();
   }
   static final TypeSongState _initialValue = TypeSongState(
       newList: XHandle.loading(), mostListenList: XHandle.loading());
@@ -29,6 +30,34 @@ class TypeSongBloc extends Cubit<TypeSongState> {
         return date.compareTo(newDate) > 0;
       }).toList();
       emit(state.copyWith(newList: XHandle.completed(_result)));
+    } else {
+      XSnackbar.show(msg: 'Load All List Error');
+    }
+  }
+
+  Future<void> getMostListenSongs() async {
+    final _value = await _domain.mostListen.getListOfSongs();
+    final _value1 = await _domain.song.getListOfSongs();
+
+    if (_value.isSuccess) {
+      final List<SongModel> _result = [];
+      for (SongModel item1 in (_value1.data ?? [])) {
+        for (String item in (_value.data ?? [])) {
+          if (item == item1.title) {
+            _result.add(item1);
+          }
+        }
+      }
+      Map<SongModel, int> numberOf = {
+        for (var x in (_result).toSet())
+          x: (_result).where((item) => item == x).length
+      };
+      var aa = (_result)..sort((a, b) => numberOf[b]!.compareTo(numberOf[a]!));
+      var seen = <SongModel>{};
+      List<SongModel> uniquelist =
+          aa.where((country) => seen.add(country)).toList();
+
+      emit(state.copyWith(mostListenList: XHandle.completed(uniquelist)));
     } else {
       XSnackbar.show(msg: 'Load All List Error');
     }
