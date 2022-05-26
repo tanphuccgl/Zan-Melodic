@@ -11,7 +11,7 @@
 // ignore_for_file: type=lint
 
 import 'package:auto_route/auto_route.dart' as _i5;
-import 'package:flutter/material.dart' as _i17;
+import 'package:flutter/material.dart' as _i18;
 
 import '../../modules/album/album/pages/album_page.dart' as _i10;
 import '../../modules/album/album_detail/pages/album_detail_page.dart' as _i11;
@@ -24,16 +24,17 @@ import '../../modules/loading/pages/loading_page.dart' as _i2;
 import '../../modules/playlist/playlist/pages/playlist_page.dart' as _i8;
 import '../../modules/playlist/playlist_detail/pages/playlist_detail_page.dart'
     as _i9;
-import '../../modules/song_detail/info_song/pages/info_song_page.dart' as _i15;
-import '../../modules/song_detail/lyric/pages/lyric_page.dart' as _i16;
+import '../../modules/song_detail/info_song/pages/info_song_page.dart' as _i16;
+import '../../modules/song_detail/lyric/pages/lyric_page.dart' as _i17;
 import '../../modules/song_detail/now_playing/page/now_playing_page.dart'
-    as _i14;
+    as _i15;
 import '../../modules/song_detail/router/detail_song_wrapper_router.dart'
     as _i3;
 import '../../modules/songs/pages/songs_page.dart' as _i7;
+import '../../modules/type_song/pages/type_song_page.dart' as _i14;
 
 class XRouter extends _i5.RootStackRouter {
-  XRouter([_i17.GlobalKey<_i17.NavigatorState>? navigatorKey])
+  XRouter([_i18.GlobalKey<_i18.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
@@ -78,6 +79,10 @@ class XRouter extends _i5.RootStackRouter {
       return _i5.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i5.EmptyRouterPage());
     },
+    TypeSongTab.name: (routeData) {
+      return _i5.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i5.EmptyRouterPage());
+    },
     FavoritesRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i6.FavoritesPage());
@@ -110,17 +115,21 @@ class XRouter extends _i5.RootStackRouter {
       return _i5.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i13.DiscoverPage());
     },
+    TypeSongRoute.name: (routeData) {
+      return _i5.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i14.TypeSongPage());
+    },
     NowPlayingRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i14.NowPlayingPage());
+          routeData: routeData, child: const _i15.NowPlayingPage());
     },
     InfoSongRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i15.InfoSongPage());
+          routeData: routeData, child: const _i16.InfoSongPage());
     },
     LyricRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i16.LyricPage());
+          routeData: routeData, child: const _i17.LyricPage());
     }
   };
 
@@ -208,6 +217,18 @@ class XRouter extends _i5.RootStackRouter {
                           _i5.RouteConfig('*#redirect',
                               path: '*',
                               parent: DiscoverTab.name,
+                              redirectTo: '',
+                              fullMatch: true)
+                        ]),
+                    _i5.RouteConfig(TypeSongTab.name,
+                        path: 'type_song',
+                        parent: DashboardRoute.name,
+                        children: [
+                          _i5.RouteConfig(TypeSongRoute.name,
+                              path: '', parent: TypeSongTab.name),
+                          _i5.RouteConfig('*#redirect',
+                              path: '*',
+                              parent: TypeSongTab.name,
                               redirectTo: '',
                               fullMatch: true)
                         ]),
@@ -336,6 +357,15 @@ class DiscoverTab extends _i5.PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [_i5.EmptyRouterPage]
+class TypeSongTab extends _i5.PageRouteInfo<void> {
+  const TypeSongTab({List<_i5.PageRouteInfo>? children})
+      : super(TypeSongTab.name, path: 'type_song', initialChildren: children);
+
+  static const String name = 'TypeSongTab';
+}
+
+/// generated route for
 /// [_i6.FavoritesPage]
 class FavoritesRoute extends _i5.PageRouteInfo<void> {
   const FavoritesRoute() : super(FavoritesRoute.name, path: '');
@@ -400,7 +430,15 @@ class DiscoverRoute extends _i5.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i14.NowPlayingPage]
+/// [_i14.TypeSongPage]
+class TypeSongRoute extends _i5.PageRouteInfo<void> {
+  const TypeSongRoute() : super(TypeSongRoute.name, path: '');
+
+  static const String name = 'TypeSongRoute';
+}
+
+/// generated route for
+/// [_i15.NowPlayingPage]
 class NowPlayingRoute extends _i5.PageRouteInfo<void> {
   const NowPlayingRoute() : super(NowPlayingRoute.name, path: '');
 
@@ -408,7 +446,7 @@ class NowPlayingRoute extends _i5.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i15.InfoSongPage]
+/// [_i16.InfoSongPage]
 class InfoSongRoute extends _i5.PageRouteInfo<void> {
   const InfoSongRoute() : super(InfoSongRoute.name, path: 'info');
 
@@ -416,7 +454,7 @@ class InfoSongRoute extends _i5.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i16.LyricPage]
+/// [_i17.LyricPage]
 class LyricRoute extends _i5.PageRouteInfo<void> {
   const LyricRoute() : super(LyricRoute.name, path: 'lyric');
 
