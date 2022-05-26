@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:audio_service/audio_service.dart';
@@ -6,12 +7,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:just_waveform/just_waveform.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/models/audio_model.dart';
 import 'package:zanmelodic/src/models/enums/button_state.dart';
 import 'package:zanmelodic/src/models/enums/repeat_state.dart';
+import 'package:zanmelodic/src/modules/audio_control/logic/just_waveform.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/progress_bar_bloc.dart';
 import 'package:zanmelodic/src/modules/dashboard/pages/dashboard_page.dart';
 import 'package:zanmelodic/src/utils/utils.dart';
@@ -33,6 +34,8 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
   AudioHandleBloc() : super(_initialValue) {
     init();
   }
+  StreamSubscription? _eventStream;
+  Stream<XWaveformProgress>? _progressStream;
 
   MediaItem converSongOnlineToModel(XAudio audio) {
     final result = MediaItem(
@@ -186,24 +189,27 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
   void _listenToChangesInSong() {
     state.audioHandler.mediaItem.listen((mediaItem) {
       emit(state.copyWith(currentSong: mediaItem));
-      getWaveform();
 
+      ///Fix   getWaveform();
       _updateSkipButtons();
     });
   }
 
   void getWaveform() {
-    emit(state.copyWith(progressWidget: 0.0, waveform: []));
     final audioFile = File(state.currentSong.extras!['data']);
-    final progressStream = JustWaveform.extract(
+
+    if (_eventStream != null) {
+      _eventStream!.cancel();
+      emit(state.copyWith(waveform: []));
+    }
+    _progressStream = XJustWaveform.extract(
       audioInFile: audioFile,
       waveOutFile: XUtils.convertMediaToWaveFile(audioFile),
-      zoom: const WaveformZoom.pixelsPerSecond(1),
+      zoom: const XWaveformZoom.pixelsPerSecond(1),
     );
-    progressStream.listen(
-      (waveformProgress) {
-        emit(state.copyWith(progressWidget: (waveformProgress.progress)));
 
+    _eventStream = _progressStream!.listen(
+      (waveformProgress) {
         if (waveformProgress.waveform != null) {
           emit(state.copyWith(
               waveform: (waveformProgress.waveform?.data
