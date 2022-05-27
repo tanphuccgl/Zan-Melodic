@@ -8,7 +8,9 @@ import 'package:zanmelodic/src/widgets/state/state_empty_widget.dart';
 class BaseSongs extends StatelessWidget {
   final List<SongModel> songs;
   final PlaylistModel? playlist;
-  const BaseSongs({Key? key, this.playlist, required this.songs})
+  final int? childCount;
+  const BaseSongs(
+      {Key? key, this.playlist, required this.songs, this.childCount})
       : super(key: key);
 
   @override
@@ -24,7 +26,7 @@ class BaseSongs extends StatelessWidget {
                       index: index,
                     ),
               );
-            }, childCount: songs.length),
+            }, childCount: childCount ?? songs.length),
           )
         : const XStateEmptyWidget();
   }

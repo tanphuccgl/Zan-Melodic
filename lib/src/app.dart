@@ -16,6 +16,7 @@ import 'package:zanmelodic/src/modules/folder/logic/folder_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/logic/playlist_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist_detail/logic/playlist_detail_bloc.dart';
 import 'package:zanmelodic/src/modules/songs/logic/songs_bloc.dart';
+import 'package:zanmelodic/src/modules/type_song/logic/type_song_bloc.dart';
 import 'package:zanmelodic/src/modules/upper_control/logic/upper_control_bloc.dart';
 
 class MyApp extends StatelessWidget {
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => PlaylistBloc()),
         BlocProvider(create: (_) => PlaylistDetailBloc()),
         BlocProvider(create: (_) => FavoritesBloc()),
+        BlocProvider(create: (_) => TypeSongBloc()),
       ],
       child: MaterialApp.router(
         theme: XTheme.light(),

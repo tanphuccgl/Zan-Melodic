@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:zanmelodic/src/config/routes/auto_route.gr.dart';
+import 'package:zanmelodic/src/models/presf.dart';
 import 'package:zanmelodic/src/repositories/audio_query/base_audio_query.dart';
 import 'package:zanmelodic/src/repositories/service/audio_handler.dart';
 
@@ -12,6 +13,7 @@ import 'src/repositories/audio_query/favorite_audio_room.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await Prefs.init();
   BaseAudioQuery().audioQuery;
   FavoriteAudioRoom().init();
   GetIt.I.registerLazySingleton(() => XRouter());

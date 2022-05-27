@@ -6,6 +6,8 @@ import 'package:zanmelodic/src/repositories/features/favorites/repo.dart';
 import 'package:zanmelodic/src/repositories/features/favorites/repo_impl.dart';
 import 'package:zanmelodic/src/repositories/features/folder/repo.dart';
 import 'package:zanmelodic/src/repositories/features/folder/repo_impl.dart';
+import 'package:zanmelodic/src/repositories/features/most_listen/repo.dart';
+import 'package:zanmelodic/src/repositories/features/most_listen/repo_impl.dart';
 import 'package:zanmelodic/src/repositories/features/playlist/repo.dart';
 import 'package:zanmelodic/src/repositories/features/playlist/repo_impl.dart';
 import 'package:zanmelodic/src/repositories/features/song/repo.dart';
@@ -20,6 +22,7 @@ class Domain {
     favorites = FavoriteRepositoryImpl();
     folder = FolderRepositoryImpl();
     audio = AudioRepositoryImpl();
+    mostListen = MostListenRepositoryImpl();
   }
   factory Domain() {
     _internal ??= Domain._();
@@ -32,4 +35,5 @@ class Domain {
   late final FavoriteRepository favorites;
   late final FolderRepository folder;
   late final AudioRepository audio;
+  late final MostListenRepository mostListen;
 }
