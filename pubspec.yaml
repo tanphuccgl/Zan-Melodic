@@ -30,6 +30,8 @@ dependencies:
   cloud_firestore: ^3.1.12
   firebase_storage: ^10.2.13
   firebase_core: ^1.14.1
+  firebase_messaging: ^11.2.13
+  flutter_local_notifications: ^9.4.0
   # GITHUB
 
   # FLUTTER
