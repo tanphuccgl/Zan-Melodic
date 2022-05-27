@@ -21,7 +21,7 @@ class NowPlayingPage extends StatelessWidget {
         final media = state.currentSong;
         final int id = int.parse(media.id);
         return Scaffold(
-          backgroundColor: MyColors.colorBackground,
+          backgroundColor: state.mainColor,
           body: GestureDetector(
             onDoubleTap: () => XCoordinator.pop(context),
             child: Padding(

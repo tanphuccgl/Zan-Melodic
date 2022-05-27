@@ -47,6 +47,8 @@ dependencies:
   audio_video_progress_bar: ^0.10.0
   flutter_audio_waveforms: ^1.2.1+5
   just_waveform: ^0.0.2
+  palette_generator: ^0.3.3
+  uri_to_file: ^0.2.0
 
 
 

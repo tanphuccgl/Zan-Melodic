@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:palette_generator/palette_generator.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/models/audio_model.dart';
 import 'package:zanmelodic/src/models/enums/button_state.dart';
@@ -65,6 +66,12 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
     _listenToBufferedPosition();
     _listenToTotalDuration();
     _listenToChangesInSong();
+  }
+
+  Future<void> getImagePalette(ImageProvider imageProvider) async {
+    final PaletteGenerator paletteGenerator =
+        await PaletteGenerator.fromImageProvider(imageProvider);
+    emit(state.copyWith(mainColor: paletteGenerator.dominantColor!.color));
   }
 
   Future<void> loadPlaylist(List<MediaItem> items) async {
@@ -192,11 +199,21 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
       emit(state.copyWith(currentSong: mediaItem));
       if (mediaItem != null) {
         Prefs.saveMedia(mediaItem.title);
+        getMainColors(mediaItem);
       }
 
       ///Fix   getWaveform();
       _updateSkipButtons();
     });
+  }
+
+  Future<void> getMainColors(MediaItem mediaItem) async {
+    if (mediaItem.extras!['image'] != null) {
+      getImagePalette(
+        NetworkImage(mediaItem.extras!['image']),
+      );
+    }
+    if (mediaItem.extras!['uri_image'] != null) {}
   }
 
   void getWaveform() {
