@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:zanmelodic/src/modules/artist/pages/artist_page.dart';
+import 'package:zanmelodic/src/modules/artist/artist/pages/artist_page.dart';
 import 'package:zanmelodic/src/modules/dashboard/router/dashboard_router.dart';
 
 class ArtistRouters {}

@@ -15,7 +15,7 @@ import 'package:flutter/material.dart' as _i19;
 
 import '../../modules/album/album/pages/album_page.dart' as _i10;
 import '../../modules/album/album_detail/pages/album_detail_page.dart' as _i11;
-import '../../modules/artist/pages/artist_page.dart' as _i12;
+import '../../modules/artist/artist/pages/artist_page.dart' as _i12;
 import '../../modules/dashboard/pages/dashboard_page.dart' as _i4;
 import '../../modules/dashboard/router/dashboard_wrapper_router.dart' as _i1;
 import '../../modules/discover/pages/discover_page.dart' as _i14;

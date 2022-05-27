@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/constants/my_properties.dart';
 import 'package:zanmelodic/src/models/handle.dart';
-import 'package:zanmelodic/src/modules/artist/logic/artist_bloc.dart';
-import 'package:zanmelodic/src/modules/artist/widgets/artists_widget.dart';
+import 'package:zanmelodic/src/modules/artist/artist/logic/artist_bloc.dart';
+import 'package:zanmelodic/src/modules/artist/artist/widgets/artists_widget.dart';
+
 import 'package:zanmelodic/src/modules/upper_control/widgets/upper_control_bar.dart';
 import 'package:zanmelodic/src/widgets/base/base_screen.dart';
 
