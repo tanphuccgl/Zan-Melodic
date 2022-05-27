@@ -5,7 +5,8 @@ class FolderState extends UpperControlState {
 
   void get sortListByName => (items.data ?? []).sort((a, b) =>
       isSortName ? (b.name).compareTo((a.name)) : (a.name).compareTo((b.name)));
-  void get shuffleList => isShuffle ? null : (items.data ?? []).shuffle();
+  void get shuffleList =>
+      isShuffle == true ? (items.data ?? []).shuffle() : null;
 
   const FolderState({
     required this.items,

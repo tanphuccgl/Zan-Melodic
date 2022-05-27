@@ -6,7 +6,8 @@ class GenreState extends UpperControlState {
   void get sortListByName => (items.data ?? []).sort((a, b) => isSortName
       ? (b.genre).compareTo((a.genre))
       : (a.genre).compareTo((b.genre)));
-  void get shuffleList => isShuffle ? null : (items.data ?? []).shuffle();
+  void get shuffleList =>
+      isShuffle == true ? (items.data ?? []).shuffle() : null;
 
   const GenreState({
     required this.items,
