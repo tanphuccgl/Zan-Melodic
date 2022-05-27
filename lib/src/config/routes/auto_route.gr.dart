@@ -11,31 +11,35 @@
 // ignore_for_file: type=lint
 
 import 'package:auto_route/auto_route.dart' as _i5;
-import 'package:flutter/material.dart' as _i19;
+import 'package:flutter/material.dart' as _i22;
 
 import '../../modules/album/album/pages/album_page.dart' as _i10;
 import '../../modules/album/album_detail/pages/album_detail_page.dart' as _i11;
 import '../../modules/artist/artist/pages/artist_page.dart' as _i12;
+import '../../modules/artist/artist_detail/pages/artist_detail_page.dart'
+    as _i13;
 import '../../modules/dashboard/pages/dashboard_page.dart' as _i4;
 import '../../modules/dashboard/router/dashboard_wrapper_router.dart' as _i1;
-import '../../modules/discover/pages/discover_page.dart' as _i14;
+import '../../modules/discover/pages/discover_page.dart' as _i15;
 import '../../modules/favorites/pages/favorites_page.dart' as _i6;
-import '../../modules/folder/pages/folder_page.dart' as _i13;
+import '../../modules/folder/pages/folder_page.dart' as _i14;
+import '../../modules/genre/genre/pages/genre_page.dart' as _i17;
+import '../../modules/genre/genre_detail/pages/genre_detail_page.dart' as _i18;
 import '../../modules/loading/pages/loading_page.dart' as _i2;
 import '../../modules/playlist/playlist/pages/playlist_page.dart' as _i8;
 import '../../modules/playlist/playlist_detail/pages/playlist_detail_page.dart'
     as _i9;
-import '../../modules/song_detail/info_song/pages/info_song_page.dart' as _i17;
-import '../../modules/song_detail/lyric/pages/lyric_page.dart' as _i18;
+import '../../modules/song_detail/info_song/pages/info_song_page.dart' as _i20;
+import '../../modules/song_detail/lyric/pages/lyric_page.dart' as _i21;
 import '../../modules/song_detail/now_playing/page/now_playing_page.dart'
-    as _i16;
+    as _i19;
 import '../../modules/song_detail/router/detail_song_wrapper_router.dart'
     as _i3;
 import '../../modules/songs/pages/songs_page.dart' as _i7;
-import '../../modules/type_song/pages/type_song_page.dart' as _i15;
+import '../../modules/type_song/pages/type_song_page.dart' as _i16;
 
 class XRouter extends _i5.RootStackRouter {
-  XRouter([_i19.GlobalKey<_i19.NavigatorState>? navigatorKey])
+  XRouter([_i22.GlobalKey<_i22.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
@@ -88,6 +92,10 @@ class XRouter extends _i5.RootStackRouter {
       return _i5.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i5.EmptyRouterPage());
     },
+    GenreTab.name: (routeData) {
+      return _i5.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i5.EmptyRouterPage());
+    },
     FavoritesRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i6.FavoritesPage());
@@ -116,29 +124,41 @@ class XRouter extends _i5.RootStackRouter {
       return _i5.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i12.ArtistPage());
     },
+    ArtistDetailRoute.name: (routeData) {
+      return _i5.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i13.ArtistDetailPage());
+    },
     FolderRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i13.FolderPage());
+          routeData: routeData, child: const _i14.FolderPage());
     },
     DiscoverRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i14.DiscoverPage());
+          routeData: routeData, child: const _i15.DiscoverPage());
     },
     TypeSongRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i15.TypeSongPage());
+          routeData: routeData, child: const _i16.TypeSongPage());
+    },
+    GenreRoute.name: (routeData) {
+      return _i5.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i17.GenrePage());
+    },
+    GenreDetailRoute.name: (routeData) {
+      return _i5.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i18.GenreDetailPage());
     },
     NowPlayingRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i16.NowPlayingPage());
+          routeData: routeData, child: const _i19.NowPlayingPage());
     },
     InfoSongRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i17.InfoSongPage());
+          routeData: routeData, child: const _i20.InfoSongPage());
     },
     LyricRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i18.LyricPage());
+          routeData: routeData, child: const _i21.LyricPage());
     }
   };
 
@@ -211,6 +231,8 @@ class XRouter extends _i5.RootStackRouter {
                         children: [
                           _i5.RouteConfig(ArtistRoute.name,
                               path: '', parent: ArtistTab.name),
+                          _i5.RouteConfig(ArtistDetailRoute.name,
+                              path: 'detail', parent: ArtistTab.name),
                           _i5.RouteConfig('*#redirect',
                               path: '*',
                               parent: ArtistTab.name,
@@ -250,6 +272,20 @@ class XRouter extends _i5.RootStackRouter {
                           _i5.RouteConfig('*#redirect',
                               path: '*',
                               parent: TypeSongTab.name,
+                              redirectTo: '',
+                              fullMatch: true)
+                        ]),
+                    _i5.RouteConfig(GenreTab.name,
+                        path: 'genre',
+                        parent: DashboardRoute.name,
+                        children: [
+                          _i5.RouteConfig(GenreRoute.name,
+                              path: '', parent: GenreTab.name),
+                          _i5.RouteConfig(GenreDetailRoute.name,
+                              path: 'detail', parent: GenreTab.name),
+                          _i5.RouteConfig('*#redirect',
+                              path: '*',
+                              parent: GenreTab.name,
                               redirectTo: '',
                               fullMatch: true)
                         ]),
@@ -396,6 +432,15 @@ class TypeSongTab extends _i5.PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [_i5.EmptyRouterPage]
+class GenreTab extends _i5.PageRouteInfo<void> {
+  const GenreTab({List<_i5.PageRouteInfo>? children})
+      : super(GenreTab.name, path: 'genre', initialChildren: children);
+
+  static const String name = 'GenreTab';
+}
+
+/// generated route for
 /// [_i6.FavoritesPage]
 class FavoritesRoute extends _i5.PageRouteInfo<void> {
   const FavoritesRoute() : super(FavoritesRoute.name, path: '');
@@ -452,7 +497,15 @@ class ArtistRoute extends _i5.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i13.FolderPage]
+/// [_i13.ArtistDetailPage]
+class ArtistDetailRoute extends _i5.PageRouteInfo<void> {
+  const ArtistDetailRoute() : super(ArtistDetailRoute.name, path: 'detail');
+
+  static const String name = 'ArtistDetailRoute';
+}
+
+/// generated route for
+/// [_i14.FolderPage]
 class FolderRoute extends _i5.PageRouteInfo<void> {
   const FolderRoute() : super(FolderRoute.name, path: '');
 
@@ -460,7 +513,7 @@ class FolderRoute extends _i5.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i14.DiscoverPage]
+/// [_i15.DiscoverPage]
 class DiscoverRoute extends _i5.PageRouteInfo<void> {
   const DiscoverRoute() : super(DiscoverRoute.name, path: '');
 
@@ -468,7 +521,7 @@ class DiscoverRoute extends _i5.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i15.TypeSongPage]
+/// [_i16.TypeSongPage]
 class TypeSongRoute extends _i5.PageRouteInfo<void> {
   const TypeSongRoute() : super(TypeSongRoute.name, path: '');
 
@@ -476,7 +529,23 @@ class TypeSongRoute extends _i5.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i16.NowPlayingPage]
+/// [_i17.GenrePage]
+class GenreRoute extends _i5.PageRouteInfo<void> {
+  const GenreRoute() : super(GenreRoute.name, path: '');
+
+  static const String name = 'GenreRoute';
+}
+
+/// generated route for
+/// [_i18.GenreDetailPage]
+class GenreDetailRoute extends _i5.PageRouteInfo<void> {
+  const GenreDetailRoute() : super(GenreDetailRoute.name, path: 'detail');
+
+  static const String name = 'GenreDetailRoute';
+}
+
+/// generated route for
+/// [_i19.NowPlayingPage]
 class NowPlayingRoute extends _i5.PageRouteInfo<void> {
   const NowPlayingRoute() : super(NowPlayingRoute.name, path: '');
 
@@ -484,7 +553,7 @@ class NowPlayingRoute extends _i5.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i17.InfoSongPage]
+/// [_i20.InfoSongPage]
 class InfoSongRoute extends _i5.PageRouteInfo<void> {
   const InfoSongRoute() : super(InfoSongRoute.name, path: 'info');
 
@@ -492,7 +561,7 @@ class InfoSongRoute extends _i5.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i18.LyricPage]
+/// [_i21.LyricPage]
 class LyricRoute extends _i5.PageRouteInfo<void> {
   const LyricRoute() : super(LyricRoute.name, path: 'lyric');
 

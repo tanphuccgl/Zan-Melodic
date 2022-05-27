@@ -8,6 +8,8 @@ import 'package:zanmelodic/src/modules/artist/artist/logic/artist_bloc.dart';
 import 'package:zanmelodic/src/modules/artist/artist_detail/logic/artist_detail_bloc.dart';
 import 'package:zanmelodic/src/modules/favorites/logic/favorites_bloc.dart';
 import 'package:zanmelodic/src/modules/folder/logic/folder_bloc.dart';
+import 'package:zanmelodic/src/modules/genre/genre/logic/genre_bloc.dart';
+import 'package:zanmelodic/src/modules/genre/genre_detail/logic/genre_detail_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/logic/playlist_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist_detail/logic/playlist_detail_bloc.dart';
 import 'package:zanmelodic/src/modules/songs/logic/songs_bloc.dart';
@@ -31,6 +33,8 @@ class ShuffleButton extends StatelessWidget {
           context.read<AlbumDetailBloc>().onShuffleToList();
           context.read<ArtistBloc>().onShuffleToList();
           context.read<ArtistDetailBloc>().onShuffleToList();
+          context.read<GenreBloc>().onShuffleToList();
+          context.read<GenreDetailBloc>().onShuffleToList();
         },
         icon: MyIcons.shuffleIcon,
         color: state.isShuffle ? MyColors.colorPrimary : MyColors.colorWhite,

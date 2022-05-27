@@ -6,6 +6,7 @@ enum TabIndex {
   playlist,
   album,
   artist,
+  genre,
   folder,
 }
 
@@ -26,6 +27,8 @@ extension TabIndexExt on TabIndex {
         return "Album";
       case TabIndex.artist:
         return "Artist";
+      case TabIndex.genre:
+        return "Genre";
       case TabIndex.folder:
         return "Folder";
 
