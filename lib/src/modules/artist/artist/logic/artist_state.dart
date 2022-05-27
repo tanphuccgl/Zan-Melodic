@@ -5,7 +5,8 @@ class ArtistState extends UpperControlState {
   void get sortListByName => (items.data ?? []).sort((a, b) => isSortName
       ? (b.artist).compareTo((a.artist))
       : (a.artist).compareTo((b.artist)));
-  void get shuffleList => isShuffle ? null : (items.data ?? []).shuffle();
+  void get shuffleList =>
+      isShuffle == true ? (items.data ?? []).shuffle() : null;
 
   const ArtistState({
     required this.items,

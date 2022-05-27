@@ -3,7 +3,8 @@ part of 'genre_detail_bloc.dart';
 class GenreDetailState extends UpperControlState {
   final XHandle<List<SongModel>> items;
   final GenreModel genre;
-  void get shuffleList => isShuffle ? null : (items.data ?? []).shuffle();
+  void get shuffleList =>
+      isShuffle == true ? (items.data ?? []).shuffle() : null;
 
   void get sortListByName => (items.data ?? []).sort((a, b) => isSortName
       ? (b.title).compareTo((a.title))

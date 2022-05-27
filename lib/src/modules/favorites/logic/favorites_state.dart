@@ -10,7 +10,8 @@ class FavoritesState extends UpperControlState {
     return _list.isEmpty ? false : true;
   }
 
-  void get shuffleList => isShuffle ? null : (items.data ?? []).shuffle();
+  void get shuffleList =>
+      isShuffle == true ? (items.data ?? []).shuffle() : null;
 
   void get sortListByName => (items.data ?? []).sort((a, b) => isSortName
       ? (b.title).compareTo((a.title))

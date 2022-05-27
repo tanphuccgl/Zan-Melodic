@@ -6,7 +6,8 @@ class AlbumState extends UpperControlState {
   void get sortListByName => (items.data ?? []).sort((a, b) => isSortName
       ? (b.album).compareTo((a.album))
       : (a.album).compareTo((b.album)));
-  void get shuffleList => isShuffle ? null : (items.data ?? []).shuffle();
+  void get shuffleList =>
+      isShuffle == true ? (items.data ?? []).shuffle() : null;
 
   const AlbumState({
     required this.items,
