@@ -15,6 +15,7 @@ import 'package:zanmelodic/src/modules/audio_control/pages/player_bottom_bar.dar
 import 'package:zanmelodic/src/modules/discover/pages/discover_page.dart';
 import 'package:zanmelodic/src/modules/favorites/pages/favorites_page.dart';
 import 'package:zanmelodic/src/modules/folder/pages/folder_page.dart';
+import 'package:zanmelodic/src/modules/genre/genre/pages/genre_page.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/pages/playlist_page.dart';
 import 'package:zanmelodic/src/modules/songs/pages/songs_page.dart';
 import 'package:zanmelodic/src/modules/type_song/pages/type_song_page.dart';
@@ -33,6 +34,7 @@ class DashboardPage extends StatelessWidget {
           PlaylistTab(),
           AlbumTab(),
           ArtistTab(),
+          GenreTab(),
           FolderTab(),
         ],
         builder: (context, child, animation) {
@@ -81,6 +83,7 @@ class DashboardPage extends StatelessWidget {
                       PlaylistPage(),
                       AlbumPage(),
                       ArtistPage(),
+                      GenrePage(),
                       FolderPage(),
                     ]),
                   ),

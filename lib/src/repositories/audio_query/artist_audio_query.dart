@@ -8,13 +8,10 @@ class ArtistAudioQuery extends BaseAudioQuery {
   }
 
   Future<List<SongModel>> getSongFromArtist(int idArtist) async {
-    final _list = await getAudiofromLocal();
-    final value = _list
-        .where((e) =>
-            e.isMusic == true &&
-            e.data.contains('/storage/emulated/0/Call/') == false &&
-            e.artistId == idArtist)
-        .toList();
-    return value;
+    List<SongModel> _list = await audioQuery.queryAudiosFrom(
+      AudiosFromType.ARTIST,
+      idArtist,
+    );
+    return _list;
   }
 }
