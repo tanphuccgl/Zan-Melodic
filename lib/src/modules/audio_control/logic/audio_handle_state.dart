@@ -13,6 +13,7 @@ class AudioHandleState extends Equatable {
   final bool isSortModeEnabled;
   final bool isShowBottomBar;
   final List<double> waveform;
+  final Color mainColor;
 
   const AudioHandleState({
     required this.currentSong,
@@ -27,6 +28,7 @@ class AudioHandleState extends Equatable {
     this.isSortModeEnabled = false,
     this.isShowBottomBar = false,
     required this.waveform,
+    this.mainColor = MyColors.colorBackground,
   });
 
   @override
@@ -43,6 +45,7 @@ class AudioHandleState extends Equatable {
         isSortModeEnabled,
         isShowBottomBar,
         waveform,
+        mainColor,
       ];
 
   Color get shuffleColorIcon =>
@@ -72,6 +75,7 @@ class AudioHandleState extends Equatable {
     bool? isSortModeEnabled,
     bool? isShowBottomBar,
     List<double>? waveform,
+    Color? mainColor,
   }) {
     return AudioHandleState(
       currentSong: currentSong ?? this.currentSong,
@@ -86,6 +90,7 @@ class AudioHandleState extends Equatable {
       isSortModeEnabled: isSortModeEnabled ?? this.isSortModeEnabled,
       isShowBottomBar: isShowBottomBar ?? this.isShowBottomBar,
       waveform: waveform ?? this.waveform,
+      mainColor: mainColor ?? this.mainColor,
     );
   }
 }
