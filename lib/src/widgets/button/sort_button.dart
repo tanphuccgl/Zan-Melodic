@@ -4,6 +4,8 @@ import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/constants/my_icons.dart';
 import 'package:zanmelodic/src/modules/album/album/logic/album_bloc.dart';
 import 'package:zanmelodic/src/modules/album/album_detail/logic/album_detail_bloc.dart';
+import 'package:zanmelodic/src/modules/artist/artist/logic/artist_bloc.dart';
+import 'package:zanmelodic/src/modules/artist/artist_detail/logic/artist_detail_bloc.dart';
 import 'package:zanmelodic/src/modules/favorites/logic/favorites_bloc.dart';
 import 'package:zanmelodic/src/modules/folder/logic/folder_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/logic/playlist_bloc.dart';
@@ -28,6 +30,8 @@ class SortButton extends StatelessWidget {
           context.read<FolderBloc>().onSortNameToList();
           context.read<PlaylistDetailBloc>().onSortNameToList();
           context.read<AlbumDetailBloc>().onSortNameToList();
+          context.read<ArtistBloc>().onSortNameToList();
+          context.read<ArtistDetailBloc>().onSortNameToList();
         },
         icon: MyIcons.sortIcon,
         color: state.isSortName ? MyColors.colorPrimary : MyColors.colorWhite,

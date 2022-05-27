@@ -9,24 +9,32 @@ class BaseSongs extends StatelessWidget {
   final List<SongModel> songs;
   final PlaylistModel? playlist;
   final int? childCount;
+  final double pHori;
   const BaseSongs(
-      {Key? key, this.playlist, required this.songs, this.childCount})
+      {Key? key,
+      this.playlist,
+      required this.songs,
+      this.childCount,
+      this.pHori = 0})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return songs.isNotEmpty
-        ? SliverList(
-            delegate: SliverChildBuilderDelegate((context, index) {
-              return SongCard(
-                song: songs[index],
-                playlistModel: playlist,
-                onTap: () => context.read<AudioHandleBloc>().playItem(
-                      items: songs,
-                      index: index,
-                    ),
-              );
-            }, childCount: childCount ?? songs.length),
+        ? SliverPadding(
+            padding: EdgeInsets.symmetric(horizontal: pHori),
+            sliver: SliverList(
+              delegate: SliverChildBuilderDelegate((context, index) {
+                return SongCard(
+                  song: songs[index],
+                  playlistModel: playlist,
+                  onTap: () => context.read<AudioHandleBloc>().playItem(
+                        items: songs,
+                        index: index,
+                      ),
+                );
+              }, childCount: childCount ?? songs.length),
+            ),
           )
         : const XStateEmptyWidget();
   }

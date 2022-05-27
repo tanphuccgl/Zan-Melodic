@@ -11,10 +11,12 @@ class BaseAppBarDetail extends StatelessWidget {
   final List<SongModel> songs;
   final AlbumModel? album;
   final PlaylistModel? playlist;
+  final ArtistModel? artist;
   const BaseAppBarDetail({
     Key? key,
     this.album,
     this.playlist,
+    this.artist,
     required this.numberSongs,
     required this.songs,
   }) : super(key: key);
@@ -40,6 +42,17 @@ class BaseAppBarDetail extends StatelessWidget {
         subTile:
             'By: ${playlist!.dateAdded} | ${XUtils.formatNumberSong(numberSongs)}',
         title: playlist!.playlist,
+        upperControlBar: UpperControlBar(
+          onPressedPlay: () =>
+              context.read<AudioHandleBloc>().playItem(items: songs),
+        ),
+      );
+    } else if (artist != null) {
+      return CustomAppBarSliver(
+        artworkType: ArtworkType.ARTIST,
+        id: artist!.id,
+        subTile: '${artist!.numberOfAlbums} | ${artist!.numberOfTracks} }',
+        title: artist!.artist,
         upperControlBar: UpperControlBar(
           onPressedPlay: () =>
               context.read<AudioHandleBloc>().playItem(items: songs),

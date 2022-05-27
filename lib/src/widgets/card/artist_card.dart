@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
+import 'package:zanmelodic/src/modules/artist/artist_detail/logic/artist_detail_bloc.dart';
 import 'package:zanmelodic/src/widgets/image_widget/custom_image.dart';
 import 'package:zanmelodic/src/widgets/text/custom_text.dart';
 
@@ -11,10 +13,10 @@ class ArtistCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () => context.read<AlbumDetailBloc>().fetchListOfSongsFromAlbum(
-      //       context,
-      //       album: artist,
-      //     ),
+      onTap: () => context.read<ArtistDetailBloc>().fetchListOfSongsFromArtist(
+            context,
+            artist: artist,
+          ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 9),
         child: Row(

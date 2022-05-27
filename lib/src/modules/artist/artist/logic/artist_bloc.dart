@@ -17,7 +17,7 @@ class ArtistBloc extends UpperControlBloc<ArtistState> {
   Future<void> fetchListOfArtist() async {
     final value = await _domain.artist.getListOfArtist();
     if (value.isSuccess) {
-      emit(state.copyWith(items: XHandle.completed(value.data ?? [])));
+      emit(state.copyWithItems(items: XHandle.completed(value.data ?? [])));
     } else {
       XSnackbar.show(msg: 'Load All List Error');
     }

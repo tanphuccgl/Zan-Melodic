@@ -23,7 +23,8 @@ class ArtistState extends UpperControlState {
         isShuffle,
       ];
 
-  ArtistState copyWith({
+  @override
+  ArtistState copyWithItems({
     XHandle<List<ArtistModel>>? items,
     bool? isSortName,
     bool? isShuffle,
