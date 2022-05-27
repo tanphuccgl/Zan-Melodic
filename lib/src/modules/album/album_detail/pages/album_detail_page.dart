@@ -43,7 +43,8 @@ class AlbumDetailPage extends StatelessWidget {
                       album: state.album,
                       numberSongs: state.album.numOfSongs,
                       songs: _items),
-                  BaseSongs(songs: _items),
+                  BaseSongs(
+                      songs: _items, pHori: MyProperties.pHoriDetailScreen),
                 ],
               ),
             ),

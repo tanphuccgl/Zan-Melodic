@@ -9,6 +9,8 @@ import 'package:zanmelodic/src/config/themes/themes.dart';
 import 'package:zanmelodic/src/localization/localization_util.dart';
 import 'package:zanmelodic/src/modules/album/album/logic/album_bloc.dart';
 import 'package:zanmelodic/src/modules/album/album_detail/logic/album_detail_bloc.dart';
+import 'package:zanmelodic/src/modules/artist/artist/logic/artist_bloc.dart';
+import 'package:zanmelodic/src/modules/artist/artist_detail/logic/artist_detail_bloc.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
 import 'package:zanmelodic/src/modules/discover/logic/discover_bloc.dart';
 import 'package:zanmelodic/src/modules/favorites/logic/favorites_bloc.dart';
@@ -42,6 +44,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => PlaylistDetailBloc()),
         BlocProvider(create: (_) => FavoritesBloc()),
         BlocProvider(create: (_) => TypeSongBloc()),
+        BlocProvider(create: (_) => ArtistBloc()),
+        BlocProvider(create: (_) => ArtistDetailBloc()),
       ],
       child: MaterialApp.router(
         theme: XTheme.light(),

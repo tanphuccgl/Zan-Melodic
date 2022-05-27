@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:zanmelodic/src/config/routes/auto_route.gr.dart';
 import 'package:zanmelodic/src/config/routes/page_routers.dart';
 import 'package:zanmelodic/src/modules/album/router/album_router.dart';
+import 'package:zanmelodic/src/modules/artist/router/artist_router.dart';
 import 'package:zanmelodic/src/modules/dashboard/pages/dashboard_page.dart';
 import 'package:zanmelodic/src/modules/dashboard/router/dashboard_wrapper_router.dart';
 import 'package:zanmelodic/src/modules/discover/router/discover_router.dart';
@@ -21,6 +22,7 @@ class DashboardTaps {
   static const String albumTab = 'album';
   static const String folderTab = 'folder';
   static const String typeSongTab = 'type_song';
+  static const String artistTab = 'artist';
 }
 
 class DashboardCoordinator {
@@ -39,6 +41,7 @@ class DashboardCoordinator {
             SongCoordinator.autoRoute,
             PlaylistCoordinator.autoRoute,
             AlbumCoordinator.autoRoute,
+            ArtistCoordinator.autoRoute,
             FolderCoordinator.autoRoute,
             DiscoverCoordinator.autoRoute,
             TypeSongCoordinator.autoRoute,

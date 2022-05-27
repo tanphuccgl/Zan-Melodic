@@ -11,10 +11,12 @@ class BaseAppBarDetail extends StatelessWidget {
   final List<SongModel> songs;
   final AlbumModel? album;
   final PlaylistModel? playlist;
+  final ArtistModel? artist;
   const BaseAppBarDetail({
     Key? key,
     this.album,
     this.playlist,
+    this.artist,
     required this.numberSongs,
     required this.songs,
   }) : super(key: key);
@@ -29,8 +31,7 @@ class BaseAppBarDetail extends StatelessWidget {
             '${album!.artist} | ${XUtils.formatNumberSong(album!.numOfSongs)}',
         title: album!.album,
         upperControlBar: UpperControlBar(
-          onPressedPlay: () =>
-              context.read<AudioHandleBloc>().playItem(items: songs),
+          onPressedPlay: () => _onPressedPlay(context),
         ),
       );
     } else if (playlist != null) {
@@ -41,12 +42,25 @@ class BaseAppBarDetail extends StatelessWidget {
             'By: ${playlist!.dateAdded} | ${XUtils.formatNumberSong(numberSongs)}',
         title: playlist!.playlist,
         upperControlBar: UpperControlBar(
-          onPressedPlay: () =>
-              context.read<AudioHandleBloc>().playItem(items: songs),
+          onPressedPlay: () => _onPressedPlay(context),
+        ),
+      );
+    } else if (artist != null) {
+      return CustomAppBarSliver(
+        artworkType: ArtworkType.ARTIST,
+        id: artist!.id,
+        subTile:
+            '${XUtils.formatNumberSong(artist?.numberOfTracks ?? -1)} | ${XUtils.formatNumberAlbum(artist?.numberOfAlbums ?? -1)}',
+        title: artist!.artist,
+        upperControlBar: UpperControlBar(
+          onPressedPlay: () => _onPressedPlay(context),
         ),
       );
     } else {
       return const SizedBox.shrink();
     }
   }
+
+  void _onPressedPlay(BuildContext context) =>
+      context.read<AudioHandleBloc>().playItem(items: songs);
 }
