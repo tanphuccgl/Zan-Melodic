@@ -23,11 +23,11 @@ class TypeSongBloc extends Cubit<TypeSongState> {
       final _items = _value.data ?? [];
 
       final _result = _items.where((e) {
-        var date = DateTime.fromMillisecondsSinceEpoch(e.dateAdded! * 1000);
+        var dateAdd = DateTime.fromMillisecondsSinceEpoch(e.dateAdded! * 1000);
         var now = DateTime.now();
-        var newDate = DateTime(now.year, now.month, date.day - 1);
+        var newDate = DateTime(now.year, now.month, dateAdd.day - 1);
 
-        return date.compareTo(newDate) > 0;
+        return dateAdd.compareTo(newDate) > 0;
       }).toList();
       emit(state.copyWith(newList: XHandle.completed(_result)));
     } else {
@@ -36,13 +36,13 @@ class TypeSongBloc extends Cubit<TypeSongState> {
   }
 
   Future<void> getMostListenSongs() async {
-    final _value = await _domain.mostListen.getListOfSongs();
-    final _value1 = await _domain.song.getListOfSongs();
+    final _valueName = await _domain.mostListen.getListOfSongs();
+    final _valueSongs = await _domain.song.getListOfSongs();
 
-    if (_value.isSuccess) {
+    if (_valueName.isSuccess) {
       final List<SongModel> _result = [];
-      for (SongModel item1 in (_value1.data ?? [])) {
-        for (String item in (_value.data ?? [])) {
+      for (SongModel item1 in (_valueSongs.data ?? [])) {
+        for (String item in (_valueName.data ?? [])) {
           if (item == item1.title) {
             _result.add(item1);
           }
@@ -52,10 +52,11 @@ class TypeSongBloc extends Cubit<TypeSongState> {
         for (var x in (_result).toSet())
           x: (_result).where((item) => item == x).length
       };
-      var aa = (_result)..sort((a, b) => numberOf[b]!.compareTo(numberOf[a]!));
-      var seen = <SongModel>{};
+      var listSort = (_result)
+        ..sort((a, b) => numberOf[b]!.compareTo(numberOf[a]!));
+      var listSet = <SongModel>{};
       List<SongModel> uniquelist =
-          aa.where((country) => seen.add(country)).toList();
+          listSort.where((country) => listSet.add(country)).toList();
 
       emit(state.copyWith(mostListenList: XHandle.completed(uniquelist)));
     } else {
