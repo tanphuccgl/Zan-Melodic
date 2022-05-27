@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/modules/artist/artist_detail/logic/artist_detail_bloc.dart';
+import 'package:zanmelodic/src/utils/utils.dart';
 import 'package:zanmelodic/src/widgets/image_widget/custom_image.dart';
 import 'package:zanmelodic/src/widgets/text/custom_text.dart';
 
@@ -40,10 +41,11 @@ class ArtistCard extends StatelessWidget {
                     style: Style.textTheme().titleMedium,
                   ),
                   XText(
-                    title: artist.numberOfAlbums.toString(),
+                    title: XUtils.formatNumberSong(artist.numberOfTracks ?? -1),
                   ),
                   XText(
-                    title: artist.numberOfTracks.toString(),
+                    title:
+                        XUtils.formatNumberAlbum(artist.numberOfAlbums ?? -1),
                   ),
                 ],
               ),

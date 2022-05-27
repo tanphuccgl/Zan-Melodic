@@ -12,6 +12,11 @@ class XUtils {
     return numberSong;
   }
 
+  static String formatNumberAlbum(int number) {
+    final String numberSong = '$number ${number > 1 ? 'albums' : 'album'}';
+    return numberSong;
+  }
+
   static String isValidNameCreatePlaylist(String name) {
     String message = "";
     if (name.isEmpty) {
