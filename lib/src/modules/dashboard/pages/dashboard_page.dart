@@ -9,6 +9,7 @@ import 'package:zanmelodic/src/config/themes/styles.dart';
 import 'package:zanmelodic/src/constants/my_properties.dart';
 import 'package:zanmelodic/src/models/enums/tab_index.dart';
 import 'package:zanmelodic/src/modules/album/album/pages/album_page.dart';
+import 'package:zanmelodic/src/modules/artist/pages/artist_page.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
 import 'package:zanmelodic/src/modules/audio_control/pages/player_bottom_bar.dart';
 import 'package:zanmelodic/src/modules/discover/pages/discover_page.dart';
@@ -31,6 +32,7 @@ class DashboardPage extends StatelessWidget {
           SongTab(),
           PlaylistTab(),
           AlbumTab(),
+          ArtistTab(),
           FolderTab(),
         ],
         builder: (context, child, animation) {
@@ -78,6 +80,7 @@ class DashboardPage extends StatelessWidget {
                       SongPage(),
                       PlaylistPage(),
                       AlbumPage(),
+                      ArtistPage(),
                       FolderPage(),
                     ]),
                   ),
