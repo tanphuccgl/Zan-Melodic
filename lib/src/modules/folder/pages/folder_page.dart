@@ -18,7 +18,7 @@ class FolderPage extends StatelessWidget {
       final List<XFolder> _items = _handle.data ?? [];
       return BaseScaffold(
         handle: _handle,
-        onRefresh: () => context.read<FolderBloc>().fetchListFolder(),
+        onRefresh: () async => context.read<FolderBloc>().fetchListFolder(),
         child: Padding(
           padding: MyProperties.pPage,
           child: CustomScrollView(

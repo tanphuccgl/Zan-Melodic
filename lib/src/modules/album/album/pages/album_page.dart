@@ -20,7 +20,7 @@ class AlbumPage extends StatelessWidget {
 
         return BaseScaffold<AlbumModel>(
           handle: _handle,
-          onRefresh: () => context.read<AlbumBloc>().fetchListOfAlbums(),
+          onRefresh: () async => context.read<AlbumBloc>().fetchListOfAlbums(),
           child: Padding(
             padding: MyProperties.pPage,
             child: CustomScrollView(

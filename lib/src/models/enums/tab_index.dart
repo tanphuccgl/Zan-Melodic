@@ -16,7 +16,7 @@ extension TabIndexExt on TabIndex {
       case TabIndex.discover:
         return "Discover";
       case TabIndex.typeSong:
-        return "Type song";
+        return "Most song";
       case TabIndex.favorites:
         return "Favorites";
       case TabIndex.song:

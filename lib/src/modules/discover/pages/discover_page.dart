@@ -20,7 +20,7 @@ class DiscoverPage extends StatelessWidget {
 
       return BaseScaffold<XAudio>(
         handle: _handle,
-        onRefresh: () => context.read<DiscoverBloc>().getAllTracks(),
+        onRefresh: () async => context.read<DiscoverBloc>().getAllTracks(),
         child: Padding(
           padding: const EdgeInsets.only(left: 20.0, top: 20.0),
           child: CustomScrollView(

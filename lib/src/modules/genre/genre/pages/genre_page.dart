@@ -20,7 +20,7 @@ class GenrePage extends StatelessWidget {
 
         return BaseScaffold<GenreModel>(
           handle: _handle,
-          onRefresh: () => context.read<GenreBloc>().fetchListOfGenre(),
+          onRefresh: () async => context.read<GenreBloc>().fetchListOfGenre(),
           child: Padding(
             padding: MyProperties.pPage,
             child: CustomScrollView(

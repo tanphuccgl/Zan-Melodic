@@ -25,7 +25,7 @@ class ArtistDetailPage extends StatelessWidget {
         return GestureDetector(
           onDoubleTap: () => XCoordinator.pop(context),
           child: BaseScaffold<SongModel>(
-            onRefresh: () => context
+            onRefresh: () async => context
                 .read<ArtistDetailBloc>()
                 .fetchListOfSongsFromArtist(context, artist: state.artist),
             handle: _handle,

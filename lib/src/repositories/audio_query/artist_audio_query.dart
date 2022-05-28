@@ -9,7 +9,7 @@ class ArtistAudioQuery extends BaseAudioQuery {
 
   Future<List<SongModel>> getSongFromArtist(int idArtist) async {
     List<SongModel> _list = await audioQuery.queryAudiosFrom(
-      AudiosFromType.ARTIST,
+      AudiosFromType.ARTIST_ID,
       idArtist,
     );
     return _list;

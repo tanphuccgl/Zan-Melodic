@@ -19,7 +19,7 @@ class SongPage extends StatelessWidget {
 
       return BaseScaffold<SongModel>(
         handle: _handle,
-        onRefresh: () => context.read<SongsBloc>().fetchListOfSongs(),
+        onRefresh: () async => context.read<SongsBloc>().fetchListOfSongs(),
         child: Padding(
           padding: MyProperties.pPage,
           child: CustomScrollView(

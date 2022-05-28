@@ -21,7 +21,7 @@ class FavoritesPage extends StatelessWidget {
 
       return BaseScaffold<SongModel>(
         handle: _handle,
-        onRefresh: () =>
+        onRefresh: () async =>
             context.read<FavoritesBloc>().fetchSongsFromFavorites(),
         child: Padding(
           padding: MyProperties.pPage,

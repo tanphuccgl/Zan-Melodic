@@ -3,7 +3,7 @@ import 'package:zanmelodic/src/config/themes/my_colors.dart';
 
 class BaseRefresh extends StatelessWidget {
   final Widget child;
-  final VoidCallback onRefresh;
+  final Future<void> Function() onRefresh;
   const BaseRefresh({
     Key? key,
     required this.child,
@@ -15,7 +15,7 @@ class BaseRefresh extends StatelessWidget {
     return RefreshIndicator(
       color: MyColors.colorPrimary,
       backgroundColor: MyColors.colorWhite,
-      onRefresh: () async => onRefresh,
+      onRefresh: onRefresh,
       child: child,
     );
   }

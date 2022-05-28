@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
+import 'package:zanmelodic/src/utils/utils.dart';
 
 class XText extends StatelessWidget {
   final String title;
@@ -10,7 +11,7 @@ class XText extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Text(title,
+    return Text(XUtils.fixFontError(title),
         maxLines: maxLines,
         overflow: TextOverflow.ellipsis,
         style: style ??
