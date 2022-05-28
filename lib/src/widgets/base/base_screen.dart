@@ -7,9 +7,8 @@ import 'package:zanmelodic/src/widgets/state/state_loading_widget.dart';
 class BaseScaffold<T> extends StatelessWidget {
   final XHandle<List<T>> handle;
   final XHandle<List<T>>? handle2;
-
   final Widget child;
-  final Function() onRefresh;
+  final Future<void> Function() onRefresh;
   final FloatingActionButtonLocation? floatingActionButtonLocation;
   final Widget? floatingActionButton;
   const BaseScaffold(
@@ -31,7 +30,7 @@ class BaseScaffold<T> extends StatelessWidget {
             floatingActionButtonLocation: floatingActionButtonLocation,
             body: BaseRefresh(
               child: child,
-              onRefresh: () async => onRefresh,
+              onRefresh: onRefresh,
             ));
       } else if (handle.isLoading) {
         return const XStateLoadingWidget(
@@ -49,7 +48,7 @@ class BaseScaffold<T> extends StatelessWidget {
             floatingActionButtonLocation: floatingActionButtonLocation,
             body: BaseRefresh(
               child: child,
-              onRefresh: () async => onRefresh,
+              onRefresh: onRefresh,
             ));
       } else if (handle.isLoading || handle2!.isLoading) {
         return const XStateLoadingWidget(

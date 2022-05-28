@@ -26,7 +26,7 @@ class PlaylistDetailPage extends StatelessWidget {
           onDoubleTap: () => XCoordinator.pop(context),
           child: BaseScaffold<SongModel>(
             handle: _handle,
-            onRefresh: () =>
+            onRefresh: () async =>
                 context.read<PlaylistDetailBloc>().fetchListOfSongsFromPlaylist(
                       context,
                       playlist: state.playlist,

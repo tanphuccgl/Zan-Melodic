@@ -21,7 +21,7 @@ class ArtistPage extends StatelessWidget {
 
         return BaseScaffold<ArtistModel>(
           handle: _handle,
-          onRefresh: () => context.read<ArtistBloc>().fetchListOfArtist(),
+          onRefresh: () async => context.read<ArtistBloc>().fetchListOfArtist(),
           child: Padding(
             padding: MyProperties.pPage,
             child: CustomScrollView(

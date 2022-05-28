@@ -9,7 +9,7 @@ class GenreAudioQuery extends BaseAudioQuery {
 
   Future<List<SongModel>> getSongFromGenre(int idGenre) async {
     List<SongModel> _list = await audioQuery.queryAudiosFrom(
-      AudiosFromType.GENRE,
+      AudiosFromType.GENRE_ID,
       idGenre,
     );
     return _list;

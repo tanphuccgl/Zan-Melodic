@@ -16,6 +16,8 @@ dependencies:
   http: ^0.13.4
   shared_preferences: ^2.0.11
   get_it: ^7.2.0
+  intl: ^0.17.0
+
 
 
   # WIDGET
@@ -40,17 +42,20 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  intl: ^0.17.0
+  
+  # MEDIA
   just_audio: ^0.9.19
   on_audio_query: ^2.6.0
   on_audio_room: ^2.2.1+1
-  file_picker: ^4.5.1
   audio_service: ^0.18.4
   audio_video_progress_bar: ^0.10.0
   flutter_audio_waveforms: ^1.2.1+5
   just_waveform: ^0.0.2
   palette_generator: ^0.3.3
-  uri_to_file: ^0.2.0
+ 
+ # OTHER
+  file_picker: ^4.5.1
+
 
 
 

@@ -39,7 +39,7 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
   StreamSubscription? _eventStream;
   Stream<XWaveformProgress>? _progressStream;
 
-  MediaItem converSongOnlineToModel(XAudio audio) {
+  MediaItem convertSongOnlineToModel(XAudio audio) {
     final result = MediaItem(
       id: audio.id.toString(),
       album: 'Firebase',
@@ -99,7 +99,7 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
       mediaItems = (items).map((e) => converSongToModel(e)).toList();
     }
     if (audios != null) {
-      mediaItems = (audios).map((e) => converSongOnlineToModel(e)).toList();
+      mediaItems = (audios).map((e) => convertSongOnlineToModel(e)).toList();
     }
 
     bool isEqual = listEquals(mediaItems, state.playlist);
@@ -201,8 +201,6 @@ class AudioHandleBloc extends Cubit<AudioHandleState> {
         Prefs.saveMedia(mediaItem.title);
         getMainColors(mediaItem);
       }
-
-      ///Fix   getWaveform();
       _updateSkipButtons();
     });
   }

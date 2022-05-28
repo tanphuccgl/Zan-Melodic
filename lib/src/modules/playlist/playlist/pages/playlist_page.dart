@@ -17,7 +17,7 @@ class PlaylistPage extends StatelessWidget {
       final XHandle<List<PlaylistModel>> _handle = state.items;
       final List<PlaylistModel> _items = _handle.data ?? [];
       return BaseScaffold<PlaylistModel>(
-        onRefresh: () => context.read<PlaylistBloc>().fetchPlaylists(),
+        onRefresh: () async => context.read<PlaylistBloc>().fetchPlaylists(),
         handle: _handle,
         child: Padding(
           padding: MyProperties.pPage,

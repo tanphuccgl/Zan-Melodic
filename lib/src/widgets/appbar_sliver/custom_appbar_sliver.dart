@@ -20,8 +20,8 @@ class CustomAppBarSliver extends StatelessWidget {
     required this.id,
     required this.title,
     required this.artworkType,
-    this.hExpanded = 360.0,
-    this.hToolbar = 330.0,
+    this.hExpanded = 390.0,
+    this.hToolbar = 360.0,
     required this.upperControlBar,
     required this.subTile,
   }) : super(key: key);
@@ -55,6 +55,7 @@ class CustomAppBarSliver extends StatelessWidget {
                       onPressed: () {},
                       child: Text(
                         title,
+                        textAlign: TextAlign.center,
                         style: Style.textTheme()
                             .displaySmall!
                             .copyWith(fontSize: 25),

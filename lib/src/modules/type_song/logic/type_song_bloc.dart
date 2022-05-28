@@ -25,7 +25,7 @@ class TypeSongBloc extends Cubit<TypeSongState> {
       final _result = _items.where((e) {
         var dateAdd = DateTime.fromMillisecondsSinceEpoch(e.dateAdded! * 1000);
         var now = DateTime.now();
-        var newDate = DateTime(now.year, now.month, dateAdd.day - 1);
+        var newDate = DateTime(now.year, now.month, now.day - 1);
 
         return dateAdd.compareTo(newDate) > 0;
       }).toList();
@@ -38,9 +38,9 @@ class TypeSongBloc extends Cubit<TypeSongState> {
   Future<void> getMostListenSongs() async {
     final _valueName = await _domain.mostListen.getListOfSongs();
     final _valueSongs = await _domain.song.getListOfSongs();
+    final List<SongModel> _result = [];
 
     if (_valueName.isSuccess) {
-      final List<SongModel> _result = [];
       for (SongModel item1 in (_valueSongs.data ?? [])) {
         for (String item in (_valueName.data ?? [])) {
           if (item == item1.title) {
