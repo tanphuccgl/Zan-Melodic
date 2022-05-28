@@ -27,7 +27,7 @@ class TypeSongBloc extends Cubit<TypeSongState> {
         var now = DateTime.now();
         var newDate = DateTime(now.year, now.month, now.day - 1);
 
-        return dateAdd.compareTo(newDate) > 0;
+        return dateAdd.compareTo(newDate) >= 0;
       }).toList();
       emit(state.copyWith(newList: XHandle.completed(_result)));
     } else {
