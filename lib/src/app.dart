@@ -12,6 +12,7 @@ import 'package:zanmelodic/src/modules/album/album_detail/logic/album_detail_blo
 import 'package:zanmelodic/src/modules/artist/artist/logic/artist_bloc.dart';
 import 'package:zanmelodic/src/modules/artist/artist_detail/logic/artist_detail_bloc.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
+import 'package:zanmelodic/src/modules/dashboard/logic/permission_bloc.dart';
 import 'package:zanmelodic/src/modules/discover/logic/discover_bloc.dart';
 import 'package:zanmelodic/src/modules/favorites/logic/favorites_bloc.dart';
 import 'package:zanmelodic/src/modules/folder/logic/folder_bloc.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (_) => PermissionBloc()),
         BlocProvider(create: (_) => AudioHandleBloc()),
         BlocProvider(
             create: (_) => UpperControlBloc(const UpperControlState())),

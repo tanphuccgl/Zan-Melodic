@@ -4,10 +4,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:zanmelodic/src/repositories/audio_query/base_audio_query.dart';
+import 'package:zanmelodic/main.dart';
 import 'package:zanmelodic/src/widgets/loading/bot_toast.dart';
-
-import '../../../../main.dart';
 
 class DashboardWrapperPage extends StatefulWidget {
   const DashboardWrapperPage({Key? key}) : super(key: key);
@@ -21,8 +19,6 @@ class _DashboardWrapperPageState extends State<DashboardWrapperPage> {
   @override
   void initState() {
     super.initState();
-    BaseAudioQuery().permissionsRequest();
-
     FirebaseMessaging.instance
         .getInitialMessage()
         .then((RemoteMessage? message) {

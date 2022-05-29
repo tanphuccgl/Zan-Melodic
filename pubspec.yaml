@@ -55,6 +55,7 @@ dependencies:
  
  # OTHER
   file_picker: ^4.5.1
+  permission_handler: ^9.2.0
 
 
 
