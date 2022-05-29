@@ -27,7 +27,9 @@ class ProcessBar extends StatelessWidget {
                 children: [
                   Image.asset(
                     MyImage.audio,
+                    fit: BoxFit.fitWidth,
                     color: MyColors.colorWhite1,
+                    width: double.infinity,
                   ),
                   Align(
                     alignment: Alignment.center,
