@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zanmelodic/src/models/folder_model.dart';
-
-import 'package:zanmelodic/src/widgets/card/browse_file_card.dart';
-import 'package:zanmelodic/src/widgets/card/folder_card.dart';
+import 'package:zanmelodic/src/widgets/card/folder/browse_file_card.dart';
+import 'package:zanmelodic/src/widgets/card/folder/folder_card.dart';
 
 class ListFolderWidget extends StatelessWidget {
   const ListFolderWidget({Key? key, required this.folders}) : super(key: key);

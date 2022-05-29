@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/widgets/empty_text_button.dart';
-import 'package:zanmelodic/src/widgets/card/add_playlist_card.dart';
-import 'package:zanmelodic/src/widgets/card/playlist_card.dart';
+import 'package:zanmelodic/src/widgets/card/playlist/add_playlist_card.dart';
+import 'package:zanmelodic/src/widgets/card/playlist/playlist_card.dart';
 
 class PlaylistWidget extends StatelessWidget {
   const PlaylistWidget({Key? key, required this.playlists}) : super(key: key);
