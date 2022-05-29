@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:intl/intl.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 
 class XUtils {
   static String formatDuration(Duration duration) {
@@ -39,8 +41,9 @@ class XUtils {
     return waveFile;
   }
 
-  static String dateTimeFolder() {
-    var date = DateTime.now();
+  static String dateTimeFolder(int millisecondsSinceEpoch) {
+    var date =
+        DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch * 1000);
     return DateFormat("dd/MM/yyyy").format(date);
   }
 
@@ -53,5 +56,21 @@ class XUtils {
       e;
     }
     return _decode;
+  }
+
+  static String formatBytes(int bytes, {int decimals = 1}) {
+    if (bytes <= 0) return "0 B";
+    const suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+    var i = (log(bytes) / log(1024)).floor();
+    return ((bytes / pow(1024, i)).toStringAsFixed(decimals)) +
+        ' ' +
+        suffixes[i];
+  }
+
+  static String getPathFolder(SongModel song) {
+    final _dir = song.data.replaceAll(song.displayName, '');
+
+    final _result = _dir.substring(0, _dir.length - 1);
+    return _result;
   }
 }
