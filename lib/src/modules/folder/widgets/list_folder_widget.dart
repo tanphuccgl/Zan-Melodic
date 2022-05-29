@@ -18,7 +18,7 @@ class ListFolderWidget extends StatelessWidget {
           ListView(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            children: folders.map((e) => FolderCard(folder: e.name)).toList(),
+            children: folders.map((e) => FolderCard(folder: e)).toList(),
           ),
           const BrowseFileCard()
         ],
