@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
-import 'package:zanmelodic/src/modules/dashboard/logic/permission_bloc.dart';
+import 'package:zanmelodic/src/modules/permission/logic/permission_bloc.dart';
 
 class AccessPermission extends StatelessWidget {
   const AccessPermission({Key? key, required this.widget}) : super(key: key);

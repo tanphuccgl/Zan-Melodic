@@ -12,12 +12,12 @@ import 'package:zanmelodic/src/modules/album/album_detail/logic/album_detail_blo
 import 'package:zanmelodic/src/modules/artist/artist/logic/artist_bloc.dart';
 import 'package:zanmelodic/src/modules/artist/artist_detail/logic/artist_detail_bloc.dart';
 import 'package:zanmelodic/src/modules/audio_control/logic/audio_handle_bloc.dart';
-import 'package:zanmelodic/src/modules/dashboard/logic/permission_bloc.dart';
 import 'package:zanmelodic/src/modules/discover/logic/discover_bloc.dart';
 import 'package:zanmelodic/src/modules/favorites/logic/favorites_bloc.dart';
 import 'package:zanmelodic/src/modules/folder/logic/folder_bloc.dart';
 import 'package:zanmelodic/src/modules/genre/genre/logic/genre_bloc.dart';
 import 'package:zanmelodic/src/modules/genre/genre_detail/logic/genre_detail_bloc.dart';
+import 'package:zanmelodic/src/modules/permission/logic/permission_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/logic/playlist_bloc.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist_detail/logic/playlist_detail_bloc.dart';
 import 'package:zanmelodic/src/modules/recently/logic/recently_bloc.dart';
