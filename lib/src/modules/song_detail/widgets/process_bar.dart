@@ -1,6 +1,5 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_audio_waveforms/flutter_audio_waveforms.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zanmelodic/src/config/themes/my_colors.dart';
 import 'package:zanmelodic/src/config/themes/styles.dart';
@@ -76,20 +75,5 @@ class ProcessBar extends StatelessWidget {
       XUtils.formatDuration(duration),
       style: Style.textTheme().titleMedium!.copyWith(fontSize: 17),
     );
-  }
-
-  Widget waveformWidget(AudioHandleState state) {
-    return state.waveform.isEmpty
-        ? const Center(child: CircularProgressIndicator())
-        : SquigglyWaveform(
-            inactiveColor: MyColors.colorWhite,
-            activeColor: MyColors.colorPrimary,
-            strokeWidth: 1,
-            maxDuration: state.progress.total,
-            elapsedDuration: state.progress.current,
-            samples: state.waveform,
-            height: 60,
-            width: 280,
-          );
   }
 }

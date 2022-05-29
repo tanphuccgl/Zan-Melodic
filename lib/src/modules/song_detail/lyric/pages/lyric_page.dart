@@ -5,6 +5,7 @@ import 'package:zanmelodic/src/constants/my_properties.dart';
 import 'package:zanmelodic/src/modules/song_detail/lyric/widgets/appbar.dart';
 import 'package:zanmelodic/src/modules/song_detail/lyric/widgets/lyric.dart';
 import 'package:zanmelodic/src/modules/song_detail/widgets/bottom_control.dart';
+import 'package:zanmelodic/src/widgets/shader_mask/shader_mask.dart';
 
 class LyricPage extends StatelessWidget {
   const LyricPage({Key? key}) : super(key: key);
@@ -43,26 +44,7 @@ class LyricPage extends StatelessWidget {
                 Column(),
                 Positioned(
                   bottom: 0,
-                  child: ShaderMask(
-                    shaderCallback: (Rect rect) {
-                      return const LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          MyColors.colorBlack,
-                          Colors.transparent,
-                          Colors.transparent,
-                          MyColors.colorBlack
-                        ],
-                        stops: [
-                          0.0,
-                          0.1,
-                          1,
-                          1.0
-                        ], // 10% purple, 80% transparent, 10% purple
-                      ).createShader(rect);
-                    },
-                    blendMode: BlendMode.dstOut,
+                  child: XShaderMask(
                     child: Container(
                       color: MyColors.colorBlack,
                       height: 220,

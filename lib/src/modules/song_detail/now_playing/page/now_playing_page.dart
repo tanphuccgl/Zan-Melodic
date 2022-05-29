@@ -19,7 +19,6 @@ class NowPlayingPage extends StatelessWidget {
     return BlocBuilder<AudioHandleBloc, AudioHandleState>(
       builder: (context, state) {
         final media = state.currentSong;
-        final int id = int.parse(media.id);
         return Scaffold(
           backgroundColor: state.mainColor,
           body: GestureDetector(
@@ -37,7 +36,7 @@ class NowPlayingPage extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: CustomImage(
                           urlImage: media.extras!['image'],
-                          id: id,
+                          id: int.parse(media.id),
                           height: 220.0,
                           width: 220.0,
                           isShadow: true,

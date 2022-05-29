@@ -5,10 +5,10 @@ import 'package:zanmelodic/src/models/audio_model.dart';
 import 'package:zanmelodic/src/widgets/image_widget/custom_image.dart';
 import 'package:zanmelodic/src/widgets/text/custom_text.dart';
 
-class SongCard extends StatelessWidget {
+class SongOnlineCard extends StatelessWidget {
   final XAudio audio;
   final VoidCallback onTap;
-  const SongCard({
+  const SongOnlineCard({
     Key? key,
     required this.audio,
     required this.onTap,
