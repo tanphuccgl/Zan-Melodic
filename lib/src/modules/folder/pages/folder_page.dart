@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zanmelodic/src/constants/my_properties.dart';
 import 'package:zanmelodic/src/models/folder_model.dart';
 import 'package:zanmelodic/src/models/handle.dart';
-import 'package:zanmelodic/src/modules/dashboard/logic/access_permission.dart';
 import 'package:zanmelodic/src/modules/folder/logic/folder_bloc.dart';
 import 'package:zanmelodic/src/modules/folder/widgets/list_folder_widget.dart';
+import 'package:zanmelodic/src/modules/permission/pages/access_permission.dart';
 import 'package:zanmelodic/src/modules/upper_control/widgets/upper_control_bar.dart';
 import 'package:zanmelodic/src/widgets/base/base_screen.dart';
 

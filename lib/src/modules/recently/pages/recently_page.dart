@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/models/handle.dart';
-import 'package:zanmelodic/src/modules/dashboard/logic/access_permission.dart';
+import 'package:zanmelodic/src/modules/permission/pages/access_permission.dart';
 import 'package:zanmelodic/src/modules/recently/logic/recently_bloc.dart';
 import 'package:zanmelodic/src/widgets/base/base_screen.dart';
 import 'package:zanmelodic/src/widgets/base/base_songs.dart';
