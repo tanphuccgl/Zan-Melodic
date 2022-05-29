@@ -12,8 +12,8 @@ class RecentlyBloc extends Cubit<RecentlyState> {
     getNewSongs();
     getMostListenSongs();
   }
-  static final RecentlyState _initialValue = RecentlyState(
-      newList: XHandle.loading(), mostListenList: XHandle.loading());
+  static final RecentlyState _initialValue =
+      RecentlyState(newSongs: XHandle.loading(), mostListen: XHandle.loading());
 
   final Domain _domain = Domain();
 
@@ -29,7 +29,7 @@ class RecentlyBloc extends Cubit<RecentlyState> {
 
         return dateAdd.compareTo(newDate) >= 0;
       }).toList();
-      emit(state.copyWith(newList: XHandle.completed(_result)));
+      emit(state.copyWith(newSongs: XHandle.completed(_result)));
     } else {
       XSnackbar.show(msg: 'Load All List Error');
     }
@@ -57,8 +57,10 @@ class RecentlyBloc extends Cubit<RecentlyState> {
       var listSet = <SongModel>{};
       List<SongModel> uniquelist =
           listSort.where((country) => listSet.add(country)).toList();
+      uniquelist =
+          uniquelist.length < 3 ? uniquelist : uniquelist.take(3).toList();
 
-      emit(state.copyWith(mostListenList: XHandle.completed(uniquelist)));
+      emit(state.copyWith(mostListen: XHandle.completed(uniquelist)));
     } else {
       XSnackbar.show(msg: 'Load All List Error');
     }

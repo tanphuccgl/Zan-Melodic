@@ -2,26 +2,26 @@
 part of 'recently_bloc.dart';
 
 class RecentlyState extends Equatable {
-  final XHandle<List<SongModel>> newList;
-  final XHandle<List<SongModel>> mostListenList;
+  final XHandle<List<SongModel>> newSongs;
+  final XHandle<List<SongModel>> mostListen;
 
   const RecentlyState({
-    required this.newList,
-    required this.mostListenList,
+    required this.newSongs,
+    required this.mostListen,
   });
   @override
   List<Object?> get props => [
-        newList,
-        mostListenList,
+        newSongs,
+        mostListen,
       ];
 
   RecentlyState copyWith({
-    XHandle<List<SongModel>>? newList,
-    XHandle<List<SongModel>>? mostListenList,
+    XHandle<List<SongModel>>? newSongs,
+    XHandle<List<SongModel>>? mostListen,
   }) {
     return RecentlyState(
-      newList: newList ?? this.newList,
-      mostListenList: mostListenList ?? this.mostListenList,
+      newSongs: newSongs ?? this.newSongs,
+      mostListen: mostListen ?? this.mostListen,
     );
   }
 }
