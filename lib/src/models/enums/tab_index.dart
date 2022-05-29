@@ -1,6 +1,6 @@
 enum TabIndex {
   discover,
-  typeSong,
+  recently,
   favorites,
   song,
   playlist,
@@ -15,8 +15,8 @@ extension TabIndexExt on TabIndex {
     switch (this) {
       case TabIndex.discover:
         return "Discover";
-      case TabIndex.typeSong:
-        return "Most song";
+      case TabIndex.recently:
+        return "Recently";
       case TabIndex.favorites:
         return "Favorites";
       case TabIndex.song:

@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-part of 'type_song_bloc.dart';
+part of 'recently_bloc.dart';
 
-class TypeSongState extends Equatable {
+class RecentlyState extends Equatable {
   final XHandle<List<SongModel>> newList;
   final XHandle<List<SongModel>> mostListenList;
 
-  const TypeSongState({
+  const RecentlyState({
     required this.newList,
     required this.mostListenList,
   });
@@ -15,11 +15,11 @@ class TypeSongState extends Equatable {
         mostListenList,
       ];
 
-  TypeSongState copyWith({
+  RecentlyState copyWith({
     XHandle<List<SongModel>>? newList,
     XHandle<List<SongModel>>? mostListenList,
   }) {
-    return TypeSongState(
+    return RecentlyState(
       newList: newList ?? this.newList,
       mostListenList: mostListenList ?? this.mostListenList,
     );

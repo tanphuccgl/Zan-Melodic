@@ -5,14 +5,14 @@ import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/repositories/domain.dart';
 import 'package:zanmelodic/src/widgets/loading/bot_toast.dart';
 
-part 'type_song_state.dart';
+part 'recently_state.dart';
 
-class TypeSongBloc extends Cubit<TypeSongState> {
-  TypeSongBloc() : super(_initialValue) {
+class RecentlyBloc extends Cubit<RecentlyState> {
+  RecentlyBloc() : super(_initialValue) {
     getNewSongs();
     getMostListenSongs();
   }
-  static final TypeSongState _initialValue = TypeSongState(
+  static final RecentlyState _initialValue = RecentlyState(
       newList: XHandle.loading(), mostListenList: XHandle.loading());
 
   final Domain _domain = Domain();

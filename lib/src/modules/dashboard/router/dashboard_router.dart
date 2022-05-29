@@ -11,8 +11,8 @@ import 'package:zanmelodic/src/modules/favorites/router/favorites_router.dart';
 import 'package:zanmelodic/src/modules/folder/router/folder_router.dart';
 import 'package:zanmelodic/src/modules/genre/router/genre_router.dart';
 import 'package:zanmelodic/src/modules/playlist/router/playlist_router.dart';
+import 'package:zanmelodic/src/modules/recently/router/recently_router.dart';
 import 'package:zanmelodic/src/modules/songs/router/songs_router.dart';
-import 'package:zanmelodic/src/modules/type_song/router/type_song_router.dart';
 
 class DashboardTaps {
   static const String discoverTab = 'discover';
@@ -22,7 +22,7 @@ class DashboardTaps {
   static const String playlistTab = 'playlist';
   static const String albumTab = 'album';
   static const String folderTab = 'folder';
-  static const String typeSongTab = 'type_song';
+  static const String recentlyTab = 'type_song';
   static const String artistTab = 'artist';
   static const String genreTab = 'genre';
 }
@@ -46,7 +46,7 @@ class DashboardCoordinator {
             ArtistCoordinator.autoRoute,
             FolderCoordinator.autoRoute,
             DiscoverCoordinator.autoRoute,
-            TypeSongCoordinator.autoRoute,
+            RecentlyCoordinator.autoRoute,
             GenreCoordinator.autoRoute,
             RedirectRoute(path: '*', redirectTo: ''),
           ]),

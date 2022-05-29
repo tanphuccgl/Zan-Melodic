@@ -17,8 +17,8 @@ import 'package:zanmelodic/src/modules/favorites/pages/favorites_page.dart';
 import 'package:zanmelodic/src/modules/folder/pages/folder_page.dart';
 import 'package:zanmelodic/src/modules/genre/genre/pages/genre_page.dart';
 import 'package:zanmelodic/src/modules/playlist/playlist/pages/playlist_page.dart';
+import 'package:zanmelodic/src/modules/recently/pages/recently_page.dart';
 import 'package:zanmelodic/src/modules/songs/pages/songs_page.dart';
-import 'package:zanmelodic/src/modules/type_song/pages/type_song_page.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -28,7 +28,7 @@ class DashboardPage extends StatelessWidget {
     return AutoTabsScaffold(
         routes: const [
           DiscoverTab(),
-          TypeSongTab(),
+          RecentlyTab(),
           FavoritesTab(),
           SongTab(),
           PlaylistTab(),
@@ -77,7 +77,7 @@ class DashboardPage extends StatelessWidget {
                         : EdgeInsets.zero,
                     child: const TabBarView(children: [
                       DiscoverPage(),
-                      TypeSongPage(),
+                      RecentlyPage(),
                       FavoritesPage(),
                       SongPage(),
                       PlaylistPage(),

@@ -1,16 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:zanmelodic/src/modules/dashboard/router/dashboard_router.dart';
-import 'package:zanmelodic/src/modules/type_song/pages/type_song_page.dart';
+import 'package:zanmelodic/src/modules/recently/pages/recently_page.dart';
 
-class TypeSongRouters {}
+class RecentlyRouters {}
 
-class TypeSongCoordinator {
+class RecentlyCoordinator {
   static const autoRoute = AutoRoute(
-      path: DashboardTaps.typeSongTab,
+      path: DashboardTaps.recentlyTab,
       page: EmptyRouterPage,
-      name: 'TypeSongTab',
+      name: 'RecentlyTab',
       children: [
-        AutoRoute(path: "", page: TypeSongPage, name: "TypeSongRoute"),
+        AutoRoute(path: "", page: RecentlyPage, name: "RecentlyRoute"),
         RedirectRoute(path: '*', redirectTo: ''),
       ]);
 }
