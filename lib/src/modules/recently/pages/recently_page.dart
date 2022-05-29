@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:zanmelodic/src/models/handle.dart';
+import 'package:zanmelodic/src/modules/dashboard/logic/access_permission.dart';
 import 'package:zanmelodic/src/modules/recently/logic/recently_bloc.dart';
 import 'package:zanmelodic/src/widgets/base/base_screen.dart';
 import 'package:zanmelodic/src/widgets/base/base_songs.dart';
@@ -30,14 +31,15 @@ class RecentlyPage extends StatelessWidget {
         },
         child: Padding(
           padding: const EdgeInsets.only(left: _padding, top: _padding),
-          child: CustomScrollView(
-            physics: const BouncingScrollPhysics(),
-            slivers: [
-              const HeaderTitle(title: 'New'),
-              BaseSongs(songs: _newSongs),
-              const HeaderTitle(title: 'Most Listen'),
-              BaseSongs(songs: _mostlisten, childCount: _mostlisten.length),
-            ],
+          child: AccessPermission(
+            widget: CustomScrollView(
+              slivers: [
+                const HeaderTitle(title: 'New'),
+                BaseSongs(songs: _newSongs),
+                const HeaderTitle(title: 'Most Listen'),
+                BaseSongs(songs: _mostlisten, childCount: _mostlisten.length),
+              ],
+            ),
           ),
         ),
       );

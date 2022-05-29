@@ -5,6 +5,7 @@ import 'package:zanmelodic/src/constants/my_properties.dart';
 import 'package:zanmelodic/src/models/handle.dart';
 import 'package:zanmelodic/src/modules/artist/artist/logic/artist_bloc.dart';
 import 'package:zanmelodic/src/modules/artist/artist/widgets/artists_widget.dart';
+import 'package:zanmelodic/src/modules/dashboard/logic/access_permission.dart';
 
 import 'package:zanmelodic/src/modules/upper_control/widgets/upper_control_bar.dart';
 import 'package:zanmelodic/src/widgets/base/base_screen.dart';
@@ -24,12 +25,13 @@ class ArtistPage extends StatelessWidget {
           onRefresh: () async => context.read<ArtistBloc>().fetchListOfArtist(),
           child: Padding(
             padding: MyProperties.pPage,
-            child: CustomScrollView(
-              physics: const BouncingScrollPhysics(),
-              slivers: [
-                const SliverToBoxAdapter(child: UpperControlBar()),
-                ArtistsWidget(artist: _items),
-              ],
+            child: AccessPermission(
+              widget: CustomScrollView(
+                slivers: [
+                  const SliverToBoxAdapter(child: UpperControlBar()),
+                  ArtistsWidget(artist: _items),
+                ],
+              ),
             ),
           ),
         );
