@@ -12,7 +12,6 @@ class AudioHandleState extends Equatable {
   final AudioHandler audioHandler;
   final bool isSortModeEnabled;
   final bool isShowBottomBar;
-  final List<double> waveform;
   final Color mainColor;
 
   const AudioHandleState({
@@ -27,7 +26,6 @@ class AudioHandleState extends Equatable {
     this.repeatButton = RepeatState.off,
     this.isSortModeEnabled = false,
     this.isShowBottomBar = false,
-    required this.waveform,
     this.mainColor = MyColors.colorBackground,
   });
 
@@ -44,7 +42,6 @@ class AudioHandleState extends Equatable {
         repeatButton,
         isSortModeEnabled,
         isShowBottomBar,
-        waveform,
         mainColor,
       ];
 
@@ -74,7 +71,6 @@ class AudioHandleState extends Equatable {
     RepeatState? repeatButton,
     bool? isSortModeEnabled,
     bool? isShowBottomBar,
-    List<double>? waveform,
     Color? mainColor,
   }) {
     return AudioHandleState(
@@ -89,7 +85,6 @@ class AudioHandleState extends Equatable {
       repeatButton: repeatButton ?? this.repeatButton,
       isSortModeEnabled: isSortModeEnabled ?? this.isSortModeEnabled,
       isShowBottomBar: isShowBottomBar ?? this.isShowBottomBar,
-      waveform: waveform ?? this.waveform,
       mainColor: mainColor ?? this.mainColor,
     );
   }
